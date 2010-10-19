@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:components="de.robinz.as3.pcc.chessboard.view.views.*"
+	pageTitle="Chessboard"
+	layout="vertical"
+	horizontalAlign="center"
+	verticalAlign="middle"
+	backgroundColor="#FFFFFF"
+	creationComplete="onCreationComplete()"
+>
+
+	<mx:Script>
+		<![CDATA[
+
+			import org.puremvc.as3.patterns.observer.Notification;
+			import de.robinz.as3.pcc.chessboard.ApplicationFacade;
+
+			private var facade : ApplicationFacade = ApplicationFacade.getInstance();
+
+			private function onCreationComplete() : void {
+				facade.startup( this );
+			}
+
+		]]>
+	</mx:Script>
+
+	<components:ApplicationView id="applicationView"
+		width="100%"
+		height="100%"
+	/>
+
+</mx:Application>
