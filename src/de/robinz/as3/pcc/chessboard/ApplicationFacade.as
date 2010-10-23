@@ -11,7 +11,7 @@ package de.robinz.as3.pcc.chessboard
 	 */
 	public class ApplicationFacade extends Facade
 	{
-		public static const STARTUP:String 	= "STARTUP";
+		public static const STARTUP : String 	= "STARTUP";
 
 		public static function getInstance() : ApplicationFacade {
 			if ( ! instance ) {
