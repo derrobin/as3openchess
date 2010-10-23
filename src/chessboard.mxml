@@ -2,12 +2,30 @@
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
 	xmlns:components="de.robinz.as3.pcc.chessboard.view.views.*"
 	pageTitle="PCC Chessboard"
+	creationComplete="onCreationComplete()"
 	layout="vertical"
 	horizontalAlign="center"
 	verticalAlign="middle"
-	backgroundColor="#FFFFFF"
-	creationComplete="onCreationComplete()"
+	backgroundGradientColors="[]"
+	backgroundColor="#ababab"
+	horizontalGap="0"
+	verticalGap="0"
+	paddingLeft="20"
+	paddingRight="20"
+	paddingBottom="20"
+	paddingTop="20"
 >
+
+	<mx:Style>
+		global {
+			horizontalGap: 0px;
+			verticalGap: 0px;
+			paddingLeft: 0px;
+			paddingRight: 0px;
+			paddingBottom: 0;
+			paddingTop: 0px;
+		}
+	</mx:Style>
 
 	<mx:Script>
 		<![CDATA[

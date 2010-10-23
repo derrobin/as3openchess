@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml">
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:components="de.robinz.as3.pcc.chessboard.view.views.*"
+>
 
-
+	<components:Chessboard id="chessboard" width="100%" height="100%" />
 
 </mx:Canvas>

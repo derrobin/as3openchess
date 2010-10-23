@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+	creationComplete="onCreationComplete()">
+
+	<mx:Style>
+
+		.legendVertical {
+			verticalAlign: middle;
+			horizontalAlign: center;
+			backgroundColor: #ffffff;
+		}
+		.legendVerticalRow {
+			backgroundColor: #ffffff;
+			horizontalAlign: center;
+			verticalAlign: middle;
+		}
+		.fieldBlack {
+			backgroundColor: #bbbbbb;
+			/*
+			borderSides: left right top bottom;
+			borderColor: #000000;
+			border-alpha: 0.5;
+			border-style: inset;
+			*/
+		}
+		.fieldWhite {
+			backgroundColor: #ffffff;
+			/*
+			borderSides: left right top bottom;
+			borderColor: #000000;
+			border-style: inset;
+			*/
+		}
+
+	</mx:Style>
+
+	<mx:Script>
+		<![CDATA[
+			import mx.core.Container;
+
+			[Bindable]
+			private var legendVerticalWidth : int = 25;
+			[Bindable]
+			private var legendHorizonalHeight : int = 25;
+			[Bindable]
+			private var boardSpace : int = 1;
+			[Bindable]
+			private var boardSpaceColor : int = 0x000000;
+
+			private function onCreationComplete() : void {
+			}
+
+			private function onBoardResize( e : Event ) : void {
+			}
+
+			private function removeHorizontalLegendLines() : void {
+			}
+
+		]]>
+	</mx:Script>
+
+	<mx:VBox width="100%" height="100%" horizontalAlign="center" backgroundColor="{ boardSpaceColor }" resize="onBoardResize( event )">
+
+		<mx:HBox width="100%" height="30" backgroundColor="#ffffff">
+
+			<mx:Spacer width="50%" />
+
+			<mx:HBox width="{ rowEight.width }" height="100%" backgroundColor="#ff00ff">
+
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="A" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="B" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="C" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="D" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="E" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="F" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="G" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="H" />
+				</mx:HBox>
+
+			</mx:HBox>
+
+			<mx:Spacer width="50%" />
+
+		</mx:HBox>
+
+		<mx:HBox width="100%" height="100%">
+
+			<mx:VBox width="{ legendVerticalWidth }" height="100%">
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="8" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="7" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="6" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="5" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="4" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="3" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="2" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="1" />
+				</mx:HBox>
+			</mx:VBox>
+
+			<mx:VBox width="100%" height="100%">
+				<mx:Spacer height="{ boardSpace }" />
+				<mx:HBox id="rowEight" height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+				</mx:HBox>
+				<mx:Spacer height="{ boardSpace }" />
+				<mx:HBox height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+				</mx:HBox>
+				<mx:Spacer height="{ boardSpace }" />
+				<mx:HBox height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+				</mx:HBox>
+				<mx:Spacer height="{ boardSpace }" />
+				<mx:HBox height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+				</mx:HBox>
+				<mx:Spacer height="{ boardSpace }" />
+				<mx:HBox height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+				</mx:HBox>
+				<mx:Spacer height="{ boardSpace }" />
+				<mx:HBox height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+				</mx:HBox>
+				<mx:Spacer height="{ boardSpace }" />
+				<mx:HBox height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+				</mx:HBox>
+				<mx:Spacer height="{ boardSpace }" />
+				<mx:HBox height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Spacer width="{ boardSpace }" />
+				</mx:HBox>
+				<mx:Spacer height="{ boardSpace }" />
+			</mx:VBox>
+
+			<mx:VBox width="{ legendVerticalWidth }" height="100%">
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="8" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="7" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="6" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="5" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="4" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="3" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="2" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="1" />
+				</mx:HBox>
+			</mx:VBox>
+
+		</mx:HBox>
+
+		<mx:HBox width="100%" height="30" backgroundColor="#ffffff">
+
+			<mx:Spacer width="50%" />
+
+			<mx:HBox width="{ rowEight.width }" height="100%" backgroundColor="#ff00ff">
+
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="A" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="B" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="C" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="D" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="E" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="F" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="G" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="H" />
+				</mx:HBox>
+
+			</mx:HBox>
+
+			<mx:Spacer width="50%" />
+
+		</mx:HBox>
+
+	</mx:VBox>
+
+</mx:Canvas>
