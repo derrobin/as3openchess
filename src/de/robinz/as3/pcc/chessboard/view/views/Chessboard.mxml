@@ -16,20 +16,9 @@
 		}
 		.fieldBlack {
 			backgroundColor: #bbbbbb;
-			/*
-			borderSides: left right top bottom;
-			borderColor: #000000;
-			border-alpha: 0.5;
-			border-style: inset;
-			*/
 		}
 		.fieldWhite {
 			backgroundColor: #ffffff;
-			/*
-			borderSides: left right top bottom;
-			borderColor: #000000;
-			border-style: inset;
-			*/
 		}
 
 	</mx:Style>
@@ -45,7 +34,7 @@
 			[Bindable]
 			private var boardSpace : int = 1;
 			[Bindable]
-			private var boardSpaceColor : int = 0x000000;
+			private var boardSpaceColor : int = 0xa0a0a0;
 
 			private function onCreationComplete() : void {
 			}
