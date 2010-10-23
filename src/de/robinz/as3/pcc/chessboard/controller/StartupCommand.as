@@ -10,8 +10,7 @@ package de.robinz.as3.pcc.chessboard.controller
 	 */
 	public class StartupCommand extends MacroCommand
 	{
-		override protected function initializeMacroCommand():void
-		{
+		protected override function initializeMacroCommand() : void {
 			addSubCommand( PrepareModelCommand );
 			addSubCommand( PrepareViewCommand );
 			addSubCommand( InitCommand );

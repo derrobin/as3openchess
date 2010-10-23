@@ -12,8 +12,7 @@ package de.robinz.as3.pcc.chessboard.view
 	{
 		public static const NAME : String = "ApplicationMediator";
 
-		public function ApplicationMediator( viewComponent : chessboard )
-		{
+		public function ApplicationMediator( viewComponent : chessboard ) {
 			super( NAME, viewComponent );
 		}
 

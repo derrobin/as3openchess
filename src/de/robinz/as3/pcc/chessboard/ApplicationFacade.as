@@ -13,21 +13,19 @@ package de.robinz.as3.pcc.chessboard
 	{
 		public static const STARTUP:String 	= "STARTUP";
 
-		public static function getInstance():ApplicationFacade
-		{
-			if ( ! instance )
+		public static function getInstance() : ApplicationFacade {
+			if ( ! instance ) {
 				instance = new ApplicationFacade();
+			}
 			return instance as ApplicationFacade;
 		}
 
-		override protected function initializeController():void
-		{
+		protected override function initializeController() : void {
 			super.initializeController();
 			registerCommand( STARTUP, StartupCommand );
 		}
 
-		public function startup( app:chessboard ):void
-		{
+		public function startup( app : chessboard ) : void {
 			sendNotification( STARTUP, app );
 		}
 

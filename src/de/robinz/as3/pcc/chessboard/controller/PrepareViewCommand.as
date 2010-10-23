@@ -12,9 +12,8 @@ package de.robinz.as3.pcc.chessboard.controller
 	 */
 	public class PrepareViewCommand extends SimpleCommand
 	{
-		override public function execute(note:INotification):void
-		{
-			var app:chessboard = note.getBody() as chessboard;
+		public override function execute( note : INotification ) : void {
+			var app : chessboard = note.getBody() as chessboard;
 			facade.registerMediator( new ApplicationMediator( app ) );
 		}
 

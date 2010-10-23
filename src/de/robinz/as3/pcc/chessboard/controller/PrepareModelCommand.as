@@ -11,8 +11,7 @@ package de.robinz.as3.pcc.chessboard.controller
 	 */
 	public class PrepareModelCommand extends SimpleCommand
 	{
-		override public function execute(notification:INotification):void
-		{
+		public override function execute( notification : INotification ) : void {
 		}
 	}
 }
