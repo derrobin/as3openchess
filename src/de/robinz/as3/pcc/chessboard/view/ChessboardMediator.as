@@ -31,9 +31,6 @@ package de.robinz.as3.pcc.chessboard.view
 			viewComponent.addEventListener( MouseEvent.MOUSE_OVER, onMouseOver, true );
 		}
 
-		private function onCreationComplete() : void {
-		}
-
 		private function onMouseOver( e : Event ) : void {
 			if ( e.target is Box && !( e.target is HBox ) && !( e.target is VBox ) ) {
 				chessboard.info1.text = ( e.target as Box ).id;
@@ -47,13 +44,6 @@ package de.robinz.as3.pcc.chessboard.view
 				chessboard.info2.text = "You clicked on a Piece with the FontKey [" + ( e.target as Text ).text + "] and the Notation [" + box.id + "]";
 			}
 		}
-
-		private function onBoardResize( e : Event ) : void {
-		}
-
-		private function removeHorizontalLegendLines() : void {
-		}
-
 
 		public function setPiece( p : IBoardPiece, n : BoardNotation ) : void {
 			var field : Box = this.chessboard[ n.row + n.column ] as Box;
