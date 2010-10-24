@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
-	creationComplete="onCreationComplete()">
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml">
 
 	<mx:Style>
 
@@ -14,11 +13,22 @@
 			horizontalAlign: center;
 			verticalAlign: middle;
 		}
+		.fieldBlack,
+		.fieldWhite {
+			horizontalAlign: center;
+			verticalAlign: middle;
+			fontFamily: font1;
+			fontSize: 40;
+		}
 		.fieldBlack {
 			backgroundColor: #bbbbbb;
 		}
 		.fieldWhite {
 			backgroundColor: #ffffff;
+		}
+		.mystyle1 {
+			fontFamily: font1;
+			fontSize: 32pt;
 		}
 
 	</mx:Style>
@@ -35,26 +45,27 @@
 			private var boardSpace : int = 1;
 			[Bindable]
 			private var boardSpaceColor : int = 0xa0a0a0;
-
-			private function onCreationComplete() : void {
-			}
-
-			private function onBoardResize( e : Event ) : void {
-			}
-
-			private function removeHorizontalLegendLines() : void {
-			}
+			[Embed(source='../../fonts/Alpha.ttf',
+				fontName='font1',
+				mimeType='application/x-font'
+			 )]
+			private var font1:Class;
 
 		]]>
 	</mx:Script>
 
-	<mx:VBox width="100%" height="100%" horizontalAlign="center" backgroundColor="{ boardSpaceColor }" resize="onBoardResize( event )">
+	<mx:VBox id="board" width="100%" height="100%" horizontalAlign="center" backgroundColor="{ boardSpaceColor }">
+
+		<mx:VBox height="80" width="100%" id="infoboard">
+			<mx:Text height="20" width="100%" id="info1" />
+			<mx:Text height="20" width="100%" id="info2" />
+		</mx:VBox>
 
 		<mx:HBox width="100%" height="30" backgroundColor="#ffffff">
 
 			<mx:Spacer width="50%" />
 
-			<mx:HBox width="{ rowEight.width }" height="100%" backgroundColor="#ff00ff">
+			<mx:HBox width="{ row8.width }" height="100%" backgroundColor="#ff00ff">
 
 				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
 					<mx:Text text="A" />
@@ -118,163 +129,291 @@
 
 			<mx:VBox width="100%" height="100%">
 				<mx:Spacer height="{ boardSpace }" />
-				<mx:HBox id="rowEight" height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
+				<mx:HBox id="row8" height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="a8" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Box id="b8" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="c8" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Box id="d8" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="e8" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Box id="f8" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="g8" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
-					<mx:Spacer width="{ boardSpace }" />
-				</mx:HBox>
-				<mx:Spacer height="{ boardSpace }" />
-				<mx:HBox height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="h8" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
 				</mx:HBox>
 				<mx:Spacer height="{ boardSpace }" />
-				<mx:HBox height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
+				<mx:HBox id="row7" height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="a7" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Box id="b7" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="c7" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Box id="d7" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="e7" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Box id="f7" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="g7" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
-					<mx:Spacer width="{ boardSpace }" />
-				</mx:HBox>
-				<mx:Spacer height="{ boardSpace }" />
-				<mx:HBox height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="h7" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
 				</mx:HBox>
 				<mx:Spacer height="{ boardSpace }" />
-				<mx:HBox height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
+				<mx:HBox id="row6" height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="a6" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Box id="b6" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="c6" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Box id="d6" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="e6" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Box id="f6" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="g6" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
-					<mx:Spacer width="{ boardSpace }" />
-				</mx:HBox>
-				<mx:Spacer height="{ boardSpace }" />
-				<mx:HBox height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
-					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="h6" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
 				</mx:HBox>
 				<mx:Spacer height="{ boardSpace }" />
-				<mx:HBox height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
+				<mx:HBox id="row5" height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="a5" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Box id="b5" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="c5" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Box id="d5" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="e5" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Box id="f5" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="g5" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Box id="h5" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
 				</mx:HBox>
 				<mx:Spacer height="{ boardSpace }" />
-				<mx:HBox height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
+				<mx:HBox id="row4" height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Box id="a4" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="b4" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Box id="c4" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="d4" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Box id="e4" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="f4" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldWhite" />
+					<mx:Box id="g4" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
-					<mx:Canvas width="12.5%" height="100%" styleName="fieldBlack" />
+					<mx:Box id="h4" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+				</mx:HBox>
+				<mx:Spacer height="{ boardSpace }" />
+				<mx:HBox id="row3" height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="a3" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="b3" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="c3" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="d3" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="e3" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="f3" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="g3" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="h3" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+				</mx:HBox>
+				<mx:Spacer height="{ boardSpace }" />
+				<mx:HBox id="row2" height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="a2" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="b2" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="c2" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="d2" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="e2" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="f2" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="g2" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="h2" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+				</mx:HBox>
+				<mx:Spacer height="{ boardSpace }" />
+				<mx:HBox id="row1" height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }">
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="a1" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="b1" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="c1" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="d1" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="e1" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="f1" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="g1" width="12.5%" height="100%" styleName="fieldWhite">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
+					<mx:Spacer width="{ boardSpace }" />
+					<mx:Box id="h1" width="12.5%" height="100%" styleName="fieldBlack">
+						<mx:Text text="" mouseChildren="false" />
+					</mx:Box>
 					<mx:Spacer width="{ boardSpace }" />
 				</mx:HBox>
 				<mx:Spacer height="{ boardSpace }" />
@@ -313,7 +452,7 @@
 
 			<mx:Spacer width="50%" />
 
-			<mx:HBox width="{ rowEight.width }" height="100%" backgroundColor="#ff00ff">
+			<mx:HBox width="{ row8.width }" height="100%" backgroundColor="#ff00ff">
 
 				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
 					<mx:Text text="A" />
