@@ -35,7 +35,6 @@
 
 	<mx:Script>
 		<![CDATA[
-			import mx.core.Container;
 
 			[Bindable]
 			private var legendVerticalWidth : int = 25;
@@ -45,11 +44,8 @@
 			private var boardSpace : int = 1;
 			[Bindable]
 			private var boardSpaceColor : int = 0xa0a0a0;
-			[Embed(source='../../fonts/Alpha.ttf',
-				fontName='font1',
-				mimeType='application/x-font'
-			 )]
-			private var font1:Class;
+			[Embed(source='../../fonts/Alpha.ttf',fontName='font1',mimeType='application/x-font')]
+			private var font1 : Class;
 
 		]]>
 	</mx:Script>
