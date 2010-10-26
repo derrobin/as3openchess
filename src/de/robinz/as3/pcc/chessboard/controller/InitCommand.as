@@ -29,10 +29,10 @@ package de.robinz.as3.pcc.chessboard.controller
 			this.setWhitePiece( BoardPiece.PIECE_PAWN, "h2" );
 			this.setWhitePiece( BoardPiece.PIECE_ROOK, "a1" );
 			this.setWhitePiece( BoardPiece.PIECE_ROOK, "h1" );
-			this.setWhitePiece( BoardPiece.PIECE_BISHOP, "b1" );
-			this.setWhitePiece( BoardPiece.PIECE_BISHOP, "g1" );
-			this.setWhitePiece( BoardPiece.PIECE_KNIGHT, "c1" );
-			this.setWhitePiece( BoardPiece.PIECE_KNIGHT, "f1" );
+			this.setWhitePiece( BoardPiece.PIECE_BISHOP, "c1" );
+			this.setWhitePiece( BoardPiece.PIECE_BISHOP, "f1" );
+			this.setWhitePiece( BoardPiece.PIECE_KNIGHT, "b1" );
+			this.setWhitePiece( BoardPiece.PIECE_KNIGHT, "g1" );
 			this.setWhitePiece( BoardPiece.PIECE_QUEEN, "d1" );
 			this.setWhitePiece( BoardPiece.PIECE_KING, "e1" );
 
@@ -47,10 +47,10 @@ package de.robinz.as3.pcc.chessboard.controller
 			this.setBlackPiece( BoardPiece.PIECE_PAWN, "h7" );
 			this.setBlackPiece( BoardPiece.PIECE_ROOK, "a8" );
 			this.setBlackPiece( BoardPiece.PIECE_ROOK, "h8" );
-			this.setBlackPiece( BoardPiece.PIECE_BISHOP, "b8" );
-			this.setBlackPiece( BoardPiece.PIECE_BISHOP, "g8" );
-			this.setBlackPiece( BoardPiece.PIECE_KNIGHT, "c8" );
-			this.setBlackPiece( BoardPiece.PIECE_KNIGHT, "f8" );
+			this.setBlackPiece( BoardPiece.PIECE_BISHOP, "c8" );
+			this.setBlackPiece( BoardPiece.PIECE_BISHOP, "f8" );
+			this.setBlackPiece( BoardPiece.PIECE_KNIGHT, "b8" );
+			this.setBlackPiece( BoardPiece.PIECE_KNIGHT, "g8" );
 			this.setBlackPiece( BoardPiece.PIECE_QUEEN, "e8" );
 			this.setBlackPiece( BoardPiece.PIECE_KING, "d8" );
 		}
