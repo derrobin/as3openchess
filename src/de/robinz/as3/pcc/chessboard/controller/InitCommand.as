@@ -1,7 +1,13 @@
 package de.robinz.as3.pcc.chessboard.controller
 {
 	import de.robinz.as3.pcc.chessboard.library.BoardNotation;
-	import de.robinz.as3.pcc.chessboard.library.BoardPiece;
+	import de.robinz.as3.pcc.chessboard.library.Piece;
+	import de.robinz.as3.pcc.chessboard.library.pieces.Bishop;
+	import de.robinz.as3.pcc.chessboard.library.pieces.King;
+	import de.robinz.as3.pcc.chessboard.library.pieces.Knight;
+	import de.robinz.as3.pcc.chessboard.library.pieces.Pawn;
+	import de.robinz.as3.pcc.chessboard.library.pieces.Queen;
+	import de.robinz.as3.pcc.chessboard.library.pieces.Rook;
 	import de.robinz.as3.pcc.chessboard.view.ChessboardMediator;
 
 	import org.puremvc.as3.interfaces.INotification;
@@ -18,41 +24,40 @@ package de.robinz.as3.pcc.chessboard.controller
 		public override function execute( note : INotification ) : void {
 
 			// Create Chess Start Positions
+			this.setWhitePiece( Pawn.NAME, "a2" );
+			this.setWhitePiece( Pawn.NAME, "b2" );
+			this.setWhitePiece( Pawn.NAME, "c2" );
+			this.setWhitePiece( Pawn.NAME, "d2" );
+			this.setWhitePiece( Pawn.NAME, "e2" );
+			this.setWhitePiece( Pawn.NAME, "f2" );
+			this.setWhitePiece( Pawn.NAME, "g2" );
+			this.setWhitePiece( Pawn.NAME, "h2" );
+			this.setWhitePiece( Rook.NAME, "a1" );
+			this.setWhitePiece( Rook.NAME, "h1" );
+			this.setWhitePiece( Bishop.NAME, "c1" );
+			this.setWhitePiece( Bishop.NAME, "f1" );
+			this.setWhitePiece( Knight.NAME, "b1" );
+			this.setWhitePiece( Knight.NAME, "g1" );
+			this.setWhitePiece( Queen.NAME, "d1" );
+			this.setWhitePiece( King.NAME, "e1" );
 
-			this.setWhitePiece( BoardPiece.PIECE_PAWN, "a2" );
-			this.setWhitePiece( BoardPiece.PIECE_PAWN, "b2" );
-			this.setWhitePiece( BoardPiece.PIECE_PAWN, "c2" );
-			this.setWhitePiece( BoardPiece.PIECE_PAWN, "d2" );
-			this.setWhitePiece( BoardPiece.PIECE_PAWN, "e2" );
-			this.setWhitePiece( BoardPiece.PIECE_PAWN, "f2" );
-			this.setWhitePiece( BoardPiece.PIECE_PAWN, "g2" );
-			this.setWhitePiece( BoardPiece.PIECE_PAWN, "h2" );
-			this.setWhitePiece( BoardPiece.PIECE_ROOK, "a1" );
-			this.setWhitePiece( BoardPiece.PIECE_ROOK, "h1" );
-			this.setWhitePiece( BoardPiece.PIECE_BISHOP, "c1" );
-			this.setWhitePiece( BoardPiece.PIECE_BISHOP, "f1" );
-			this.setWhitePiece( BoardPiece.PIECE_KNIGHT, "b1" );
-			this.setWhitePiece( BoardPiece.PIECE_KNIGHT, "g1" );
-			this.setWhitePiece( BoardPiece.PIECE_QUEEN, "d1" );
-			this.setWhitePiece( BoardPiece.PIECE_KING, "e1" );
 
-
-			this.setBlackPiece( BoardPiece.PIECE_PAWN, "a7" );
-			this.setBlackPiece( BoardPiece.PIECE_PAWN, "b7" );
-			this.setBlackPiece( BoardPiece.PIECE_PAWN, "c7" );
-			this.setBlackPiece( BoardPiece.PIECE_PAWN, "d7" );
-			this.setBlackPiece( BoardPiece.PIECE_PAWN, "e7" );
-			this.setBlackPiece( BoardPiece.PIECE_PAWN, "f7" );
-			this.setBlackPiece( BoardPiece.PIECE_PAWN, "g7" );
-			this.setBlackPiece( BoardPiece.PIECE_PAWN, "h7" );
-			this.setBlackPiece( BoardPiece.PIECE_ROOK, "a8" );
-			this.setBlackPiece( BoardPiece.PIECE_ROOK, "h8" );
-			this.setBlackPiece( BoardPiece.PIECE_BISHOP, "c8" );
-			this.setBlackPiece( BoardPiece.PIECE_BISHOP, "f8" );
-			this.setBlackPiece( BoardPiece.PIECE_KNIGHT, "b8" );
-			this.setBlackPiece( BoardPiece.PIECE_KNIGHT, "g8" );
-			this.setBlackPiece( BoardPiece.PIECE_QUEEN, "e8" );
-			this.setBlackPiece( BoardPiece.PIECE_KING, "d8" );
+			this.setBlackPiece( Pawn.NAME, "a7" );
+			this.setBlackPiece( Pawn.NAME, "b7" );
+			this.setBlackPiece( Pawn.NAME, "c7" );
+			this.setBlackPiece( Pawn.NAME, "d7" );
+			this.setBlackPiece( Pawn.NAME, "e7" );
+			this.setBlackPiece( Pawn.NAME, "f7" );
+			this.setBlackPiece( Pawn.NAME, "g7" );
+			this.setBlackPiece( Pawn.NAME, "h7" );
+			this.setBlackPiece( Rook.NAME, "a8" );
+			this.setBlackPiece( Rook.NAME, "h8" );
+			this.setBlackPiece( Bishop.NAME, "c8" );
+			this.setBlackPiece( Bishop.NAME, "f8" );
+			this.setBlackPiece( Knight.NAME, "b8" );
+			this.setBlackPiece( Knight.NAME, "g8" );
+			this.setBlackPiece( Queen.NAME, "e8" );
+			this.setBlackPiece( King.NAME, "d8" );
 		}
 
 		private function setWhitePiece( piece : String, shortenNotation : String ) : void {
@@ -65,7 +70,7 @@ package de.robinz.as3.pcc.chessboard.controller
 
 		private function setPiece( piece : String, shortenNotation : String, isWhite : Boolean ) : void {
 			bm.setPiece(
-				BoardPiece.createByParams( piece, isWhite ),
+				Piece.createByParams( piece, isWhite ),
 				BoardNotation.createNotationByString( shortenNotation )
 			);
 		}
