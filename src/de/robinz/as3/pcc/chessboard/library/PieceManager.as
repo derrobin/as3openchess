@@ -19,8 +19,8 @@ package de.robinz.as3.pcc.chessboard.library
 				case Rook.NAME:		return new Rook();
 				case Bishop.NAME:	return new Bishop();
 				case Knight.NAME:	return new Knight();
-				case Queen.NAME:	return new Pawn();
-				case King.NAME:		return new Pawn();
+				case Queen.NAME:	return new Queen();
+				case King.NAME:		return new King();
 			};
 
 			throw new Error( "No Piece not Found!" );

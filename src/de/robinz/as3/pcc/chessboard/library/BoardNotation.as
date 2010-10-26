@@ -2,7 +2,6 @@ package de.robinz.as3.pcc.chessboard.library
 {
 	public class BoardNotation
 	{
-		//public static var A : String = "a";
 		public var row : String;
 		public var column : String;
 
