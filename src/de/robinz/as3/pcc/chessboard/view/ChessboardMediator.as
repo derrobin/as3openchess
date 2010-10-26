@@ -11,6 +11,9 @@ package de.robinz.as3.pcc.chessboard.view
 	import mx.containers.HBox;
 	import mx.containers.VBox;
 	import mx.controls.Text;
+	import mx.core.DragSource;
+	import mx.events.DragEvent;
+	import mx.managers.DragManager;
 
 	import org.puremvc.as3.patterns.mediator.Mediator;
 
@@ -29,6 +32,44 @@ package de.robinz.as3.pcc.chessboard.view
 
 			viewComponent.addEventListener( MouseEvent.CLICK, onMouseClick, true );
 			viewComponent.addEventListener( MouseEvent.MOUSE_OVER, onMouseOver, true );
+			viewComponent.addEventListener( DragEvent.DRAG_ENTER, onDragEnter, true );
+			viewComponent.addEventListener( DragEvent.DRAG_DROP, onDragDrop, true );
+			viewComponent.addEventListener( MouseEvent.MOUSE_MOVE, onMouseMove, true );
+		}
+
+		private function onMouseMove( e : MouseEvent ) : void {
+			if ( e.target is Text ) {
+				var di : Text = Text( e.target );
+				var ds : DragSource = new DragSource();
+
+				ds.addData( di, "piece" );
+
+				DragManager.doDrag( di, ds, e, null );
+			}
+
+		}
+
+		private function onDragEnter( e : DragEvent ) : void {
+			if ( e.dragSource.hasFormat( "piece" ) ) {
+				if ( e.target is Box ) {
+					DragManager.acceptDragDrop( Box( e.target ) );
+				}
+				if ( e.currentTarget is Box ) {
+					DragManager.acceptDragDrop( Box( e.currentTarget ) );
+				}
+			}
+
+		}
+
+		private function onDragDrop( e : DragEvent ) : void {
+			var b : Box = Box( e.target );
+			var t : Text = Text( e.dragInitiator );
+
+			//b = ( t.parent as Box ).removeChild( b );
+			b.addChild( t );
+			// ..
+			// Text( e.dragInitiator ).x = Box( e.target ).mouseX;
+			// Text( e.dragInitiator ).y = Box( e.target ).mouseY;
 		}
 
 		private function onMouseOver( e : Event ) : void {
