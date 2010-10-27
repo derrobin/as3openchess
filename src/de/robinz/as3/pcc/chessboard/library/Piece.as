@@ -1,11 +1,14 @@
 package de.robinz.as3.pcc.chessboard.library
 {
+	import de.robinz.as3.pcc.chessboard.library.managers.FontManager;
+	import de.robinz.as3.pcc.chessboard.library.managers.PieceManager;
+
 	public class Piece implements IPiece
 	{
 		private var _isWhite : Boolean = true;
 
 		public static function createByParams( name : String, white : Boolean = true ) : IPiece {
-			var p : IPiece = PieceManager.createByName( name );
+			var p : IPiece = PieceManager.getInstance().createByName( name );
 
 			if ( ! white ) {
 				p.setBlack();
