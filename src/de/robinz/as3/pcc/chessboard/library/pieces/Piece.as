@@ -1,4 +1,4 @@
-package de.robinz.as3.pcc.chessboard.library
+package de.robinz.as3.pcc.chessboard.library.pieces
 {
 	import de.robinz.as3.pcc.chessboard.library.managers.FontManager;
 	import de.robinz.as3.pcc.chessboard.library.managers.PieceManager;

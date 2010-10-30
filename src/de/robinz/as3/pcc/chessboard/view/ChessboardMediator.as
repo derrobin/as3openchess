@@ -1,7 +1,7 @@
 package de.robinz.as3.pcc.chessboard.view
 {
-	import de.robinz.as3.pcc.chessboard.library.IPiece;
 	import de.robinz.as3.pcc.chessboard.library.Notation;
+	import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 	import de.robinz.as3.pcc.chessboard.view.views.Chessboard;
 
 	import flash.events.Event;

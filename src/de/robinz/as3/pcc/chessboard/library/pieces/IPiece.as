@@ -1,4 +1,4 @@
-package de.robinz.as3.pcc.chessboard.library
+package de.robinz.as3.pcc.chessboard.library.pieces
 {
 	public interface IPiece
 	{

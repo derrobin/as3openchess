@@ -1,7 +1,7 @@
 package de.robinz.as3.pcc.chessboard.library.managers
 {
-	import de.robinz.as3.pcc.chessboard.library.IPiece;
 	import de.robinz.as3.pcc.chessboard.library.pieces.Bishop;
+	import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 	import de.robinz.as3.pcc.chessboard.library.pieces.King;
 	import de.robinz.as3.pcc.chessboard.library.pieces.Knight;
 	import de.robinz.as3.pcc.chessboard.library.pieces.Pawn;

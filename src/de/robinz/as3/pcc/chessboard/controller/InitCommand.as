@@ -1,11 +1,11 @@
 package de.robinz.as3.pcc.chessboard.controller
 {
 	import de.robinz.as3.pcc.chessboard.library.Notation;
-	import de.robinz.as3.pcc.chessboard.library.Piece;
 	import de.robinz.as3.pcc.chessboard.library.pieces.Bishop;
 	import de.robinz.as3.pcc.chessboard.library.pieces.King;
 	import de.robinz.as3.pcc.chessboard.library.pieces.Knight;
 	import de.robinz.as3.pcc.chessboard.library.pieces.Pawn;
+	import de.robinz.as3.pcc.chessboard.library.pieces.Piece;
 	import de.robinz.as3.pcc.chessboard.library.pieces.Queen;
 	import de.robinz.as3.pcc.chessboard.library.pieces.Rook;
 	import de.robinz.as3.pcc.chessboard.view.ChessboardMediator;
