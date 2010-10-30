@@ -1,7 +1,7 @@
 package de.robinz.as3.pcc.chessboard.view
 {
-	import de.robinz.as3.pcc.chessboard.library.BoardNotation;
 	import de.robinz.as3.pcc.chessboard.library.IPiece;
+	import de.robinz.as3.pcc.chessboard.library.Notation;
 	import de.robinz.as3.pcc.chessboard.view.views.Chessboard;
 
 	import flash.events.Event;
@@ -86,7 +86,7 @@ package de.robinz.as3.pcc.chessboard.view
 			}
 		}
 
-		public function setPiece( p : IPiece, n : BoardNotation ) : void {
+		public function setPiece( p : IPiece, n : Notation ) : void {
 			var field : Box = this.chessboard[ n.row + n.column ] as Box;
 			( field.getChildAt( 0 ) as Text ).text = p.fontKey;
 		}

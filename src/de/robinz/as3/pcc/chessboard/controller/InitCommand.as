@@ -1,6 +1,6 @@
 package de.robinz.as3.pcc.chessboard.controller
 {
-	import de.robinz.as3.pcc.chessboard.library.BoardNotation;
+	import de.robinz.as3.pcc.chessboard.library.Notation;
 	import de.robinz.as3.pcc.chessboard.library.Piece;
 	import de.robinz.as3.pcc.chessboard.library.pieces.Bishop;
 	import de.robinz.as3.pcc.chessboard.library.pieces.King;
@@ -71,7 +71,7 @@ package de.robinz.as3.pcc.chessboard.controller
 		private function setPiece( piece : String, shortenNotation : String, isWhite : Boolean ) : void {
 			bm.setPiece(
 				Piece.createByParams( piece, isWhite ),
-				BoardNotation.createNotationByString( shortenNotation )
+				Notation.createNotationByString( shortenNotation )
 			);
 		}
 
