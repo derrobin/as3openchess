@@ -27,9 +27,13 @@ package de.robinz.as3.pcc.chessboard.library.pieces.rules.result
 				out += n.toString() + NOTATION_AND;
 			}
 
+			out = out.substr( 0, out.length - NOTATION_AND.length );
+
 			if ( this.isLoop ) {
+				out =+ "LOOP(" + out + ")";
 			}
 
+			return out;
 		}
 
 

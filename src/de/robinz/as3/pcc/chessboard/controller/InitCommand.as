@@ -58,6 +58,8 @@ package de.robinz.as3.pcc.chessboard.controller
 			this.setBlackPiece( Knight.NAME, "g8" );
 			this.setBlackPiece( Queen.NAME, "e8" );
 			this.setBlackPiece( King.NAME, "d8" );
+
+			
 		}
 
 		private function setWhitePiece( piece : String, shortenNotation : String ) : void {
