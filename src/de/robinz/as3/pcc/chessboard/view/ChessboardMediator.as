@@ -1,6 +1,7 @@
 package de.robinz.as3.pcc.chessboard.view
 {
 	import de.robinz.as3.pcc.chessboard.library.Notation;
+	import de.robinz.as3.pcc.chessboard.library.managers.FontManager;
 	import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 	import de.robinz.as3.pcc.chessboard.view.views.Chessboard;
 
@@ -40,11 +41,18 @@ package de.robinz.as3.pcc.chessboard.view
 		private function onMouseMove( e : MouseEvent ) : void {
 			if ( e.target is Text ) {
 				var di : Text = Text( e.target );
+				var piece : IPiece = di.data as IPiece;
+
+				if ( piece == null ) {
+					return;
+				}
+
+				var fm : FontManager = FontManager.getInstance();
 				var ds : DragSource = new DragSource();
 
 				ds.addData( di, "piece" );
 
-				DragManager.doDrag( di, ds, e, null );
+				DragManager.doDrag( di, ds, e/* , fm.convertTextToFlexImage( piece.fontKey ) */ );
 			}
 
 		}
@@ -89,6 +97,7 @@ package de.robinz.as3.pcc.chessboard.view
 		public function setPiece( p : IPiece, n : Notation ) : void {
 			var field : Box = this.chessboard[ n.row + n.column ] as Box;
 			( field.getChildAt( 0 ) as Text ).text = p.fontKey;
+			( field.getChildAt( 0 ) as Text ).data = p;
 		}
 
 		private function get chessboard() : Chessboard {
