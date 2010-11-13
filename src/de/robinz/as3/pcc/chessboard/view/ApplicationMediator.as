@@ -1,8 +1,9 @@
 package de.robinz.as3.pcc.chessboard.view
 {
 	import de.robinz.as3.pcc.chessboard.tests.ApplicationTest;
+	import de.robinz.as3.pcc.chessboard.view.views.ApplicationView;
+	import de.robinz.as3.pcc.chessboard.view.views.Chessboard;
 
-	import flexunit.flexui.TestRunnerBase;
 	import flexunit.framework.TestSuite;
 
 	import org.puremvc.as3.patterns.mediator.Mediator;
@@ -15,18 +16,18 @@ package de.robinz.as3.pcc.chessboard.view
 	 */
 	public class ApplicationMediator extends Mediator
 	{
-		public static const UNIT_TESTS : Boolean = true;
+		public static const UNIT_TESTS : Boolean = false;
 		public static const NAME : String = "ApplicationMediator";
 
-		public function ApplicationMediator( m : chessboard ) {
+		public function ApplicationMediator( m : mainapp ) {
 			super( NAME, m );
 
 			if ( UNIT_TESTS ) {
-				m.applicationView.chessboard.visible = false;
-				m.applicationView.chessboard.includeInLayout = false;
+				chessboard.visible = false;
+				chessboard.includeInLayout = false;
 
-				m.applicationView.testRunner.test = createSuite();
-				m.applicationView.testRunner.startTest();
+				view.testRunner.test = createSuite();
+				view.testRunner.startTest();
 			}
 		}
 
@@ -36,6 +37,15 @@ package de.robinz.as3.pcc.chessboard.view
  			return ts;
  		}
 
+		protected function get chessboard() : Chessboard {
+			return this.view.chessboard;
+		}
+		protected function get view() : ApplicationView {
+			return this.app.applicationView;
+		}
+		protected function get app() : mainapp {
+			return this.viewComponent as mainapp;
+		}
 
 	}
 }

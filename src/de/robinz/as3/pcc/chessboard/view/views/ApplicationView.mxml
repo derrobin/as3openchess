@@ -6,6 +6,6 @@
 
 	<components:Chessboard id="chessboard" width="100%" height="100%" />
 
-	<flexunit:TestRunnerBase id="testRunner" width="100%" height="100%" />
+	<flexunit:TestRunnerBase id="testRunner" width="100%" height="100%" visible="false" includeInLayout="true" />
 
 </mx:Canvas>

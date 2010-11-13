@@ -30,7 +30,7 @@ package de.robinz.as3.pcc.chessboard
 			registerCommand( STARTUP, StartupCommand );
 		}
 
-		public function startup( app : chessboard ) : void {
+		public function startup( app : mainapp ) : void {
 			sendNotification( STARTUP, app );
 		}
 	}
