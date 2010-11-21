@@ -118,35 +118,6 @@ package de.robinz.as3.pcc.chessboard.view
 				trace( e.getStackTrace() );
 			}
 			return null;
-			/*
-			var child : Object;
-			var b : Box;
-			var sc : Object; // Style Classes
-			var childs : Array = new Array().concat(
-				this.chessboard.row1.getChildren(),
-				this.chessboard.row2.getChildren(),
-				this.chessboard.row3.getChildren(),
-				this.chessboard.row4.getChildren(),
-				this.chessboard.row5.getChildren(),
-				this.chessboard.row6.getChildren(),
-				this.chessboard.row7.getChildren(),
-				this.chessboard.row8.getChildren()
-			);
-
-			for each( child in childs ) {
-				if ( !( child is Box ) ) {
-					continue;
-				}
-
-				b = child as Box;
-
-				if ( b.styleName != "fieldBlack" || b.styleName != "fieldWhite" ) {
-					continue;
-				}
-
-
-			}
-			*/
 		}
 
 		public function getPieceAt( n : Notation ) : IPiece {
