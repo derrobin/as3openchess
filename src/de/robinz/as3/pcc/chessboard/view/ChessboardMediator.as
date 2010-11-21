@@ -1,7 +1,9 @@
 package de.robinz.as3.pcc.chessboard.view
 {
+	import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 	import de.robinz.as3.pcc.chessboard.library.Notation;
 	import de.robinz.as3.pcc.chessboard.library.managers.FontManager;
+	import de.robinz.as3.pcc.chessboard.library.notation.ChessboardMove;
 	import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 	import de.robinz.as3.pcc.chessboard.view.views.Chessboard;
 
@@ -16,6 +18,7 @@ package de.robinz.as3.pcc.chessboard.view
 	import mx.events.DragEvent;
 	import mx.managers.DragManager;
 
+	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
 
 	/**
@@ -81,16 +84,20 @@ package de.robinz.as3.pcc.chessboard.view
 			var toPosition : Notation = Notation.createNotationByString( tb.id );
 			//n.column
 
-			//var m : Move = new Move();
-			//m.fromPosition = fromPosition;
-			//m.toPosition = toPosition;
-			//m.piece = p;
+			var m : ChessboardMove = new ChessboardMove();
+			m.fromPosition = fromPosition;
+			m.toPosition = toPosition;
+			m.piece = p;
 
-			//sendNotification( ApplicationFacade., m );
+			sendNotification( ApplicationFacade.TRY_TO_MOVE, m );
 
+			/*
 			var targetField : Box = this.getFieldAt( toPosition );
 
 			tb.addChild( t );
+			*/
+
+
 			// ..
 			// Text( e.dragInitiator ).x = Box( e.target ).mouseX;
 			// Text( e.dragInitiator ).y = Box( e.target ).mouseY;
@@ -120,22 +127,66 @@ package de.robinz.as3.pcc.chessboard.view
 			return null;
 		}
 
+		public function removePieceFromNotation( n : Notation ) : Boolean {
+			try {
+				var field : Box = this.chessboard[ n.row + n.column ] as Box;
+				field.removeAllChildren();
+			} catch( e : Error ) {
+				// TODO: Logging
+				trace("ERROR:removePieceFromPosition()!");
+				return false;
+			}
+
+			return true;
+		}
+
 		public function getPieceAt( n : Notation ) : IPiece {
 			var p : IPiece = null;
 
-			var field : Box = this.getFieldAt( n );
-
-			var text : Text = field.getChildAt( 0 ) as Text;
-
-			p = text.data as IPiece;
+			try {
+				var field : Box = this.getFieldAt( n );
+				var text : Text = field.getChildAt( 0 ) as Text;
+				p = text.data as IPiece;
+			} catch ( e : Error ) {
+				// TODO: logging
+				trace("ERROR:getPieceAt()");
+			}
 
 			return p;
 		}
 
 		public function setPiece( p : IPiece, n : Notation ) : void {
 			var field : Box = this.chessboard[ n.row + n.column ] as Box;
-			( field.getChildAt( 0 ) as Text ).text = p.fontKey;
-			( field.getChildAt( 0 ) as Text ).data = p;
+			var text : Text = new Text();
+
+			text.mouseChildren = false;
+			text.text = p.fontKey;
+			text.data = p;
+
+			field.addChild( text );
+		}
+
+		public override function listNotificationInterests() : Array {
+			return [
+				ApplicationFacade.MOVE
+			];
+		}
+
+		public override function handleNotification( n : INotification ) : void {
+			switch( n.getName() ) {
+				case ApplicationFacade.MOVE:
+					this.handleMove( n.getBody() as ChessboardMove );
+				break;
+			}
+		}
+
+		private function handleMove( m : ChessboardMove ) : void {
+			var fromBox : Box = this.getFieldAt( m.fromPosition );
+			var fromText : Text = fromBox.getChildAt( 0 ) as Text;
+			var toBox : Box = this.getFieldAt( m.toPosition );
+			//var toText : Text = this.getFieldAt( m.toPosition ) as Text;
+
+			toBox.addChild( fromText );
 		}
 
 		private function get chessboard() : Chessboard {

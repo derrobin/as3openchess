@@ -2,7 +2,7 @@
 <mx:Box xmlns:mx="http://www.adobe.com/2006/mxml"
 	xmlns:components="de.robinz.as3.pcc.chessboard.view.views.*"
 	xmlns:flexunit="flexunit.flexui.*"
->
+xmlns:moveHistory="de.robinz.as3.pcc.chessboard.view.views.moveHistory.*" xmlns:takenPieces="de.robinz.as3.pcc.chessboard.view.views.takenPieces.*">
 
 	<mx:Script>
 		<![CDATA[

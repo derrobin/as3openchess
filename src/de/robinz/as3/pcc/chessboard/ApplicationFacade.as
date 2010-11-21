@@ -1,6 +1,9 @@
 package de.robinz.as3.pcc.chessboard
 {
 	import de.robinz.as3.pcc.chessboard.controller.StartupCommand;
+	import de.robinz.as3.pcc.chessboard.controller.move.MoveCommand;
+	import de.robinz.as3.pcc.chessboard.controller.move.TryToMoveCommand;
+	import de.robinz.as3.pcc.chessboard.controller.piece.BeatPieceCommand;
 
 	import org.puremvc.as3.patterns.facade.Facade;
 
@@ -13,9 +16,13 @@ package de.robinz.as3.pcc.chessboard
 	public class ApplicationFacade extends Facade
 	{
 		public static const STARTUP : String 	= "STARTUP";
-		public static const TRY_MOVE : String = "TRY_MOVE";
+
+		public static const TRY_TO_MOVE : String = "TRY_TO_MOVE";
+		public static const REJECT_MOVE : String = "REJECT_MOVE";
 		public static const GET_MOVES : String = "GET_MOVES";
 		public static const MOVE : String = "MOVE";
+
+		public static const BEAT_PIECE_FROM_NOTATION : String = "BEAT_PIECE_FROM_NOTATION";
 
 		public static const GAME_END : String = "gameEnd";
 		public static const GAME_START : String = "gameStart";
@@ -29,7 +36,13 @@ package de.robinz.as3.pcc.chessboard
 
 		protected override function initializeController() : void {
 			super.initializeController();
+
 			registerCommand( STARTUP, StartupCommand );
+
+			registerCommand( TRY_TO_MOVE, TryToMoveCommand );
+			registerCommand( MOVE, MoveCommand );
+
+			registerCommand( BEAT_PIECE_FROM_NOTATION, BeatPieceCommand );
 		}
 
 		public function startup( app : mainapp ) : void {

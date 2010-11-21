@@ -20,6 +20,10 @@ package de.robinz.as3.pcc.chessboard.library
 			return n;
 		}
 
+		public function equals( n : Notation ) : Boolean {
+			return this.toString() == n.toString();
+		}
+
 		public function toString() : String {
 			return this.row + column.toString();
 		}
