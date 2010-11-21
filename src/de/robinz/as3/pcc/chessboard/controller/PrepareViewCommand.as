@@ -1,7 +1,9 @@
 package de.robinz.as3.pcc.chessboard.controller
 {
-	import de.robinz.as3.pcc.chessboard.view.ChessboardMediator;
 	import de.robinz.as3.pcc.chessboard.view.ApplicationMediator;
+	import de.robinz.as3.pcc.chessboard.view.ChessboardMediator;
+	import de.robinz.as3.pcc.chessboard.view.MoveHistoryMediator;
+	import de.robinz.as3.pcc.chessboard.view.TakenPiecesMediator;
 
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;
@@ -19,7 +21,8 @@ package de.robinz.as3.pcc.chessboard.controller
 
 			facade.registerMediator( new ApplicationMediator( app ) );
 			facade.registerMediator( new ChessboardMediator( app.applicationView.chessboard ) );
-
+			facade.registerMediator( new MoveHistoryMediator( app.applicationView.chessboardMoveHistory ) );
+			facade.registerMediator( new TakenPiecesMediator( app.applicationView.chessboardTakenPieces ) );
 		}
 
 	}

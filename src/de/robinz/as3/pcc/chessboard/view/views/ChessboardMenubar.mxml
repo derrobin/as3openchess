@@ -13,8 +13,27 @@
 				<menuitem type="separator" />
 				<menuitem label="Load Game" />
 				<menuitem label="Save Game" />
+				<menuitem label="Recent Games..">
+					<menuitem label="Game Name 0 | xxxx/xx/xx | Open Result" />
+					<menuitem label="Game Name 1 | xxxx/xx/xx | Open Result" />
+					<menuitem label="Game Name 2 | 2010/10/10 | Win" />
+					<menuitem label="Game Name 3 | 2010/10/10 | Win" />
+					<menuitem label="Game Name 4 | 2010/10/10 | Loose" />
+				</menuitem>
+				<menuitem type="separator" />
+				<menuitem label="Export Game as..">
+					<menuitem label="Format 1" />
+					<menuitem label="Format 2" />
+					<menuitem label="Format 3" />
+				</menuitem>
+				<menuitem label="Import Game from..">
+					<menuitem label="Format 1" />
+					<menuitem label="Format 2" />
+					<menuitem label="Format 3" />
+				</menuitem>
 			</menuitem>
 			<menuitem label="Settings">
+				<menuitem label="Game Colors" />
 				<menuitem label="Board Size" />
 				<menuitem type="separator" />
 				<menuitem label="Piece Style" />
@@ -22,6 +41,7 @@
 			</menuitem>
 			<menuitem label="Help">
 				<menuitem label="Search.." />
+				<menuitem label="Show Themes" />
 			</menuitem>
 			<menuitem label="Info">
 				<menuitem label="About" />

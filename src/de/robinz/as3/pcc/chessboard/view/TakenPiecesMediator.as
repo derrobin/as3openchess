@@ -1,15 +1,11 @@
 package de.robinz.as3.pcc.chessboard.view
 {
-	import de.robinz.as3.pcc.chessboard.tests.ApplicationTest;
-	import de.robinz.as3.pcc.chessboard.view.views.ApplicationView;
-	import de.robinz.as3.pcc.chessboard.view.views.Chessboard;
-
-	import flexunit.framework.TestSuite;
+	import de.robinz.as3.pcc.chessboard.view.views.ChessboardTakenPieces;
 
 	import org.puremvc.as3.patterns.mediator.Mediator;
 
 	/**
-	 * Application startup
+	 * UI Control for Info Panel - Taken Pieces
 	 *
 	 * @author Robin Heinel
 	 *
@@ -18,12 +14,12 @@ package de.robinz.as3.pcc.chessboard.view
 	{
 		public static const NAME : String = "TakenPiecesMediator";
 
-		public function TakenPiecesMediator( m : Hist ) {
+		public function TakenPiecesMediator( m : ChessboardTakenPieces ) {
 			super( NAME, m );
 		}
 
-		protected function get view() : ApplicationView {
-			return this.app.applicationView;
+		protected function get view() : ChessboardTakenPieces {
+			return this.viewComponent as ChessboardTakenPieces;
 		}
 	}
 }
