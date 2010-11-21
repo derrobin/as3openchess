@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml">
+
+	<mx:Style>
+
+		.pieceContainer {
+			verticalAlign: middle;
+			horizontalAlign: center;
+		}
+		.piece {
+			fontFamily: font1;
+			fontSize: 25pt;
+		}
+
+	</mx:Style>
+
+	<mx:VBox width="100%" height="100%">
+		<mx:Panel width="100%" height="50%" title="White Pieces" backgroundColor="#eeeeee">
+			<mx:HBox width="100%" height="100%">
+				<mx:VBox width="45" height="45" styleName="pieceContainer">
+					<mx:Text text="p" width="25" height="25" styleName="piece" mouseChildren="false" />
+				</mx:VBox>
+				<mx:VBox width="45" height="45" styleName="pieceContainer">
+					<mx:Text text="h" width="25" height="25" styleName="piece" mouseChildren="false" />
+				</mx:VBox>
+			</mx:HBox>
+		</mx:Panel>
+		<mx:HRule width="100%" height="1" />
+		<mx:Panel width="100%" height="50%" title="Black Pieces" backgroundColor="#eeeeee">
+			<mx:HBox width="100%" height="100%">
+				<mx:VBox width="45" height="45" styleName="pieceContainer">
+					<mx:Text text="o" width="25" height="25" styleName="piece" mouseChildren="false" />
+				</mx:VBox>
+				<mx:VBox width="45" height="45" styleName="pieceContainer">
+					<mx:Text text="o" width="25" height="25" styleName="piece" mouseChildren="false" />
+				</mx:VBox>
+				<mx:VBox width="45" height="45" styleName="pieceContainer">
+					<mx:Text text="t" width="25" height="25" styleName="piece" mouseChildren="false" />
+				</mx:VBox>
+			</mx:HBox>
+		</mx:Panel>
+	</mx:VBox>
+</mx:Panel>

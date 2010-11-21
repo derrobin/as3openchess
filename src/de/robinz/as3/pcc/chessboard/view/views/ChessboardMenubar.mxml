@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:ApplicationControlBar xmlns:mx="http://www.adobe.com/2006/mxml"
+	width="100%"
+	dock="true"
+	paddingTop="0"
+	paddingBottom="0"
+>
+
+	<mx:MenuBar id="myMenuBar" labelField="@label">
+		<mx:XMLList>
+			<menuitem label="Chessboard Menu">
+				<menuitem label="New Game" />
+				<menuitem type="separator" />
+				<menuitem label="Load Game" />
+				<menuitem label="Save Game" />
+			</menuitem>
+			<menuitem label="Settings">
+				<menuitem label="Board Size" />
+				<menuitem type="separator" />
+				<menuitem label="Piece Style" />
+				<menuitem label="Board Style" />
+			</menuitem>
+			<menuitem label="Help">
+				<menuitem label="Search.." />
+			</menuitem>
+			<menuitem label="Info">
+				<menuitem label="About" />
+			</menuitem>
+		</mx:XMLList>
+	</mx:MenuBar>
+</mx:ApplicationControlBar>
