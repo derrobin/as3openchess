@@ -1,9 +1,11 @@
 package de.robinz.as3.pcc.chessboard.library
 {
+	import mx.utils.ObjectUtil;
+
 	public class Notation
 	{
 		public var row : String;
-		public var column : String;
+		public var column : int;
 
 		public static function createNotationByString( input : String ) : Notation {
 
@@ -13,11 +15,14 @@ package de.robinz.as3.pcc.chessboard.library
 			var n : Notation = new Notation();
 
 			n.row = row;
-			n.column = column;
+			n.column = int( column );
 
 			return n;
 		}
 
+		public function toString() : String {
+			return this.row + column.toString();
+		}
 
 
 	}

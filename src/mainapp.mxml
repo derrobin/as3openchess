@@ -10,10 +10,10 @@
 	backgroundColor="#ababab"
 	horizontalGap="0"
 	verticalGap="0"
-	paddingLeft="20"
-	paddingRight="20"
-	paddingBottom="20"
-	paddingTop="20"
+	paddingLeft="0"
+	paddingRight="0"
+	paddingBottom="0"
+	paddingTop="0"
 >
 
 	<mx:Style>

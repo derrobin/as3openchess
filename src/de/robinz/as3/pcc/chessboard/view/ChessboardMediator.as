@@ -70,11 +70,27 @@ package de.robinz.as3.pcc.chessboard.view
 		}
 
 		private function onDragDrop( e : DragEvent ) : void {
-			var b : Box = Box( e.target );
-			var t : Text = Text( e.dragInitiator );
+			var tb : Box = Box( e.target ); // Target Box
+			var fb : Box = Box( e.dragInitiator.parent ); // From Box
 
+			var t : Text = Text( e.dragInitiator );
+			var p : IPiece = t.data as IPiece;
 			//b = ( t.parent as Box ).removeChild( b );
-			b.addChild( t );
+
+			var fromPosition : Notation = Notation.createNotationByString( fb.id );
+			var toPosition : Notation = Notation.createNotationByString( tb.id );
+			//n.column
+
+			//var m : Move = new Move();
+			//m.fromPosition = fromPosition;
+			//m.toPosition = toPosition;
+			//m.piece = p;
+
+			//sendNotification( ApplicationFacade., m );
+
+			var targetField : Box = this.getFieldAt( toPosition );
+
+			tb.addChild( t );
 			// ..
 			// Text( e.dragInitiator ).x = Box( e.target ).mouseX;
 			// Text( e.dragInitiator ).y = Box( e.target ).mouseY;
@@ -82,7 +98,7 @@ package de.robinz.as3.pcc.chessboard.view
 
 		private function onMouseOver( e : Event ) : void {
 			if ( e.target is Box && !( e.target is HBox ) && !( e.target is VBox ) ) {
-				chessboard.info1.text = ( e.target as Box ).id;
+				//chessboard.info1.text = ( e.target as Box ).id;
 			}
 		}
 
@@ -90,8 +106,59 @@ package de.robinz.as3.pcc.chessboard.view
 			if ( e.target is Text ) {
 				var t : Text = ( e.target as Text );
 				var box : Box = t.parent as Box;
-				chessboard.info2.text = "You clicked on a Piece with the FontKey [" + ( e.target as Text ).text + "] and the Notation [" + box.id + "]";
+				//chessboard.info2.text = "You clicked on a Piece with the FontKey [" + ( e.target as Text ).text + "] and the Notation [" + box.id + "]";
 			}
+		}
+
+		private function getFieldAt( n : Notation ) : Box {
+			try {
+				var b : Box = this.chessboard[ n.toString() ] as Box;
+				return b;
+			} catch( e : Error ) {
+				trace( e.getStackTrace() );
+			}
+			return null;
+			/*
+			var child : Object;
+			var b : Box;
+			var sc : Object; // Style Classes
+			var childs : Array = new Array().concat(
+				this.chessboard.row1.getChildren(),
+				this.chessboard.row2.getChildren(),
+				this.chessboard.row3.getChildren(),
+				this.chessboard.row4.getChildren(),
+				this.chessboard.row5.getChildren(),
+				this.chessboard.row6.getChildren(),
+				this.chessboard.row7.getChildren(),
+				this.chessboard.row8.getChildren()
+			);
+
+			for each( child in childs ) {
+				if ( !( child is Box ) ) {
+					continue;
+				}
+
+				b = child as Box;
+
+				if ( b.styleName != "fieldBlack" || b.styleName != "fieldWhite" ) {
+					continue;
+				}
+
+
+			}
+			*/
+		}
+
+		public function getPieceAt( n : Notation ) : IPiece {
+			var p : IPiece = null;
+
+			var field : Box = this.getFieldAt( n );
+
+			var text : Text = field.getChildAt( 0 ) as Text;
+
+			p = text.data as IPiece;
+
+			return p;
 		}
 
 		public function setPiece( p : IPiece, n : Notation ) : void {

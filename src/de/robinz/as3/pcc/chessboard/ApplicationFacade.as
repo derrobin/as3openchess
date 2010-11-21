@@ -13,6 +13,8 @@ package de.robinz.as3.pcc.chessboard
 	public class ApplicationFacade extends Facade
 	{
 		public static const STARTUP : String 	= "STARTUP";
+		public static const TRY_MOVE : String = "TRY_MOVE";
+		public static const GET_MOVES : String = "GET_MOVES";
 		public static const MOVE : String = "MOVE";
 
 		public static const GAME_END : String = "gameEnd";
