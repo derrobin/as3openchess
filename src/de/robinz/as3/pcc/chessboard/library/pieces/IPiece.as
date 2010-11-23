@@ -9,5 +9,6 @@ package de.robinz.as3.pcc.chessboard.library.pieces
 		function setBlack() : void;
 
 		function getName() : String;
+		function getSortIndex() : int;
 	}
 }

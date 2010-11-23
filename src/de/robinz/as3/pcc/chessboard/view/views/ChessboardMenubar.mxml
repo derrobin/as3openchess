@@ -35,7 +35,10 @@
 			<menuitem label="Settings">
 				<menuitem label="Game Colors" />
 				<menuitem label="Board Size" />
-				<menuitem type="separator" />
+				<menuitem label="Panels..">
+					<menuitem label="Move History" type="check" toggled="true" />
+					<menuitem label="Taken Pieces" type="check" toggled="true" />
+				</menuitem>
 				<menuitem label="Piece Style" />
 				<menuitem label="Board Style" />
 			</menuitem>

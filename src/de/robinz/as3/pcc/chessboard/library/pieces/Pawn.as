@@ -11,5 +11,8 @@ package de.robinz.as3.pcc.chessboard.library.pieces
 			return NAME;
 		}
 
+		public override function getSortIndex() : int {
+			return 16;
+		}
 	}
 }

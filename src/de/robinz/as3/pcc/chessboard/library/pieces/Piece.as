@@ -35,9 +35,15 @@ package de.robinz.as3.pcc.chessboard.library.pieces
 			throw new Error( "Not Implemented!" );
 		}
 
+		public function getSortIndex() : int {
+			throw new Error( "Not Implemented!" );
+		}
+
 		public function get isWhite() : Boolean {
 			return this._isWhite;
 		}
+
+
 
 	}
 }

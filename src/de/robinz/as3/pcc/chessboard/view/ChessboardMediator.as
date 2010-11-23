@@ -184,7 +184,6 @@ package de.robinz.as3.pcc.chessboard.view
 			var fromBox : Box = this.getFieldAt( m.fromPosition );
 			var fromText : Text = fromBox.getChildAt( 0 ) as Text;
 			var toBox : Box = this.getFieldAt( m.toPosition );
-			//var toText : Text = this.getFieldAt( m.toPosition ) as Text;
 
 			toBox.addChild( fromText );
 		}

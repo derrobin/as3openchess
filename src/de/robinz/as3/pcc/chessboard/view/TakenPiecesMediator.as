@@ -1,6 +1,7 @@
 package de.robinz.as3.pcc.chessboard.view
 {
 	import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
+	import de.robinz.as3.pcc.chessboard.library.pieces.Piece;
 	import de.robinz.as3.pcc.chessboard.view.views.ChessboardTakenPieces;
 	import de.robinz.as3.pcc.chessboard.view.views.takenPieces.TakenPiece;
 
@@ -26,6 +27,7 @@ package de.robinz.as3.pcc.chessboard.view
 			var tp : TakenPiece = new TakenPiece();
 			tp.initialize();
 			tp.piece.text = p.fontKey;
+			tp.data = p;
 
 			var targetContainer : Container;
 
@@ -36,7 +38,24 @@ package de.robinz.as3.pcc.chessboard.view
 			}
 
 			targetContainer.addChild( tp );
+
+			// TODO: LAST POS
+			// TODO: Sort Piece Queue
 		}
+
+		/* private function insertPiece( c : Container, p : Piece ) : void {
+			var childs = c.getChildren();
+			var child : TakenPiece;
+			var piece : IPiece;
+			for each( child in childs ) {
+				piece = child.data as IPiece;
+				if ( piece.getSortIndex() == p.getSortIndex() ) {
+					c.addChild();
+				}
+			}
+
+			c.addChildAt( c, p.getSortIndex() );
+		} */
 
 		protected function get view() : ChessboardTakenPieces {
 			return this.viewComponent as ChessboardTakenPieces;
