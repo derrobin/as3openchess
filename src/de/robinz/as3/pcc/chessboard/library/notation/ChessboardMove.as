@@ -8,6 +8,7 @@ package de.robinz.as3.pcc.chessboard.library.notation
 		public var piece : IPiece;
 		public var fromPosition : Notation;
 		public var toPosition : Notation;
+		public var beat : Boolean = false;
 
 		public function ChessboardMove()
 		{

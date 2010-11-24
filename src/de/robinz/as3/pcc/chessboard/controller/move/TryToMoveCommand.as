@@ -50,6 +50,7 @@ package de.robinz.as3.pcc.chessboard.controller.move
 
 			// beat and move
 			if ( movePiece.isWhite != targetPiece.isWhite ) {
+				m.beat = true;
 				sendNotification( ApplicationFacade.BEAT_PIECE_FROM_NOTATION, m.toPosition );
 				sendNotification( ApplicationFacade.MOVE, m );
 			}

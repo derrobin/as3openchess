@@ -14,5 +14,8 @@ package de.robinz.as3.pcc.chessboard.library.pieces
 		public override function getSortIndex() : int {
 			return 16;
 		}
+		public override function get notationChar() : String {
+			return "B";
+		}
 	}
 }

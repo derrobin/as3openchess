@@ -15,7 +15,13 @@ package de.robinz.as3.pcc.chessboard.controller.move
 	public class MoveCommand extends SimpleCommand
 	{
 		public override function execute( n : INotification ) : void {
+			if ( n.getBody() is ChessboardMove ) {
+				this.move( n.getBody() as ChessboardMove );
+			}
+		}
 
+		private function move( m : ChessboardMove ) : void {
+			this.gm.mh.add( m );
 		}
 
 		private function get gm() : GameMediator {

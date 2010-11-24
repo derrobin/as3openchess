@@ -10,6 +10,8 @@ package de.robinz.as3.pcc.chessboard.library.pieces
 		public override function getName() : String {
 			return NAME;
 		}
-
+		public override function get notationChar() : String {
+			return "K";
+		}
 	}
 }

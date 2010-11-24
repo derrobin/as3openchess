@@ -15,5 +15,9 @@ package de.robinz.as3.pcc.chessboard.library.pieces
 			return 8;
 		}
 
+		public override function get notationChar() : String {
+			return "L";
+		}
+
 	}
 }
