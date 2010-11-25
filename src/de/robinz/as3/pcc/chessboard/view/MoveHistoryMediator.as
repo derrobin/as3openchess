@@ -36,7 +36,8 @@ package de.robinz.as3.pcc.chessboard.view
 			//me.color.setStyle( "backgroundColor", color );
 			me.moveNumber.htmlText = "<strong>" + this.count + "</strong>";
 			me.movePiece.text = m.piece.notationChar;
-			me.moveDescription.text = m.fromPosition.toString() + " " + + ( m.beat ? "x" : "- " ) + m.toPosition.toString();
+			var divider : String = m.beat ? " x " : " - ";
+			me.moveDescription.text = m.fromPosition.toString() + divider + m.toPosition.toString();
 
 			view.moveList.addChildAt( me, 0 );
 		}
