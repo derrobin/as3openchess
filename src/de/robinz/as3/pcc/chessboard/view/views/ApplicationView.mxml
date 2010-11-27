@@ -54,8 +54,22 @@ xmlns:moveHistory="de.robinz.as3.pcc.chessboard.view.views.moveHistory.*" xmlns:
 		.historyMoveNumber,
 		.historyMovePiece,
 		.historyMoveDescription {
-			fontSize: 15;
+			fontSize: 14;
 		}
+		.historyMoveNumber {
+			background-color: #ff0000;
+			fontSize: 12;
+		}
+		.pieceContainer {
+			verticalAlign: middle;
+			horizontalAlign: center;
+			background: #ff0000;
+		}
+		.piece {
+			fontFamily: font1;
+			fontSize: 25pt;
+		}
+
 	</mx:Style>
 
 	<components:ChessboardMenubar id="chessboardMenubar" />

@@ -1,6 +1,7 @@
 package de.robinz.as3.pcc.chessboard.view
 {
 	import de.robinz.as3.pcc.chessboard.library.notation.ChessboardMove;
+	import de.robinz.as3.pcc.chessboard.library.pieces.Pawn;
 	import de.robinz.as3.pcc.chessboard.view.views.ChessboardMoveHistory;
 	import de.robinz.as3.pcc.chessboard.view.views.moveHistory.ChessboardMoveEntry;
 
@@ -34,10 +35,11 @@ package de.robinz.as3.pcc.chessboard.view
 			this.count++;
 
 			//me.color.setStyle( "backgroundColor", color );
-			me.moveNumber.htmlText = "<strong>" + this.count + "</strong>";
-			me.movePiece.text = m.piece.notationChar;
-			var divider : String = m.beat ? " x " : " - ";
-			me.moveDescription.text = m.fromPosition.toString() + divider + m.toPosition.toString();
+			me.moveNumber.text = this.count + ".";
+			//me.movePiece.text = m.piece.notationChar;
+			var divider : String = m.beat ? "x" : "-";
+			var notationChar : String = m.piece.getName() == Pawn.NAME ? "" : m.piece.notationChar;
+			me.moveDescription.text = notationChar + m.fromPosition.toString() + divider + m.toPosition.toString();
 
 			view.moveList.addChildAt( me, 0 );
 		}
