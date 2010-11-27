@@ -29,14 +29,11 @@ package de.robinz.as3.pcc.chessboard.view
 
 		public function add( m : ChessboardMove ) : void {
 			var me : ChessboardMoveEntry = new ChessboardMoveEntry();
-			//var color : int = m.piece.isWhite == true ? 0xffffff : 0x000000;
 			me.initialize();
 
 			this.count++;
 
-			//me.color.setStyle( "backgroundColor", color );
 			me.moveNumber.text = this.count + ".";
-			//me.movePiece.text = m.piece.notationChar;
 			var divider : String = m.beat ? "x" : "-";
 			var notationChar : String = m.piece.getName() == Pawn.NAME ? "" : m.piece.notationChar;
 			me.moveDescription.text = notationChar + m.fromPosition.toString() + divider + m.toPosition.toString();
