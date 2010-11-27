@@ -1,6 +1,7 @@
 package de.robinz.as3.pcc.chessboard
 {
 	import de.robinz.as3.pcc.chessboard.controller.StartupCommand;
+	import de.robinz.as3.pcc.chessboard.controller.game.NewGameCommand;
 	import de.robinz.as3.pcc.chessboard.controller.move.MoveCommand;
 	import de.robinz.as3.pcc.chessboard.controller.move.TryToMoveCommand;
 	import de.robinz.as3.pcc.chessboard.controller.piece.BeatPieceCommand;
@@ -24,8 +25,9 @@ package de.robinz.as3.pcc.chessboard
 
 		public static const BEAT_PIECE_FROM_NOTATION : String = "BEAT_PIECE_FROM_NOTATION";
 
-		public static const GAME_END : String = "gameEnd";
-		public static const GAME_START : String = "gameStart";
+		//public static const GAME_END : String = "gameEnd";
+		//public static const GAME_START : String = "gameStart";
+		public static const NEW_GAME : String = "newGame";
 
 		public static function getInstance() : ApplicationFacade {
 			if ( ! instance ) {
@@ -41,6 +43,8 @@ package de.robinz.as3.pcc.chessboard
 
 			registerCommand( TRY_TO_MOVE, TryToMoveCommand );
 			registerCommand( MOVE, MoveCommand );
+
+			registerCommand( NEW_GAME, NewGameCommand );
 
 			registerCommand( BEAT_PIECE_FROM_NOTATION, BeatPieceCommand );
 		}

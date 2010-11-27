@@ -6,10 +6,19 @@
 	paddingBottom="0"
 >
 
-	<mx:MenuBar id="myMenuBar" labelField="@label">
+	<mx:Script>
+		<![CDATA[
+
+			public static const MENU_ENTRY_MEW_GAME : String = "newGame";
+
+		]]>
+	</mx:Script>
+
+
+	<mx:MenuBar id="menuBar" labelField="@label">
 		<mx:XMLList>
 			<menuitem label="Chessboard Menu">
-				<menuitem label="New Game" />
+				<menuitem label="New Game" data="newGame" />
 				<menuitem type="separator" />
 				<menuitem label="Load Game" />
 				<menuitem label="Save Game" />

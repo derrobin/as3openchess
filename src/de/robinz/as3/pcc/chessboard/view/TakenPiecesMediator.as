@@ -23,6 +23,11 @@ package de.robinz.as3.pcc.chessboard.view
 			super( NAME, m );
 		}
 
+		public function reset() : void {
+			this.view.whitePieces.removeAllChildren();
+			this.view.blackPieces.removeAllChildren();
+		}
+
 		public function addPiece( p : IPiece ) : void {
 			var tp : TakenPiece = new TakenPiece();
 			tp.initialize();

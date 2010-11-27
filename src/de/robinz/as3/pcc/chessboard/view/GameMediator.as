@@ -1,5 +1,8 @@
 package de.robinz.as3.pcc.chessboard.view
 {
+	import de.robinz.as3.pcc.chessboard.library.Notation;
+	import de.robinz.as3.pcc.chessboard.library.pieces.Piece;
+
 	import org.puremvc.as3.patterns.mediator.Mediator;
 
 	/**
@@ -16,6 +19,22 @@ package de.robinz.as3.pcc.chessboard.view
 
 		public function GameMediator() {
 			super( NAME, null );
+		}
+
+
+		public function setWhitePiece( piece : String, shortenNotation : String ) : void {
+			this.setPiece( piece, shortenNotation, true );
+		}
+
+		public function setBlackPiece( piece : String, shortenNotation : String ) : void {
+			this.setPiece( piece, shortenNotation, false );
+		}
+
+		public function setPiece( piece : String, shortenNotation : String, isWhite : Boolean ) : void {
+			this.cb.setPiece(
+				Piece.createByParams( piece, isWhite ),
+				Notation.createNotationByString( shortenNotation )
+			);
 		}
 
 		public function get cb() : ChessboardMediator {

@@ -140,6 +140,39 @@ package de.robinz.as3.pcc.chessboard.view
 			return true;
 		}
 
+		private function getRowChildren() : Array {
+			return new Array().concat(
+				this.chessboard.row1.getChildren(),
+				this.chessboard.row2.getChildren(),
+				this.chessboard.row3.getChildren(),
+				this.chessboard.row4.getChildren(),
+				this.chessboard.row5.getChildren(),
+				this.chessboard.row6.getChildren(),
+				this.chessboard.row7.getChildren(),
+				this.chessboard.row8.getChildren()
+			);
+		}
+
+		public function removeAllPieces() : void {
+			var childs : Array = this.getRowChildren();
+			var child : Object;
+			var b : Box;
+
+			for each( child in childs ) {
+				if ( !( child is Box ) ) {
+					continue;
+				}
+
+				b = child as Box;
+
+				if ( b.styleName != "fieldBlack" && b.styleName != "fieldWhite" ) {
+					continue;
+				}
+
+				b.removeAllChildren();
+			}
+		}
+
 		public function getPieceAt( n : Notation ) : IPiece {
 			var p : IPiece = null;
 

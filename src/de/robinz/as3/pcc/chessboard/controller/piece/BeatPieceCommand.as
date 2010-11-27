@@ -8,7 +8,7 @@ package de.robinz.as3.pcc.chessboard.controller.piece
 	import org.puremvc.as3.patterns.command.SimpleCommand;
 
 	/**
-	 * MoveCommand
+	 * BeatPieceCommand
 	 *
 	 * @author Robin Heinel
 	 *
