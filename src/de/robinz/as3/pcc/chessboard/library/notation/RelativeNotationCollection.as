@@ -3,7 +3,12 @@ package de.robinz.as3.pcc.chessboard.library.pieces.rules.result
 	import de.robinz.as3.pcc.chessboard.library.notation.IRelativeNotation;
 	import de.robinz.as3.rzlib.collections.TypedCollection;
 
-	public class RelativeNotationList extends TypedCollection
+	/**
+	 * RelativeNotationCollection
+	 *
+	 * @author robin heinel
+	 */
+	public class RelativeNotationCollection extends TypedCollection
 	{
 		public static const NOTATION_AND : String  = "&";
 
@@ -11,7 +16,7 @@ package de.robinz.as3.pcc.chessboard.library.pieces.rules.result
 
 		public function get isLoop() : Boolean { return this._isLoop; }
 
-		public function RelativeNotationList() {
+		public function RelativeNotationCollection() {
 			super( IRelativeNotation, TypedCollection.COMPARISON_ISA );
 		}
 

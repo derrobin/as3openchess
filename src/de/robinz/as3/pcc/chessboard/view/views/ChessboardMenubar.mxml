@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+ChessboardMenubar
+@author robin heinel
+-->
 <mx:ApplicationControlBar xmlns:mx="http://www.adobe.com/2006/mxml"
 	width="100%"
 	dock="true"
@@ -10,53 +14,82 @@
 		<![CDATA[
 
 			public static const MENU_ENTRY_MEW_GAME : String = "newGame";
+			public static const MENU_ENTRY_LOAD_GAME : String = "loadGame";
+			public static const MENU_ENTRY_SAVE_GAME : String = "saveGame";
+			public static const MENU_ENTRY_RECENT_GAMES : String = "recentGames";
+			public static const MENU_ENTRY_IMPORT_GAME : String = "importGame";
+			public static const MENU_ENTRY_EXPORT_GAME : String = "exportGame";
+			public static const MENU_ENTRY_GAME_COLORS : String = "gameColors";
+			public static const MENU_ENTRY_BOARD_SIZE : String = "boardSize";
+			public static const MENU_ENTRY_PANEL_MOVE_HISTORY : String = "panelMoveHistory";
+			public static const MENU_ENTRY_PANEL_TAKEN_PIECES : String = "panelTakenPieces";
+			public static const MENU_ENTRY_PIECE_SETTINGS : String = "pieceSettings";
+			public static const MENU_ENTRY_BOARD_STYLE : String = "boardStyle";
+			public static const MENU_ENTRY_ABOUT_GAME : String = "aboutGame";
+			public static const MENU_ENTRY_REVERT_MOVES : String = "revertMoves";
+
+			public static const MENU_ENTRY_SET_TEST_PIECES : String = "setTestPieces";
 
 		]]>
 	</mx:Script>
 
+<!--
+<menuitem label="Recent Games..">
+	<menuitem label="Game Name 0 | xxxx/xx/xx | Open Result" />
+	<menuitem label="Game Name 1 | xxxx/xx/xx | Open Result" />
+	<menuitem label="Game Name 2 | 2010/10/10 | Win" />
+	<menuitem label="Game Name 3 | 2010/10/10 | Win" />
+	<menuitem label="Game Name 4 | 2010/10/10 | Loose" />
+</menuitem>
+<menuitem label="Help">
+	<menuitem label="Search.." data="searchHelp" />
+	<menuitem label="Show Themes" data="showHelpThemes" />
+</menuitem>
+-->
 
+
+<!--
+full menu:
+			<menuitem label="Chessboard Menu">
+				<menuitem label="New Game" data="newGame" />
+				<menuitem type="separator" />
+				<menuitem label="Load Game" data="loadGame" />
+				<menuitem label="Save Game" data="saveGame" />
+				<menuitem label="Recent Games.." data="recentGames" />
+				<menuitem type="separator" />
+				<menuitem label="Export Game.." data="exportGame" />
+				<menuitem label="Import Game.." data="importGame" />
+			</menuitem>
+			<menuitem label="Settings">
+				<menuitem label="Game Colors" data="gameColors" />
+				<menuitem label="Board Size" data="boardSize" />
+				<menuitem label="Panels..">
+					<menuitem label="Move History" data="panelMoveHistory" type="check" toggled="true" />
+					<menuitem label="Taken Pieces" data="panelTakenPieces" type="check" toggled="true" />
+				</menuitem>
+				<menuitem label="Piece Style" data="pieceStyle" />
+				<menuitem label="Board Style" data="boardStyle" />
+			</menuitem>
+			<menuitem label="Info">
+				<menuitem label="About" data="aboutGame" />
+			</menuitem>
+-->
 	<mx:MenuBar id="menuBar" labelField="@label">
 		<mx:XMLList>
 			<menuitem label="Chessboard Menu">
 				<menuitem label="New Game" data="newGame" />
 				<menuitem type="separator" />
-				<menuitem label="Load Game" />
-				<menuitem label="Save Game" />
-				<menuitem label="Recent Games..">
-					<menuitem label="Game Name 0 | xxxx/xx/xx | Open Result" />
-					<menuitem label="Game Name 1 | xxxx/xx/xx | Open Result" />
-					<menuitem label="Game Name 2 | 2010/10/10 | Win" />
-					<menuitem label="Game Name 3 | 2010/10/10 | Win" />
-					<menuitem label="Game Name 4 | 2010/10/10 | Loose" />
-				</menuitem>
-				<menuitem type="separator" />
-				<menuitem label="Export Game as..">
-					<menuitem label="Format 1" />
-					<menuitem label="Format 2" />
-					<menuitem label="Format 3" />
-				</menuitem>
-				<menuitem label="Import Game from..">
-					<menuitem label="Format 1" />
-					<menuitem label="Format 2" />
-					<menuitem label="Format 3" />
-				</menuitem>
+				<menuitem label="Load Game" data="loadGame" />
+				<menuitem label="Save Game" data="saveGame" />
+				<menuitem label="Test Chessfont" data="setTestPieces" />
 			</menuitem>
 			<menuitem label="Settings">
-				<menuitem label="Game Colors" />
-				<menuitem label="Board Size" />
 				<menuitem label="Panels..">
-					<menuitem label="Move History" type="check" toggled="true" />
-					<menuitem label="Taken Pieces" type="check" toggled="true" />
+					<menuitem label="Move History" data="panelMoveHistory" type="check" toggled="true" />
+					<menuitem label="Taken Pieces" data="panelTakenPieces" type="check" toggled="true" />
 				</menuitem>
-				<menuitem label="Piece Style" />
-				<menuitem label="Board Style" />
-			</menuitem>
-			<menuitem label="Help">
-				<menuitem label="Search.." />
-				<menuitem label="Show Themes" />
-			</menuitem>
-			<menuitem label="Info">
-				<menuitem label="About" />
+				<menuitem label="Piece Settings.." data="pieceSettings" />
+				<menuitem label="Browse Move History.." data="revertMoves" />
 			</menuitem>
 		</mx:XMLList>
 	</mx:MenuBar>

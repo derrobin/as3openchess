@@ -1,0 +1,77 @@
+/**
+ * default stylesheets
+ *
+ * @author robin heinel
+ *
+ */
+global {
+	horizontalGap: 0px;
+	verticalGap: 0px;
+	paddingLeft: 0px;
+	paddingRight: 0px;
+	paddingBottom: 0;
+	paddingTop: 0px;
+}
+.chessboardLeftPanelContainer {
+	horizontalGap: 20;
+	verticalGap: 20;
+}
+.chessboardStage {
+	paddingLeft: 20;
+	paddingRight: 20;
+	paddingBottom: 20;
+	paddingTop: 20;
+	verticalAlign: middle;
+	horizontalAlign: center;
+}
+.boardContainer {
+	verticalAlign: middle;
+	horizontalAlign: center;
+	horizontalGap: 20;
+	verticalGap: 20;
+}
+.historyMoveNumber,
+.historyMovePiece,
+.historyMoveDescription {
+	fontSize: 14;
+}
+.historyMoveNumber {
+	background-color: #ff0000;
+	fontSize: 12;
+}
+.pieceContainer {
+	verticalAlign: middle;
+	horizontalAlign: center;
+	background: #ff0000;
+}
+.piece {
+	fontFamily: font1;
+	fontSize: 25pt;
+}
+.legendVertical {
+	verticalAlign: middle;
+	horizontalAlign: center;
+	backgroundColor: #ffffff;
+}
+.legendVerticalRow {
+	backgroundColor: #ffffff;
+	horizontalAlign: center;
+	verticalAlign: middle;
+}
+.fieldBlack,
+.fieldWhite {
+	horizontalAlign: center;
+	verticalAlign: middle;
+	fontFamily: font1;
+	fontSize: 40;
+}
+.fieldBlack {
+	backgroundColor: #bbbbbb;
+}
+.fieldWhite {
+	backgroundColor: #ffffff;
+}
+.mystyle1 {
+	fontFamily: font1;
+	fontSize: 32pt;
+}

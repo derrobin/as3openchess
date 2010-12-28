@@ -5,15 +5,28 @@ package de.robinz.as3.pcc.chessboard.controller
 	/**
 	 * Application startup
 	 *
-	 * @author Robin Heinel
-	 *
+	 * @author robin heinel
 	 */
 	public class StartupCommand extends MacroCommand
 	{
+		// Start MacroCommand overrides
+
 		protected override function initializeMacroCommand() : void {
 			addSubCommand( PrepareModelCommand );
 			addSubCommand( PrepareViewCommand );
 			addSubCommand( InitCommand );
 		}
+
+		// End MacroCommand overrides
+
+
+		// Start Innerclass Methods
+
+		// End Innerclass Methods
+
+
+		// Start Getter / Setters
+
+		// End Getter / Setters
 	}
 }

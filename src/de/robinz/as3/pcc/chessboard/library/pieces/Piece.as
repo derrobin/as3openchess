@@ -1,14 +1,20 @@
 package de.robinz.as3.pcc.chessboard.library.pieces
 {
 	import de.robinz.as3.pcc.chessboard.library.managers.FontManager;
-	import de.robinz.as3.pcc.chessboard.library.managers.PieceManager;
 
+	/**
+	 * Piece
+	 *
+	 * @author robin heinel
+	 */
 	public class Piece implements IPiece
 	{
 		private var _isWhite : Boolean = true;
+		private var _useFontKey : Boolean = false;
+		private var _fontKey : String;
 
 		public static function createByParams( name : String, white : Boolean = true ) : IPiece {
-			var p : IPiece = PieceManager.getInstance().createByName( name );
+			var p : IPiece = factoryByName( name );
 
 			if ( ! white ) {
 				p.setBlack();
@@ -17,7 +23,18 @@ package de.robinz.as3.pcc.chessboard.library.pieces
 			return p as IPiece;
 		}
 
+		private static function factoryByName( name : String ) : IPiece {
+			switch( name ) {
+				case Pawn.NAME:		return new Pawn();
+				case Rook.NAME:		return new Rook();
+				case Bishop.NAME:	return new Bishop();
+				case Knight.NAME:	return new Knight();
+				case Queen.NAME:	return new Queen();
+				case King.NAME:		return new King();
+			};
 
+			throw new Error( "No Piece not Found!" );
+		}
 
 		public function setWhite() : void {
 			this._isWhite = true;
@@ -27,8 +44,31 @@ package de.robinz.as3.pcc.chessboard.library.pieces
 			this._isWhite  = false;
 		}
 
+		public function equals( piece : IPiece ) : Boolean {
+			var name1 : String = this.getName();
+			var name2 : String = piece.getName();
+			if ( name1 == name2 ) {
+				if ( this._isWhite == piece.isWhite ) {
+					return true;
+				}
+			}
+			return false;
+		}
+
 		public function get fontKey() : String {
-			return FontManager.getFontKeyByPiece( this );
+			if ( this._useFontKey ) {
+				return this._fontKey;
+			}
+			return FontManager.getInstance().getFontKeyByPiece( this );
+		}
+
+		public function set fontKey( value : String ) : void {
+			if ( !( this is FakedPiece ) ) {
+				throw new Error("Only Fake's should use setFontKey()!");
+			}
+
+			this._useFontKey = true;
+			this._fontKey = value;
 		}
 
 		public function getName() : String {

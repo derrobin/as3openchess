@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ChessboardField
+@author robin heinel
+-->
+<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml">
+
+	<mx:Script>
+		<![CDATA[
+			import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
+			import mx.controls.Text;
+
+			public function hasPiece() : Boolean {
+				if ( this.numChildren > 0 ) {
+					return true;
+				}
+
+				return false;
+			}
+
+			public function getPiece() : IPiece {
+				try {
+					var t : Text = this.getText();
+					var piece : IPiece = t.data as IPiece;
+					return piece;
+				} catch( e : Error ) {
+					trace( e.getStackTrace() );
+					return null;
+				}
+
+				return null;
+			}
+
+			public function getText() : Text {
+				var t : Text = this.getChildAt( 0 ) as Text;
+				return t;
+			}
+
+		]]>
+	</mx:Script>
+
+</mx:Box>

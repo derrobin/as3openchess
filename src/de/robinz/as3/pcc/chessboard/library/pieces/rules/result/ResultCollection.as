@@ -2,9 +2,9 @@ package de.robinz.as3.pcc.chessboard.library.pieces.rules.result
 {
 	import de.robinz.as3.rzlib.collections.TypedCollection;
 
-	public class ResultList extends TypedCollection
+	public class ResultCollection extends TypedCollection
 	{
-		public function ResultList() {
+		public function ResultCollection() {
 			super( IResult, TypedCollection.COMPARISON_ISA );
 		}
 

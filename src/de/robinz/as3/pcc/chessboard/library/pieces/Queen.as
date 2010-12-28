@@ -1,5 +1,10 @@
 package de.robinz.as3.pcc.chessboard.library.pieces
 {
+	/**
+	 * Queen
+	 *
+	 * @author robin heinel
+	 */
 	public class Queen extends Piece implements IPiece
 	{
 		public static var NAME : String = "queen";

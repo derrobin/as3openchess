@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+application entry point
+@author robin heinel
+-->
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
 				xmlns:components="de.robinz.as3.pcc.chessboard.view.views.*"
 				pageTitle="PCC Chessboard"
@@ -15,16 +19,7 @@
 				paddingBottom="0"
 				paddingTop="0">
 
-	<mx:Style>
-		global {
-			horizontalGap: 0px;
-			verticalGap: 0px;
-			paddingLeft: 0px;
-			paddingRight: 0px;
-			paddingBottom: 0;
-			paddingTop: 0px;
-		}
-	</mx:Style>
+	<mx:Style source="de/robinz/as3/pcc/chessboard/styles/default.css" />
 
 	<mx:Script>
 		<![CDATA[
@@ -36,6 +31,7 @@
 			private function onCreationComplete():void
 			{
 				facade.startup(this);
+				trace("a");
 			}
 		]]>
 	</mx:Script>

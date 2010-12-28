@@ -1,7 +1,6 @@
 package de.robinz.as3.pcc.chessboard.controller.move
 {
 	import de.robinz.as3.pcc.chessboard.library.notation.ChessboardMove;
-	import de.robinz.as3.pcc.chessboard.view.GameMediator;
 
 	import mx.controls.Alert;
 
@@ -11,25 +10,33 @@ package de.robinz.as3.pcc.chessboard.controller.move
 	/**
 	 * RejectMoveCommand
 	 *
-	 * @author Robin Heinel
-	 *
+	 * @author robin heinel
 	 */
 	public class RejectMoveCommand extends SimpleCommand
 	{
+		// Start SimpleCommand overrides
+
 		public override function execute( n : INotification ) : void {
 			if ( n.getBody() is ChessboardMove ) {
 				this.rejectMove( n.getBody() as ChessboardMove );
 			}
 		}
 
+		// End SimpleCommand overrides
+
+
+		// Start Innerclass Methods
+
 		private function rejectMove( m : ChessboardMove ) : void {
 			Alert.show( "Move rejected.", "Impossible Move!" );
 			sendNotification();
 		}
 
-		private function get gm() : GameMediator {
-			return this.facade.retrieveMediator( GameMediator.NAME ) as GameMediator;
-		}
+		// End Innerclass Methods
 
+
+		// Start Getter / Setters
+
+		// End Getter / Setters
 	}
 }

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+ApplicationView
+@author robin heinel
+-->
 <mx:Box xmlns:mx="http://www.adobe.com/2006/mxml"
 	xmlns:components="de.robinz.as3.pcc.chessboard.view.views.*"
 	xmlns:flexunit="flexunit.flexui.*"
@@ -11,9 +15,6 @@ xmlns:moveHistory="de.robinz.as3.pcc.chessboard.view.views.moveHistory.*" xmlns:
 			private var _mainHeight : int = 700;
 			[Bindable]
 			private var _mainWidth : int = 1000;
-
-			[Embed(source='../../fonts/Alpha.ttf',fontName='font1',mimeType='application/x-font')]
-			private var font1 : Class;
 
 			public function set mainWidth( value : int ) : void {
 				this._mainWidth = value;
@@ -33,50 +34,16 @@ xmlns:moveHistory="de.robinz.as3.pcc.chessboard.view.views.moveHistory.*" xmlns:
 		]]>
 	</mx:Script>
 
-	<mx:Style>
-
-		.chessboardLeftPanelContainer {
-			horizontalGap: 20;
-			verticalGap: 20;
-		}
-		.chessboardStage {
-			paddingLeft: 20;
-			paddingRight: 20;
-			paddingBottom: 20;
-			paddingTop: 20;
-			verticalAlign: middle;
-			horizontalAlign: center;
-		}
-		.boardContainer {
-			horizontalGap: 20;
-			verticalGap: 20;
-		}
-		.historyMoveNumber,
-		.historyMovePiece,
-		.historyMoveDescription {
-			fontSize: 14;
-		}
-		.historyMoveNumber {
-			background-color: #ff0000;
-			fontSize: 12;
-		}
-		.pieceContainer {
-			verticalAlign: middle;
-			horizontalAlign: center;
-			background: #ff0000;
-		}
-		.piece {
-			fontFamily: font1;
-			fontSize: 25pt;
-		}
-
-	</mx:Style>
-
 	<components:ChessboardMenubar id="chessboardMenubar" />
 
-	<mx:Box id="chessboardStage" styleName="chessboardStage" width="100%" height="100%">
+<!--	<mx:TextInput id="value1" />
+	<mx:Button id="value1Button" label="set value" />-->
 
-		<mx:HBox styleName="boardContainer" width="{_mainWidth}" height="{_mainHeight}"
+	<mx:Box id="chessboardStage" width="100%" height="100%"
+		styleName="chessboardStage">
+
+		<mx:HBox width="{_mainWidth}" height="{_mainHeight}"
+			styleName="boardContainer"
 			horizontalGap="20"
 			verticalGap="20">
 

@@ -1,5 +1,10 @@
 package de.robinz.as3.pcc.chessboard.library.notation
 {
+	/**
+	 * this notation is used to represent the moves of the pieces in a board relative language
+	 *
+	 * @author robin heinel
+	 */
 	public class RelativeNotation implements IRelativeNotation
 	{
 		public static const DIRECTION_NORTH : String	= "N";

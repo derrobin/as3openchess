@@ -4,7 +4,7 @@ package de.robinz.as3.pcc.chessboard.controller.move
 	import de.robinz.as3.pcc.chessboard.library.notation.ChessboardMove;
 	import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 	import de.robinz.as3.pcc.chessboard.library.pieces.King;
-	import de.robinz.as3.pcc.chessboard.view.GameMediator;
+	import de.robinz.as3.pcc.chessboard.model.GameProxy;
 
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;
@@ -12,54 +12,60 @@ package de.robinz.as3.pcc.chessboard.controller.move
 	/**
 	 * TryToMoveCommand
 	 *
-	 * @author Robin Heinel
-	 *
+	 * @author robin heinel
 	 */
 	public class TryToMoveCommand extends SimpleCommand
 	{
+		// Start SimpleCommand overrides
+
 		public override function execute( n : INotification ) : void {
 			if ( n.getBody() is ChessboardMove ) {
 				this.tryToMove( n.getBody() as ChessboardMove );
 			}
 		}
 
+		// End SimpleCommand overrides
+
+
+		// Start Innerclass Methods
+
 		private function tryToMove( m : ChessboardMove ) : void {
 			var movePiece : IPiece = m.piece;
-			var targetPiece : IPiece = gm.cb.getPieceAt( m.toPosition );
 
 			// ignore
 			if ( m.fromPosition.equals( m.toPosition ) ) {
 				return;
 			}
-
 			// move
-			if ( targetPiece == null ) {
+			if ( m.beatenPiece == null ) {
 				sendNotification( ApplicationFacade.MOVE, m );
 				return;
 			}
-
 			// rejects
-			if ( movePiece.isWhite && targetPiece.isWhite ) {
+			if ( movePiece.isWhite && m.beatenPiece.isWhite ) {
 				sendNotification( ApplicationFacade.REJECT_MOVE, m );
 				return;
 			}
-			if ( targetPiece.getName() == King.NAME ) {
+			if ( m.beatenPiece.getName() == King.NAME ) {
 				sendNotification( ApplicationFacade.REJECT_MOVE, m );
 				return;
 			}
-
 			// beat and move
-			if ( movePiece.isWhite != targetPiece.isWhite ) {
-				m.beat = true;
-				sendNotification( ApplicationFacade.BEAT_PIECE_FROM_NOTATION, m.toPosition );
+			if ( movePiece.isWhite != m.beatenPiece.isWhite ) {
+				sendNotification( ApplicationFacade.REMOVE_PIECE, m );
 				sendNotification( ApplicationFacade.MOVE, m );
 			}
-
 		}
 
-		private function get gm() : GameMediator {
-			return this.facade.retrieveMediator( GameMediator.NAME ) as GameMediator;
+		// End Innerclass Methods
+
+
+		// Start Getter / Setters
+
+		private function get gameProxy() : GameProxy {
+			return this.facade.retrieveProxy( GameProxy.NAME ) as GameProxy;
 		}
 
+		// End Getter / Setters
 	}
 }
