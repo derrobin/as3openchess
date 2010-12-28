@@ -31,7 +31,7 @@ application entry point
 			private function onCreationComplete():void
 			{
 				facade.startup(this);
-				trace("a");
+				trace("test");
 			}
 		]]>
 	</mx:Script>
