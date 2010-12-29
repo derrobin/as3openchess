@@ -1,4 +1,4 @@
-package de.robinz.as3.pcc.chessboard.controller.ui
+package de.robinz.as3.pcc.chessboard.controller.ui.dialog
 {
 	import de.robinz.as3.pcc.chessboard.model.ApplicationProxy;
 	import de.robinz.as3.pcc.chessboard.view.ApplicationMediator;

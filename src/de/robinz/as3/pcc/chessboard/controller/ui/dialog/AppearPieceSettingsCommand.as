@@ -1,4 +1,4 @@
-package de.robinz.as3.pcc.chessboard.controller.ui
+package de.robinz.as3.pcc.chessboard.controller.ui.dialog
 {
 	import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 	import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
