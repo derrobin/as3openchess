@@ -29,8 +29,8 @@ package de.robinz.as3.pcc.chessboard
 	import de.robinz.as3.pcc.chessboard.controller.ui.panel.DisappearMoveHistoryPanelCommand;
 	import de.robinz.as3.pcc.chessboard.controller.ui.panel.DisappearTakenPiecesPanelCommand;
 	import de.robinz.as3.pcc.chessboard.controller.ui.panel.ToggleGameActionsPanelCommand;
-	import de.robinz.as3.pcc.chessboard.controller.ui.panel.ToogleMoveHistoryPanelCommand;
-	import de.robinz.as3.pcc.chessboard.controller.ui.panel.ToogleTakenPiecesPanelCommand;
+	import de.robinz.as3.pcc.chessboard.controller.ui.panel.ToggleMoveHistoryPanelCommand;
+	import de.robinz.as3.pcc.chessboard.controller.ui.panel.ToggleTakenPiecesPanelCommand;
 
 	import org.puremvc.as3.patterns.facade.Facade;
 
@@ -138,8 +138,8 @@ package de.robinz.as3.pcc.chessboard
 			registerCommand( APPEAR_TAKEN_PIECES_PANEL, AppearTakenPiecesPanelCommand );
 			registerCommand( DISAPPEAR_MOVE_HISTORY_PANEL, DisappearMoveHistoryPanelCommand );
 			registerCommand( DISAPPEAR_TAKEN_PIECES_PANEL, DisappearTakenPiecesPanelCommand );
-			registerCommand( TOGGLE_MOVE_HISTORY_PANEL, ToogleMoveHistoryPanelCommand );
-			registerCommand( TOGGLE_TAKEN_PIECES_PANEL, ToogleTakenPiecesPanelCommand );
+			registerCommand( TOGGLE_MOVE_HISTORY_PANEL, ToggleMoveHistoryPanelCommand );
+			registerCommand( TOGGLE_TAKEN_PIECES_PANEL, ToggleTakenPiecesPanelCommand );
 
 			registerCommand( APPEAR_PIECE_SETTINGS, AppearPieceSettingsCommand );
 			registerCommand( DISAPPEAR_PIECE_SETTINGS, DisappearPieceSettingsCommand );

@@ -13,7 +13,7 @@ package de.robinz.as3.pcc.chessboard.controller.ui.panel
 	 *
 	 * @author robin heinel
 	 */
-	public class ToogleTakenPiecesPanelCommand extends SimpleCommand
+	public class ToggleTakenPiecesPanelCommand extends SimpleCommand
 	{
 		// Start SimpleCommand overrides
 

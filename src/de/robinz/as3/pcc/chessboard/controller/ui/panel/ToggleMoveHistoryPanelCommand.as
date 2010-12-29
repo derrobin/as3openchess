@@ -13,7 +13,7 @@ package de.robinz.as3.pcc.chessboard.controller.ui.panel
 	 *
 	 * @author robin heinel
 	 */
-	public class ToogleMoveHistoryPanelCommand extends SimpleCommand
+	public class ToggleMoveHistoryPanelCommand extends SimpleCommand
 	{
 		// Start SimpleCommand overrides
 
