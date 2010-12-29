@@ -16,10 +16,6 @@ package de.robinz.as3.pcc.chessboard.controller.piece
 		// Start SimpleCommand overrides
 
 		public override function execute( n : INotification ) : void {
-			// TODO: check this!
-			if ( ! this.facade.hasMediator( TakenPiecesMediator.NAME ) ) {
-				this.facade.registerMediator( new TakenPiecesMediator( appMediator.app.applicationView.chessboardTakenPieces ) );
-			}
 		}
 
 		// End SimpleCommand overrides

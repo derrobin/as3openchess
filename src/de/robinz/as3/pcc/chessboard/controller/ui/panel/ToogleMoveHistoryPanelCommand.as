@@ -1,30 +1,38 @@
-package de.robinz.as3.pcc.chessboard.controller.ui
+package de.robinz.as3.pcc.chessboard.controller.ui.panel
 {
+	import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 	import de.robinz.as3.pcc.chessboard.model.ApplicationProxy;
 	import de.robinz.as3.pcc.chessboard.view.ApplicationMediator;
-	import de.robinz.as3.pcc.chessboard.view.TakenPiecesMediator;
+	import de.robinz.as3.pcc.chessboard.view.MoveHistoryMediator;
 
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;
 
 	/**
-	 * DisappearTakenPiecesPanelCommand
+	 * AppearMoveHistoryPanelCommand
 	 *
 	 * @author robin heinel
 	 */
-	public class DisappearTakenPiecesPanelCommand extends SimpleCommand
+	public class ToogleMoveHistoryPanelCommand extends SimpleCommand
 	{
 		// Start SimpleCommand overrides
 
 		public override function execute( n : INotification ) : void {
-			this.facade.removeMediator( TakenPiecesMediator.NAME );
-			appProxy.closePanel( TakenPiecesMediator.NAME );
+			this.tooglePanel();
 		}
 
 		// End SimpleCommand overrides
 
 
 		// Start Innerclass Methods
+
+		private function tooglePanel() : void {
+			if ( appProxy.isPanelOpen( MoveHistoryMediator.NAME ) ) {
+				sendNotification( ApplicationFacade.DISAPPEAR_MOVE_HISTORY_PANEL );
+			} else {
+				sendNotification( ApplicationFacade.APPEAR_MOVE_HISTORY_PANEL );
+			}
+		}
 
 		// End Innerclass Methods
 
@@ -39,7 +47,5 @@ package de.robinz.as3.pcc.chessboard.controller.ui
 		}
 
 		// End Getter / Setters
-
-
 	}
 }

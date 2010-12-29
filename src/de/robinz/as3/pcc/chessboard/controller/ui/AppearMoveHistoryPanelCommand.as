@@ -1,5 +1,6 @@
 package de.robinz.as3.pcc.chessboard.controller.ui
 {
+	import de.robinz.as3.pcc.chessboard.model.ApplicationProxy;
 	import de.robinz.as3.pcc.chessboard.view.ApplicationMediator;
 	import de.robinz.as3.pcc.chessboard.view.MoveHistoryMediator;
 
@@ -19,6 +20,8 @@ package de.robinz.as3.pcc.chessboard.controller.ui
 			if ( ! this.facade.hasMediator( MoveHistoryMediator.NAME ) ) {
 				this.facade.registerMediator( new MoveHistoryMediator( appMediator.app.applicationView.chessboardMoveHistory ) );
 			}
+
+			appProxy.openPanel( MoveHistoryMediator.NAME );
 		}
 
 		// End SimpleCommand overrides
@@ -31,6 +34,12 @@ package de.robinz.as3.pcc.chessboard.controller.ui
 
 		// Start Getter / Setters
 
+		private function get appProxy() : ApplicationProxy {
+			return this.facade.retrieveProxy( ApplicationProxy.NAME ) as ApplicationProxy;
+		}
+		private function get moveHistoryMediator() : MoveHistoryMediator {
+			return this.facade.retrieveMediator( MoveHistoryMediator.NAME ) as MoveHistoryMediator;
+		}
 		private function get appMediator() : ApplicationMediator {
 			return this.facade.retrieveMediator( ApplicationMediator.NAME ) as ApplicationMediator;
 		}

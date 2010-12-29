@@ -24,8 +24,8 @@ package de.robinz.as3.pcc.chessboard.controller
 
 			facade.registerMediator( new ApplicationMediator( app ) );
 			facade.registerMediator( new ChessboardMediator( app.applicationView.chessboard ) );
-			facade.registerMediator( new MoveHistoryMediator( app.applicationView.chessboardMoveHistory ) );
-			facade.registerMediator( new TakenPiecesMediator( app.applicationView.chessboardTakenPieces ) );
+			//facade.registerMediator( new MoveHistoryMediator( app.applicationView.chessboardMoveHistory ) );
+			//facade.registerMediator( new TakenPiecesMediator( app.applicationView.chessboardTakenPieces ) );
 			facade.registerMediator( new MenubarMediator( app.applicationView.chessboardMenubar ) );
 		}
 

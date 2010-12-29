@@ -1,19 +1,18 @@
 package de.robinz.as3.pcc.chessboard.view
 {
 	import de.robinz.as3.pcc.chessboard.ApplicationFacade;
+	import de.robinz.as3.pcc.chessboard.library.vo.PanelVO;
+	import de.robinz.as3.pcc.chessboard.library.vo.PanelVOCollection;
 	import de.robinz.as3.pcc.chessboard.tests.ApplicationTest;
 	import de.robinz.as3.pcc.chessboard.view.views.ApplicationView;
 	import de.robinz.as3.pcc.chessboard.view.views.Chessboard;
 
 	import flash.events.Event;
-	import flash.events.MouseEvent;
 
 	import flexunit.framework.TestSuite;
 
-	import mx.controls.Button;
+	import mx.containers.Panel;
 	import mx.core.Container;
-	import mx.styles.CSSStyleDeclaration;
-	import mx.styles.StyleManager;
 
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
@@ -28,8 +27,8 @@ package de.robinz.as3.pcc.chessboard.view
 		public static const UNIT_TESTS : Boolean = false;
 		public static const NAME : String = "ApplicationMediator";
 
-		private var tempChessboardWidth : int;
-		private var tempChessboardHeight : int;
+		private var _panels : PanelVOCollection;
+
 
 		public function ApplicationMediator( m : mainapp ) {
 			super( NAME, m );
@@ -42,23 +41,114 @@ package de.robinz.as3.pcc.chessboard.view
 				view.testRunner.startTest();
 			}
 
-			this.tempChessboardWidth = this.view.chessboard.width;
-			this.tempChessboardHeight = this.view.chessboard.height;
-
-			//m.addEventListener( MouseEvent.CLICK, onMouseClick );
+			this._panels = this.registerPanels();
+			this.setDefaultPanelSize();
 		}
 
 
 		// Start Innerclass Methods
 
-/* 		private function onMouseClick( e : MouseEvent ) : void {
-			if ( e.target is Button ) {
-				var button : Button = e.target as Button;
-				if ( button.id == "value1Button" ) {
-					sendNotification( ApplicationFacade.CHANGE_PIECE_STYLE, this.view.value1.text );
+		private function setDefaultPanelSize() : void {
+			this.view.chessboardMoveHistory.percentHeight = this._panels.getAt( 0 ).minHeight;
+			this.view.chessboardTakenPieces.percentHeight = this._panels.getAt( 1 ).minHeight;
+		}
+
+		private function registerPanels() : PanelVOCollection {
+			var c : PanelVOCollection = new PanelVOCollection();
+			c.add( PanelVO.createByParams( this.view.chessboardMoveHistory, 65, 100 ) );
+			c.add( PanelVO.createByParams( this.view.chessboardTakenPieces, 35, 35 ) );
+			return c;
+		}
+
+		private function showMoveHistory() : void {
+			this.showPanel( this.view.chessboardMoveHistory );
+		}
+		private function hideMoveHistory() : void {
+			this.hidePanel( this.view.chessboardMoveHistory );
+		}
+		private function showTakenPieces() : void {
+			this.showPanel( this.view.chessboardTakenPieces );
+		}
+		private function hideTakenPieces() : void {
+			this.hidePanel( this.view.chessboardTakenPieces );
+		}
+
+		private function hidePanel( panel : Panel ) : void {
+			this.switchPanel( panel, false );
+		}
+		private function showPanel( panel : Panel ) : void {
+			this.switchPanel( panel, true );
+		}
+
+		private function switchLeftContainer() : void {
+			if ( this.isVisibleLeftPanels() ) {
+				this.switchContainer( this.view.leftPanelContainer, true );
+				return;
+			}
+			this.switchContainer( this.view.leftPanelContainer, false );
+		}
+
+		private function isVisibleLeftPanels() : Boolean {
+			var p : PanelVO;
+			for each( p in this._panels.list ) {
+				if ( p.visible == true ) {
+					return true;
 				}
 			}
-		} */
+			return false;
+		}
+
+		private function managePanelSizes() : void {
+			var avs : int = 100; // availible space in percent
+			var p : PanelVO;
+
+			// TODO: refactor this later, this is should be common layout managing?
+			var mh : PanelVO = this._panels.getByPanel( this.view.chessboardMoveHistory );
+			var tp : PanelVO = this._panels.getByPanel( this.view.chessboardTakenPieces );
+
+			var mhh : int = mh.visible == true ? mh.maxHeight : 0; // move history height
+			var tph : int = tp.visible == true ? tp.maxHeight : 0; // taken pieces height
+
+			if ( ( mhh + tph ) <= 100 ) {
+				this.assignPanelSizes( mhh, tph );
+				return;
+			}
+
+			mhh = mh.minHeight;
+
+			if ( ( mhh + tph ) <= 100 ) {
+				this.assignPanelSizes( mhh, tph );
+				return;
+			}
+
+			tph = mh.minHeight;
+
+			if ( ( mhh + tph ) <= 100 ) {
+				this.assignPanelSizes( mhh, tph );
+				return;
+			}
+
+			throw new Error( "Case not implemented!" );
+		}
+
+		private function assignPanelSizes( mhh : int, tph : int ) : void {
+			this.view.chessboardMoveHistory.percentHeight = mhh;
+			this.view.chessboardTakenPieces.percentHeight = tph;
+		}
+
+		private function switchPanel( panel : Panel, visible : Boolean = true ) : void {
+			var vo : PanelVO = this._panels.getByPanel( panel );
+			vo.visible = visible;
+
+			this.switchContainer( panel, visible );
+			this.managePanelSizes();
+			this.switchLeftContainer();
+		}
+
+		private function switchContainer( c : Container, visible : Boolean = true ) : void {
+			c.visible = visible;
+			c.includeInLayout = visible;
+		}
 
 		private function createSuite() : TestSuite {
 			var ts:TestSuite = new TestSuite();
@@ -78,47 +168,6 @@ package de.robinz.as3.pcc.chessboard.view
 			return true;
 		}
 
-		private function toogleMoveHistoryPanel( actived : Boolean ) : void {
-			if ( actived && this.view.chessboardTakenPieces.visible == false ) {
-				this.view.chessboardMoveHistory.percentHeight = 100;
-			}
-			// TODO: refactoring
-			if ( actived && this.view.leftPanelContainer.visible == false ) {
-				this.view.chessboard.percentWidth = 100;
-				this.view.chessboard.percentHeight = 100;
-				this.view.leftPanelContainer.visible = true;
-				this.view.leftPanelContainer.includeInLayout = true;
-			}
-			if ( !actived && !this.view.chessboardTakenPieces.visible ) {
-				this.view.chessboard.width = this.tempChessboardWidth;
-				this.view.chessboard.height = this.tempChessboardHeight;
-				this.view.leftPanelContainer.visible = false;
-				this.view.leftPanelContainer.includeInLayout = false;
-			}
-		}
-
-		private function toogleTakenPiecesPanel( actived : Boolean ) : void {
-			if ( actived && this.view.chessboardMoveHistory.percentHeight == 100 ) {
-				this.view.chessboardMoveHistory.percentHeight = 65;
-			}
-			if ( !actived && this.view.chessboardMoveHistory.percentHeight == 65 ) {
-				this.view.chessboardMoveHistory.percentHeight = 100;
-			}
-			// TODO: refactoring
-			if ( actived && this.view.leftPanelContainer.visible == false ) {
-				this.view.chessboard.percentWidth = 100;
-				this.view.chessboard.percentHeight = 100;
-				this.view.leftPanelContainer.visible = true;
-				this.view.leftPanelContainer.includeInLayout = true;
-			}
-			if ( !actived && !this.view.chessboardMoveHistory.visible ) {
-				this.view.chessboard.width = this.tempChessboardWidth;
-				this.view.chessboard.height = this.tempChessboardHeight;
-				this.view.leftPanelContainer.visible = false;
-				this.view.leftPanelContainer.includeInLayout = false;
-			}
-		}
-
 		// End Innerclass Methods
 
 
@@ -126,8 +175,6 @@ package de.robinz.as3.pcc.chessboard.view
 
 		public override function listNotificationInterests() : Array {
 			return [
-				ApplicationFacade.TOGGLE_MOVE_HISTORY_PANEL,
-				ApplicationFacade.TOGGLE_TAKEN_PIECES_PANEL,
 				ApplicationFacade.APPEAR_MOVE_HISTORY_PANEL,
 				ApplicationFacade.DISAPPEAR_MOVE_HISTORY_PANEL,
 				ApplicationFacade.APPEAR_TAKEN_PIECES_PANEL,
@@ -137,12 +184,6 @@ package de.robinz.as3.pcc.chessboard.view
 
 		public override function handleNotification( n : INotification ) : void {
 			switch( n.getName() ) {
-				case ApplicationFacade.TOGGLE_MOVE_HISTORY_PANEL:
-					this.handleToggleMoveHistoryPanel();
-				break;
-				case ApplicationFacade.TOGGLE_TAKEN_PIECES_PANEL:
-					this.handleToggleTakenPiecesPanel();
-				break;
 				case ApplicationFacade.APPEAR_MOVE_HISTORY_PANEL:
 					this.handleAppearMoveHistoryPanel();
 				break;
@@ -163,35 +204,30 @@ package de.robinz.as3.pcc.chessboard.view
 
 		// Start Notification Handlers
 
-		private function handleToggleMoveHistoryPanel() : void {
-			var actived : Boolean = this.toggleContainer( this.view.chessboardMoveHistory );
-			if ( actived ) {
-				sendNotification( ApplicationFacade.APPEAR_MOVE_HISTORY_PANEL );
-			} else {
-				sendNotification( ApplicationFacade.DISAPPEAR_MOVE_HISTORY_PANEL );
-			}
-		}
-
-		private function handleToggleTakenPiecesPanel() : void {
-			var actived : Boolean = this.toggleContainer( this.view.chessboardTakenPieces );
-			if ( actived ) {
-				sendNotification( ApplicationFacade.APPEAR_TAKEN_PIECES_PANEL );
-			} else {
-				sendNotification( ApplicationFacade.DISAPPEAR_TAKEN_PIECES_PANEL );
-			}
-		}
-
 		private function handleAppearMoveHistoryPanel() : void {
-			this.toogleMoveHistoryPanel( true );
+			this.showMoveHistory();
+			/* this.view.leftPanelContainer.visible = true;
+			this.view.leftPanelContainer.includeInLayout = true;
+			this.view.chessboardMoveHistory.visible = true;
+			this.view.chessboardMoveHistory.includeInLayout = true; */
+			//this.toogleMoveHistoryPanel( true );
 		}
 		private function handleDisappearMoveHistoryPanel() : void {
-			this.toogleMoveHistoryPanel( false );
+			this.hideMoveHistory();
+
+			/* this.view.leftPanelContainer.visible = false;
+			this.view.leftPanelContainer.includeInLayout = false;
+			this.view.chessboardMoveHistory.visible = false;
+			this.view.chessboardMoveHistory.includeInLayout = false; */
+			//this.toogleMoveHistoryPanel( false );
 		}
 		private function handleAppearTakenPiecesPanel() : void {
-			this.toogleTakenPiecesPanel( true );
+			this.showTakenPieces();
+			//this.toogleTakenPiecesPanel( true );
 		}
 		private function handleDisappearTakenPiecesPanel() : void {
-			this.toogleTakenPiecesPanel( false );
+			this.hideTakenPieces();
+			//this.toogleTakenPiecesPanel( false );
 		}
 
 

@@ -13,11 +13,13 @@ package de.robinz.as3.pcc.chessboard.model
 	{
 		public static const NAME : String = "ApplicationProxy";
 
+		private var _openPanels : Dictionary;
 		private var _openDialogs : Dictionary;
 
 		public function ApplicationProxy( data : Object = null ) {
 			super( NAME, data );
 			this._openDialogs = new Dictionary( true );
+			this._openPanels = new Dictionary( true );
 		}
 
 
@@ -31,6 +33,21 @@ package de.robinz.as3.pcc.chessboard.model
 
 
 		// Start Proxy Interface
+
+		public function isPanelOpen( mediatorName : String ) : Boolean {
+			if ( this._openPanels[ mediatorName ] == null ) {
+				return false;
+			}
+			return this._openPanels[ mediatorName ] as Boolean;
+		}
+
+		public function openPanel( mediatorName : String ) : void {
+			this._openPanels[ mediatorName ] = true;
+		}
+
+		public function closePanel( mediatorName : String ) : void {
+			this._openPanels[ mediatorName ] = false;
+		}
 
 		public function isDialogOpen( mediatorName : String ) : Boolean {
 			if ( this._openDialogs[ mediatorName ] == null ) {

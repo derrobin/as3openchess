@@ -17,6 +17,8 @@ package de.robinz.as3.pcc.chessboard.controller
 		public override function execute( note : INotification ) : void {
 			sendNotification( ApplicationFacade.CHANGE_PIECE_SETTINGS );
 			sendNotification( ApplicationFacade.NEW_GAME );
+			sendNotification( ApplicationFacade.APPEAR_MOVE_HISTORY_PANEL );
+			sendNotification( ApplicationFacade.APPEAR_TAKEN_PIECES_PANEL );
 		}
 
 		// End SimpleCommand overrides

@@ -47,15 +47,24 @@ xmlns:moveHistory="de.robinz.as3.pcc.chessboard.view.views.moveHistory.*" xmlns:
 			horizontalGap="20"
 			verticalGap="20">
 
-			<components:Chessboard id="chessboard" width="100%" height="100%" />
+			<components:Chessboard id="chessboard" width="700" height="700" />
 
-			<mx:VBox id="leftPanelContainer" styleName="chessboardLeftPanelContainer" width="250" height="100%">
+			<mx:VBox id="leftPanelContainer" styleName="chessboardLeftPanelContainer" width="250" height="100%"
+				visible="false"
+				includeInLayout="false"
+			>
 
-				<components:ChessboardMoveHistory id="chessboardMoveHistory" width="100%" height="65%"
-					title="Move History" />
+				<components:ChessboardMoveHistory id="chessboardMoveHistory" width="100%"
+					title="Move History"
+					visible="false"
+					includeInLayout="false"
+				/>
 
-				<components:ChessboardTakenPieces id="chessboardTakenPieces" width="100%" height="35%"
-					title="Taken Pieces" />
+				<components:ChessboardTakenPieces id="chessboardTakenPieces" width="100%"
+					title="Taken Pieces"
+					visible="false"
+					includeInLayout="false"
+				/>
 
 
 			</mx:VBox>
