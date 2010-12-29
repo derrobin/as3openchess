@@ -7,6 +7,7 @@ package de.robinz.as3.pcc.chessboard.view
 	import de.robinz.as3.pcc.chessboard.view.views.moveHistory.ChessboardMoveEntry;
 
 	import flash.display.DisplayObject;
+	import flash.events.MouseEvent;
 
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
@@ -20,6 +21,11 @@ package de.robinz.as3.pcc.chessboard.view
 	{
 		public static const NAME : String = "MoveHistoryMediator";
 
+		private const ENTRY_COLOR_DEFAULT : int = 0xffffff;
+		private const ENTRY_COLOR_HOOVER : int = 0xE3E3E3;
+		private const ENTRY_COLOR_CURRENT_MOVE : int = 0xFFD1D1;
+
+
 		public function MoveHistoryMediator( m : ChessboardMoveHistory ) {
 			super( NAME, m );
 		}
@@ -30,6 +36,44 @@ package de.robinz.as3.pcc.chessboard.view
 
 
 		// Start Innerclass Methods
+
+		private function hooverEntry( entry : ChessboardMoveEntry, newColor : int ) : void {
+			var color : int = int( entry.getStyle( "backgroundColor" ) );
+			if ( color == ENTRY_COLOR_CURRENT_MOVE ) {
+				return;
+			}
+			entry.setStyle( "backgroundColor", newColor );
+		}
+
+		private function selectMoveEntry( m : ChessboardMove ) : void {
+			var entry : ChessboardMoveEntry = this.getMoveEntry( m );
+			if ( entry == null ) {
+				return;
+			}
+			this.unselectAllMoveEntries();
+			entry.setStyle( "backgroundColor", ENTRY_COLOR_CURRENT_MOVE );
+		}
+
+		private function unselectAllMoveEntries() : void {
+			var childs : Array = this.view.moveList.getChildren();
+			var child : ChessboardMoveEntry;
+			for each( child in childs ) {
+				child.setStyle( "backgroundColor", ENTRY_COLOR_DEFAULT );
+			}
+		}
+
+		private function getMoveEntry( m : ChessboardMove ) : ChessboardMoveEntry {
+			var childs : Array = this.view.moveList.getChildren();
+			var child : ChessboardMoveEntry;
+			var move : ChessboardMove;
+			for each( child in childs ) {
+				move = child.data as ChessboardMove;
+				if ( move.equals( m ) ) {
+					return child;
+				}
+			}
+			return null;
+		}
 
 		private function removeLastEntry() : void {
 			if ( this.view.moveList.numChildren == 0 ) {
@@ -46,11 +90,22 @@ package de.robinz.as3.pcc.chessboard.view
 		private function add( m : ChessboardMove ) : void {
 			var me : ChessboardMoveEntry = new ChessboardMoveEntry();
 			me.initialize();
+			me.data = m;
 
 			me.moveNumber.text = m.game.currentMove + ".";
 			var divider : String = m.beatenPiece == null ? "-" : "x";
 			var notationChar : String = m.piece.getName() == Pawn.NAME ? "" : m.piece.notationChar;
 			me.moveDescription.text = notationChar + m.fromPosition.toString() + divider + m.toPosition.toString();
+
+			me.mouseChildren = false;
+			me.mouseEnabled = true;
+			me.useHandCursor = true;
+
+			me.addEventListener( MouseEvent.MOUSE_OVER, onMoveEntryMouseOver );
+			me.addEventListener( MouseEvent.MOUSE_OUT, onMoveEntryMouseOut );
+			me.addEventListener( MouseEvent.CLICK, onMoveEntryClick );
+
+			this.unselectAllMoveEntries();
 
 			view.moveList.addChildAt( me, 0 );
 		}
@@ -62,7 +117,7 @@ package de.robinz.as3.pcc.chessboard.view
 
 		public override function listNotificationInterests() : Array {
 			return [
-				ApplicationFacade.MOVE_BACKWARD_SUCCEED,
+				ApplicationFacade.SELECT_MOVE_HISTORY_ENTRY,
 				ApplicationFacade.NEW_GAME,
 				ApplicationFacade.MOVE
 			];
@@ -70,8 +125,8 @@ package de.robinz.as3.pcc.chessboard.view
 
 		public override function handleNotification( n : INotification ) : void {
 			switch( n.getName() ) {
-				case ApplicationFacade.MOVE_BACKWARD_SUCCEED:
-					this.handleMoveBackwardSucceed();
+				case ApplicationFacade.SELECT_MOVE_HISTORY_ENTRY:
+					this.handleSelectMoveHistoryEntry( n.getBody() == null ? null : n.getBody() as ChessboardMove );
 				break;
 				case ApplicationFacade.NEW_GAME:
 					this.handleNewGame();
@@ -87,8 +142,12 @@ package de.robinz.as3.pcc.chessboard.view
 
 		// Start Notification Handlers
 
-		private function handleMoveBackwardSucceed() : void {
-			this.removeLastEntry();
+		private function handleSelectMoveHistoryEntry( move : ChessboardMove ) : void {
+			if ( move == null ) {
+				this.unselectAllMoveEntries();
+				return;
+			}
+			this.selectMoveEntry( move );
 		}
 
 		private function handleNewGame() : void {
@@ -96,10 +155,10 @@ package de.robinz.as3.pcc.chessboard.view
 		}
 
 		private function handleMove( move : ChessboardMove ) : void {
-			if ( move.isMoveBack ) {
+			//this.selectMoveEntry( move );
+			if ( move.isMoveBack || move.isMoveForward ) {
 				return;
 			}
-
 			this.add( move );
 		}
 
@@ -107,6 +166,22 @@ package de.robinz.as3.pcc.chessboard.view
 
 
 		// Start Event Handlers
+
+		private function onMoveEntryMouseOver( e : MouseEvent ) : void {
+			var entry : ChessboardMoveEntry = e.currentTarget as ChessboardMoveEntry;
+			this.hooverEntry( entry, ENTRY_COLOR_HOOVER );
+		}
+
+		private function onMoveEntryMouseOut( e : MouseEvent ) : void {
+			var entry : ChessboardMoveEntry = e.currentTarget as ChessboardMoveEntry;
+			this.hooverEntry( entry, ENTRY_COLOR_DEFAULT );
+		}
+
+		private function onMoveEntryClick( e : MouseEvent ) : void {
+			var entry : ChessboardMoveEntry = e.currentTarget as ChessboardMoveEntry;
+			var move : ChessboardMove = entry.data as ChessboardMove;
+			sendNotification( ApplicationFacade.MOVE_JUMP, move );
+		}
 
 		// End Event Handlers
 

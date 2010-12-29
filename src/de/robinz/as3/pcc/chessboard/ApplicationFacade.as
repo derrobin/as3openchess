@@ -13,6 +13,7 @@ package de.robinz.as3.pcc.chessboard
 	import de.robinz.as3.pcc.chessboard.controller.move.history.MoveBackwardCommand;
 	import de.robinz.as3.pcc.chessboard.controller.move.history.MoveEndCommand;
 	import de.robinz.as3.pcc.chessboard.controller.move.history.MoveForwardCommand;
+	import de.robinz.as3.pcc.chessboard.controller.move.history.MoveJumpCommand;
 	import de.robinz.as3.pcc.chessboard.controller.move.history.MoveStartCommand;
 	import de.robinz.as3.pcc.chessboard.controller.piece.RemovePieceCommand;
 	import de.robinz.as3.pcc.chessboard.controller.test.ShowAllFontKeysOnChessboardCommand;
@@ -53,6 +54,7 @@ package de.robinz.as3.pcc.chessboard
 		public static const MOVE_FORWARD_SUCCEED : String = "moveForwardSucceed";
 		public static const MOVE_BACKWARD : String = "moveBackward";
 		public static const MOVE_BACKWARD_SUCCEED : String = "moveBackwardSucceed";
+		public static const MOVE_JUMP : String = "moveJump";
 
 		public static const LOOK_BOARD : String = "lookBoard";
 		public static const UNLOOK_BOARD : String = "unlookBoard";
@@ -74,6 +76,8 @@ package de.robinz.as3.pcc.chessboard
 		public static const TOGGLE_MOVE_HISTORY_PANEL : String = "toggleMoveHistoryPanel";
 		public static const APPEAR_MOVE_HISTORY_PANEL : String = "appearMoveHistoryPanel";
 		public static const DISAPPEAR_MOVE_HISTORY_PANEL : String = "disappearMoveHistoryPanel";
+		public static const SELECT_MOVE_HISTORY_ENTRY : String = "selectMoveHistoryEntry";
+
 		public static const TOGGLE_TAKEN_PIECES_PANEL : String = "toolgeTakenPiecesPanel";
 		public static const APPEAR_TAKEN_PIECES_PANEL : String = "appearTakenPiecesPanel";
 		public static const DISAPPEAR_TAKEN_PIECES_PANEL : String = "disappearTakenPiecesPanel";
@@ -135,6 +139,7 @@ package de.robinz.as3.pcc.chessboard
 			registerCommand( MOVE_END, MoveEndCommand );
 			registerCommand( MOVE_FORWARD, MoveForwardCommand );
 			registerCommand( MOVE_BACKWARD, MoveBackwardCommand );
+			registerCommand( MOVE_JUMP, MoveJumpCommand );
 
 			registerCommand( SHOW_ALL_FONT_KEYS_ON_CHESSBOARD, ShowAllFontKeysOnChessboardCommand );
 

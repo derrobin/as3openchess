@@ -45,6 +45,7 @@ package de.robinz.as3.pcc.chessboard.controller.move.history
 			sendNotification( ApplicationFacade.TRY_TO_MOVE, m );
 
 			sendNotification( ApplicationFacade.MOVE_FORWARD_SUCCEED );
+			sendNotification( ApplicationFacade.SELECT_MOVE_HISTORY_ENTRY, m );
 		}
 
 		// End Innerclass Methods

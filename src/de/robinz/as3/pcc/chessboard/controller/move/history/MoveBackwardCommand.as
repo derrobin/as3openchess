@@ -29,6 +29,8 @@ package de.robinz.as3.pcc.chessboard.controller.move.history
 			var moveBack : ChessboardMove = this.gameProxy.moveBack();
 
 			if ( moveBack == null ) {
+				// clear move history selected entry
+				sendNotification( ApplicationFacade.SELECT_MOVE_HISTORY_ENTRY );
 				// no move to going back
 				return;
 			}
@@ -52,6 +54,7 @@ package de.robinz.as3.pcc.chessboard.controller.move.history
 
 			//
 			sendNotification( ApplicationFacade.MOVE_BACKWARD_SUCCEED );
+			sendNotification( ApplicationFacade.SELECT_MOVE_HISTORY_ENTRY, moveBack );
 		}
 
 		// End Innerclass Methods

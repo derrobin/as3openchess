@@ -4,6 +4,7 @@ package de.robinz.as3.pcc.chessboard.model
 	import de.robinz.as3.pcc.chessboard.library.ChessboardGame;
 	import de.robinz.as3.pcc.chessboard.library.Notation;
 	import de.robinz.as3.pcc.chessboard.library.notation.ChessboardMove;
+	import de.robinz.as3.pcc.chessboard.library.notation.ChessboardMoveCollection;
 	import de.robinz.as3.pcc.chessboard.library.pieces.Piece;
 
 	import org.puremvc.as3.patterns.proxy.Proxy;
@@ -35,7 +36,33 @@ package de.robinz.as3.pcc.chessboard.model
 		// End proxy overrides
 
 
+		// Start innerclass methods
+
+		/* private function getMoveIndex( move : ChessboardMove ) : Boolean {
+			var m : ChessboardMove;
+			for each( m in this._game.moves.list ) {
+				if ( m.equals( move )
+			}
+		} */
+
+		// End innerclass methods
+
+
 		// Start Proxy Interface
+
+		public function moveIndex( move : ChessboardMove ) : int {
+			var moves : ChessboardMoveCollection = this._game.moves;
+			var m : ChessboardMove;
+			var index : int = 0;
+			for each( m in moves.list ) {
+				if ( m.equals( move ) ) {
+					return index;
+				}
+				index++;
+			}
+
+			return 0;
+		}
 
 		public function reset() : void {
 			this._game = new ChessboardGame();
@@ -63,11 +90,7 @@ package de.robinz.as3.pcc.chessboard.model
 		}
 
 		public function move( m : ChessboardMove ) : void {
-			if ( m.isMoveBack ) {
-				return;
-			}
-			if ( m.isMoveForward ) {
-				this._currentMove++;
+			if ( m.isMoveBack || m.isMoveForward) {
 				return;
 			}
 
