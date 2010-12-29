@@ -51,6 +51,9 @@ package de.robinz.as3.pcc.chessboard.view
 				case ChessboardMenubar.MENU_ENTRY_REVERT_MOVES:
 					sendNotification( ApplicationFacade.APPEAR_MOVE_HISTORY_MODIFIER );
 				break;
+				case ChessboardMenubar.MENU_ENTRY_PANEL_GAME_ACTIONS:
+					sendNotification( ApplicationFacade.TOGGLE_GAME_ACTIONS_PANEL );
+				break;
 				case ChessboardMenubar.MENU_ENTRY_RECENT_GAMES:
 				case ChessboardMenubar.MENU_ENTRY_IMPORT_GAME:
 				case ChessboardMenubar.MENU_ENTRY_EXPORT_GAME:

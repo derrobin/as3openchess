@@ -60,6 +60,12 @@ xmlns:moveHistory="de.robinz.as3.pcc.chessboard.view.views.moveHistory.*" xmlns:
 					includeInLayout="false"
 				/>
 
+				<components:ChessboardGameActions id="chessboardGameActions" width="100%"
+					title="Game Actions"
+					visible="false"
+					includeInLayout="false"
+				/>
+
 				<components:ChessboardTakenPieces id="chessboardTakenPieces" width="100%"
 					title="Taken Pieces"
 					visible="false"

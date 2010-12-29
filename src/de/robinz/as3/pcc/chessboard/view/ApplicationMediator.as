@@ -51,26 +51,15 @@ package de.robinz.as3.pcc.chessboard.view
 		private function setDefaultPanelSize() : void {
 			this.view.chessboardMoveHistory.percentHeight = this._panels.getAt( 0 ).minHeight;
 			this.view.chessboardTakenPieces.percentHeight = this._panels.getAt( 1 ).minHeight;
+			this.view.chessboardGameActions.percentHeight = this._panels.getAt( 2 ).minHeight;
 		}
 
 		private function registerPanels() : PanelVOCollection {
 			var c : PanelVOCollection = new PanelVOCollection();
 			c.add( PanelVO.createByParams( this.view.chessboardMoveHistory, 65, 100 ) );
 			c.add( PanelVO.createByParams( this.view.chessboardTakenPieces, 35, 35 ) );
+			c.add( PanelVO.createByParams( this.view.chessboardGameActions, 15, 15 ) );
 			return c;
-		}
-
-		private function showMoveHistory() : void {
-			this.showPanel( this.view.chessboardMoveHistory );
-		}
-		private function hideMoveHistory() : void {
-			this.hidePanel( this.view.chessboardMoveHistory );
-		}
-		private function showTakenPieces() : void {
-			this.showPanel( this.view.chessboardTakenPieces );
-		}
-		private function hideTakenPieces() : void {
-			this.hidePanel( this.view.chessboardTakenPieces );
 		}
 
 		private function hidePanel( panel : Panel ) : void {
@@ -81,59 +70,43 @@ package de.robinz.as3.pcc.chessboard.view
 		}
 
 		private function switchLeftContainer() : void {
-			if ( this.isVisibleLeftPanels() ) {
+			if ( this._panels.isVisiblePanels() ) {
 				this.switchContainer( this.view.leftPanelContainer, true );
 				return;
 			}
 			this.switchContainer( this.view.leftPanelContainer, false );
 		}
 
-		private function isVisibleLeftPanels() : Boolean {
-			var p : PanelVO;
-			for each( p in this._panels.list ) {
-				if ( p.visible == true ) {
-					return true;
-				}
-			}
-			return false;
-		}
-
 		private function managePanelSizes() : void {
 			var avs : int = 100; // availible space in percent
+			var visiblePanels : PanelVOCollection = this._panels.getVisiblePanels();
+
 			var p : PanelVO;
+			var avg : int = Math.ceil( 100 / visiblePanels.length ); // average
+			var value : int;
+			var space : int = 100;
 
-			// TODO: refactor this later, this is should be common layout managing?
-			var mh : PanelVO = this._panels.getByPanel( this.view.chessboardMoveHistory );
-			var tp : PanelVO = this._panels.getByPanel( this.view.chessboardTakenPieces );
-
-			var mhh : int = mh.visible == true ? mh.maxHeight : 0; // move history height
-			var tph : int = tp.visible == true ? tp.maxHeight : 0; // taken pieces height
-
-			if ( ( mhh + tph ) <= 100 ) {
-				this.assignPanelSizes( mhh, tph );
-				return;
+			for each( p in visiblePanels.list ) {
+				value = p.minHeight;
+				space = space - value;
+				p.panel.percentHeight = value;
 			}
 
-			mhh = mh.minHeight;
-
-			if ( ( mhh + tph ) <= 100 ) {
-				this.assignPanelSizes( mhh, tph );
-				return;
+			if ( space > 0 ) {
+				var diff : int;
+				for each( p in visiblePanels.list ) {
+					diff = p.maxHeight - p.minHeight;
+					if ( space >= diff ) {
+						p.panel.percentHeight = p.maxHeight;
+						space = space - diff;
+						continue;
+					}
+					// TODO: add maxHeight to calculcation
+					if ( space > 0 ) {
+						p.panel.percentHeight = p.panel.percentHeight + space;
+					}
+				}
 			}
-
-			tph = mh.minHeight;
-
-			if ( ( mhh + tph ) <= 100 ) {
-				this.assignPanelSizes( mhh, tph );
-				return;
-			}
-
-			throw new Error( "Case not implemented!" );
-		}
-
-		private function assignPanelSizes( mhh : int, tph : int ) : void {
-			this.view.chessboardMoveHistory.percentHeight = mhh;
-			this.view.chessboardTakenPieces.percentHeight = tph;
 		}
 
 		private function switchPanel( panel : Panel, visible : Boolean = true ) : void {
@@ -175,6 +148,8 @@ package de.robinz.as3.pcc.chessboard.view
 
 		public override function listNotificationInterests() : Array {
 			return [
+				ApplicationFacade.APPEAR_GAME_ACTIONS_PANEL,
+				ApplicationFacade.DISAPPEAR_GAME_ACTIONS_PANEL,
 				ApplicationFacade.APPEAR_MOVE_HISTORY_PANEL,
 				ApplicationFacade.DISAPPEAR_MOVE_HISTORY_PANEL,
 				ApplicationFacade.APPEAR_TAKEN_PIECES_PANEL,
@@ -184,6 +159,12 @@ package de.robinz.as3.pcc.chessboard.view
 
 		public override function handleNotification( n : INotification ) : void {
 			switch( n.getName() ) {
+				case ApplicationFacade.APPEAR_GAME_ACTIONS_PANEL:
+					this.handleAppearGameActionsPanel();
+				break;
+				case ApplicationFacade.DISAPPEAR_GAME_ACTIONS_PANEL:
+					this.handleDisappearGameActionsPanel();
+				break;
 				case ApplicationFacade.APPEAR_MOVE_HISTORY_PANEL:
 					this.handleAppearMoveHistoryPanel();
 				break;
@@ -204,30 +185,23 @@ package de.robinz.as3.pcc.chessboard.view
 
 		// Start Notification Handlers
 
+		private function handleAppearGameActionsPanel() : void {
+			this.showPanel( this.view.chessboardGameActions );
+		}
+		private function handleDisappearGameActionsPanel() : void {
+			this.hidePanel( this.view.chessboardGameActions );
+		}
 		private function handleAppearMoveHistoryPanel() : void {
-			this.showMoveHistory();
-			/* this.view.leftPanelContainer.visible = true;
-			this.view.leftPanelContainer.includeInLayout = true;
-			this.view.chessboardMoveHistory.visible = true;
-			this.view.chessboardMoveHistory.includeInLayout = true; */
-			//this.toogleMoveHistoryPanel( true );
+			this.showPanel( this.view.chessboardMoveHistory );
 		}
 		private function handleDisappearMoveHistoryPanel() : void {
-			this.hideMoveHistory();
-
-			/* this.view.leftPanelContainer.visible = false;
-			this.view.leftPanelContainer.includeInLayout = false;
-			this.view.chessboardMoveHistory.visible = false;
-			this.view.chessboardMoveHistory.includeInLayout = false; */
-			//this.toogleMoveHistoryPanel( false );
+			this.hidePanel( this.view.chessboardMoveHistory );
 		}
 		private function handleAppearTakenPiecesPanel() : void {
-			this.showTakenPieces();
-			//this.toogleTakenPiecesPanel( true );
+			this.showPanel( this.view.chessboardTakenPieces );
 		}
 		private function handleDisappearTakenPiecesPanel() : void {
-			this.hideTakenPieces();
-			//this.toogleTakenPiecesPanel( false );
+			this.hidePanel( this.view.chessboardTakenPieces );
 		}
 
 

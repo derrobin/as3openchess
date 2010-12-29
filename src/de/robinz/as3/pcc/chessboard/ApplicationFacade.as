@@ -22,10 +22,13 @@ package de.robinz.as3.pcc.chessboard
 	import de.robinz.as3.pcc.chessboard.controller.ui.dialog.AppearPieceSettingsCommand;
 	import de.robinz.as3.pcc.chessboard.controller.ui.dialog.DisappearMoveHistoryModifierCommand;
 	import de.robinz.as3.pcc.chessboard.controller.ui.dialog.DisappearPieceSettingsCommand;
+	import de.robinz.as3.pcc.chessboard.controller.ui.panel.AppearGameActionsPanelCommand;
 	import de.robinz.as3.pcc.chessboard.controller.ui.panel.AppearMoveHistoryPanelCommand;
 	import de.robinz.as3.pcc.chessboard.controller.ui.panel.AppearTakenPiecesPanelCommand;
+	import de.robinz.as3.pcc.chessboard.controller.ui.panel.DisappearGameActionsPanelCommand;
 	import de.robinz.as3.pcc.chessboard.controller.ui.panel.DisappearMoveHistoryPanelCommand;
 	import de.robinz.as3.pcc.chessboard.controller.ui.panel.DisappearTakenPiecesPanelCommand;
+	import de.robinz.as3.pcc.chessboard.controller.ui.panel.ToggleGameActionsPanelCommand;
 	import de.robinz.as3.pcc.chessboard.controller.ui.panel.ToogleMoveHistoryPanelCommand;
 	import de.robinz.as3.pcc.chessboard.controller.ui.panel.ToogleTakenPiecesPanelCommand;
 
@@ -103,6 +106,11 @@ package de.robinz.as3.pcc.chessboard
 		public static const APPEAR_MOVE_HISTORY_MODIFIER : String = "appearMoveHistoryModifier";
 		public static const DISAPPEAR_MOVE_HISTORY_MODIFIER : String = "disappearMoveHistoryModifier";
 
+		public static const APPEAR_GAME_ACTIONS_PANEL : String = "appearGameActionsPanel";
+		public static const DISAPPEAR_GAME_ACTIONS_PANEL : String = "disappearGameActionsPanel";
+		public static const TOGGLE_GAME_ACTIONS_PANEL : String = "toggleGameActionsPanel";
+
+
 		public static function getInstance() : ApplicationFacade {
 			if ( ! instance ) {
 				instance = new ApplicationFacade();
@@ -139,11 +147,17 @@ package de.robinz.as3.pcc.chessboard
 			registerCommand( APPEAR_MOVE_HISTORY_MODIFIER, AppearMoveHistoryModifierCommand );
 			registerCommand( DISAPPEAR_MOVE_HISTORY_MODIFIER, DisappearMoveHistoryModifierCommand );
 
+			registerCommand( APPEAR_GAME_ACTIONS_PANEL, AppearGameActionsPanelCommand );
+			registerCommand( DISAPPEAR_GAME_ACTIONS_PANEL, DisappearGameActionsPanelCommand );
+			registerCommand( TOGGLE_GAME_ACTIONS_PANEL, ToggleGameActionsPanelCommand );
+
 			registerCommand( MOVE_START, MoveStartCommand );
 			registerCommand( MOVE_END, MoveEndCommand );
 			registerCommand( MOVE_FORWARD, MoveForwardCommand );
 			registerCommand( MOVE_BACKWARD, MoveBackwardCommand );
 			registerCommand( MOVE_JUMP, MoveJumpCommand );
+
+			//registerCommand( APPEAR_GAME_ACTIONS
 
 			registerCommand( SHOW_ALL_FONT_KEYS_ON_CHESSBOARD, ShowAllFontKeysOnChessboardCommand );
 

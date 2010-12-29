@@ -16,6 +16,20 @@ package de.robinz.as3.pcc.chessboard.library.vo
 			super( PanelVO, COMPARISON_ISA );
 		}
 
+		public function getVisiblePanels() : PanelVOCollection {
+			var list : PanelVOCollection = new PanelVOCollection();
+			var p : PanelVO;
+			for each( p in this.list ) {
+				if ( p.visible == true ) {
+					list.add( p );
+				}
+			}
+			return list;
+		}
+
+		public function isVisiblePanels() : Boolean {
+			return this.getVisiblePanels().length > 0;
+		}
 
 		public function getByPanel( panel : Panel ) : PanelVO {
 			var p : Panel;
