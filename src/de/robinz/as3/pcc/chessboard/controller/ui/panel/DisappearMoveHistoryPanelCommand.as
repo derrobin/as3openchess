@@ -1,4 +1,4 @@
-package de.robinz.as3.pcc.chessboard.controller.ui
+package de.robinz.as3.pcc.chessboard.controller.ui.panel
 {
 	import de.robinz.as3.pcc.chessboard.model.ApplicationProxy;
 	import de.robinz.as3.pcc.chessboard.view.ApplicationMediator;
@@ -8,20 +8,17 @@ package de.robinz.as3.pcc.chessboard.controller.ui
 	import org.puremvc.as3.patterns.command.SimpleCommand;
 
 	/**
-	 * AppearMoveHistoryPanelCommand
+	 * DisappearMoveHistoryPanelCommand
 	 *
 	 * @author robin heinel
 	 */
-	public class AppearMoveHistoryPanelCommand extends SimpleCommand
+	public class DisappearMoveHistoryPanelCommand extends SimpleCommand
 	{
 		// Start SimpleCommand overrides
 
 		public override function execute( n : INotification ) : void {
-			if ( ! this.facade.hasMediator( MoveHistoryMediator.NAME ) ) {
-				this.facade.registerMediator( new MoveHistoryMediator( appMediator.app.applicationView.chessboardMoveHistory ) );
-			}
-
-			appProxy.openPanel( MoveHistoryMediator.NAME );
+			this.facade.removeMediator( MoveHistoryMediator.NAME );
+			appProxy.closePanel( MoveHistoryMediator.NAME );
 		}
 
 		// End SimpleCommand overrides
@@ -36,9 +33,6 @@ package de.robinz.as3.pcc.chessboard.controller.ui
 
 		private function get appProxy() : ApplicationProxy {
 			return this.facade.retrieveProxy( ApplicationProxy.NAME ) as ApplicationProxy;
-		}
-		private function get moveHistoryMediator() : MoveHistoryMediator {
-			return this.facade.retrieveMediator( MoveHistoryMediator.NAME ) as MoveHistoryMediator;
 		}
 		private function get appMediator() : ApplicationMediator {
 			return this.facade.retrieveMediator( ApplicationMediator.NAME ) as ApplicationMediator;

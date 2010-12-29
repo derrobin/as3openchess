@@ -1,24 +1,24 @@
-package de.robinz.as3.pcc.chessboard.controller.ui
+package de.robinz.as3.pcc.chessboard.controller.ui.panel
 {
 	import de.robinz.as3.pcc.chessboard.model.ApplicationProxy;
 	import de.robinz.as3.pcc.chessboard.view.ApplicationMediator;
-	import de.robinz.as3.pcc.chessboard.view.MoveHistoryMediator;
+	import de.robinz.as3.pcc.chessboard.view.TakenPiecesMediator;
 
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;
 
 	/**
-	 * DisappearMoveHistoryPanelCommand
+	 * DisappearTakenPiecesPanelCommand
 	 *
 	 * @author robin heinel
 	 */
-	public class DisappearMoveHistoryPanelCommand extends SimpleCommand
+	public class DisappearTakenPiecesPanelCommand extends SimpleCommand
 	{
 		// Start SimpleCommand overrides
 
 		public override function execute( n : INotification ) : void {
-			this.facade.removeMediator( MoveHistoryMediator.NAME );
-			appProxy.closePanel( MoveHistoryMediator.NAME );
+			this.facade.removeMediator( TakenPiecesMediator.NAME );
+			appProxy.closePanel( TakenPiecesMediator.NAME );
 		}
 
 		// End SimpleCommand overrides
@@ -39,5 +39,7 @@ package de.robinz.as3.pcc.chessboard.controller.ui
 		}
 
 		// End Getter / Setters
+
+
 	}
 }

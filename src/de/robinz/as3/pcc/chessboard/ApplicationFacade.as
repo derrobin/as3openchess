@@ -17,15 +17,15 @@ package de.robinz.as3.pcc.chessboard
 	import de.robinz.as3.pcc.chessboard.controller.move.history.MoveStartCommand;
 	import de.robinz.as3.pcc.chessboard.controller.piece.RemovePieceCommand;
 	import de.robinz.as3.pcc.chessboard.controller.test.ShowAllFontKeysOnChessboardCommand;
-	import de.robinz.as3.pcc.chessboard.controller.ui.AppearMoveHistoryPanelCommand;
 	import de.robinz.as3.pcc.chessboard.controller.ui.AppearPieceSettingsCommand;
-	import de.robinz.as3.pcc.chessboard.controller.ui.AppearTakenPiecesPanelCommand;
 	import de.robinz.as3.pcc.chessboard.controller.ui.ChangePieceSettingsCommand;
-	import de.robinz.as3.pcc.chessboard.controller.ui.DisappearMoveHistoryPanelCommand;
 	import de.robinz.as3.pcc.chessboard.controller.ui.DisappearPieceSettingsCommand;
-	import de.robinz.as3.pcc.chessboard.controller.ui.DisappearTakenPiecesPanelCommand;
 	import de.robinz.as3.pcc.chessboard.controller.ui.dialog.AppearMoveHistoryModifierCommand;
 	import de.robinz.as3.pcc.chessboard.controller.ui.dialog.DisappearMoveHistoryModifierCommand;
+	import de.robinz.as3.pcc.chessboard.controller.ui.panel.AppearMoveHistoryPanelCommand;
+	import de.robinz.as3.pcc.chessboard.controller.ui.panel.AppearTakenPiecesPanelCommand;
+	import de.robinz.as3.pcc.chessboard.controller.ui.panel.DisappearMoveHistoryPanelCommand;
+	import de.robinz.as3.pcc.chessboard.controller.ui.panel.DisappearTakenPiecesPanelCommand;
 	import de.robinz.as3.pcc.chessboard.controller.ui.panel.ToogleMoveHistoryPanelCommand;
 	import de.robinz.as3.pcc.chessboard.controller.ui.panel.ToogleTakenPiecesPanelCommand;
 
