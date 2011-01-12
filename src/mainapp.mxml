@@ -30,6 +30,7 @@ application entry point
 
 			private function onCreationComplete():void
 			{
+				// test
 				facade.startup(this);
 			}
 		]]>
