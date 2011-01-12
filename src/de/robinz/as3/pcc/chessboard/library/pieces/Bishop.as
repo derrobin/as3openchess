@@ -1,5 +1,8 @@
 package de.robinz.as3.pcc.chessboard.library.pieces
 {
+	import de.robinz.as3.pcc.chessboard.library.Notation;
+	import de.robinz.as3.pcc.chessboard.library.notation.ChessboardMove;
+
 	/**
 	 * Bishop
 	 *
@@ -22,6 +25,23 @@ package de.robinz.as3.pcc.chessboard.library.pieces
 
 		public override function get notationChar() : String {
 			return "L";
+		}
+
+		public override function isMoveValide( m : ChessboardMove ) : Boolean {
+			if( super.isMoveValide( m ) ) {
+				var diffRow : int;
+				var diffCol : int;
+
+				diffRow = Math.abs( m.toPosition.row - m.fromPosition.row );
+				diffCol = Math.abs( Notation.indexes.getItemIndex( m.fromPosition.column ) - Notation.indexes.getItemIndex( m.toPosition.column ) );
+
+				if( diffCol == diffRow ) {
+					return true;
+				}
+
+			}
+
+			return false;
 		}
 
 	}

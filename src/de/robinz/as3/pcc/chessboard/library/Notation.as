@@ -1,6 +1,6 @@
 package de.robinz.as3.pcc.chessboard.library
 {
-	import mx.utils.ObjectUtil;
+	import mx.collections.ArrayCollection;
 
 	/**
 	 * Notation
@@ -9,18 +9,19 @@ package de.robinz.as3.pcc.chessboard.library
 	 */
 	public class Notation
 	{
-		public var row : String;
-		public var column : int;
+		public var row : int;
+		public var column : String;
+		public static var indexes : ArrayCollection = new ArrayCollection( [ "a", "b", "c", "d", "e", "f", "g", "h" ] );
 
 		public static function createNotationByString( input : String ) : Notation {
 
-			var row : String = input.charAt( 0 ).toLowerCase();
-			var column : String = input.charAt( 1 );
+			var column : String = input.charAt( 0 ).toLowerCase();
+			var row : String = input.charAt( 1 );
 
 			var n : Notation = new Notation();
 
-			n.row = row;
-			n.column = int( column );
+			n.row = int( row );
+			n.column = column;
 
 			return n;
 		}
@@ -30,7 +31,7 @@ package de.robinz.as3.pcc.chessboard.library
 		}
 
 		public function toString() : String {
-			return this.row + column.toString();
+			return this.column + row.toString();
 		}
 
 

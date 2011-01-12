@@ -36,25 +36,27 @@ package de.robinz.as3.pcc.chessboard.controller.move
 			if ( m.fromPosition.equals( m.toPosition ) ) {
 				return;
 			}
-			// move
-			if ( m.beatenPiece == null ) {
-				sendNotification( ApplicationFacade.MOVE, m );
-				return;
-			}
-			// rejects
-			if ( movePiece.isWhite && m.beatenPiece.isWhite ) {
+
+			if ( m.beatenPiece && ( m.beatenPiece.getName() == King.NAME ) ) {
 				sendNotification( ApplicationFacade.REJECT_MOVE, m );
 				return;
 			}
-			if ( m.beatenPiece.getName() == King.NAME ) {
-				sendNotification( ApplicationFacade.REJECT_MOVE, m );
+
+			if( movePiece.isMoveValide( m ) ) {
+				if ( m.beatenPiece == null ) {
+					sendNotification( ApplicationFacade.MOVE, m );
+					return;
+				}
+
+				if ( movePiece.isWhite != m.beatenPiece.isWhite ) {
+					sendNotification( ApplicationFacade.REMOVE_PIECE, m );
+					sendNotification( ApplicationFacade.MOVE, m );
+				}
+
 				return;
 			}
-			// beat and move
-			if ( movePiece.isWhite != m.beatenPiece.isWhite ) {
-				sendNotification( ApplicationFacade.REMOVE_PIECE, m );
-				sendNotification( ApplicationFacade.MOVE, m );
-			}
+
+			sendNotification( ApplicationFacade.REJECT_MOVE, m );
 		}
 
 		// End Innerclass Methods

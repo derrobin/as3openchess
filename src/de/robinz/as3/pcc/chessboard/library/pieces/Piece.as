@@ -1,6 +1,7 @@
 package de.robinz.as3.pcc.chessboard.library.pieces
 {
 	import de.robinz.as3.pcc.chessboard.library.managers.FontManager;
+	import de.robinz.as3.pcc.chessboard.library.notation.ChessboardMove;
 
 	/**
 	 * Piece
@@ -53,6 +54,15 @@ package de.robinz.as3.pcc.chessboard.library.pieces
 				}
 			}
 			return false;
+		}
+
+		public function isMoveValide( m : ChessboardMove ) : Boolean {
+			if( m.beatenPiece ) {
+				if( m.beatenPiece.isWhite == this.isWhite ) {
+					return false;
+				}
+			}
+			return true;
 		}
 
 		public function get fontKey() : String {

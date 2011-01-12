@@ -1,5 +1,7 @@
 package de.robinz.as3.pcc.chessboard.library.pieces
 {
+	import de.robinz.as3.pcc.chessboard.library.notation.ChessboardMove;
+
 	/**
 	 * IPiece
 	 *
@@ -14,6 +16,7 @@ package de.robinz.as3.pcc.chessboard.library.pieces
 		function setWhite() : void;
 		function setBlack() : void;
 		function equals( piece : IPiece ) : Boolean;
+		function isMoveValide( m : ChessboardMove ) : Boolean;
 
 		// TODO: implement this as getter
 		function getName() : String;
