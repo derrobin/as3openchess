@@ -16,8 +16,6 @@ package de.robinz.as3.pcc.chessboard.view
 
 	import mx.collections.ArrayCollection;
 	import mx.containers.Box;
-	import mx.containers.HBox;
-	import mx.containers.VBox;
 	import mx.controls.Alert;
 	import mx.controls.Spacer;
 	import mx.controls.Text;
@@ -57,7 +55,6 @@ package de.robinz.as3.pcc.chessboard.view
 
 
 		// Start Innerclass Methods
-
 		private function createFields() : void {
 			var spacer : Spacer;
 			var field : ChessboardField;
@@ -106,7 +103,7 @@ package de.robinz.as3.pcc.chessboard.view
 			return f;
 		}
 
-		private function removePieceFromNotation( n : Notation ) : Boolean {
+		private function removePieceByNotation( n : Notation ) : Boolean {
 			try {
 				var field : ChessboardField = this.getField( n.toString() );
 				field.removeAllChildren();
@@ -140,6 +137,7 @@ package de.robinz.as3.pcc.chessboard.view
 			return c;
 		}
 
+		// TODO: performance refactoring: use dictionary for indexing
 		private function getField( notation : String ) : ChessboardField {
 			var fields : ChessboardFieldCollection = this.getFields();
 			var field : ChessboardField;
@@ -212,14 +210,13 @@ package de.robinz.as3.pcc.chessboard.view
 
 		private function refreshPieces() : void {
 			var wl : ArrayCollection = getCurrentPieceWrappers(); // wrapper list
-			var t : Text;
 			var piece : IPiece;
 			var notation : Notation;
 			var c : DisplayObjectContainer;
 			var d : DisplayObject;
 			var field : ChessboardField;
 
-			for each( t in wl ) {
+			for each( var t : Text in wl ) {
 				piece = t.data as IPiece;
 				field = t.parent as ChessboardField;
 				notation = Notation.createNotationByString( field.id );
@@ -318,7 +315,7 @@ package de.robinz.as3.pcc.chessboard.view
 		}
 
 		private function handleRemovePiece( m : ChessboardMove ) : void {
-			if ( this.removePieceFromNotation( m.toPosition ) ) {
+			if ( this.removePieceByNotation( m.toPosition ) ) {
 				sendNotification( ApplicationFacade.PIECE_REMOVED, m );
 			}
 		}
