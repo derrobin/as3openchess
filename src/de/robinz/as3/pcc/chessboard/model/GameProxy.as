@@ -3,8 +3,8 @@ package de.robinz.as3.pcc.chessboard.model
 	import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 	import de.robinz.as3.pcc.chessboard.library.ChessboardGame;
 	import de.robinz.as3.pcc.chessboard.library.Notation;
-	import de.robinz.as3.pcc.chessboard.library.notation.ChessboardMove;
-	import de.robinz.as3.pcc.chessboard.library.notation.ChessboardMoveCollection;
+	import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
+	import de.robinz.as3.pcc.chessboard.library.ChessboardMoveCollection;
 	import de.robinz.as3.pcc.chessboard.library.pieces.Piece;
 
 	import org.puremvc.as3.patterns.proxy.Proxy;

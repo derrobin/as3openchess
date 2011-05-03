@@ -1,6 +1,6 @@
 package de.robinz.as3.pcc.chessboard.library
 {
-	import de.robinz.as3.pcc.chessboard.library.notation.ChessboardMoveCollection;
+	import de.robinz.as3.pcc.chessboard.library.ChessboardMoveCollection;
 
 	/**
 	 * ChessboardGame

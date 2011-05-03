@@ -2,8 +2,8 @@ package de.robinz.as3.pcc.chessboard.view
 {
 	import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 	import de.robinz.as3.pcc.chessboard.library.Notation;
-	import de.robinz.as3.pcc.chessboard.library.managers.FontManager;
-	import de.robinz.as3.pcc.chessboard.library.notation.ChessboardMove;
+	import de.robinz.as3.pcc.chessboard.library.FontManager;
+	import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 	import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 	import de.robinz.as3.pcc.chessboard.view.views.Chessboard;
 	import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardField;
@@ -271,8 +271,8 @@ package de.robinz.as3.pcc.chessboard.view
 					this.handleEnableBoardInspectMode();
 				break;
 				case ApplicationFacade.DISABLE_BOARD_INSPECT_PIECE_MODE:
-					this.handleDisableBoardInspectMode();
-				break;
+                    this.handleDisableBoardInspectMode();
+                break;
 				case ApplicationFacade.REMOVE_PIECE:
 					this.handleRemovePiece( n.getBody() as ChessboardMove );
 				break;

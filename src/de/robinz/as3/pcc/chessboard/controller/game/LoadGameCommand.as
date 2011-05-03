@@ -2,7 +2,7 @@ package de.robinz.as3.pcc.chessboard.controller.game
 {
 	import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 	import de.robinz.as3.pcc.chessboard.library.ChessboardGame;
-	import de.robinz.as3.pcc.chessboard.library.notation.ChessboardMove;
+	import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;

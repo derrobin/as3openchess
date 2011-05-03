@@ -1,7 +1,7 @@
 package de.robinz.as3.pcc.chessboard.controller.move
 {
 	import de.robinz.as3.pcc.chessboard.ApplicationFacade;
-	import de.robinz.as3.pcc.chessboard.library.notation.ChessboardMove;
+	import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 	import de.robinz.as3.pcc.chessboard.model.GameProxy;
 
 	import org.puremvc.as3.interfaces.INotification;

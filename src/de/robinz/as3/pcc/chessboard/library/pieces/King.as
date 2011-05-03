@@ -1,7 +1,7 @@
 package de.robinz.as3.pcc.chessboard.library.pieces
 {
 	import de.robinz.as3.pcc.chessboard.library.Notation;
-	import de.robinz.as3.pcc.chessboard.library.notation.ChessboardMove;
+	import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 
 	/**
 	 * King

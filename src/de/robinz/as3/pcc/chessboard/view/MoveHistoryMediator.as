@@ -1,7 +1,7 @@
 package de.robinz.as3.pcc.chessboard.view
 {
 	import de.robinz.as3.pcc.chessboard.ApplicationFacade;
-	import de.robinz.as3.pcc.chessboard.library.notation.ChessboardMove;
+	import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 	import de.robinz.as3.pcc.chessboard.library.pieces.Pawn;
 	import de.robinz.as3.pcc.chessboard.view.views.ChessboardMoveHistory;
 	import de.robinz.as3.pcc.chessboard.view.views.moveHistory.ChessboardMoveEntry;

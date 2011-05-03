@@ -31,8 +31,6 @@ package de.robinz.as3.pcc.chessboard.view
 
 		public override function listNotificationInterests() : Array {
 			return [
-				ApplicationFacade.APPEAR_PANEL_SAVE_GAME,
-				ApplicationFacade.DISAPPEAR_PANEL_SAVE_GAME
 			];
 		}
 

@@ -1,6 +1,6 @@
 package de.robinz.as3.pcc.chessboard.controller.ui
 {
-	import de.robinz.as3.pcc.chessboard.library.managers.FontManager;
+	import de.robinz.as3.pcc.chessboard.library.FontManager;
 	import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 	import de.robinz.as3.pcc.chessboard.model.FontProxy;
 	import de.robinz.as3.pcc.chessboard.view.ApplicationMediator;

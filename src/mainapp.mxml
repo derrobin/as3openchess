@@ -32,6 +32,10 @@ application entry point
 			{
 				facade.startup(this);
 			}
+
+            public function getApplicationView() : ApplicationView {
+                return this.applicationView;
+            }
 		]]>
 	</mx:Script>
 

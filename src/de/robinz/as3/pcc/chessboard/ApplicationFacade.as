@@ -1,40 +1,29 @@
 package de.robinz.as3.pcc.chessboard
 {
-	import de.robinz.as3.pcc.chessboard.controller.StartupCommand;
-	import de.robinz.as3.pcc.chessboard.controller.game.ErrorCommand;
-	import de.robinz.as3.pcc.chessboard.controller.game.GetCurrentGameCommand;
-	import de.robinz.as3.pcc.chessboard.controller.game.InfoCommand;
-	import de.robinz.as3.pcc.chessboard.controller.game.LoadGameCommand;
-	import de.robinz.as3.pcc.chessboard.controller.game.NewGameCommand;
-	import de.robinz.as3.pcc.chessboard.controller.game.SaveGameCommand;
-	import de.robinz.as3.pcc.chessboard.controller.game.ShowSaveGamesCommand;
-	import de.robinz.as3.pcc.chessboard.controller.move.MoveCommand;
-	import de.robinz.as3.pcc.chessboard.controller.move.TryToMoveCommand;
-	import de.robinz.as3.pcc.chessboard.controller.move.history.MoveBackwardCommand;
-	import de.robinz.as3.pcc.chessboard.controller.move.history.MoveEndCommand;
-	import de.robinz.as3.pcc.chessboard.controller.move.history.MoveForwardCommand;
-	import de.robinz.as3.pcc.chessboard.controller.move.history.MoveJumpCommand;
-	import de.robinz.as3.pcc.chessboard.controller.move.history.MoveStartCommand;
-	import de.robinz.as3.pcc.chessboard.controller.piece.RemovePieceCommand;
-	import de.robinz.as3.pcc.chessboard.controller.test.ShowAllFontKeysOnChessboardCommand;
-	import de.robinz.as3.pcc.chessboard.controller.ui.ChangePieceSettingsCommand;
-	import de.robinz.as3.pcc.chessboard.controller.ui.dialog.AppearMoveHistoryModifierCommand;
-	import de.robinz.as3.pcc.chessboard.controller.ui.dialog.AppearPieceSettingsCommand;
-	import de.robinz.as3.pcc.chessboard.controller.ui.dialog.DisappearMoveHistoryModifierCommand;
-	import de.robinz.as3.pcc.chessboard.controller.ui.dialog.DisappearPieceSettingsCommand;
-	import de.robinz.as3.pcc.chessboard.controller.ui.panel.AppearGameActionsPanelCommand;
-	import de.robinz.as3.pcc.chessboard.controller.ui.panel.AppearMoveHistoryPanelCommand;
-	import de.robinz.as3.pcc.chessboard.controller.ui.panel.AppearTakenPiecesPanelCommand;
-	import de.robinz.as3.pcc.chessboard.controller.ui.panel.DisappearGameActionsPanelCommand;
-	import de.robinz.as3.pcc.chessboard.controller.ui.panel.DisappearMoveHistoryPanelCommand;
-	import de.robinz.as3.pcc.chessboard.controller.ui.panel.DisappearTakenPiecesPanelCommand;
-	import de.robinz.as3.pcc.chessboard.controller.ui.panel.ToggleGameActionsPanelCommand;
-	import de.robinz.as3.pcc.chessboard.controller.ui.panel.ToggleMoveHistoryPanelCommand;
-	import de.robinz.as3.pcc.chessboard.controller.ui.panel.ToggleTakenPiecesPanelCommand;
+import de.robinz.as3.pcc.chessboard.controller.ErrorCommand;
+import de.robinz.as3.pcc.chessboard.controller.InfoCommand;
+import de.robinz.as3.pcc.chessboard.controller.ShowAllFontKeysOnChessboardCommand;
+import de.robinz.as3.pcc.chessboard.controller.StartupCommand;
+import de.robinz.as3.pcc.chessboard.controller.game.GetCurrentGameCommand;
+import de.robinz.as3.pcc.chessboard.controller.game.LoadGameCommand;
+import de.robinz.as3.pcc.chessboard.controller.game.NewGameCommand;
+import de.robinz.as3.pcc.chessboard.controller.game.SaveGameCommand;
+import de.robinz.as3.pcc.chessboard.controller.game.ShowSaveGamesCommand;
+import de.robinz.as3.pcc.chessboard.controller.move.MoveCommand;
+import de.robinz.as3.pcc.chessboard.controller.move.TryToMoveCommand;
+import de.robinz.as3.pcc.chessboard.controller.move.history.MoveBackwardCommand;
+import de.robinz.as3.pcc.chessboard.controller.move.history.MoveEndCommand;
+import de.robinz.as3.pcc.chessboard.controller.move.history.MoveForwardCommand;
+import de.robinz.as3.pcc.chessboard.controller.move.history.MoveJumpCommand;
+import de.robinz.as3.pcc.chessboard.controller.move.history.MoveStartCommand;
+import de.robinz.as3.pcc.chessboard.controller.piece.RemovePieceCommand;
+import de.robinz.as3.pcc.chessboard.controller.ui.ChangePieceSettingsCommand;
+import de.robinz.as3.pcc.chessboard.controller.ui.DialogActionCommand;
+import de.robinz.as3.pcc.chessboard.controller.ui.PanelActionCommand;
 
-	import org.puremvc.as3.patterns.facade.Facade;
+import org.puremvc.as3.patterns.facade.Facade;
 
-	/**
+/**
 	 * ApplicationFacade
 	 *
 	 * @author robin heinel
@@ -134,30 +123,27 @@ package de.robinz.as3.pcc.chessboard
 			registerCommand( LOAD_GAME, LoadGameCommand );
 			registerCommand( GET_CURRENT_GAME, GetCurrentGameCommand );
 
-			registerCommand( APPEAR_MOVE_HISTORY_PANEL, AppearMoveHistoryPanelCommand );
-			registerCommand( APPEAR_TAKEN_PIECES_PANEL, AppearTakenPiecesPanelCommand );
-			registerCommand( DISAPPEAR_MOVE_HISTORY_PANEL, DisappearMoveHistoryPanelCommand );
-			registerCommand( DISAPPEAR_TAKEN_PIECES_PANEL, DisappearTakenPiecesPanelCommand );
-			registerCommand( TOGGLE_MOVE_HISTORY_PANEL, ToggleMoveHistoryPanelCommand );
-			registerCommand( TOGGLE_TAKEN_PIECES_PANEL, ToggleTakenPiecesPanelCommand );
+			registerCommand( APPEAR_MOVE_HISTORY_PANEL, PanelActionCommand );
+			registerCommand( APPEAR_TAKEN_PIECES_PANEL, PanelActionCommand );
+			registerCommand( APPEAR_GAME_ACTIONS_PANEL, PanelActionCommand );
+			registerCommand( APPEAR_PIECE_SETTINGS, DialogActionCommand );
+			registerCommand( APPEAR_MOVE_HISTORY_MODIFIER, DialogActionCommand );
 
-			registerCommand( APPEAR_PIECE_SETTINGS, AppearPieceSettingsCommand );
-			registerCommand( DISAPPEAR_PIECE_SETTINGS, DisappearPieceSettingsCommand );
+			registerCommand( DISAPPEAR_MOVE_HISTORY_PANEL, PanelActionCommand );
+			registerCommand( DISAPPEAR_TAKEN_PIECES_PANEL, PanelActionCommand );
+			registerCommand( DISAPPEAR_GAME_ACTIONS_PANEL, PanelActionCommand );
+			registerCommand( DISAPPEAR_PIECE_SETTINGS, DialogActionCommand );
+			registerCommand( DISAPPEAR_MOVE_HISTORY_MODIFIER, DialogActionCommand );
 
-			registerCommand( APPEAR_MOVE_HISTORY_MODIFIER, AppearMoveHistoryModifierCommand );
-			registerCommand( DISAPPEAR_MOVE_HISTORY_MODIFIER, DisappearMoveHistoryModifierCommand );
-
-			registerCommand( APPEAR_GAME_ACTIONS_PANEL, AppearGameActionsPanelCommand );
-			registerCommand( DISAPPEAR_GAME_ACTIONS_PANEL, DisappearGameActionsPanelCommand );
-			registerCommand( TOGGLE_GAME_ACTIONS_PANEL, ToggleGameActionsPanelCommand );
+			registerCommand( TOGGLE_MOVE_HISTORY_PANEL, PanelActionCommand );
+			registerCommand( TOGGLE_TAKEN_PIECES_PANEL, PanelActionCommand );
+			registerCommand( TOGGLE_GAME_ACTIONS_PANEL, PanelActionCommand );
 
 			registerCommand( MOVE_START, MoveStartCommand );
 			registerCommand( MOVE_END, MoveEndCommand );
 			registerCommand( MOVE_FORWARD, MoveForwardCommand );
 			registerCommand( MOVE_BACKWARD, MoveBackwardCommand );
 			registerCommand( MOVE_JUMP, MoveJumpCommand );
-
-			//registerCommand( APPEAR_GAME_ACTIONS
 
 			registerCommand( SHOW_ALL_FONT_KEYS_ON_CHESSBOARD, ShowAllFontKeysOnChessboardCommand );
 
