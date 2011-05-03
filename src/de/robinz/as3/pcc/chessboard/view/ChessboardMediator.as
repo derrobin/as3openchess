@@ -117,14 +117,14 @@ package de.robinz.as3.pcc.chessboard.view
 
 		private function getFields() : ChessboardFieldCollection {
 			var list : Array = new Array().concat(
-				this.chessboard.row1.getChildren(),
-				this.chessboard.row2.getChildren(),
-				this.chessboard.row3.getChildren(),
-				this.chessboard.row4.getChildren(),
-				this.chessboard.row5.getChildren(),
-				this.chessboard.row6.getChildren(),
-				this.chessboard.row7.getChildren(),
-				this.chessboard.row8.getChildren()
+				this.chessboard[ 'row1' ].getChildren(),
+				this.chessboard[ 'row2' ].getChildren(),
+				this.chessboard[ 'row3' ].getChildren(),
+				this.chessboard[ 'row4' ].getChildren(),
+				this.chessboard[ 'row5' ].getChildren(),
+				this.chessboard[ 'row6' ].getChildren(),
+				this.chessboard[ 'row7' ].getChildren(),
+				this.chessboard[ 'row8' ].getChildren()
 			);
 			var o : Object;
 			var c : ChessboardFieldCollection = new ChessboardFieldCollection();
