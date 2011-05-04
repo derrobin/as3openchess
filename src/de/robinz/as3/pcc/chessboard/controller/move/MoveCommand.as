@@ -30,7 +30,6 @@ public class MoveCommand extends SimpleCommand
 	private function move( m : ChessboardMove ) : void {
 		if ( m.isMoveForward == false ) {
 			this.gameProxy.move( m );
-			sendNotification( ApplicationFacade.FIELD_HINT, m.fromPosition.toString() );
 		}
 
 		// give a reference to the corresponding game

@@ -48,6 +48,7 @@ public class ChessboardMediator extends Mediator
 	private var _isBoardInspectMode : Boolean = false;
 	private var _isBoardLocked : Boolean = false;
 	private var _pieceSettings : PieceSettingsVO;
+	private var _cachedFields : ChessboardFieldCollection;
 
 	public function ChessboardMediator( viewComponent : Chessboard ) {
 		super( NAME, viewComponent );
@@ -128,6 +129,10 @@ public class ChessboardMediator extends Mediator
 	}
 
 	private function getFields() : ChessboardFieldCollection {
+		if ( this._cachedFields != null ) {
+			return this._cachedFields;
+		}
+
 		var list : Array = new Array().concat(
 			this.chessboard[ 'row1' ].getChildren(),
 			this.chessboard[ 'row2' ].getChildren(),
@@ -146,6 +151,7 @@ public class ChessboardMediator extends Mediator
 			}
 		}
 
+		this._cachedFields = c;
 		return c;
 	}
 
@@ -259,8 +265,6 @@ public class ChessboardMediator extends Mediator
 		f.styleName = CSS_SELECTOR_FIELD_MOVE_HINT;
 		// dynamic font size, depends from piece settings
 		f.setStyle( "fontSize", this._pieceSettings.fontSizeCssValue );
-
-		this.refreshPieces();
 	}
 
 	private function removeAllMoveHints() : void {
