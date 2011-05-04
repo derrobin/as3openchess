@@ -8,6 +8,7 @@ import de.robinz.as3.pcc.chessboard.controller.game.GetCurrentGameCommand;
 import de.robinz.as3.pcc.chessboard.controller.game.LoadGameCommand;
 import de.robinz.as3.pcc.chessboard.controller.game.NewGameCommand;
 import de.robinz.as3.pcc.chessboard.controller.game.SaveGameCommand;
+import de.robinz.as3.pcc.chessboard.controller.game.ShowPieceMoveHintsCommand;
 import de.robinz.as3.pcc.chessboard.controller.game.ShowSaveGamesCommand;
 import de.robinz.as3.pcc.chessboard.controller.move.MoveCommand;
 import de.robinz.as3.pcc.chessboard.controller.move.TryToMoveCommand;
@@ -105,6 +106,8 @@ public class ApplicationFacade extends Facade
 	public static const FIELD_HINT : String = "fieldHint";
 	public static const REMOVE_ALL_FIELD_HINTS : String = "removeAllFieldHints";
 
+	public static const SHOW_PIECE_MOVE_HINTS : String = "showPieceMoveHints";
+
 	public static function getInstance() : ApplicationFacade {
 		if ( ! instance ) {
 			instance = new ApplicationFacade();
@@ -154,7 +157,9 @@ public class ApplicationFacade extends Facade
 
 		registerCommand( CHANGE_PIECE_SETTINGS, ChangePieceSettingsCommand );
 
-		registerCommand( ApplicationFacade.REMOVE_PIECE, RemovePieceCommand );
+		registerCommand( REMOVE_PIECE, RemovePieceCommand );
+
+		registerCommand( SHOW_PIECE_MOVE_HINTS, ShowPieceMoveHintsCommand );
 	}
 
 	public function startup( app : mainapp ) : void {

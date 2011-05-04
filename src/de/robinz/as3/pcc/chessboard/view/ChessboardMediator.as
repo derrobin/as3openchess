@@ -1,15 +1,14 @@
 package de.robinz.as3.pcc.chessboard.view
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
-import de.robinz.as3.pcc.chessboard.library.Notation;
-import de.robinz.as3.pcc.chessboard.library.FontManager;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
+import de.robinz.as3.pcc.chessboard.library.FontManager;
+import de.robinz.as3.pcc.chessboard.library.Notation;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 import de.robinz.as3.pcc.chessboard.view.views.Chessboard;
 import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardField;
-import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardFieldCollection;
 import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardFieldCollection;
 
 import flash.display.DisplayObject;
@@ -54,10 +53,11 @@ public class ChessboardMediator extends Mediator
 		super( NAME, viewComponent );
 
 		viewComponent.addEventListener( MouseEvent.CLICK, onMouseClick, true );
-		//viewComponent.addEventListener( MouseEvent.MOUSE_OVER, onMouseOver, true );
 		viewComponent.addEventListener( DragEvent.DRAG_ENTER, onDragEnter, true );
 		viewComponent.addEventListener( DragEvent.DRAG_DROP, onDragDrop, true );
 		viewComponent.addEventListener( MouseEvent.MOUSE_MOVE, onMouseMove, true );
+		viewComponent.addEventListener( MouseEvent.MOUSE_DOWN, onMouseDown, true );
+		viewComponent.addEventListener( MouseEvent.MOUSE_UP, onMouseUp, true );
 
 		this.createFields();
 	}
@@ -76,6 +76,7 @@ public class ChessboardMediator extends Mediator
 		var notation : String;
 		var isWhite : Boolean = true;
 
+		// TODO: encapsulate this algorithm
 		for( j; j <= 8; j++ ) {
 			isWhite = isWhite ? false : true;
 
@@ -111,6 +112,7 @@ public class ChessboardMediator extends Mediator
 
 		var vo : ChessboardFieldVO = new ChessboardFieldVO();
 		vo.isWhite = isWhite;
+		vo.notation = notation;
 		f.data = vo;
 
 		return f;
@@ -179,10 +181,6 @@ public class ChessboardMediator extends Mediator
 			}
 
 			b = child as Box;
-
-			if ( b.styleName != CSS_SELECTOR_FIELD_BLACK && b.styleName != CSS_SELECTOR_FIELD_WHITE ) {
-				continue;
-			}
 
 			b.removeAllChildren();
 		}
@@ -262,7 +260,9 @@ public class ChessboardMediator extends Mediator
 			return;
 		}
 
+		// TODO: switching selector doesnt work
 		f.styleName = CSS_SELECTOR_FIELD_MOVE_HINT;
+
 		// dynamic font size, depends from piece settings
 		f.setStyle( "fontSize", this._pieceSettings.fontSizeCssValue );
 	}
@@ -280,6 +280,44 @@ public class ChessboardMediator extends Mediator
 			vo = f.data as ChessboardFieldVO;
 			f.styleName = vo.isWhite ? CSS_SELECTOR_FIELD_WHITE : CSS_SELECTOR_FIELD_BLACK;
 		}
+	}
+
+	private function showMoveHints( field : ChessboardField, piece : IPiece ) : void {
+		var fv : ChessboardFieldVO = field.data as ChessboardFieldVO;
+
+		var rows : String = "abcdefgh";
+		var c : String; // char
+		var i : int = 1;
+		var j : int = 1;
+		var notation : Notation;
+		var isWhite : Boolean = true;
+		var move : ChessboardMove;
+		var fromPosition : Notation = Notation.createNotationByString( fv.notation );
+
+		// TODO: encapsulate this algorithm
+		for( j; j <= 8; j++ ) {
+			isWhite = isWhite ? false : true;
+
+			for( i; i <= rows.length; i++ ) {
+				c = rows.charAt( i - 1 );
+				notation = Notation.createNotationByString( c + j.toString() );
+
+				move = new ChessboardMove();
+				move.fromPosition = fromPosition;
+				move.toPosition = Notation.createNotationByString( notation.toString() );
+				move.beatenPiece = this.getPieceAt( notation );
+				move.piece = piece;
+
+				if ( piece.isMoveValide( move ) ) {
+					this.markMoveHint( notation.toString() );
+				}
+
+			}
+
+			i = 1;
+		}
+
+		//sendNotification( ApplicationFacade.SHOW_PIECE_MOVE_HINTS, bp );
 	}
 
 	// End Innerclass Methods
@@ -425,10 +463,23 @@ public class ChessboardMediator extends Mediator
 
 	}
 
+	private function onMouseUp( e : MouseEvent ) : void {
+		this.removeAllMoveHints();
+	}
+
+	private function onMouseDown( e : MouseEvent ) : void {
+		if ( e.target is Text && ( e.target as Text ).parent is ChessboardField ) {
+			var p : IPiece = ( e.target as Text ).data as IPiece;
+			var f : ChessboardField = ( e.target as Text ).parent as ChessboardField;
+			this.showMoveHints( f, p );
+		}
+	}
+
 	private function onDragEnter( e : DragEvent ) : void {
 		if ( e.dragSource.hasFormat( "piece" ) ) {
 			if ( e.target is ChessboardField ) {
-				DragManager.acceptDragDrop( ChessboardField( e.target ) );
+				var f : ChessboardField = e.target as ChessboardField;
+				DragManager.acceptDragDrop( f );
 			}
 		}
 
@@ -456,12 +507,8 @@ public class ChessboardMediator extends Mediator
 		m.beatenPiece = this.getPieceAt( toPosition );
 
 		sendNotification( ApplicationFacade.TRY_TO_MOVE, m );
+		this.removeAllMoveHints();
 	}
-
-	/* private function onMouseOver( e : Event ) : void {
-		if ( e.target is Box && !( e.target is HBox ) && !( e.target is VBox ) ) {
-		}
-	} */
 
 	private function onMouseClick( e : Event ) : void {
 		if ( this._isBoardLocked ) {
@@ -471,10 +518,10 @@ public class ChessboardMediator extends Mediator
 
 		if ( e.target is Text ) {
 			var t : Text = ( e.target as Text );
-			var box : Box = t.parent as Box;
+			// var f : ChessboardField = t.parent as ChessboardField;
+			var piece : IPiece = t.data as IPiece;
 
 			if ( _isBoardInspectMode ) {
-				var piece : IPiece = t.data as IPiece;
 				Alert.show(
 					"Piece Name: " + piece.getName() + "\n" +
 					"Piece FontKey: " + piece.fontKey

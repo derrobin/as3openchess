@@ -22,7 +22,6 @@ public class NewGameCommand extends SimpleCommand
 	// Start SimpleCommand overrides
 
 	public override function execute( n : INotification ) : void {
-		// this.gm.cb.removeAllPieces();
 		sendNotification( ApplicationFacade.REMOVE_ALL_PIECES );
 		sendNotification( ApplicationFacade.DISABLE_BOARD_INSPECT_PIECE_MODE );
 		sendNotification( ApplicationFacade.UNLOCK_BOARD );
