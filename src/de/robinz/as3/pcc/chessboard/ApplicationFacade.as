@@ -24,136 +24,136 @@ import de.robinz.as3.pcc.chessboard.controller.ui.PanelActionCommand;
 import org.puremvc.as3.patterns.facade.Facade;
 
 /**
-	 * ApplicationFacade
-	 *
-	 * @author robin heinel
-	 */
-	public class ApplicationFacade extends Facade
-	{
-		public static const STARTUP : String 	= "startup";
-		public static const ERROR : String = "error";
-		public static const INFO : String = "info";
+ * ApplicationFacade
+ *
+ * @author robin heinel
+ */
+public class ApplicationFacade extends Facade
+{
+	public static const STARTUP : String 	= "startup";
+	public static const ERROR : String = "error";
+	public static const INFO : String = "info";
 
-		// TODO: rename it to set piece settings
-		public static const SET_FONT_SETTINGS : String = "setFontSettings";
+	// TODO: rename it to set piece settings
+	public static const SET_FONT_SETTINGS : String = "setFontSettings";
 
-		public static const TRY_TO_MOVE : String = "toToMove";
-		public static const REJECT_MOVE : String = "rejectMove";
-		public static const GET_MOVES : String = "getMoves";
-		public static const MOVE : String = "move";
+	public static const TRY_TO_MOVE : String = "toToMove";
+	public static const REJECT_MOVE : String = "rejectMove";
+	public static const GET_MOVES : String = "getMoves";
+	public static const MOVE : String = "move";
 
-		public static const MOVE_START : String = "moveStart";
-		public static const MOVE_END : String = "moveEnd";
-		public static const MOVE_FORWARD : String = "moveForward";
-		public static const MOVE_FORWARD_SUCCEED : String = "moveForwardSucceed";
-		public static const MOVE_BACKWARD : String = "moveBackward";
-		public static const MOVE_BACKWARD_SUCCEED : String = "moveBackwardSucceed";
-		public static const MOVE_JUMP : String = "moveJump";
+	public static const MOVE_START : String = "moveStart";
+	public static const MOVE_END : String = "moveEnd";
+	public static const MOVE_FORWARD : String = "moveForward";
+	public static const MOVE_FORWARD_SUCCEED : String = "moveForwardSucceed";
+	public static const MOVE_BACKWARD : String = "moveBackward";
+	public static const MOVE_BACKWARD_SUCCEED : String = "moveBackwardSucceed";
+	public static const MOVE_JUMP : String = "moveJump";
 
-		public static const LOOK_BOARD : String = "lookBoard";
-		public static const UNLOOK_BOARD : String = "unlookBoard";
+	public static const LOOK_BOARD : String = "lookBoard";
+	public static const UNLOOK_BOARD : String = "unlookBoard";
 
-		public static const REMOVE_PIECE : String = "removePiece";
-		public static const PIECE_REMOVED : String = "pieceRemoved";
+	public static const REMOVE_PIECE : String = "removePiece";
+	public static const PIECE_REMOVED : String = "pieceRemoved";
 
-		public static const SET_PIECE : String = "setPiece";
-		public static const RESTORE_PIECE : String = "restorePiece";
-		public static const REMOVE_ALL_PIECES : String = "removeAllPieces";
+	public static const SET_PIECE : String = "setPiece";
+	public static const RESTORE_PIECE : String = "restorePiece";
+	public static const REMOVE_ALL_PIECES : String = "removeAllPieces";
 
-		public static const NEW_GAME : String = "newGame";
-		public static const SAVE_GAME : String = "saveGame";
-		public static const SHOW_SAVE_GAMES : String = "showSaveGames";
-		public static const LOAD_GAME : String = "loadGame";
-		public static const GET_CURRENT_GAME : String = "getCurrentGame";
-		public static const SET_CURRENT_GAME : String = "setCurrentGame";
+	public static const NEW_GAME : String = "newGame";
+	public static const SAVE_GAME : String = "saveGame";
+	public static const SHOW_SAVE_GAMES : String = "showSaveGames";
+	public static const LOAD_GAME : String = "loadGame";
+	public static const GET_CURRENT_GAME : String = "getCurrentGame";
+	public static const SET_CURRENT_GAME : String = "setCurrentGame";
 
-		public static const TOGGLE_MOVE_HISTORY_PANEL : String = "toggleMoveHistoryPanel";
-		public static const APPEAR_MOVE_HISTORY_PANEL : String = "appearMoveHistoryPanel";
-		public static const DISAPPEAR_MOVE_HISTORY_PANEL : String = "disappearMoveHistoryPanel";
-		public static const SELECT_MOVE_HISTORY_ENTRY : String = "selectMoveHistoryEntry";
+	public static const TOGGLE_MOVE_HISTORY_PANEL : String = "toggleMoveHistoryPanel";
+	public static const APPEAR_MOVE_HISTORY_PANEL : String = "appearMoveHistoryPanel";
+	public static const DISAPPEAR_MOVE_HISTORY_PANEL : String = "disappearMoveHistoryPanel";
+	public static const SELECT_MOVE_HISTORY_ENTRY : String = "selectMoveHistoryEntry";
 
-		public static const TOGGLE_TAKEN_PIECES_PANEL : String = "toolgeTakenPiecesPanel";
-		public static const APPEAR_TAKEN_PIECES_PANEL : String = "appearTakenPiecesPanel";
-		public static const DISAPPEAR_TAKEN_PIECES_PANEL : String = "disappearTakenPiecesPanel";
+	public static const TOGGLE_TAKEN_PIECES_PANEL : String = "toolgeTakenPiecesPanel";
+	public static const APPEAR_TAKEN_PIECES_PANEL : String = "appearTakenPiecesPanel";
+	public static const DISAPPEAR_TAKEN_PIECES_PANEL : String = "disappearTakenPiecesPanel";
 
-		public static const APPEAR_PANEL_SAVE_GAME : String = "appearPanelSaveGame";
-		public static const DISAPPEAR_PANEL_SAVE_GAME : String = "disappearPanelSaveGame";
-		public static const SET_SAVE_GAME : String = "setSaveGame";
+	public static const APPEAR_PANEL_SAVE_GAME : String = "appearPanelSaveGame";
+	public static const DISAPPEAR_PANEL_SAVE_GAME : String = "disappearPanelSaveGame";
+	public static const SET_SAVE_GAME : String = "setSaveGame";
 
-		public static const SET_SAVE_GAMES : String = "setSaveGames";
-		public static const DISAPPEAR_SAVE_GAMES : String = "disappearSaveGames";
-		public static const APPEAR_SAVE_GAMES : String = "appearSaveGames";
+	public static const SET_SAVE_GAMES : String = "setSaveGames";
+	public static const DISAPPEAR_SAVE_GAMES : String = "disappearSaveGames";
+	public static const APPEAR_SAVE_GAMES : String = "appearSaveGames";
 
-		public static const SHOW_ALL_FONT_KEYS_ON_CHESSBOARD : String = "showAllFontKeysOnChessboard";
-		public static const ENABLE_BOARD_INSPECT_PIECE_MODE : String = "enableBoardInspectPieceMode";
-		public static const DISABLE_BOARD_INSPECT_PIECE_MODE : String = "disableBoardInspectPieceMode";
+	public static const SHOW_ALL_FONT_KEYS_ON_CHESSBOARD : String = "showAllFontKeysOnChessboard";
+	public static const ENABLE_BOARD_INSPECT_PIECE_MODE : String = "enableBoardInspectPieceMode";
+	public static const DISABLE_BOARD_INSPECT_PIECE_MODE : String = "disableBoardInspectPieceMode";
 
-		public static const APPEAR_PIECE_SETTINGS : String = "appearPieceSettings";
-		public static const DISAPPEAR_PIECE_SETTINGS : String = "disappearPieceSettings";
-		public static const CHANGE_PIECE_SETTINGS : String = "changePieceSettings";
+	public static const APPEAR_PIECE_SETTINGS : String = "appearPieceSettings";
+	public static const DISAPPEAR_PIECE_SETTINGS : String = "disappearPieceSettings";
+	public static const CHANGE_PIECE_SETTINGS : String = "changePieceSettings";
 
-		public static const APPEAR_MOVE_HISTORY_MODIFIER : String = "appearMoveHistoryModifier";
-		public static const DISAPPEAR_MOVE_HISTORY_MODIFIER : String = "disappearMoveHistoryModifier";
+	public static const APPEAR_MOVE_HISTORY_MODIFIER : String = "appearMoveHistoryModifier";
+	public static const DISAPPEAR_MOVE_HISTORY_MODIFIER : String = "disappearMoveHistoryModifier";
 
-		public static const APPEAR_GAME_ACTIONS_PANEL : String = "appearGameActionsPanel";
-		public static const DISAPPEAR_GAME_ACTIONS_PANEL : String = "disappearGameActionsPanel";
-		public static const TOGGLE_GAME_ACTIONS_PANEL : String = "toggleGameActionsPanel";
+	public static const APPEAR_GAME_ACTIONS_PANEL : String = "appearGameActionsPanel";
+	public static const DISAPPEAR_GAME_ACTIONS_PANEL : String = "disappearGameActionsPanel";
+	public static const TOGGLE_GAME_ACTIONS_PANEL : String = "toggleGameActionsPanel";
 
 
-		public static function getInstance() : ApplicationFacade {
-			if ( ! instance ) {
-				instance = new ApplicationFacade();
-			}
-			return instance as ApplicationFacade;
+	public static function getInstance() : ApplicationFacade {
+		if ( ! instance ) {
+			instance = new ApplicationFacade();
 		}
-
-		protected override function initializeController() : void {
-			super.initializeController();
-
-			registerCommand( STARTUP, StartupCommand );
-			registerCommand( ERROR, ErrorCommand );
-			registerCommand( INFO, InfoCommand );
-
-			registerCommand( TRY_TO_MOVE, TryToMoveCommand );
-			registerCommand( MOVE, MoveCommand );
-
-			registerCommand( NEW_GAME, NewGameCommand );
-			registerCommand( SHOW_SAVE_GAMES, ShowSaveGamesCommand );
-			registerCommand( SAVE_GAME, SaveGameCommand );
-			registerCommand( LOAD_GAME, LoadGameCommand );
-			registerCommand( GET_CURRENT_GAME, GetCurrentGameCommand );
-
-			registerCommand( APPEAR_MOVE_HISTORY_PANEL, PanelActionCommand );
-			registerCommand( APPEAR_TAKEN_PIECES_PANEL, PanelActionCommand );
-			registerCommand( APPEAR_GAME_ACTIONS_PANEL, PanelActionCommand );
-			registerCommand( APPEAR_PIECE_SETTINGS, DialogActionCommand );
-			registerCommand( APPEAR_MOVE_HISTORY_MODIFIER, DialogActionCommand );
-
-			registerCommand( DISAPPEAR_MOVE_HISTORY_PANEL, PanelActionCommand );
-			registerCommand( DISAPPEAR_TAKEN_PIECES_PANEL, PanelActionCommand );
-			registerCommand( DISAPPEAR_GAME_ACTIONS_PANEL, PanelActionCommand );
-			registerCommand( DISAPPEAR_PIECE_SETTINGS, DialogActionCommand );
-			registerCommand( DISAPPEAR_MOVE_HISTORY_MODIFIER, DialogActionCommand );
-
-			registerCommand( TOGGLE_MOVE_HISTORY_PANEL, PanelActionCommand );
-			registerCommand( TOGGLE_TAKEN_PIECES_PANEL, PanelActionCommand );
-			registerCommand( TOGGLE_GAME_ACTIONS_PANEL, PanelActionCommand );
-
-			registerCommand( MOVE_START, MoveStartCommand );
-			registerCommand( MOVE_END, MoveEndCommand );
-			registerCommand( MOVE_FORWARD, MoveForwardCommand );
-			registerCommand( MOVE_BACKWARD, MoveBackwardCommand );
-			registerCommand( MOVE_JUMP, MoveJumpCommand );
-
-			registerCommand( SHOW_ALL_FONT_KEYS_ON_CHESSBOARD, ShowAllFontKeysOnChessboardCommand );
-
-			registerCommand( CHANGE_PIECE_SETTINGS, ChangePieceSettingsCommand );
-
-			registerCommand( ApplicationFacade.REMOVE_PIECE, RemovePieceCommand );
-		}
-
-		public function startup( app : mainapp ) : void {
-			sendNotification( STARTUP, app );
-		}
+		return instance as ApplicationFacade;
 	}
+
+	protected override function initializeController() : void {
+		super.initializeController();
+
+		registerCommand( STARTUP, StartupCommand );
+		registerCommand( ERROR, ErrorCommand );
+		registerCommand( INFO, InfoCommand );
+
+		registerCommand( TRY_TO_MOVE, TryToMoveCommand );
+		registerCommand( MOVE, MoveCommand );
+
+		registerCommand( NEW_GAME, NewGameCommand );
+		registerCommand( SHOW_SAVE_GAMES, ShowSaveGamesCommand );
+		registerCommand( SAVE_GAME, SaveGameCommand );
+		registerCommand( LOAD_GAME, LoadGameCommand );
+		registerCommand( GET_CURRENT_GAME, GetCurrentGameCommand );
+
+		registerCommand( APPEAR_MOVE_HISTORY_PANEL, PanelActionCommand );
+		registerCommand( APPEAR_TAKEN_PIECES_PANEL, PanelActionCommand );
+		registerCommand( APPEAR_GAME_ACTIONS_PANEL, PanelActionCommand );
+		registerCommand( APPEAR_PIECE_SETTINGS, DialogActionCommand );
+		registerCommand( APPEAR_MOVE_HISTORY_MODIFIER, DialogActionCommand );
+
+		registerCommand( DISAPPEAR_MOVE_HISTORY_PANEL, PanelActionCommand );
+		registerCommand( DISAPPEAR_TAKEN_PIECES_PANEL, PanelActionCommand );
+		registerCommand( DISAPPEAR_GAME_ACTIONS_PANEL, PanelActionCommand );
+		registerCommand( DISAPPEAR_PIECE_SETTINGS, DialogActionCommand );
+		registerCommand( DISAPPEAR_MOVE_HISTORY_MODIFIER, DialogActionCommand );
+
+		registerCommand( TOGGLE_MOVE_HISTORY_PANEL, PanelActionCommand );
+		registerCommand( TOGGLE_TAKEN_PIECES_PANEL, PanelActionCommand );
+		registerCommand( TOGGLE_GAME_ACTIONS_PANEL, PanelActionCommand );
+
+		registerCommand( MOVE_START, MoveStartCommand );
+		registerCommand( MOVE_END, MoveEndCommand );
+		registerCommand( MOVE_FORWARD, MoveForwardCommand );
+		registerCommand( MOVE_BACKWARD, MoveBackwardCommand );
+		registerCommand( MOVE_JUMP, MoveJumpCommand );
+
+		registerCommand( SHOW_ALL_FONT_KEYS_ON_CHESSBOARD, ShowAllFontKeysOnChessboardCommand );
+
+		registerCommand( CHANGE_PIECE_SETTINGS, ChangePieceSettingsCommand );
+
+		registerCommand( ApplicationFacade.REMOVE_PIECE, RemovePieceCommand );
+	}
+
+	public function startup( app : mainapp ) : void {
+		sendNotification( STARTUP, app );
+	}
+}
 }
