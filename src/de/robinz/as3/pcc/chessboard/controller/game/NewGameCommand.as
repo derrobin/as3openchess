@@ -25,7 +25,7 @@ public class NewGameCommand extends SimpleCommand
 		// this.gm.cb.removeAllPieces();
 		sendNotification( ApplicationFacade.REMOVE_ALL_PIECES );
 		sendNotification( ApplicationFacade.DISABLE_BOARD_INSPECT_PIECE_MODE );
-		sendNotification( ApplicationFacade.UNLOOK_BOARD );
+		sendNotification( ApplicationFacade.UNLOCK_BOARD );
 
 		this.setDefaultPieces();
 		this.gameProxy.reset();

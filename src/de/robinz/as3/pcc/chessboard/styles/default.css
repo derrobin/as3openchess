@@ -59,7 +59,8 @@ global {
 	verticalAlign: middle;
 }
 .fieldBlack,
-.fieldWhite {
+.fieldWhite,
+.fieldMoveHint {
 	horizontalAlign: center;
 	verticalAlign: middle;
 	fontFamily: font1;
@@ -70,6 +71,9 @@ global {
 }
 .fieldWhite {
 	backgroundColor: #ffffff;
+}
+.fieldMoveHint {
+	backgroundColor: #ccff99;
 }
 .mystyle1 {
 	fontFamily: font1;

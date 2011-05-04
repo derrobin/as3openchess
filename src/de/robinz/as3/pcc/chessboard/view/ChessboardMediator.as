@@ -5,8 +5,11 @@ import de.robinz.as3.pcc.chessboard.library.Notation;
 import de.robinz.as3.pcc.chessboard.library.FontManager;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
+import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
+import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 import de.robinz.as3.pcc.chessboard.view.views.Chessboard;
 import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardField;
+import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardFieldCollection;
 import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardFieldCollection;
 
 import flash.display.DisplayObject;
@@ -38,8 +41,13 @@ public class ChessboardMediator extends Mediator
 
 	public static const FIELD_SPACE : int = 1;
 
+	public static const CSS_SELECTOR_FIELD_WHITE : String = "fieldWhite";
+	public static const CSS_SELECTOR_FIELD_BLACK : String = "fieldBlack";
+	public static const CSS_SELECTOR_FIELD_MOVE_HINT : String = "fieldMoveHint";
+
 	private var _isBoardInspectMode : Boolean = false;
-	private var _isBoardLooked : Boolean = false;
+	private var _isBoardLocked : Boolean = false;
+	private var _pieceSettings : PieceSettingsVO;
 
 	public function ChessboardMediator( viewComponent : Chessboard ) {
 		super( NAME, viewComponent );
@@ -99,6 +107,10 @@ public class ChessboardMediator extends Mediator
 		f.percentWidth = 12.5;
 		f.percentHeight = 100;
 		f.styleName = "field" + ( isWhite ? "White" : "Black" );
+
+		var vo : ChessboardFieldVO = new ChessboardFieldVO();
+		vo.isWhite = isWhite;
+		f.data = vo;
 
 		return f;
 	}
@@ -162,7 +174,7 @@ public class ChessboardMediator extends Mediator
 
 			b = child as Box;
 
-			if ( b.styleName != "fieldBlack" && b.styleName != "fieldWhite" ) {
+			if ( b.styleName != CSS_SELECTOR_FIELD_BLACK && b.styleName != CSS_SELECTOR_FIELD_WHITE ) {
 				continue;
 			}
 
@@ -237,6 +249,35 @@ public class ChessboardMediator extends Mediator
 		field.addChild( text );
 	}
 
+	private function markMoveHint( notation : String ) : void {
+		var f : ChessboardField = this.getField( notation );
+
+		if ( f == null ) {
+			return;
+		}
+
+		f.styleName = CSS_SELECTOR_FIELD_MOVE_HINT;
+		// dynamic font size, depends from piece settings
+		f.setStyle( "fontSize", this._pieceSettings.fontSizeCssValue );
+
+		this.refreshPieces();
+	}
+
+	private function removeAllMoveHints() : void {
+		var c : ChessboardFieldCollection = this.getFields();
+		var f : ChessboardField;
+		var vo : ChessboardFieldVO;
+
+		for each( f in c.list ) {
+			if ( ! f.styleName == CSS_SELECTOR_FIELD_MOVE_HINT ) {
+				continue;
+			}
+
+			vo = f.data as ChessboardFieldVO;
+			f.styleName = vo.isWhite ? CSS_SELECTOR_FIELD_WHITE : CSS_SELECTOR_FIELD_BLACK;
+		}
+	}
+
 	// End Innerclass Methods
 
 
@@ -244,8 +285,10 @@ public class ChessboardMediator extends Mediator
 
 	public override function listNotificationInterests() : Array {
 		return [
-			ApplicationFacade.LOOK_BOARD,
-			ApplicationFacade.UNLOOK_BOARD,
+			ApplicationFacade.FIELD_HINT,
+			ApplicationFacade.REMOVE_ALL_FIELD_HINTS,
+			ApplicationFacade.LOCK_BOARD,
+			ApplicationFacade.UNLOCK_BOARD,
 			ApplicationFacade.CHANGE_PIECE_SETTINGS,
 			ApplicationFacade.ENABLE_BOARD_INSPECT_PIECE_MODE,
 			ApplicationFacade.DISABLE_BOARD_INSPECT_PIECE_MODE,
@@ -258,14 +301,20 @@ public class ChessboardMediator extends Mediator
 
 	public override function handleNotification( n : INotification ) : void {
 		switch( n.getName() ) {
-			case ApplicationFacade.LOOK_BOARD:
+			case ApplicationFacade.FIELD_HINT:
+				this.handleFieldHint( n.getBody() as String );
+			break;
+			case ApplicationFacade.REMOVE_ALL_FIELD_HINTS:
+				this.handleRemoveAllFieldHints();
+			break;
+			case ApplicationFacade.LOCK_BOARD:
 				this.handleLookBoard();
 			break;
-			case ApplicationFacade.UNLOOK_BOARD:
-				this.handleUnlookBoard();
+			case ApplicationFacade.UNLOCK_BOARD:
+				this.handleUnlockBoard();
 			break;
 			case ApplicationFacade.CHANGE_PIECE_SETTINGS:
-				this.handleChangePieceSettings();
+				this.handleChangePieceSettings( n.getBody() as PieceSettingsVO );
 			break;
 			case ApplicationFacade.ENABLE_BOARD_INSPECT_PIECE_MODE:
 				this.handleEnableBoardInspectMode();
@@ -293,16 +342,25 @@ public class ChessboardMediator extends Mediator
 
 	// Start Notification Handlers
 
+	private function handleFieldHint( notation : String ) : void {
+		this.markMoveHint( notation );
+	}
+
+	private function handleRemoveAllFieldHints() : void {
+		this.removeAllMoveHints();
+	}
+
 	private function handleLookBoard() : void {
-		this._isBoardLooked = true;
+		this._isBoardLocked = true;
 	}
 
-	private function handleUnlookBoard() : void {
-		this._isBoardLooked = false;
+	private function handleUnlockBoard() : void {
+		this._isBoardLocked = false;
 	}
 
-	private function handleChangePieceSettings() : void {
+	private function handleChangePieceSettings( settings : PieceSettingsVO ) : void {
 		// TODO: make condition to internal state
+		this._pieceSettings = settings;
 		this.refreshPieces();
 	}
 
@@ -373,7 +431,7 @@ public class ChessboardMediator extends Mediator
 	}
 
 	private function onDragDrop( e : DragEvent ) : void {
-		if ( this._isBoardLooked ) {
+		if ( this._isBoardLocked ) {
 			Alert.show( "All Movements are looked. You have to go to the end of the game for making the next move.", "Movement looked!" );
 			return;
 		}
@@ -402,7 +460,7 @@ public class ChessboardMediator extends Mediator
 	} */
 
 	private function onMouseClick( e : Event ) : void {
-		if ( this._isBoardLooked ) {
+		if ( this._isBoardLocked ) {
 			Alert.show( "All Movements are looked. You have to go to the end of the game for making the next move.", "Movement looked!" );
 			return;
 		}

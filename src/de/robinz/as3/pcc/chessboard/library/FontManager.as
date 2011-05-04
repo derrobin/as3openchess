@@ -8,16 +8,6 @@ import de.robinz.as3.pcc.chessboard.library.pieces.Pawn;
 import de.robinz.as3.pcc.chessboard.library.pieces.Queen;
 import de.robinz.as3.pcc.chessboard.library.pieces.Rook;
 import de.robinz.as3.pcc.chessboard.library.vo.FontVO;
-import de.robinz.as3.pcc.chessboard.library.vo.FontVOCollection;
-
-import flash.display.Bitmap;
-import flash.display.BitmapData;
-import flash.text.Font;
-import flash.text.TextField;
-import flash.text.TextFieldAutoSize;
-import flash.text.TextFormat;
-
-import mx.controls.Image;
 
 /**
  * Embedding the Fonts

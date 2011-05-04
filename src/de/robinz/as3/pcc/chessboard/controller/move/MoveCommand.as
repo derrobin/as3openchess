@@ -30,6 +30,7 @@ public class MoveCommand extends SimpleCommand
 	private function move( m : ChessboardMove ) : void {
 		if ( m.isMoveForward == false ) {
 			this.gameProxy.move( m );
+			sendNotification( ApplicationFacade.FIELD_HINT, m.fromPosition.toString() );
 		}
 
 		// give a reference to the corresponding game
@@ -37,9 +38,9 @@ public class MoveCommand extends SimpleCommand
 		m.game = gameProxy.getCurrentGame();
 
 		if ( m.game.isLastMove ) {
-			sendNotification( ApplicationFacade.UNLOOK_BOARD );
+			sendNotification( ApplicationFacade.UNLOCK_BOARD );
 		} else {
-			sendNotification( ApplicationFacade.LOOK_BOARD );
+			sendNotification( ApplicationFacade.LOCK_BOARD );
 		}
 	}
 

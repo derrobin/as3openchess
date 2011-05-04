@@ -30,6 +30,7 @@ import org.puremvc.as3.patterns.facade.Facade;
  */
 public class ApplicationFacade extends Facade
 {
+	// for global application
 	public static const STARTUP : String 	= "startup";
 	public static const ERROR : String = "error";
 	public static const INFO : String = "info";
@@ -42,6 +43,7 @@ public class ApplicationFacade extends Facade
 	public static const GET_MOVES : String = "getMoves";
 	public static const MOVE : String = "move";
 
+	// move history
 	public static const MOVE_START : String = "moveStart";
 	public static const MOVE_END : String = "moveEnd";
 	public static const MOVE_FORWARD : String = "moveForward";
@@ -50,8 +52,8 @@ public class ApplicationFacade extends Facade
 	public static const MOVE_BACKWARD_SUCCEED : String = "moveBackwardSucceed";
 	public static const MOVE_JUMP : String = "moveJump";
 
-	public static const LOOK_BOARD : String = "lookBoard";
-	public static const UNLOOK_BOARD : String = "unlookBoard";
+	public static const LOCK_BOARD : String = "lookBoard";
+	public static const UNLOCK_BOARD : String = "unlockBoard";
 
 	public static const REMOVE_PIECE : String = "removePiece";
 	public static const PIECE_REMOVED : String = "pieceRemoved";
@@ -67,38 +69,41 @@ public class ApplicationFacade extends Facade
 	public static const GET_CURRENT_GAME : String = "getCurrentGame";
 	public static const SET_CURRENT_GAME : String = "setCurrentGame";
 
-	public static const TOGGLE_MOVE_HISTORY_PANEL : String = "toggleMoveHistoryPanel";
-	public static const APPEAR_MOVE_HISTORY_PANEL : String = "appearMoveHistoryPanel";
-	public static const DISAPPEAR_MOVE_HISTORY_PANEL : String = "disappearMoveHistoryPanel";
 	public static const SELECT_MOVE_HISTORY_ENTRY : String = "selectMoveHistoryEntry";
 
-	public static const TOGGLE_TAKEN_PIECES_PANEL : String = "toolgeTakenPiecesPanel";
+	// panel and dialog actions
+	public static const APPEAR_MOVE_HISTORY_PANEL : String = "appearMoveHistoryPanel";
 	public static const APPEAR_TAKEN_PIECES_PANEL : String = "appearTakenPiecesPanel";
-	public static const DISAPPEAR_TAKEN_PIECES_PANEL : String = "disappearTakenPiecesPanel";
+	public static const APPEAR_PIECE_SETTINGS : String = "appearPieceSettings";
+	public static const APPEAR_MOVE_HISTORY_MODIFIER : String = "appearMoveHistoryModifier";
+	public static const APPEAR_GAME_ACTIONS_PANEL : String = "appearGameActionsPanel";
 
+	public static const DISAPPEAR_MOVE_HISTORY_PANEL : String = "disappearMoveHistoryPanel";
+	public static const DISAPPEAR_TAKEN_PIECES_PANEL : String = "disappearTakenPiecesPanel";
+	public static const DISAPPEAR_PIECE_SETTINGS : String = "disappearPieceSettings";
+	public static const DISAPPEAR_MOVE_HISTORY_MODIFIER : String = "disappearMoveHistoryModifier";
+	public static const DISAPPEAR_GAME_ACTIONS_PANEL : String = "disappearGameActionsPanel";
+
+	public static const TOGGLE_GAME_ACTIONS_PANEL : String = "toggleGameActionsPanel";
+	public static const TOGGLE_TAKEN_PIECES_PANEL : String = "toolgeTakenPiecesPanel";
+	public static const TOGGLE_MOVE_HISTORY_PANEL : String = "toggleMoveHistoryPanel";
+
+	// Save game dialog ( this is not handled by dialog action command )
 	public static const APPEAR_PANEL_SAVE_GAME : String = "appearPanelSaveGame";
 	public static const DISAPPEAR_PANEL_SAVE_GAME : String = "disappearPanelSaveGame";
 	public static const SET_SAVE_GAME : String = "setSaveGame";
-
 	public static const SET_SAVE_GAMES : String = "setSaveGames";
 	public static const DISAPPEAR_SAVE_GAMES : String = "disappearSaveGames";
 	public static const APPEAR_SAVE_GAMES : String = "appearSaveGames";
 
 	public static const SHOW_ALL_FONT_KEYS_ON_CHESSBOARD : String = "showAllFontKeysOnChessboard";
+
 	public static const ENABLE_BOARD_INSPECT_PIECE_MODE : String = "enableBoardInspectPieceMode";
 	public static const DISABLE_BOARD_INSPECT_PIECE_MODE : String = "disableBoardInspectPieceMode";
-
-	public static const APPEAR_PIECE_SETTINGS : String = "appearPieceSettings";
-	public static const DISAPPEAR_PIECE_SETTINGS : String = "disappearPieceSettings";
 	public static const CHANGE_PIECE_SETTINGS : String = "changePieceSettings";
 
-	public static const APPEAR_MOVE_HISTORY_MODIFIER : String = "appearMoveHistoryModifier";
-	public static const DISAPPEAR_MOVE_HISTORY_MODIFIER : String = "disappearMoveHistoryModifier";
-
-	public static const APPEAR_GAME_ACTIONS_PANEL : String = "appearGameActionsPanel";
-	public static const DISAPPEAR_GAME_ACTIONS_PANEL : String = "disappearGameActionsPanel";
-	public static const TOGGLE_GAME_ACTIONS_PANEL : String = "toggleGameActionsPanel";
-
+	public static const FIELD_HINT : String = "fieldHint";
+	public static const REMOVE_ALL_FIELD_HINTS : String = "removeAllFieldHints";
 
 	public static function getInstance() : ApplicationFacade {
 		if ( ! instance ) {
