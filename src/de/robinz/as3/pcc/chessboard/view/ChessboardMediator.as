@@ -16,13 +16,18 @@ import flash.display.DisplayObjectContainer;
 import flash.events.Event;
 import flash.events.MouseEvent;
 
+import flash.utils.setTimeout;
+
 import mx.collections.ArrayCollection;
 import mx.containers.Box;
+import mx.containers.HBox;
 import mx.controls.Alert;
 import mx.controls.Spacer;
 import mx.controls.Text;
 import mx.core.Container;
 import mx.core.DragSource;
+import mx.effects.Blur;
+import mx.events.ChildExistenceChangedEvent;
 import mx.events.DragEvent;
 import mx.managers.DragManager;
 
@@ -436,7 +441,7 @@ public class ChessboardMediator extends Mediator
 		var fromText : Text = fromBox.getChildAt( 0 ) as Text;
 		var toBox : Box = this.getField( m.toPosition.toString() );
 
-		toBox.addChild( fromText );
+		setTimeout( function() : void { toBox.addChild( fromText ); }, 200 );
 	}
 
 	// End Notification Handlers
@@ -445,32 +450,38 @@ public class ChessboardMediator extends Mediator
 	// Start Event Handlers
 
 	private function onMouseMove( e : MouseEvent ) : void {
-		if ( e.target is Text ) {
-			var di : Text = Text( e.target );
-			var piece : IPiece = di.data as IPiece;
-
-			if ( piece == null ) {
-				return;
-			}
-
-			var fm : FontManager = FontManager.getInstance();
-			var ds : DragSource = new DragSource();
-
-			ds.addData( di, "piece" );
-
-			DragManager.doDrag( di, ds, e/* , fm.convertTextToFlexImage( piece.fontKey ) */ );
-		}
-
+		if ( e.target is Text ) { this.prepareDrag( e ); }
 	}
+
+
 
 	private function onMouseUp( e : MouseEvent ) : void {
 		this.removeAllMoveHints();
 	}
 
+	private function prepareDrag( e : MouseEvent ) : void {
+		var di : Text = Text( e.target );
+		var piece : IPiece = di.data as IPiece;
+
+		if ( piece == null ) {
+			return;
+		}
+
+		var fm : FontManager = FontManager.getInstance();
+		var ds : DragSource = new DragSource();
+
+		ds.addData( di, "piece" );
+
+		DragManager.doDrag( di, ds, e /* , fm.convertTextToFlexImage( piece.fontKey ) */ );
+	}
+
 	private function onMouseDown( e : MouseEvent ) : void {
+		e.target.addEventListener( MouseEvent.MOUSE_UP, onMouseUp, true );
+
 		if ( e.target is Text && ( e.target as Text ).parent is ChessboardField ) {
 			var p : IPiece = ( e.target as Text ).data as IPiece;
 			var f : ChessboardField = ( e.target as Text ).parent as ChessboardField;
+			//this.prepareDrag( e );
 			this.showMoveHints( f, p );
 		}
 	}
@@ -480,6 +491,7 @@ public class ChessboardMediator extends Mediator
 			if ( e.target is ChessboardField ) {
 				var f : ChessboardField = e.target as ChessboardField;
 				DragManager.acceptDragDrop( f );
+				//trace( "onDragEnter: " + f.id );
 			}
 		}
 
@@ -506,8 +518,8 @@ public class ChessboardMediator extends Mediator
 		m.piece = p;
 		m.beatenPiece = this.getPieceAt( toPosition );
 
-		sendNotification( ApplicationFacade.TRY_TO_MOVE, m );
 		this.removeAllMoveHints();
+		sendNotification( ApplicationFacade.TRY_TO_MOVE, m );
 	}
 
 	private function onMouseClick( e : Event ) : void {
@@ -527,6 +539,8 @@ public class ChessboardMediator extends Mediator
 					"Piece FontKey: " + piece.fontKey
 				, "Piece Inspection" );
 			}
+
+			this.removeAllMoveHints();
 		}
 	}
 
