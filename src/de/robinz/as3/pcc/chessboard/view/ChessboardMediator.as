@@ -21,6 +21,7 @@ import flash.utils.setTimeout;
 import mx.collections.ArrayCollection;
 import mx.containers.Box;
 import mx.containers.HBox;
+import mx.containers.VBox;
 import mx.controls.Alert;
 import mx.controls.Spacer;
 import mx.controls.Text;
@@ -476,8 +477,6 @@ public class ChessboardMediator extends Mediator
 	}
 
 	private function onMouseDown( e : MouseEvent ) : void {
-		e.target.addEventListener( MouseEvent.MOUSE_UP, onMouseUp, true );
-
 		if ( e.target is Text && ( e.target as Text ).parent is ChessboardField ) {
 			var p : IPiece = ( e.target as Text ).data as IPiece;
 			var f : ChessboardField = ( e.target as Text ).parent as ChessboardField;
@@ -492,7 +491,12 @@ public class ChessboardMediator extends Mediator
 				var f : ChessboardField = e.target as ChessboardField;
 				DragManager.acceptDragDrop( f );
 				//trace( "onDragEnter: " + f.id );
+			} else if ( ! ( e.target is Text ) && ( e.target is VBox && e.target.id.indexOf( "board" ) > 0 ) )  {
+				this.removeAllMoveHints();
+			} else {
+				trace( "whats this?" );
 			}
+
 		}
 
 	}

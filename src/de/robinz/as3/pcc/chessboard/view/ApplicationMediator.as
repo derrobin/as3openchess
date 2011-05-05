@@ -9,6 +9,8 @@ import de.robinz.as3.pcc.chessboard.view.views.Chessboard;
 
 import flash.events.Event;
 
+import flash.events.MouseEvent;
+
 import flexunit.framework.TestSuite;
 
 import mx.containers.Panel;
@@ -41,6 +43,7 @@ public class ApplicationMediator extends Mediator
 			view.testRunner.startTest();
 		}
 
+		m.addEventListener( MouseEvent.MOUSE_UP, function() { trace("UP!"); } );
 		this._panels = this.registerPanels();
 		this.setDefaultPanelSize();
 	}
