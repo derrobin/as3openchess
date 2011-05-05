@@ -43,7 +43,6 @@ public class ApplicationMediator extends Mediator
 			view.testRunner.startTest();
 		}
 
-		m.addEventListener( MouseEvent.MOUSE_UP, function() { trace("UP!"); } );
 		this._panels = this.registerPanels();
 		this.setDefaultPanelSize();
 	}

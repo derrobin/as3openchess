@@ -54,6 +54,7 @@ public class ChessboardMediator extends Mediator
 	private var _isBoardLocked : Boolean = false;
 	private var _pieceSettings : PieceSettingsVO;
 	private var _cachedFields : ChessboardFieldCollection;
+	private var _hasMoveHints : Boolean = false;
 
 	public function ChessboardMediator( viewComponent : Chessboard ) {
 		super( NAME, viewComponent );
@@ -266,11 +267,11 @@ public class ChessboardMediator extends Mediator
 			return;
 		}
 
-		// TODO: switching selector doesnt work
-		f.styleName = CSS_SELECTOR_FIELD_MOVE_HINT;
-
 		// dynamic font size, depends from piece settings
 		f.setStyle( "fontSize", this._pieceSettings.fontSizeCssValue );
+		f.styleName = CSS_SELECTOR_FIELD_MOVE_HINT;
+
+		this._hasMoveHints = true;
 	}
 
 	private function removeAllMoveHints() : void {
@@ -286,6 +287,8 @@ public class ChessboardMediator extends Mediator
 			vo = f.data as ChessboardFieldVO;
 			f.styleName = vo.isWhite ? CSS_SELECTOR_FIELD_WHITE : CSS_SELECTOR_FIELD_BLACK;
 		}
+
+		this._hasMoveHints = false;
 	}
 
 	private function showMoveHints( field : ChessboardField, piece : IPiece ) : void {
@@ -452,11 +455,15 @@ public class ChessboardMediator extends Mediator
 
 	private function onMouseMove( e : MouseEvent ) : void {
 		if ( e.target is Text ) { this.prepareDrag( e ); }
+		if ( ! DragManager.isDragging && this._hasMoveHints ) {
+			this.removeAllMoveHints();
+		}
 	}
 
 
 
 	private function onMouseUp( e : MouseEvent ) : void {
+		// TODO: MOUSE_UP event is not triggering when dragging is started before
 		this.removeAllMoveHints();
 	}
 
@@ -492,9 +499,8 @@ public class ChessboardMediator extends Mediator
 				DragManager.acceptDragDrop( f );
 				//trace( "onDragEnter: " + f.id );
 			} else if ( ! ( e.target is Text ) && ( e.target is VBox && e.target.id.indexOf( "board" ) > 0 ) )  {
+				// dragging is inside the board
 				this.removeAllMoveHints();
-			} else {
-				trace( "whats this?" );
 			}
 
 		}
