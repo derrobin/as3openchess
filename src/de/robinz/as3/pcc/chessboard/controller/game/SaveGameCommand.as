@@ -2,7 +2,7 @@ package de.robinz.as3.pcc.chessboard.controller.game
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
-import de.robinz.as3.pcc.chessboard.library.ChessboardGame;
+import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import de.robinz.as3.pcc.chessboard.model.GameProxy;
 import de.robinz.as3.pcc.chessboard.model.SaveGameProxy;
 import de.robinz.as3.pcc.chessboard.view.ApplicationMediator;
@@ -30,8 +30,8 @@ public class SaveGameCommand extends BaseCommand
 			}
 			this.showSaveGameDialog();
 		}
-		if ( n.getBody() is ChessboardGame ) {
-			this.saveGame( n.getBody() as ChessboardGame );
+		if ( n.getBody() is ChessboardGameVO ) {
+			this.saveGame( n.getBody() as ChessboardGameVO );
 		}
 	}
 
@@ -40,7 +40,7 @@ public class SaveGameCommand extends BaseCommand
 
 	// Start Innerclass Methods
 
-	private function saveGame( cg : ChessboardGame ) : void {
+	private function saveGame( cg : ChessboardGameVO ) : void {
 		saveGameProxy.save( cg );
 		sendNotification( ApplicationFacade.DISAPPEAR_PANEL_SAVE_GAME );
 	}
@@ -50,7 +50,7 @@ public class SaveGameCommand extends BaseCommand
 			this.facade.registerMediator( new SaveGameDialogMediator( appMediator.app ) );
 		}
 
-		var game : ChessboardGame = this.gameProxy.getCurrentGame();
+		var game : ChessboardGameVO = this.gameProxy.getCurrentGame();
 
 		if ( game.name == null ) {
 			game.name = this.saveGameProxy.getDefaultName();

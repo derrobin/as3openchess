@@ -1,7 +1,8 @@
 package de.robinz.as3.pcc.chessboard.model
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
-import de.robinz.as3.pcc.chessboard.library.ChessboardGame;
+import de.robinz.as3.pcc.chessboard.library.Player;
+import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import de.robinz.as3.pcc.chessboard.library.Notation;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMoveCollection;
@@ -18,13 +19,16 @@ public class GameProxy extends BaseProxy
 {
 	public static const NAME : String = "GameProxy";
 
-	private var _game : ChessboardGame;
+	private var _game : ChessboardGameVO;
+	private var _currentPlayer : Player;
 	private var _currentMove : int;
+	private var _white : Player;
+	private var _black : Player;
 
 	public function GameProxy( data : Object = null ) {
 		super( NAME, data );
 
-		this._game = new ChessboardGame();
+		this._game = new ChessboardGameVO();
 		this._currentMove = 0;
 	}
 
@@ -65,8 +69,15 @@ public class GameProxy extends BaseProxy
 		return 0;
 	}
 
+	public function start( white : Player, black : Player ) : void {
+		this._white = white;
+		this._black = black;
+
+		this._currentPlayer = white;
+	}
+
 	public function reset() : void {
-		this._game = new ChessboardGame();
+		this._game = new ChessboardGameVO();
 		this._currentMove = 0;
 	}
 
@@ -97,10 +108,12 @@ public class GameProxy extends BaseProxy
 
 		this._currentMove++;
 		this._game.moves.add( m );
+		this._currentPlayer = this._currentPlayer.isWhite ? this._black : this._white;
 	}
 
-	public function getCurrentGame() : ChessboardGame {
+	public function getCurrentGame() : ChessboardGameVO {
 		this._game.currentMove = this._currentMove;
+		this._game.currentPlayer = this._currentPlayer;
 		this._game.isLastMove = this._currentMove == this._game.moves.length
 			? true
 			: false;

@@ -14,6 +14,7 @@ import mx.logging.ILogger;
 import mx.logging.Log;
 
 import org.puremvc.as3.interfaces.INotification;
+import org.puremvc.as3.interfaces.INotifier;
 import org.puremvc.as3.patterns.command.SimpleCommand;
 
 /**
@@ -21,7 +22,7 @@ import org.puremvc.as3.patterns.command.SimpleCommand;
  *
  * @author robin heinel
  */
-public class BaseCommand extends SimpleCommand
+public class BaseCommand extends SimpleCommand implements INotifier
 {
 	protected var log : ILogger = LoggerFactory.getLogger( this );
 
@@ -39,6 +40,7 @@ public class BaseCommand extends SimpleCommand
 		}
 
 	}
+
 
 	// End SimpleCommand overrides
 

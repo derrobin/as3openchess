@@ -1,7 +1,7 @@
 package de.robinz.as3.pcc.chessboard.view
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
-import de.robinz.as3.pcc.chessboard.library.ChessboardGame;
+import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import de.robinz.as3.pcc.chessboard.library.vo.SaveGameDialogVO;
 import de.robinz.as3.pcc.chessboard.view.views.game.SaveGameDialog;
 
@@ -22,7 +22,7 @@ public class SaveGameDialogMediator extends DialogBaseMediator
 {
 	public static const NAME : String = "SaveGameDialogMediator";
 
-	private var _game : ChessboardGame;
+	private var _game : ChessboardGameVO;
 	private var _data : SaveGameDialogVO;
 
 	public function SaveGameDialogMediator( viewStage : DisplayObject ) {
@@ -54,7 +54,7 @@ public class SaveGameDialogMediator extends DialogBaseMediator
 		this.popup.gameStoredAt.text = this._data.dateStored.toUTCString();
 	}
 
-	private function setGame( game : ChessboardGame ) : void {
+	private function setGame( game : ChessboardGameVO ) : void {
 		this._game = game;
 
 		this._data.name = String( game.name );
@@ -87,7 +87,7 @@ public class SaveGameDialogMediator extends DialogBaseMediator
 				this.handleDisappearPanelSaveGame();
 			break;
 			case ApplicationFacade.SET_SAVE_GAME:
-				this.handleSetSaveGame( n.getBody() as ChessboardGame );
+				this.handleSetSaveGame( n.getBody() as ChessboardGameVO );
 			break;
 		}
 	}
@@ -106,7 +106,7 @@ public class SaveGameDialogMediator extends DialogBaseMediator
 		this.facade.removeMediator( NAME );
 	}
 
-	private function handleSetSaveGame( game : ChessboardGame ) : void {
+	private function handleSetSaveGame( game : ChessboardGameVO ) : void {
 		this.setGame( game );
 	}
 

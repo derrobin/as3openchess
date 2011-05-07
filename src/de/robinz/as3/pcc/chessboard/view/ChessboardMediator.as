@@ -6,6 +6,7 @@ import de.robinz.as3.pcc.chessboard.library.FontManager;
 import de.robinz.as3.pcc.chessboard.library.Notation;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
+import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 import de.robinz.as3.pcc.chessboard.view.views.Chessboard;
 import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardField;
@@ -28,6 +29,8 @@ import mx.core.DragSource;
 import mx.events.DragEvent;
 import mx.managers.DragManager;
 
+import mx.utils.object_proxy;
+
 import org.puremvc.as3.interfaces.INotification;
 import org.puremvc.as3.patterns.mediator.Mediator;
 
@@ -45,6 +48,8 @@ public class ChessboardMediator extends Mediator
 	public static const CSS_SELECTOR_FIELD_WHITE : String = "fieldWhite";
 	public static const CSS_SELECTOR_FIELD_BLACK : String = "fieldBlack";
 	public static const CSS_SELECTOR_FIELD_MOVE_HINT : String = "fieldMoveHint";
+
+	private var _game : ChessboardGameVO;
 
 	private var _isBoardInspectMode : Boolean = false;
 	private var _isBoardLocked : Boolean = false;
@@ -332,6 +337,7 @@ public class ChessboardMediator extends Mediator
 
 	public override function listNotificationInterests() : Array {
 		return [
+			ApplicationFacade.GAME_STARTED,
 			ApplicationFacade.FIELD_HINT,
 			ApplicationFacade.REMOVE_ALL_FIELD_HINTS,
 			ApplicationFacade.LOCK_BOARD,
@@ -348,6 +354,9 @@ public class ChessboardMediator extends Mediator
 
 	public override function handleNotification( n : INotification ) : void {
 		switch( n.getName() ) {
+			case ApplicationFacade.GAME_STARTED:
+				this.handleGameStarted( n.getBody() as ChessboardGameVO );
+			break;
 			case ApplicationFacade.FIELD_HINT:
 				this.handleFieldHint( n.getBody() as String );
 			break;
@@ -388,6 +397,10 @@ public class ChessboardMediator extends Mediator
 
 
 	// Start Notification Handlers
+
+	private function handleGameStarted( game : ChessboardGameVO ) : void {
+		this._game = game;
+	}
 
 	private function handleFieldHint( notation : String ) : void {
 		this.markMoveHint( notation );
@@ -441,7 +454,10 @@ public class ChessboardMediator extends Mediator
 		var fromText : Text = fromBox.getChildAt( 0 ) as Text;
 		var toBox : Box = this.getField( m.toPosition.toString() );
 
+		// TODO: remove timeout later on refactoring ( otherwise move hinting fields are flickering )
 		setTimeout( function() : void { toBox.addChild( fromText ); }, 200 );
+
+		this._game = m.game;
 	}
 
 	// End Notification Handlers
@@ -450,10 +466,19 @@ public class ChessboardMediator extends Mediator
 	// Start Event Handlers
 
 	private function onMouseMove( e : MouseEvent ) : void {
-		if ( e.target is Text ) { this.prepareDrag( e ); }
-		if ( ! DragManager.isDragging && this._hasMoveHints ) {
-			this.removeAllMoveHints();
+		var p : IPiece = __getPiece( e.target );
+
+		if ( p != null ) {
+			if ( this._game.currentPlayer.isWhite != p.isWhite ) {
+				return;
+			}
+			this.prepareDrag( e );
+
+			if ( ! DragManager.isDragging && this._hasMoveHints ) {
+				this.removeAllMoveHints();
+			}
 		}
+
 	}
 
 
@@ -464,8 +489,8 @@ public class ChessboardMediator extends Mediator
 	}
 
 	private function prepareDrag( e : MouseEvent ) : void {
-		var di : Text = Text( e.target );
-		var piece : IPiece = di.data as IPiece;
+		var t : Text = e.target as Text;
+		var piece : IPiece = t.data as IPiece;
 
 		if ( piece == null ) {
 			return;
@@ -474,16 +499,22 @@ public class ChessboardMediator extends Mediator
 		var fm : FontManager = FontManager.getInstance();
 		var ds : DragSource = new DragSource();
 
-		ds.addData( di, "piece" );
+		ds.addData( t, "piece" );
 
-		DragManager.doDrag( di, ds, e /* , fm.convertTextToFlexImage( piece.fontKey ) */ );
+		DragManager.doDrag( t, ds, e /* , fm.convertTextToFlexImage( piece.fontKey ) */ );
 	}
 
 	private function onMouseDown( e : MouseEvent ) : void {
 		if ( e.target is Text && ( e.target as Text ).parent is ChessboardField ) {
-			var p : IPiece = ( e.target as Text ).data as IPiece;
-			var f : ChessboardField = ( e.target as Text ).parent as ChessboardField;
-			//this.prepareDrag( e );
+			var t : Text = e.target as Text;
+			var p : IPiece = t.data as IPiece;
+
+			if ( this._game.currentPlayer.isWhite != p.isWhite ) {
+				return;
+			}
+
+			var f : ChessboardField = t.parent as ChessboardField;
+
 			this.showMoveHints( f, p );
 		}
 	}
@@ -560,5 +591,23 @@ public class ChessboardMediator extends Mediator
 	}
 
 	// End Getter / Setters
+
+
+	// Start internal class getters
+
+	private function __getPiece( o : Object ) : IPiece {
+		if ( o is Text ) {
+			var t : Text = o as Text;
+			if ( t.data is IPiece ) {
+				var p : IPiece = t.data as IPiece;
+				return p;
+			}
+		}
+
+		return null;
+	}
+
+	// End internal class getters
+
 }
 }

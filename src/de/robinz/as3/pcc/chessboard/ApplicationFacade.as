@@ -62,6 +62,7 @@ public class ApplicationFacade extends Facade
 	public static const RESTORE_PIECE : String = "restorePiece";
 	public static const REMOVE_ALL_PIECES : String = "removeAllPieces";
 
+	public static const GAME_STARTED : String = "gameStarted";
 	public static const NEW_GAME : String = "newGame";
 	public static const SAVE_GAME : String = "saveGame";
 	public static const SHOW_SAVE_GAMES : String = "showSaveGames";

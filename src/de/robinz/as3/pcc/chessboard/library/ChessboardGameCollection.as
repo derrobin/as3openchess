@@ -1,5 +1,7 @@
 package de.robinz.as3.pcc.chessboard.library
 {
+import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
+
 import flash.utils.Dictionary;
 
 import mx.collections.ArrayCollection;
@@ -25,7 +27,7 @@ public class ChessboardGameCollection
 
 	public function list() : ArrayCollection {
 		var list : ArrayCollection = new ArrayCollection();
-		var o : ChessboardGame;
+		var o : ChessboardGameVO;
 		for each( o in this._collection ) {
 			list.addItem( o );
 		}
@@ -36,7 +38,7 @@ public class ChessboardGameCollection
 		return this._collection[ gameName ] != null;
 	}
 
-	public function modify( game : ChessboardGame ) : Boolean {
+	public function modify( game : ChessboardGameVO ) : Boolean {
 		if ( ! this.has( game.name ) ) {
 			return false;
 		}
@@ -45,7 +47,7 @@ public class ChessboardGameCollection
 		return true;
 	}
 
-	public function add( game : ChessboardGame ) : Boolean {
+	public function add( game : ChessboardGameVO ) : Boolean {
 		if ( this.has( game.name ) ) {
 			return false;
 		}

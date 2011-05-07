@@ -5,6 +5,8 @@ import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 import de.robinz.as3.pcc.chessboard.model.GameProxy;
 
+import flash.sampler._getInvocationCount;
+
 import org.puremvc.as3.interfaces.INotification;
 import org.puremvc.as3.patterns.command.SimpleCommand;
 
@@ -44,6 +46,8 @@ public class MoveCommand extends BaseCommand
 		} else {
 			sendNotification( ApplicationFacade.LOCK_BOARD );
 		}
+
+		log.debug( "next player: {0} ( {1} )", m.game.currentPlayer.name, m.game.currentPlayer.isWhite ? "white" : "black" );
 	}
 
 	// End Innerclass Methods

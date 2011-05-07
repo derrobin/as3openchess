@@ -2,7 +2,7 @@ package de.robinz.as3.pcc.chessboard.controller.game
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
-import de.robinz.as3.pcc.chessboard.library.ChessboardGame;
+import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 
 import org.puremvc.as3.interfaces.INotification;
@@ -20,8 +20,8 @@ public class LoadGameCommand extends BaseCommand
 	public override function execute( n : INotification ) : void {
 		super.execute( n );
 
-		if ( n.getBody() is ChessboardGame ) {
-			this.loadGame( n.getBody() as ChessboardGame );
+		if ( n.getBody() is ChessboardGameVO ) {
+			this.loadGame( n.getBody() as ChessboardGameVO );
 		}
 	}
 
@@ -30,7 +30,7 @@ public class LoadGameCommand extends BaseCommand
 
 	// Start Innerclass Methods
 
-	private function loadGame( game : ChessboardGame ) : void {
+	private function loadGame( game : ChessboardGameVO ) : void {
 		sendNotification( ApplicationFacade.NEW_GAME );
 
 		var move : ChessboardMove;

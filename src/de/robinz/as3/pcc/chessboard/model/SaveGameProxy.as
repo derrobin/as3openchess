@@ -1,6 +1,6 @@
 package de.robinz.as3.pcc.chessboard.model
 {
-import de.robinz.as3.pcc.chessboard.library.ChessboardGame;
+import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import de.robinz.as3.pcc.chessboard.library.ChessboardGameCollection;
 
 import flash.utils.Dictionary;
@@ -56,7 +56,7 @@ public class SaveGameProxy extends BaseProxy
 		return this._games;
 	}
 
-	public function save( game : ChessboardGame ) : void {
+	public function save( game : ChessboardGameVO ) : void {
 		if ( this._games.modify( game ) ) {
 			return;
 		}

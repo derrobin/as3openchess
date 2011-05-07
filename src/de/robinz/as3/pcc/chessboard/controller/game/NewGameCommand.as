@@ -2,6 +2,7 @@ package de.robinz.as3.pcc.chessboard.controller.game
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
+import de.robinz.as3.pcc.chessboard.library.Player;
 import de.robinz.as3.pcc.chessboard.library.pieces.Bishop;
 import de.robinz.as3.pcc.chessboard.library.pieces.King;
 import de.robinz.as3.pcc.chessboard.library.pieces.Knight;
@@ -31,6 +32,13 @@ public class NewGameCommand extends BaseCommand
 
 		this.setDefaultPieces();
 		this.gameProxy.reset();
+
+		this.gameProxy.start(
+				new Player( "White", true ),
+				new Player( "Black" )
+		);
+
+		sendNotification( ApplicationFacade.GAME_STARTED, gameProxy.getCurrentGame() );
 	}
 
 	// End SimpleCommand overrides

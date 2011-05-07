@@ -1,7 +1,7 @@
 package de.robinz.as3.pcc.chessboard.view
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
-import de.robinz.as3.pcc.chessboard.library.ChessboardGame;
+import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import de.robinz.as3.pcc.chessboard.library.ChessboardGameCollection;
 import de.robinz.as3.pcc.chessboard.view.views.game.ShowSaveGamesDialog;
 
@@ -103,7 +103,7 @@ public class ShowSaveGamesDialogMediator extends DialogBaseMediator
 	}
 
 	private function onLoadGame( e : Event ) : void {
-		var game : ChessboardGame = this.view.games.selectedItem as ChessboardGame;
+		var game : ChessboardGameVO = this.view.games.selectedItem as ChessboardGameVO;
 		sendNotification( ApplicationFacade.LOAD_GAME, game );
 	}
 
