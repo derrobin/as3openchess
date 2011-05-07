@@ -12,7 +12,7 @@ import org.puremvc.as3.patterns.mediator.Mediator;
  *
  * @author robin heinel
  */
-public class MenubarMediator extends Mediator
+public class MenubarMediator extends BaseMediator
 {
 	public static const NAME : String = "MenubarMediator";
 

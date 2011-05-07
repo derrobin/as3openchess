@@ -39,7 +39,7 @@ import org.puremvc.as3.patterns.mediator.Mediator;
  *
  * @author robin heinel
  */
-public class ChessboardMediator extends Mediator
+public class ChessboardMediator extends BaseMediator
 {
 	public static const NAME : String = "ChessboardMediator";
 
@@ -524,7 +524,7 @@ public class ChessboardMediator extends Mediator
 			if ( e.target is ChessboardField ) {
 				var f : ChessboardField = e.target as ChessboardField;
 				DragManager.acceptDragDrop( f );
-				//trace( "onDragEnter: " + f.id );
+				log.debug( "onDragEnter: {0}", f.id );
 			} else if ( ! ( e.target is Text ) && ( e.target is VBox && e.target.id.indexOf( "board" ) > 0 ) )  {
 				// dragging is inside the board
 				this.removeAllMoveHints();

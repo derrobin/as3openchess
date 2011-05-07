@@ -16,7 +16,7 @@ import org.puremvc.as3.patterns.mediator.Mediator;
  *
  * @author robin heinel
  */
-public class TakenPiecesMediator extends Mediator
+public class TakenPiecesMediator extends BaseMediator
 {
 	public static const NAME : String = "TakenPiecesMediator";
 

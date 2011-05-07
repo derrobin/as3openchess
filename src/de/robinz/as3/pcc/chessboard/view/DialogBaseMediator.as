@@ -14,7 +14,7 @@ import org.puremvc.as3.patterns.mediator.Mediator;
  *
  * @author robin heinel
  */
-public class DialogBaseMediator extends Mediator
+public class DialogBaseMediator extends BaseMediator
 {
 	protected var _popup : Container;
 

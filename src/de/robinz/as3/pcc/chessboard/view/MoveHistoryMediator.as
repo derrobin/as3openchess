@@ -17,7 +17,7 @@ import org.puremvc.as3.patterns.mediator.Mediator;
  *
  * @author robin heinel
  */
-public class MoveHistoryMediator extends Mediator
+public class MoveHistoryMediator extends BaseMediator
 {
 	public static const NAME : String = "MoveHistoryMediator";
 

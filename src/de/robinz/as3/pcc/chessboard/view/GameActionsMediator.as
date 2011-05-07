@@ -11,7 +11,7 @@ import org.puremvc.as3.interfaces.INotification;
  *
  * @author robin heinel
  */
-public class GameActionsMediator extends DialogBaseMediator
+public class GameActionsMediator extends BaseMediator
 {
 	public static const NAME : String = "GameActionsMediator";
 

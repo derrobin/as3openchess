@@ -24,7 +24,7 @@ import org.puremvc.as3.patterns.mediator.Mediator;
  *
  * @author robin heinel
  */
-public class ApplicationMediator extends Mediator
+public class ApplicationMediator extends BaseMediator
 {
 	public static const UNIT_TESTS : Boolean = false;
 	public static const NAME : String = "ApplicationMediator";
