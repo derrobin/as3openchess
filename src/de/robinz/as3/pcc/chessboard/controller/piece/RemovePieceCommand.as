@@ -1,5 +1,6 @@
 package de.robinz.as3.pcc.chessboard.controller.piece
 {
+import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
 import de.robinz.as3.pcc.chessboard.view.ApplicationMediator;
 import de.robinz.as3.pcc.chessboard.view.TakenPiecesMediator;
 
@@ -11,11 +12,13 @@ import org.puremvc.as3.patterns.command.SimpleCommand;
  *
  * @author robin heinel
  */
-public class RemovePieceCommand extends SimpleCommand
+public class RemovePieceCommand extends BaseCommand
 {
 	// Start SimpleCommand overrides
 
 	public override function execute( n : INotification ) : void {
+		super.execute( n );
+
 	}
 
 	// End SimpleCommand overrides

@@ -14,10 +14,12 @@ import org.puremvc.as3.patterns.command.SimpleCommand;
  *
  * @author robin heinel
  */
-public class InitCommand extends SimpleCommand {
+public class InitCommand extends BaseCommand {
 	// Start SimpleCommand overrides
 
-	public override function execute( note:INotification ):void {
+	public override function execute( n : INotification ):void {
+		super.execute( n );
+
 		sendNotification( ApplicationFacade.CHANGE_PIECE_SETTINGS, this.fontProxy.getPieceSettings() );
 		sendNotification( ApplicationFacade.NEW_GAME );
 		sendNotification( ApplicationFacade.APPEAR_MOVE_HISTORY_PANEL );

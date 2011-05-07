@@ -1,6 +1,7 @@
 package de.robinz.as3.pcc.chessboard.controller.game
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
+import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
 import de.robinz.as3.pcc.chessboard.library.ChessboardGame;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 
@@ -12,11 +13,13 @@ import org.puremvc.as3.patterns.command.SimpleCommand;
  *
  * @author robin heinel
  */
-public class LoadGameCommand extends SimpleCommand
+public class LoadGameCommand extends BaseCommand
 {
 	// Start SimpleCommand overrides
 
 	public override function execute( n : INotification ) : void {
+		super.execute( n );
+
 		if ( n.getBody() is ChessboardGame ) {
 			this.loadGame( n.getBody() as ChessboardGame );
 		}

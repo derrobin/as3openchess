@@ -1,6 +1,7 @@
 package de.robinz.as3.pcc.chessboard.controller.move.history
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
+import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 import de.robinz.as3.pcc.chessboard.model.GameProxy;
 
@@ -12,11 +13,13 @@ import org.puremvc.as3.patterns.command.SimpleCommand;
  *
  * @author robin heinel
  */
-public class MoveForwardCommand extends SimpleCommand
+public class MoveForwardCommand extends BaseCommand
 {
 	// Start SimpleCommand overrides
 
 	public override function execute( n : INotification ) : void {
+		super.execute( n );
+
 		this.forward();
 	}
 

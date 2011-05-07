@@ -8,7 +8,6 @@ import de.robinz.as3.pcc.chessboard.controller.game.GetCurrentGameCommand;
 import de.robinz.as3.pcc.chessboard.controller.game.LoadGameCommand;
 import de.robinz.as3.pcc.chessboard.controller.game.NewGameCommand;
 import de.robinz.as3.pcc.chessboard.controller.game.SaveGameCommand;
-import de.robinz.as3.pcc.chessboard.controller.game.ShowPieceMoveHintsCommand;
 import de.robinz.as3.pcc.chessboard.controller.game.ShowSaveGamesCommand;
 import de.robinz.as3.pcc.chessboard.controller.move.MoveCommand;
 import de.robinz.as3.pcc.chessboard.controller.move.TryToMoveCommand;
@@ -32,14 +31,14 @@ import org.puremvc.as3.patterns.facade.Facade;
 public class ApplicationFacade extends Facade
 {
 	// for global application
-	public static const STARTUP : String 	= "startup";
+	public static const STARTUP : String = "startup";
 	public static const ERROR : String = "error";
 	public static const INFO : String = "info";
 
 	// TODO: rename it to set piece settings
 	public static const SET_FONT_SETTINGS : String = "setFontSettings";
 
-	public static const TRY_TO_MOVE : String = "toToMove";
+	public static const TRY_TO_MOVE : String = "tryToMove";
 	public static const REJECT_MOVE : String = "rejectMove";
 	public static const GET_MOVES : String = "getMoves";
 	public static const MOVE : String = "move";
@@ -158,8 +157,6 @@ public class ApplicationFacade extends Facade
 		registerCommand( CHANGE_PIECE_SETTINGS, ChangePieceSettingsCommand );
 
 		registerCommand( REMOVE_PIECE, RemovePieceCommand );
-
-		registerCommand( SHOW_PIECE_MOVE_HINTS, ShowPieceMoveHintsCommand );
 	}
 
 	public function startup( app : mainapp ) : void {

@@ -15,11 +15,13 @@ import org.puremvc.as3.patterns.command.SimpleCommand;
  *
  * @author robin heinel
  */
-public class ShowAllFontKeysOnChessboardCommand extends SimpleCommand
+public class ShowAllFontKeysOnChessboardCommand extends BaseCommand
 {
 	// Start SimpleCommand overrides
 
 	public override function execute( n : INotification ) : void {
+		super.execute( n );
+
 		sendNotification( ApplicationFacade.REMOVE_ALL_PIECES );
 		sendNotification( ApplicationFacade.ENABLE_BOARD_INSPECT_PIECE_MODE );
 

@@ -1,6 +1,7 @@
 package de.robinz.as3.pcc.chessboard.controller.move
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
+import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 import de.robinz.as3.pcc.chessboard.model.GameProxy;
 
@@ -12,11 +13,13 @@ import org.puremvc.as3.patterns.command.SimpleCommand;
  *
  * @author robin heinel
  */
-public class MoveCommand extends SimpleCommand
+public class MoveCommand extends BaseCommand
 {
 	// Start SimpleCommand overrides
 
 	public override function execute( n : INotification ) : void {
+		super.execute( n );
+
 		if ( n.getBody() is ChessboardMove ) {
 			this.move( n.getBody() as ChessboardMove );
 		}

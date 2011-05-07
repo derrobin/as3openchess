@@ -10,11 +10,13 @@ import org.puremvc.as3.patterns.command.SimpleCommand;
  *
  * @author robin heinel
  */
-public class ErrorCommand extends SimpleCommand
+public class ErrorCommand extends BaseCommand
 {
 	// Start SimpleCommand overrides
 
 	public override function execute( n : INotification ) : void {
+		super.execute( n );
+
 		if ( n.getBody() is Error ) {
 			this.showError( n.getBody() as Error );
 		}

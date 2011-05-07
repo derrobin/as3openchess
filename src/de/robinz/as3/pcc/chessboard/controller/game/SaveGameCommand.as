@@ -1,6 +1,7 @@
 package de.robinz.as3.pcc.chessboard.controller.game
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
+import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
 import de.robinz.as3.pcc.chessboard.library.ChessboardGame;
 import de.robinz.as3.pcc.chessboard.model.GameProxy;
 import de.robinz.as3.pcc.chessboard.model.SaveGameProxy;
@@ -15,11 +16,13 @@ import org.puremvc.as3.patterns.command.SimpleCommand;
  *
  * @author robin heinel
  */
-public class SaveGameCommand extends SimpleCommand
+public class SaveGameCommand extends BaseCommand
 {
 	// Start SimpleCommand overrides
 
 	public override function execute( n : INotification ) : void {
+		super.execute( n );
+
 		if ( n.getBody() == null ) {
 			if ( this.gameProxy.getCurrentGame().moves.length == 0 ) {
 				sendNotification( ApplicationFacade.INFO, "Keine Spielzüge vorhanden." );

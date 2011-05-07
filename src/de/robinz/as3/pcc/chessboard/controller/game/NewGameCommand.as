@@ -1,6 +1,7 @@
 package de.robinz.as3.pcc.chessboard.controller.game
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
+import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
 import de.robinz.as3.pcc.chessboard.library.pieces.Bishop;
 import de.robinz.as3.pcc.chessboard.library.pieces.King;
 import de.robinz.as3.pcc.chessboard.library.pieces.Knight;
@@ -17,11 +18,13 @@ import org.puremvc.as3.patterns.command.SimpleCommand;
  *
  * @author robin heinel
  */
-public class NewGameCommand extends SimpleCommand
+public class NewGameCommand extends BaseCommand
 {
 	// Start SimpleCommand overrides
 
 	public override function execute( n : INotification ) : void {
+		super.execute( n );
+
 		sendNotification( ApplicationFacade.REMOVE_ALL_PIECES );
 		sendNotification( ApplicationFacade.DISABLE_BOARD_INSPECT_PIECE_MODE );
 		sendNotification( ApplicationFacade.UNLOCK_BOARD );

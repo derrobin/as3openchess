@@ -19,8 +19,10 @@ public class PrepareViewCommand extends SimpleCommand
 {
 	// Start SimpleCommand overrides
 
-	public override function execute( note : INotification ) : void {
-		var app : mainapp = note.getBody() as mainapp;
+	public override function execute( n : INotification ) : void {
+		super.execute( n );
+
+		var app : mainapp = n.getBody() as mainapp;
 
 		facade.registerMediator( new ApplicationMediator( app ) );
 		facade.registerMediator( new ChessboardMediator( app.applicationView.chessboard ) );

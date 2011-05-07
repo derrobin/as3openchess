@@ -1,6 +1,7 @@
 package de.robinz.as3.pcc.chessboard.controller.ui
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
+import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
 import de.robinz.as3.pcc.chessboard.model.ApplicationProxy;
 import de.robinz.as3.pcc.chessboard.view.ApplicationMediator;
 import de.robinz.as3.pcc.chessboard.view.GameActionsMediator;
@@ -17,11 +18,13 @@ import org.puremvc.as3.patterns.command.SimpleCommand;
  *
  * @author robin heinel
  */
-public class PanelActionCommand extends SimpleCommand
+public class PanelActionCommand extends BaseCommand
 {
 	// Start SimpleCommand overrides
 
 	public override function execute( n : INotification ) : void {
+		super.execute( n );
+
 		switch ( n.getName() ) {
 			case ApplicationFacade.APPEAR_GAME_ACTIONS_PANEL:
 				this.appearGameActionsPanel();

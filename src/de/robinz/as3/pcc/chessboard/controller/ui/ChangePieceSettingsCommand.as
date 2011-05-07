@@ -1,5 +1,6 @@
 package de.robinz.as3.pcc.chessboard.controller.ui
 {
+import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
 import de.robinz.as3.pcc.chessboard.library.FontManager;
 import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 import de.robinz.as3.pcc.chessboard.model.FontProxy;
@@ -16,11 +17,13 @@ import org.puremvc.as3.patterns.command.SimpleCommand;
  *
  * @author robin heinel
  */
-public class ChangePieceSettingsCommand extends SimpleCommand
+public class ChangePieceSettingsCommand extends BaseCommand
 {
 	// Start SimpleCommand overrides
 
 	public override function execute( n : INotification ) : void {
+		super.execute( n );
+
 		if ( n.getBody() is PieceSettingsVO ) {
 			this.changePieceSettings( n.getBody() as PieceSettingsVO );
 		}
