@@ -13,13 +13,11 @@ import org.puremvc.as3.patterns.command.SimpleCommand;
  *
  * @author robin heinel
  */
-public class PrepareModelCommand extends BaseCommand
+public class PrepareModelCommand extends SimpleCommand
 {
 	// Start SimpleCommand overrides
 
 	public override function execute( n : INotification ) : void {
-		super.execute( n );
-
 		facade.registerProxy( new ApplicationProxy() );
 		facade.registerProxy( new GameProxy() );
 		facade.registerProxy( new FontProxy() );
