@@ -16,6 +16,7 @@ import mx.logging.Log;
 import org.puremvc.as3.interfaces.INotification;
 import org.puremvc.as3.interfaces.INotifier;
 import org.puremvc.as3.patterns.command.SimpleCommand;
+import org.puremvc.as3.patterns.observer.Notification;
 
 /**
  * BaseCommand
@@ -30,6 +31,22 @@ public class BaseCommand extends SimpleCommand implements INotifier
 
 	public override function execute( n : INotification ) : void {
 		log.info( "executing.. " );
+	}
+
+	// End SimpleCommand overrides
+
+
+	public override function sendNotification( notificationName : String, body : Object = null, type : String = null ) : void {
+		log.info( "sending notification.." );
+		var n : Notification = new Notification( notificationName );
+		n.setBody( body );
+		n.setType( type )
+		logNotification( n );
+
+		super.sendNotification( notificationName, body, type );
+	}
+
+	private function logNotification( n : INotification ) : void {
 		log.debug( "notification-name: " + n.getName() );
 
 		if ( n.getType() != null ) {
@@ -38,11 +55,7 @@ public class BaseCommand extends SimpleCommand implements INotifier
 		if ( n.getBody() != null ) {
 			log.debug( "body-type: " + getQualifiedClassName( n.getBody() ) );
 		}
-
 	}
-
-
-	// End SimpleCommand overrides
 
 	// Start Getter / Setters
 
