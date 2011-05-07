@@ -23,13 +23,12 @@ application entry point
 
 	<mx:Script>
 		<![CDATA[
-			import org.puremvc.as3.patterns.observer.Notification;
 			import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 
 			private var facade:ApplicationFacade=ApplicationFacade.getInstance();
 
 			private function onCreationComplete():void
-			{
+            {
 				facade.startup(this);
 			}
 

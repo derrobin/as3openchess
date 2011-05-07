@@ -15,20 +15,16 @@ import flash.display.DisplayObject;
 import flash.display.DisplayObjectContainer;
 import flash.events.Event;
 import flash.events.MouseEvent;
-
 import flash.utils.setTimeout;
 
 import mx.collections.ArrayCollection;
 import mx.containers.Box;
-import mx.containers.HBox;
 import mx.containers.VBox;
 import mx.controls.Alert;
 import mx.controls.Spacer;
 import mx.controls.Text;
 import mx.core.Container;
 import mx.core.DragSource;
-import mx.effects.Blur;
-import mx.events.ChildExistenceChangedEvent;
 import mx.events.DragEvent;
 import mx.managers.DragManager;
 

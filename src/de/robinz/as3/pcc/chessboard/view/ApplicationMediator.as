@@ -222,10 +222,10 @@ public class ApplicationMediator extends Mediator
 	// Start Getter / Setters
 
 	protected function get chessboard() : Chessboard {
-		return this.view.chessboard;
+		return this.view[ 'chessboard' ];
 	}
 	protected function get view() : ApplicationView {
-		return this.app.applicationView;
+		return this.app[ 'applicationView' ];
 	}
 	public function get app() : mainapp {
 		return this.viewComponent as mainapp;
