@@ -23,6 +23,8 @@ public class InitCommand extends SimpleCommand {
 		sendNotification( ApplicationFacade.APPEAR_MOVE_HISTORY_PANEL );
 		sendNotification( ApplicationFacade.APPEAR_GAME_ACTIONS_PANEL );
 		sendNotification( ApplicationFacade.APPEAR_TAKEN_PIECES_PANEL );
+
+		this.prepareLogging();
 	}
 
 	// End SimpleCommand overrides
