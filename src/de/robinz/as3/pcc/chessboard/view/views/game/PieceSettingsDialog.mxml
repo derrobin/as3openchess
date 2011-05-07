@@ -12,11 +12,12 @@ PieceSettingsDialog
 
 			public static const EVENT_CHANGE_STYLE : String = "changeStyle";
 			public static const EVENT_CHANGE_SIZE : String = "changeSize";
+            public static const EVENT_CLOSE : String = "close";
 
 
-			/* private function saveGame():void {
-				this.dispatchEvent( new Event( EVENT_SAVE_GAME ) );
-			} */
+			private function close() : void {
+				this.dispatchEvent( new Event( EVENT_CLOSE, true ) );
+			}
 
 		]]>
 	</mx:Script>
@@ -44,7 +45,7 @@ PieceSettingsDialog
 
 	>
 			<mx:Button id="applyChanges" label="Apply Changes"/>
-			<mx:Button id="cancel" label="Cancel" click="PopUpManager.removePopUp(this);" />
+			<mx:Button id="cancel" label="Cancel" click="close();" />
 	</mx:HBox>
 
 	<mx:Spacer height="5" />

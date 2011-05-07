@@ -36,8 +36,6 @@ public class PieceSettingsMediator extends DialogBaseMediator
 
 	public function PieceSettingsMediator( viewStage : mainapp ) {
 		super( NAME, viewStage );
-
-		viewStage.addEventListener( MouseEvent.CLICK, onMouseClick );
 	}
 
 	// Start Mediator overrides ( Notification Delegates excluded, see below )
@@ -105,11 +103,18 @@ public class PieceSettingsMediator extends DialogBaseMediator
 	private function appear() : void {
 		var view : TitleWindow = this.createDialog( "Piece Settings", 450, 325, PieceSettingsDialog, this.stage );
 
-		view.addEventListener( CloseEvent.CLOSE, onPopupClose );
 		view.addEventListener( PieceSettingsDialog.EVENT_CHANGE_STYLE, onChangeStyle );
+		view.addEventListener( MouseEvent.CLICK, onMouseClick );
+		view.addEventListener( PieceSettingsDialog.EVENT_CLOSE, onClose );
+
 
 		this._popup = view as PieceSettingsDialog;
 		this._popup.addEventListener( MouseEvent.CLICK, onMouseClick );
+	}
+
+	private function close() : void {
+		sendNotification( ApplicationFacade.DISAPPEAR_PIECE_SETTINGS );
+		this.disappear();
 	}
 
 	// End Innerclass Methods
@@ -167,9 +172,8 @@ public class PieceSettingsMediator extends DialogBaseMediator
 
 	// Start Event Handlers
 
-	protected function onPopupClose( e : CloseEvent ) : void {
-		sendNotification( ApplicationFacade.DISAPPEAR_PIECE_SETTINGS );
-		this.disappear();
+	private function onClose( e : Event ) : void {
+		this.close();
 	}
 
 	private function onMouseClick( e : MouseEvent ) : void {

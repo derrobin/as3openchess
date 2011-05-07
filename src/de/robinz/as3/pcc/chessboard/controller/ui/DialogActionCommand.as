@@ -85,7 +85,7 @@ public class DialogActionCommand extends BaseCommand {
 
 	private function closeDialog( mediatorName:String ):void {
 		this.facade.removeMediator( mediatorName );
-		appProxy.closePanel( mediatorName );
+		appProxy.closeDialog( mediatorName );
 	}
 
 	// End Innerclass Methods
