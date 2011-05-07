@@ -2,12 +2,15 @@ package de.robinz.as3.pcc.chessboard.controller.ui
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
+import de.robinz.as3.pcc.chessboard.library.common.LoggerUtil;
 import de.robinz.as3.pcc.chessboard.model.ApplicationProxy;
 import de.robinz.as3.pcc.chessboard.view.ApplicationMediator;
 import de.robinz.as3.pcc.chessboard.view.GameActionsMediator;
 import de.robinz.as3.pcc.chessboard.view.MoveHistoryMediator;
 
 import de.robinz.as3.pcc.chessboard.view.TakenPiecesMediator;
+
+import flash.utils.Dictionary;
 
 import org.puremvc.as3.interfaces.IMediator;
 import org.puremvc.as3.interfaces.INotification;
@@ -56,6 +59,7 @@ public class PanelActionCommand extends BaseCommand
 				this.togglePanel( TakenPiecesMediator.NAME, ApplicationFacade.APPEAR_TAKEN_PIECES_PANEL, ApplicationFacade.DISAPPEAR_TAKEN_PIECES_PANEL );
 			break;
 		}
+
 	}
 
 	// End SimpleCommand overrides
@@ -97,19 +101,13 @@ public class PanelActionCommand extends BaseCommand
 		} else {
 			sendNotification( appearNotification );
 		}
+		log.debug( LoggerUtil.outDictionary( appProxy.getOpenPanels() ) );
 	}
 
 	// End Innerclass Methods
 
 
 	// Start Getter / Setters
-
-	private function get appProxy() : ApplicationProxy {
-		return this.facade.retrieveProxy( ApplicationProxy.NAME ) as ApplicationProxy;
-	}
-	private function get appMediator() : ApplicationMediator {
-		return this.facade.retrieveMediator( ApplicationMediator.NAME ) as ApplicationMediator;
-	}
 
 	// End Getter / Setters
 }

@@ -32,10 +32,6 @@ public class GetCurrentGameCommand extends BaseCommand
 		return this.facade.retrieveProxy( GameProxy.NAME ) as GameProxy;
 	}
 
-	private function get appMediator() : ApplicationMediator {
-		return this.facade.retrieveMediator( ApplicationMediator.NAME ) as ApplicationMediator;
-	}
-
 	// End Getter / Setters
 }
 }

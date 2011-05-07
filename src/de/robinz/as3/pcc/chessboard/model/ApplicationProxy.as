@@ -9,7 +9,7 @@ import org.puremvc.as3.patterns.proxy.Proxy;
  *
  * @author robin heinel
  */
-public class ApplicationProxy extends Proxy
+public class ApplicationProxy extends BaseProxy
 {
 	public static const NAME : String = "ApplicationProxy";
 
@@ -18,6 +18,7 @@ public class ApplicationProxy extends Proxy
 
 	public function ApplicationProxy( data : Object = null ) {
 		super( NAME, data );
+
 		this._openDialogs = new Dictionary( true );
 		this._openPanels = new Dictionary( true );
 	}
@@ -73,6 +74,14 @@ public class ApplicationProxy extends Proxy
 
 
 	// Start Getter / Setters
+
+	public function getOpenDialogs() : Dictionary {
+		return this._openDialogs;
+	}
+
+	public function getOpenPanels() : Dictionary {
+		return this._openPanels;
+	}
 
 	// End Getter / Setters
 }

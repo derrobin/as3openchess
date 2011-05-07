@@ -14,7 +14,7 @@ import org.puremvc.as3.patterns.proxy.Proxy;
  *
  * @author robin heinel
  */
-public class GameProxy extends Proxy
+public class GameProxy extends BaseProxy
 {
 	public static const NAME : String = "GameProxy";
 
@@ -23,6 +23,7 @@ public class GameProxy extends Proxy
 
 	public function GameProxy( data : Object = null ) {
 		super( NAME, data );
+
 		this._game = new ChessboardGame();
 		this._currentMove = 0;
 	}

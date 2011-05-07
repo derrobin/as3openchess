@@ -43,9 +43,6 @@ public class ShowSaveGamesCommand extends BaseCommand
 
 	// Start Getter / Setters
 
-	private function get appMediator() : ApplicationMediator {
-		return this.facade.retrieveMediator( ApplicationMediator.NAME ) as ApplicationMediator;
-	}
 	private function get saveGameProxy() : SaveGameProxy {
 		return this.facade.retrieveProxy( SaveGameProxy.NAME ) as SaveGameProxy;
 	}

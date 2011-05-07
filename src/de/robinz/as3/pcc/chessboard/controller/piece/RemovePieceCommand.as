@@ -31,10 +31,6 @@ public class RemovePieceCommand extends BaseCommand
 
 	// Start Getter / Setters
 
-	private function get appMediator() : ApplicationMediator {
-		return this.facade.retrieveMediator( ApplicationMediator.NAME ) as ApplicationMediator;
-	}
-
 	// End Getter / Setters
 }
 }

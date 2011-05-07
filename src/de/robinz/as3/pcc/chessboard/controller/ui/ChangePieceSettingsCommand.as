@@ -70,10 +70,6 @@ public class ChangePieceSettingsCommand extends BaseCommand
 		return this.facade.retrieveProxy( FontProxy.NAME ) as FontProxy;
 	}
 
-	private function get appMediator() : ApplicationMediator {
-		return this.facade.retrieveMediator( ApplicationMediator.NAME ) as ApplicationMediator;
-	}
-
 	// End Getter / Setters
 }
 }

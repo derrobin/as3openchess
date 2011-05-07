@@ -14,7 +14,7 @@ import org.puremvc.as3.patterns.proxy.Proxy;
  *
  * @author robin heinel
  */
-public class FontProxy extends Proxy
+public class FontProxy extends BaseProxy
 {
 	public static const NAME : String = "FontProxy";
 	public static const FONT_SIZE_BASE : int = 25;
