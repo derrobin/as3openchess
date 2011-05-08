@@ -15,7 +15,6 @@ public class ChessboardMoveCollection extends TypedCollection
 		super( ChessboardMove, COMPARISON_ISA );
 	}
 
-
 	/* Start TypedCollection Standard Methods */
 
 	public function getAt( index : int ) : ChessboardMove {

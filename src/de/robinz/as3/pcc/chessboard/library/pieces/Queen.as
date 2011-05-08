@@ -53,5 +53,13 @@ public class Queen extends Piece implements IPiece
 		return false;
 	}
 
+	public override function get hasAbilityToBeatDiagonal() : Boolean {
+		return true;
+	}
+
+	public override function get hasAbilityToBeatLine() : Boolean {
+		return true;
+	}
+
 }
 }

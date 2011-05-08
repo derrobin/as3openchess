@@ -49,5 +49,9 @@ public class Rook extends Piece implements IPiece
 		return false;
 	}
 
+	public override function get hasAbilityToBeatLine() : Boolean {
+		return true;
+	}
+
 }
 }

@@ -12,6 +12,8 @@ public interface IPiece
 	function get fontKey() : String;
 	function get isWhite() : Boolean;
 	function get notationChar() : String;
+	function get hasAbilityToBeatDiagonal() : Boolean;
+	function get hasAbilityToBeatLine() : Boolean;
 
 	function setWhite() : void;
 	function setBlack() : void;

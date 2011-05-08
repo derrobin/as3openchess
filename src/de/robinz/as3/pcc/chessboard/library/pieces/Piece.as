@@ -96,5 +96,12 @@ public class Piece implements IPiece
 	public function get isWhite() : Boolean {
 		return this._isWhite;
 	}
+
+	public function get hasAbilityToBeatDiagonal() : Boolean {
+		return false;
+	}
+	public function get hasAbilityToBeatLine() : Boolean {
+		return false;
+	}
 }
 }

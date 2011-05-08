@@ -44,5 +44,9 @@ public class Bishop extends Piece implements IPiece
 		return false;
 	}
 
+	public override function get hasAbilityToBeatDiagonal() : Boolean {
+		return true;
+	}
+
 }
 }
