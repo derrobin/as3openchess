@@ -6,7 +6,10 @@ import de.robinz.as3.pcc.chessboard.library.common.ReflectionUtil;
 
 import de.robinz.as3.pcc.chessboard.model.ApplicationProxy;
 
+import de.robinz.as3.pcc.chessboard.model.GameProxy;
 import de.robinz.as3.pcc.chessboard.view.ApplicationMediator;
+
+import de.robinz.as3.pcc.chessboard.view.ChessboardMediator;
 
 import flash.utils.getQualifiedClassName;
 
@@ -65,7 +68,12 @@ public class BaseCommand extends SimpleCommand implements INotifier
 	protected function get appMediator() : ApplicationMediator {
 		return this.facade.retrieveMediator( ApplicationMediator.NAME ) as ApplicationMediator;
 	}
-
+	protected function get gameProxy() : GameProxy {
+		return this.facade.retrieveProxy( GameProxy.NAME ) as GameProxy;
+	}
+	protected function get boardMediator() : ChessboardMediator {
+		return this.facade.retrieveMediator( ChessboardMediator.NAME ) as ChessboardMediator;
+	}
 	// End Getter / Setters
 
 }

@@ -27,6 +27,9 @@ public class MenubarMediator extends BaseMediator
 
 	private function menuSelect( value : String ) : void {
 		switch( value ) {
+			case ChessboardMenubar.MENU_EXPORT_FEN:
+				sendNotification( ApplicationFacade.EXPORT_FEN );
+			break;
 			case ChessboardMenubar.MENU_ENTRY_MEW_GAME:
 				sendNotification( ApplicationFacade.NEW_GAME );
 			break;

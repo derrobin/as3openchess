@@ -1,6 +1,6 @@
 package de.robinz.as3.pcc.chessboard.library.pieces
 {
-import de.robinz.as3.pcc.chessboard.library.Notation;
+import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 
 /**
@@ -34,7 +34,7 @@ public class Queen extends Piece implements IPiece
 			var diffCol : int;
 
 			diffRow = Math.abs( m.toPosition.row - m.fromPosition.row );
-			diffCol = Math.abs( Notation.indexes.getItemIndex( m.fromPosition.column ) - Notation.indexes.getItemIndex( m.toPosition.column ) );
+			diffCol = Math.abs( FieldNotation.indexes.getItemIndex( m.fromPosition.column ) - FieldNotation.indexes.getItemIndex( m.toPosition.column ) );
 
 			if( diffCol == diffRow ) {
 				return true;

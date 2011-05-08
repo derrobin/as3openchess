@@ -70,10 +70,6 @@ public class SaveGameCommand extends BaseCommand
 		return this.facade.retrieveProxy( SaveGameProxy.NAME ) as SaveGameProxy;
 	}
 
-	private function get gameProxy() : GameProxy {
-		return this.facade.retrieveProxy( GameProxy.NAME ) as GameProxy;
-	}
-
 	// End Getter / Setters
 }
 }

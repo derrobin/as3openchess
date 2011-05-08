@@ -3,7 +3,7 @@ package de.robinz.as3.pcc.chessboard.model
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.library.Player;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
-import de.robinz.as3.pcc.chessboard.library.Notation;
+import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMoveCollection;
 import de.robinz.as3.pcc.chessboard.library.pieces.Piece;
@@ -127,7 +127,7 @@ public class GameProxy extends BaseProxy
 		var m : ChessboardMove = new ChessboardMove();
 
 		m.piece = Piece.createByParams( piece, isWhite );
-		m.toPosition = Notation.createNotationByString( shortenNotation );
+		m.toPosition = FieldNotation.createNotationByString( shortenNotation );
 
 		sendNotification( ApplicationFacade.SET_PIECE, m );
 	}

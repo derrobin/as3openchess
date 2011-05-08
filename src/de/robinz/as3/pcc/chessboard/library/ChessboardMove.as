@@ -1,7 +1,7 @@
 package de.robinz.as3.pcc.chessboard.library
 {
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
-import de.robinz.as3.pcc.chessboard.library.Notation;
+import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 
 /**
@@ -13,8 +13,8 @@ import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 public class ChessboardMove
 {
 	public var piece : IPiece;
-	public var fromPosition : Notation;
-	public var toPosition : Notation;
+	public var fromPosition : FieldNotation;
+	public var toPosition : FieldNotation;
 
 	public var beatenPiece : IPiece;
 	public var game : ChessboardGameVO;

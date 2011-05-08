@@ -32,6 +32,7 @@ ChessboardMenubar
 			public static const MENU_ENTRY_REVERT_MOVES : String = "revertMoves";
 
 			public static const MENU_ENTRY_SET_TEST_PIECES : String = "setTestPieces";
+			public static const MENU_EXPORT_FEN : String = "exportFEN";
 
 		]]>
 	</mx:Script>
@@ -79,7 +80,7 @@ full menu:
 -->
 	<mx:MenuBar id="menuBar" labelField="@label">
 		<mx:XMLList>
-			<menuitem label="Chessboard Menu">
+			<menuitem label="Menu">
 				<menuitem label="New Game" data="newGame" />
 				<menuitem type="separator" />
 				<menuitem label="Load Game" data="loadGame" />
@@ -94,6 +95,9 @@ full menu:
 				</menuitem>
 				<menuitem label="Piece Settings.." data="pieceSettings" />
 				<menuitem label="Browse Move History.." data="revertMoves" />
+			</menuitem>
+			<menuitem label="Export">
+				<menuitem label="Position as FEN" data="exportFEN" />
 			</menuitem>
 		</mx:XMLList>
 	</mx:MenuBar>

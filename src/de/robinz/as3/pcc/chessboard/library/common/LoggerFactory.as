@@ -13,8 +13,11 @@ public class LoggerFactory {
 	public function LoggerFactory() {
 	}
 
-	public static function getLogger( instance : Object ) : ILogger {
-		var name : String = getQualifiedClassName( instance );
+	public static function getLogger( instance : Object, useQualifiedClassName : Boolean = true ) : ILogger {
+		var name : String = useQualifiedClassName
+			? getQualifiedClassName( instance )
+			: ReflectionUtil.getQualifiedBaseName( instance );
+
 		name = name.replace( "::", "." );
 		return Log.getLogger( name );
 	}

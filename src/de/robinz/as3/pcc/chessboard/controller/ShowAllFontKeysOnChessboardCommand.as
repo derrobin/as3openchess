@@ -1,7 +1,7 @@
 package de.robinz.as3.pcc.chessboard.controller
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
-import de.robinz.as3.pcc.chessboard.library.Notation;
+import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 import de.robinz.as3.pcc.chessboard.library.pieces.FakedPiece;
 import de.robinz.as3.pcc.chessboard.library.pieces.Piece;
@@ -73,7 +73,7 @@ public class ShowAllFontKeysOnChessboardCommand extends BaseCommand
 		fake.fontKey = fontKey;
 
 		m.piece = fake;
-		m.toPosition = Notation.createNotationByString( shortenNotation );
+		m.toPosition = FieldNotation.createNotationByString( shortenNotation );
 
 		sendNotification( ApplicationFacade.SET_PIECE, m );
 	}
@@ -82,10 +82,6 @@ public class ShowAllFontKeysOnChessboardCommand extends BaseCommand
 
 
 	// Start Getter / Setters
-
-	private function get gameProxy() : GameProxy {
-		return this.facade.retrieveProxy( GameProxy.NAME ) as GameProxy;
-	}
 
 	// End Getter / Setters
 }

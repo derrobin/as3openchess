@@ -3,7 +3,7 @@ package de.robinz.as3.pcc.chessboard.view
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 import de.robinz.as3.pcc.chessboard.library.FontManager;
-import de.robinz.as3.pcc.chessboard.library.Notation;
+import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
@@ -84,7 +84,7 @@ public class ChessboardMediator extends BaseMediator
 		var notation : String;
 		var isWhite : Boolean = true;
 
-		// TODO: encapsulate this algorithm
+		// TODO: encapsulate this algorithm, mb use of ChessboardUtil.getNotationSequence()
 		for( j; j <= 8; j++ ) {
 			isWhite = isWhite ? false : true;
 
@@ -126,7 +126,7 @@ public class ChessboardMediator extends BaseMediator
 		return f;
 	}
 
-	private function removePieceByNotation( n : Notation ) : Boolean {
+	private function removePieceByNotation( n : FieldNotation ) : Boolean {
 		try {
 			var field : ChessboardField = this.getField( n.toString() );
 			field.removeAllChildren();
@@ -194,7 +194,7 @@ public class ChessboardMediator extends BaseMediator
 		}
 	}
 
-	private function getPieceAt( n : Notation ) : IPiece {
+	private function getPieceAt( n : FieldNotation ) : IPiece {
 		var p : IPiece = null;
 
 		try {
@@ -235,7 +235,7 @@ public class ChessboardMediator extends BaseMediator
 	private function refreshPieces() : void {
 		var wl : ArrayCollection = getCurrentPieceWrappers(); // wrapper list
 		var piece : IPiece;
-		var notation : Notation;
+		var notation : FieldNotation;
 		var c : DisplayObjectContainer;
 		var d : DisplayObject;
 		var field : ChessboardField;
@@ -243,14 +243,14 @@ public class ChessboardMediator extends BaseMediator
 		for each( var t : Text in wl ) {
 			piece = t.data as IPiece;
 			field = t.parent as ChessboardField;
-			notation = Notation.createNotationByString( field.id );
+			notation = FieldNotation.createNotationByString( field.id );
 			t.parent.removeChild( t );
 
 			this.setPiece( piece, notation );
 		}
 	}
 
-	private function setPiece( p : IPiece, n : Notation ) : void {
+	private function setPiece( p : IPiece, n : FieldNotation ) : void {
 		var field : Container = this.getField( n.toString() ) as Container;
 		var text : Text = new Text();
 
@@ -299,10 +299,10 @@ public class ChessboardMediator extends BaseMediator
 		var c : String; // char
 		var i : int = 1;
 		var j : int = 1;
-		var notation : Notation;
+		var notation : FieldNotation;
 		var isWhite : Boolean = true;
 		var move : ChessboardMove;
-		var fromPosition : Notation = Notation.createNotationByString( fv.notation );
+		var fromPosition : FieldNotation = FieldNotation.createNotationByString( fv.notation );
 
 		// TODO: encapsulate this algorithm
 		for( j; j <= 8; j++ ) {
@@ -310,11 +310,11 @@ public class ChessboardMediator extends BaseMediator
 
 			for( i; i <= rows.length; i++ ) {
 				c = rows.charAt( i - 1 );
-				notation = Notation.createNotationByString( c + j.toString() );
+				notation = FieldNotation.createNotationByString( c + j.toString() );
 
 				move = new ChessboardMove();
 				move.fromPosition = fromPosition;
-				move.toPosition = Notation.createNotationByString( notation.toString() );
+				move.toPosition = FieldNotation.createNotationByString( notation.toString() );
 				move.beatenPiece = this.getPieceAt( notation );
 				move.piece = piece;
 
@@ -331,6 +331,15 @@ public class ChessboardMediator extends BaseMediator
 	}
 
 	// End Innerclass Methods
+
+
+	// Start Object Methods
+
+	public function getBoardFields() : ChessboardFieldCollection {
+		return this.getFields();
+	}
+
+	// End Object Methods
 
 
 	// Start Notification Delegates
@@ -443,7 +452,7 @@ public class ChessboardMediator extends BaseMediator
 	}
 
 	private function handleSetPiece( m : ChessboardMove ) : void {
-		var n : Notation = m.toPosition;
+		var n : FieldNotation = m.toPosition;
 		var p : IPiece = m.piece;
 
 		this.setPiece( p, n );
@@ -546,8 +555,8 @@ public class ChessboardMediator extends BaseMediator
 		var t : Text = Text( e.dragInitiator );
 		var p : IPiece = t.data as IPiece;
 
-		var fromPosition : Notation = Notation.createNotationByString( fb.id );
-		var toPosition : Notation = Notation.createNotationByString( tb.id );
+		var fromPosition : FieldNotation = FieldNotation.createNotationByString( fb.id );
+		var toPosition : FieldNotation = FieldNotation.createNotationByString( tb.id );
 
 		var m : ChessboardMove = new ChessboardMove();
 		m.fromPosition = fromPosition;

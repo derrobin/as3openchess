@@ -1,6 +1,7 @@
 package de.robinz.as3.pcc.chessboard
 {
 import de.robinz.as3.pcc.chessboard.controller.ErrorCommand;
+import de.robinz.as3.pcc.chessboard.controller.game.ExportFenCommand;
 import de.robinz.as3.pcc.chessboard.controller.InfoCommand;
 import de.robinz.as3.pcc.chessboard.controller.ShowAllFontKeysOnChessboardCommand;
 import de.robinz.as3.pcc.chessboard.controller.StartupCommand;
@@ -42,6 +43,7 @@ public class ApplicationFacade extends Facade
 	public static const REJECT_MOVE : String = "rejectMove";
 	public static const GET_MOVES : String = "getMoves";
 	public static const MOVE : String = "move";
+	public static const EXPORT_FEN : String = "exportFEN";
 
 	// move history
 	public static const MOVE_START : String = "moveStart";
@@ -130,6 +132,7 @@ public class ApplicationFacade extends Facade
 		registerCommand( SAVE_GAME, SaveGameCommand );
 		registerCommand( LOAD_GAME, LoadGameCommand );
 		registerCommand( GET_CURRENT_GAME, GetCurrentGameCommand );
+		registerCommand( EXPORT_FEN, ExportFenCommand );
 
 		registerCommand( APPEAR_MOVE_HISTORY_PANEL, PanelActionCommand );
 		registerCommand( APPEAR_TAKEN_PIECES_PANEL, PanelActionCommand );

@@ -1,6 +1,6 @@
 package de.robinz.as3.pcc.chessboard.library.pieces
 {
-import de.robinz.as3.pcc.chessboard.library.Notation;
+import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 
 /**
@@ -47,7 +47,7 @@ public class Pawn extends Piece implements IPiece
 				return false;
 			}
 
-			diffCol = Math.abs( Notation.indexes.getItemIndex( m.fromPosition.column ) - Notation.indexes.getItemIndex( m.toPosition.column ) );
+			diffCol = Math.abs( FieldNotation.indexes.getItemIndex( m.fromPosition.column ) - FieldNotation.indexes.getItemIndex( m.toPosition.column ) );
 			if( ( maxDiffRow >= diffRow ) && ( maxDiffCol >= diffCol ) && ( m.beatenPiece == null ) ) {
 				return true;
 			}

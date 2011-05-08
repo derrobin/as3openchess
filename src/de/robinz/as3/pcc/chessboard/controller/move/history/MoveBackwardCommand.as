@@ -65,10 +65,6 @@ public class MoveBackwardCommand extends BaseCommand
 
 	// Start Getter / Setters
 
-	private function get gameProxy() : GameProxy {
-		return this.facade.retrieveProxy( GameProxy.NAME ) as GameProxy;
-	}
-
 	// End Getter / Setters
 
 

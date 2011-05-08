@@ -10,6 +10,10 @@ ChessboardField
 			import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 			import mx.controls.Text;
 
+			public function getNotation() : String {
+				return this.id;
+			}
+
 			public function hasPiece() : Boolean {
 				if ( this.numChildren > 0 ) {
 					return true;
