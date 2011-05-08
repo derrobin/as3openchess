@@ -1,7 +1,11 @@
 package de.robinz.as3.pcc.chessboard.library {
+import de.robinz.as3.pcc.chessboard.library.FieldNotation;
+import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
+import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
+import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardField;
 
 /**
- * de.robinz.as3.pcc.chessboard.library
+ * ChessboardUtil
  *
  * @author robin heinel
  */
@@ -25,5 +29,29 @@ public class ChessboardUtil {
 		return sequence;
 	}
 
+	public static function getValidMoves( field : ChessboardFieldVO, position : ChessPosition ) : ChessboardMoveCollection {
+		var moves : ChessboardMoveCollection = new ChessboardMoveCollection();
+		var move : ChessboardMove;
+		var piece : IPiece = position.getPieceAt( field.notation );
+		var sequence : Array = getNotationSequence();
+		var toNotation : FieldNotation;
+		var notation : String;
+		var fromPosition : FieldNotation = FieldNotation.createNotationByString( field.notation );
+
+		for each( notation in sequence ) {
+			toNotation = FieldNotation.createNotationByString( notation );
+			move = new ChessboardMove();
+			move.fromPosition = fromPosition;
+			move.toPosition = toNotation;
+			move.beatenPiece = position.getPieceAt( notation.toString() );
+			move.piece = piece;
+
+			if ( piece.isMoveValide( move ) ) {
+				moves.add( move );
+			}
+		}
+
+		return moves;
+	}
 }
 }

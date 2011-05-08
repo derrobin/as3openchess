@@ -1,6 +1,7 @@
 package de.robinz.as3.pcc.chessboard.controller.game
 {
 import de.robinz.as3.pcc.chessboard.controller.*;
+import de.robinz.as3.pcc.chessboard.library.ChessPosition;
 import de.robinz.as3.pcc.chessboard.library.FENPosition;
 import de.robinz.as3.pcc.chessboard.library.FENPosition;
 
@@ -26,21 +27,9 @@ public class ExportFenCommand extends BaseCommand
 		super.execute( n );
 
 		var fen : FENPosition = new FENPosition();
-
-		var fields : ChessboardFieldCollection = boardMediator.getBoardFields();
-		var field : ChessboardField;
-		var p : IPiece;
-		var notation : String;
-
-		for each( field in fields.list ) {
-			p = field.hasPiece() ? field.getPiece() : null;
-			notation = field.getNotation();
-
-			fen.setPiece( p, notation );
-		}
+		fen.setPosition( boardMediator.getPosition() );
 
 		Alert.show( fen.toString(), "FEN Notation" );
-
 	}
 
 	// End SimpleCommand overrides

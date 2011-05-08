@@ -23,28 +23,12 @@ import mx.logging.Log;
  *
  * @author robin heinel
  */
-public class FENPosition {
+public class FENPosition extends ChessPosition {
 	private var log : ILogger;
 
-	private var _position : Dictionary;
-
 	public function FENPosition() {
+		super();
 		this.log = LoggerFactory.getLogger( this, false );
-		this._position = new Dictionary();
-		this.initPosition();
-	}
-
-	private function initPosition() : void {
-		var sequence = ChessboardUtil.getNotationSequence();
-		var notation : String;
-		var i : int = 0;
-
-		for each ( notation in sequence ) {
-			this._position[ notation ] = null;
-			i++;
-		}
-
-		log.debug( "initPosition: {0} notations created.", i.toString() );
 	}
 
 	public function getNotationChar( piece : IPiece ) : String {
@@ -58,19 +42,6 @@ public class FENPosition {
 		}
 		log.error( "no notation char found!" );
 		return "";
-	}
-
-	public function setPiece( piece : IPiece, notation : String ) : void {
-		if ( ! this._position.hasOwnProperty( notation ) ) {
-			log.warn( "unvalid position!" );
-			return;
-		}
-		if ( this._position[ notation ] != null ) {
-			log.warn( "position already set!" );
-			return;
-		}
-
-		this._position[ notation ] = piece;
 	}
 
 	public function getNotation() : String {

@@ -1,7 +1,10 @@
 package de.robinz.as3.pcc.chessboard.view
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
+import de.robinz.as3.pcc.chessboard.library.ChessPosition;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
+import de.robinz.as3.pcc.chessboard.library.ChessboardMoveCollection;
+import de.robinz.as3.pcc.chessboard.library.ChessboardUtil;
 import de.robinz.as3.pcc.chessboard.library.FontManager;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
@@ -294,40 +297,12 @@ public class ChessboardMediator extends BaseMediator
 
 	private function showMoveHints( field : ChessboardField, piece : IPiece ) : void {
 		var fv : ChessboardFieldVO = field.data as ChessboardFieldVO;
-
-		var rows : String = "abcdefgh";
-		var c : String; // char
-		var i : int = 1;
-		var j : int = 1;
-		var notation : FieldNotation;
-		var isWhite : Boolean = true;
+		var validMoves : ChessboardMoveCollection = ChessboardUtil.getValidMoves( fv, this.getPosition() );
 		var move : ChessboardMove;
-		var fromPosition : FieldNotation = FieldNotation.createNotationByString( fv.notation );
 
-		// TODO: encapsulate this algorithm
-		for( j; j <= 8; j++ ) {
-			isWhite = isWhite ? false : true;
-
-			for( i; i <= rows.length; i++ ) {
-				c = rows.charAt( i - 1 );
-				notation = FieldNotation.createNotationByString( c + j.toString() );
-
-				move = new ChessboardMove();
-				move.fromPosition = fromPosition;
-				move.toPosition = FieldNotation.createNotationByString( notation.toString() );
-				move.beatenPiece = this.getPieceAt( notation );
-				move.piece = piece;
-
-				if ( piece.isMoveValide( move ) ) {
-					this.markMoveHint( notation.toString() );
-				}
-
-			}
-
-			i = 1;
+		for each( move in validMoves.list ) {
+			this.markMoveHint( move.toPosition.toString() );
 		}
-
-		//sendNotification( ApplicationFacade.SHOW_PIECE_MOVE_HINTS, bp );
 	}
 
 	// End Innerclass Methods
@@ -335,8 +310,21 @@ public class ChessboardMediator extends BaseMediator
 
 	// Start Object Methods
 
-	public function getBoardFields() : ChessboardFieldCollection {
-		return this.getFields();
+	public function getPosition() : ChessPosition {
+		var position : ChessPosition = new ChessPosition();
+		var fields : ChessboardFieldCollection = this.getFields();
+		var field : ChessboardField;
+		var p : IPiece;
+		var notation : String;
+
+		for each( field in fields.list ) {
+			p = field.hasPiece() ? field.getPiece() : null;
+			notation = field.getNotation();
+
+			position.setPiece( p, notation );
+		}
+
+		return position;
 	}
 
 	// End Object Methods
