@@ -2,7 +2,7 @@ package de.robinz.as3.pcc.chessboard.library {
 import flash.utils.Dictionary;
 
 /**
- * de.robinz.as3.pcc.chessboard.library
+ * Player
  *
  * @author robin heinel
  */

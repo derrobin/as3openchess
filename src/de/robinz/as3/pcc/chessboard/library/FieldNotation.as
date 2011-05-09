@@ -1,5 +1,10 @@
 package de.robinz.as3.pcc.chessboard.library
 {
+import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
+
+import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVOCollection;
+import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardFieldCollection;
+
 import mx.collections.ArrayCollection;
 import mx.logging.ILogger;
 import mx.logging.Log;
@@ -48,31 +53,59 @@ public class FieldNotation
 		return null;
 	}
 
-//	public function getNextTop() : FieldNotation {
-//		if ( this.row >= 7 ) {
-//			return null;
-//		}
-//
-//		var nr : String = this.column + ( this.row + 1 ).toString(); // next row
-//
-//		log.debug( "try next notation / top: {0}", nr );
-//		var n : FieldNotation = FieldNotation.createNotationByString( nr );
-//
-//		return n;
-//	}
-//
-//	public function getNextDown() : FieldNotation {
-//		if ( this.row == 1 ) {
-//			return null;
-//		}
-//
-//		var nr : String = this.column + ( this.row - 1 ).toString(); // next row
-//
-//		log.debug( "try next notation / down: {0}", nr );
-//		var n : FieldNotation = FieldNotation.createNotationByString( nr );
-//
-//		return n;
-//	}
+	public function checkRowSet( value : int ) : Boolean {
+		var n : int = this.row + value;
+		if ( n < 1 || n > 8 ) {
+			return false;
+		}
+		return true;
+	}
+
+	public function setRow( value : int ) {
+		if ( ! checkRowSet( value ) ) {
+			log.warn( "unvalid row update ( {0} ) !", n );
+			return;
+		}
+
+		// TODO: refactoring set checkRowSet()
+		var n : int = this.row + value;
+		this.row = n;
+	}
+
+	public function checkSetColumn( value : int ) : Boolean {
+		var i : int = indexes.getItemIndex( this.column );
+		var index : int = i + value;
+		if ( index > indexes.length - 1 ) {
+			return false;
+		}
+		var n : Object = indexes.getItemAt( index < 0 ? 0 : index );
+		if ( n == null ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	public function setColumn( value : int ) {
+		if ( ! checkSetColumn( value ) ) {
+			log.warn( "unvalid column update ( {0} ) !", n );
+			return;
+		}
+
+		// TODO: refactoring see checkSetColumn()
+		var i : int = indexes.getItemIndex( this.column );
+		var index : int = i + value;
+		var n : Object = indexes.getItemAt( index < 0 ? 0 : index );
+		this.column = n as String;
+	}
+
+	public function clone() : FieldNotation {
+		var o : FieldNotation = new FieldNotation();
+		o.column = this.column;
+		o.row = this.row;
+		return o;
+	}
+
 
 	public function equals( n : FieldNotation ) : Boolean {
 		return this.toString() == n.toString();

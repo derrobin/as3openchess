@@ -5,6 +5,7 @@ import de.robinz.as3.pcc.chessboard.library.ChessPosition;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMoveCollection;
 import de.robinz.as3.pcc.chessboard.library.ChessboardUtil;
+import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.FontManager;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
@@ -123,7 +124,7 @@ public class ChessboardMediator extends BaseMediator
 
 		var vo : ChessboardFieldVO = new ChessboardFieldVO();
 		vo.isWhite = isWhite;
-		vo.notation = notation;
+		vo.notation = FieldNotation.createNotationByString( notation );
 		f.data = vo;
 
 		return f;
