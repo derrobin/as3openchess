@@ -485,8 +485,7 @@ public class ChessboardMediator extends BaseMediator
 		var fromText : Text = fromBox.getChildAt( 0 ) as Text;
 		var toBox : Box = this.getField( m.toPosition.toString() );
 
-		// TODO: remove timeout later on refactoring ( otherwise move hinting fields are flickering )
-		setTimeout( function() : void { toBox.addChild( fromText ); }, 200 );
+		toBox.addChild( fromText );
 
 		this._game = m.game;
 	}
