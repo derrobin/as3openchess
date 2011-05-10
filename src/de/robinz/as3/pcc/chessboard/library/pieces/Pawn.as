@@ -26,6 +26,10 @@ public class Pawn extends Piece implements IPiece
 		return "B";
 	}
 
+	public function isStartPosition( notation : FieldNotation ) : Boolean {
+		return this.isWhite && notation.row == 2 || ( ! this.isWhite && notation.row == 7 );
+	}
+
 	public override function isMoveValide( m : ChessboardMove ) : Boolean {
 		if( super.isMoveValide( m ) ) {
 			var maxDiffRow : int = 1;
@@ -33,7 +37,7 @@ public class Pawn extends Piece implements IPiece
 			var diffRow : int;
 			var diffCol : int;
 
-			if( this.isWhite && m.fromPosition.row == 2 || (!this.isWhite && m.fromPosition.row == 7 ) ) {
+			if( this.isStartPosition( m.fromPosition ) ) {
 				maxDiffRow = 2;
 			}
 

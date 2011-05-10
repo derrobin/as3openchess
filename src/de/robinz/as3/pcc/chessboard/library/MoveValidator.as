@@ -1,6 +1,7 @@
 package de.robinz.as3.pcc.chessboard.library {
 import de.robinz.as3.pcc.chessboard.library.common.LoggerFactory;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
+import de.robinz.as3.pcc.chessboard.library.pieces.Pawn;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 
 import mx.logging.ILogger;
@@ -36,48 +37,89 @@ public class MoveValidator {
 	}
 
 	private function getFieldsBehindPieces() : FieldNotationCollection {
-		// exclude fields behind pieces ( just for lanes/lines - rook, bishop, queen )
-		var diagonal : FieldNotationCollection = new FieldNotationCollection();
-		var line : FieldNotationCollection = new FieldNotationCollection();
+		var list : FieldNotationCollection = new FieldNotationCollection(); // cross lanes
 
 		if ( this._piece.hasAbilityToBeatDiagonal ) {
-			log.info( "diagonal: get next piece for top left" );
-			var topLeft : FieldNotationCollection = getFieldsBehind( +1, -1 );
-			log.info( "diagonal: get next piece for top left" );
-			var topRight : FieldNotationCollection = getFieldsBehind( +1, +1 );
-			log.info( "diagonal: get next piece for down left" );
-			var downLeft : FieldNotationCollection = getFieldsBehind( -1, -1 );
-			log.info( "diagonal: get next piece for down right" );
-			var downRight : FieldNotationCollection = getFieldsBehind( -1, +1 );
-
-			diagonal.addCollection( topLeft );
-			diagonal.addCollection( topRight );
-			diagonal.addCollection( downLeft );
-			diagonal.addCollection( downRight );
-
-			log.debug( "getFieldsBehindPieces: affected diagonal fields: {0}", line.toString() );
+			list.addCollection( this.getFieldBehindCrossLanes() );
 		}
 		if ( this._piece.hasAbilityToBeatLine ) {
-			// get field range for line / horizontal
-			log.info( "line: get next piece for top" );
-			var top : FieldNotationCollection = getFieldsBehind( +1, 0 );
-			log.info( "line: get next piece for bottom" );
-			var bottom : FieldNotationCollection = getFieldsBehind( -1, 0 );
-			log.info( "line: get next piece for left" );
-			var left : FieldNotationCollection = getFieldsBehind(  0, -1 );
-			log.info( "line: get next piece for right" );
-			var right : FieldNotationCollection = getFieldsBehind( 0, +1 );
-
-			line.addCollection( top );
-			line.addCollection( bottom );
-			line.addCollection( left );
-			line.addCollection( right );
-
-			log.debug( "getFieldsBehindPieces: affected line fields: {0}", line.toString() );
+			list.addCollection( this.getFieldBehindDirectLanes() );
 		}
 
-		diagonal.addCollection( line );
-		return diagonal;
+		if ( this._piece is Pawn ) {
+			var notation : FieldNotation = this.getFieldBehindPawnFirstMove();
+			if ( notation != null ) {
+				list.add( notation );
+			}
+		}
+
+		return list;
+	}
+
+	private function getFieldBehindPawnFirstMove() : FieldNotation {
+		var pawn : Pawn = this._piece as Pawn;
+		var n : FieldNotation = this._field.notation.clone();
+
+		if ( pawn.isStartPosition( n ) ) {
+			var p : IPiece;
+			var setRow : int = 1;
+
+			if ( ! this._piece.isWhite ) {
+				setRow = -1;
+			}
+
+			n.setRow( setRow );
+			p = this._position.getPieceAt( n.toString() );
+			if ( p != null ) {
+				log.debug( "move collision / pawn at {0}", n.toString() );
+				n.setRow( setRow );
+				return n;
+			}
+		}
+
+		return null;
+	}
+
+	private function getFieldBehindCrossLanes() {
+		var list : FieldNotationCollection = new FieldNotationCollection();
+		log.info( "diagonal: get next piece for top left" );
+		var topLeft : FieldNotationCollection = getFieldsBehind( +1, -1 );
+		log.info( "diagonal: get next piece for top left" );
+		var topRight : FieldNotationCollection = getFieldsBehind( +1, +1 );
+		log.info( "diagonal: get next piece for down left" );
+		var downLeft : FieldNotationCollection = getFieldsBehind( -1, -1 );
+		log.info( "diagonal: get next piece for down right" );
+		var downRight : FieldNotationCollection = getFieldsBehind( -1, +1 );
+
+		list.addCollection( topLeft );
+		list.addCollection( topRight );
+		list.addCollection( downLeft );
+		list.addCollection( downRight );
+
+		log.debug( "getFieldsBehindPieces: affected diagonal fields: {0}", list.toString() );
+		return list;
+	}
+
+	// get field range for line / horizontal
+	private function getFieldBehindDirectLanes() {
+		var list : FieldNotationCollection = new FieldNotationCollection();
+
+		log.info( "line: get next piece for top" );
+		var top : FieldNotationCollection = getFieldsBehind( +1, 0 );
+		log.info( "line: get next piece for bottom" );
+		var bottom : FieldNotationCollection = getFieldsBehind( -1, 0 );
+		log.info( "line: get next piece for left" );
+		var left : FieldNotationCollection = getFieldsBehind(  0, -1 );
+		log.info( "line: get next piece for right" );
+		var right : FieldNotationCollection = getFieldsBehind( 0, +1 );
+
+		list.addCollection( top );
+		list.addCollection( bottom );
+		list.addCollection( left );
+		list.addCollection( right );
+
+		log.debug( "getFieldsBehindPieces: affected line fields: {0}", list.toString() );
+		return list;
 	}
 
 	private function getFieldsBehind( rowStep : int, columnStep : int ) : FieldNotationCollection {
