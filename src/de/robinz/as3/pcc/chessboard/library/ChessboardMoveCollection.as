@@ -24,6 +24,18 @@ public class ChessboardMoveCollection extends TypedCollection
 		this.log = LoggerFactory.getLogger( this );
 	}
 
+	public function hasNotationToPosition( notation : String ) : Boolean {
+		var move : ChessboardMove;
+
+		for each( move in this._list ) {
+			if ( move.toPosition.toString() == notation ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	// TODO: check usage
 	public function getToPosition() : PiecePositionVOCollection {
 		var move : ChessboardMove;

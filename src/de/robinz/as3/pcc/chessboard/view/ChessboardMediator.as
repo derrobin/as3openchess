@@ -5,6 +5,7 @@ import de.robinz.as3.pcc.chessboard.library.ChessPosition;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMoveCollection;
 import de.robinz.as3.pcc.chessboard.library.ChessboardUtil;
+import de.robinz.as3.pcc.chessboard.library.CssSelectors;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.FontManager;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
@@ -49,17 +50,20 @@ public class ChessboardMediator extends BaseMediator
 
 	public static const FIELD_SPACE : int = 1;
 
-	public static const CSS_SELECTOR_FIELD_WHITE : String = "fieldWhite";
-	public static const CSS_SELECTOR_FIELD_BLACK : String = "fieldBlack";
-	public static const CSS_SELECTOR_FIELD_MOVE_HINT : String = "fieldMoveHint";
+	public static const FIELD_COLOR_VALID_DROP : int = 0xFFF8C6;
+	public static const FIELD_COLOR_MOVE_HINT : int = 0xccff99;
+	public static const FIELD_COLOR_WHITE : int = 0xffffff;
+	public static const FIELD_COLOR_BLACK : int = 0xbbbbbb;
 
 	private var _game : ChessboardGameVO;
+	private var _validMoves : ChessboardMoveCollection;
 
 	private var _isBoardInspectMode : Boolean = false;
 	private var _isBoardLocked : Boolean = false;
 	private var _pieceSettings : PieceSettingsVO;
 	private var _cachedFields : ChessboardFieldCollection;
 	private var _hasMoveHints : Boolean = false;
+	private var _hasValidDrop : Boolean = false;
 
 	public function ChessboardMediator( viewComponent : Chessboard ) {
 		super( NAME, viewComponent );
@@ -120,7 +124,8 @@ public class ChessboardMediator extends BaseMediator
 		f.id = notation;
 		f.percentWidth = 12.5;
 		f.percentHeight = 100;
-		f.styleName = "field" + ( isWhite ? "White" : "Black" );
+		f.styleName = CssSelectors.BOARD_FIELD;
+		f.setStyle( "backgroundColor", isWhite ? FIELD_COLOR_WHITE : FIELD_COLOR_BLACK );
 
 		var vo : ChessboardFieldVO = new ChessboardFieldVO();
 		vo.isWhite = isWhite;
@@ -265,7 +270,31 @@ public class ChessboardMediator extends BaseMediator
 		field.addChild( text );
 	}
 
-	private function markMoveHint( notation : String ) : void {
+	private function resetStyleForAllFields( resetStyle : *, styleProperty : String, isValidDrop : Boolean = false ) : void {
+		var c : ChessboardFieldCollection = this.getFields();
+		var f : ChessboardField;
+		var vo : ChessboardFieldVO;
+		var style : *;
+
+		for each( f in c.list ) {
+			vo = f.data as ChessboardFieldVO;
+			style = f.getStyle( styleProperty ) as int;
+
+			// log.debug( "resetStyleForAllFields: field: {0} / property: {1} / style: {2}", f.id, styleProperty, style.toString() );
+			if ( style != resetStyle ) {
+				continue;
+			}
+			if ( isValidDrop && this._validMoves.hasNotationToPosition( vo.notation.toString() ) ) {
+				// log.debug( "resetStyleForAllFields: set move hint to {0} at {1}", f.id, vo.notation.toString() );
+				f.setStyle( styleProperty, FIELD_COLOR_MOVE_HINT );
+				continue;
+			}
+
+			f.setStyle( styleProperty, vo.isWhite ? FIELD_COLOR_WHITE : FIELD_COLOR_BLACK );
+		}
+	}
+
+	private function changeFieldStyle( notation : String, styleProperty : String, value : * ) : void {
 		var f : ChessboardField = this.getField( notation );
 
 		if ( f == null ) {
@@ -274,31 +303,35 @@ public class ChessboardMediator extends BaseMediator
 
 		// dynamic font size, depends from piece settings
 		f.setStyle( "fontSize", this._pieceSettings.fontSizeCssValue );
-		f.styleName = CSS_SELECTOR_FIELD_MOVE_HINT;
+		f.setStyle( styleProperty, value );
+	}
 
+	private function changeFieldColor( notation : String, color : int ) : void {
+		this.changeFieldStyle( notation, "backgroundColor", color );
+	}
+
+	private function markValidDrop( notation : String ) : void {
+		this.changeFieldColor( notation, FIELD_COLOR_VALID_DROP );
+		this._hasValidDrop = true;
+	}
+
+	private function markMoveHint( notation : String ) : void {
+		this.changeFieldColor( notation, FIELD_COLOR_MOVE_HINT );
 		this._hasMoveHints = true;
 	}
 
+	private function removeAllValidDrop() : void {
+		this.resetStyleForAllFields( FIELD_COLOR_VALID_DROP, "backgroundColor", true );
+		this._hasMoveHints = false;
+	}
+
 	private function removeAllMoveHints() : void {
-		var c : ChessboardFieldCollection = this.getFields();
-		var f : ChessboardField;
-		var vo : ChessboardFieldVO;
-
-		for each( f in c.list ) {
-			if ( ! f.styleName == CSS_SELECTOR_FIELD_MOVE_HINT ) {
-				continue;
-			}
-
-			vo = f.data as ChessboardFieldVO;
-			f.styleName = vo.isWhite ? CSS_SELECTOR_FIELD_WHITE : CSS_SELECTOR_FIELD_BLACK;
-		}
-
+		this.resetStyleForAllFields( FIELD_COLOR_MOVE_HINT, "backgroundColor" );
 		this._hasMoveHints = false;
 	}
 
 	private function showMoveHints( field : ChessboardField, piece : IPiece ) : void {
-		var fv : ChessboardFieldVO = field.data as ChessboardFieldVO;
-		var validMoves : ChessboardMoveCollection = ChessboardUtil.getValidMoves( fv, this.getPosition() );
+		var validMoves : ChessboardMoveCollection = this._validMoves;
 		var move : ChessboardMove;
 
 		for each( move in validMoves.list ) {
@@ -479,8 +512,6 @@ public class ChessboardMediator extends BaseMediator
 
 	}
 
-
-
 	private function onMouseUp( e : MouseEvent ) : void {
 		// TODO: MOUSE_UP event is not triggering when dragging is started before
 		this.removeAllMoveHints();
@@ -513,6 +544,9 @@ public class ChessboardMediator extends BaseMediator
 
 			var f : ChessboardField = t.parent as ChessboardField;
 
+			// TODO: get valid moves from command?
+			this._validMoves = ChessboardUtil.getValidMoves( f.data as ChessboardFieldVO, this.getPosition() );
+
 			this.showMoveHints( f, p );
 		}
 	}
@@ -521,11 +555,20 @@ public class ChessboardMediator extends BaseMediator
 		if ( e.dragSource.hasFormat( "piece" ) ) {
 			if ( e.target is ChessboardField ) {
 				var f : ChessboardField = e.target as ChessboardField;
+				var notation : String = f.id;
+				log.debug( "onDragEnter: {0}", notation );
+
 				DragManager.acceptDragDrop( f );
-				log.debug( "onDragEnter: {0}", f.id );
+				if ( this._validMoves.hasNotationToPosition( notation ) ) {
+					log.debug( "onDragEnter: validMoves has notation to position {0}", notation.toString() );
+					this.removeAllValidDrop();
+					this.markValidDrop( notation );
+				}
+
 			} else if ( ! ( e.target is Text ) && ( e.target is VBox && e.target.id.indexOf( "board" ) > 0 ) )  {
 				// dragging is inside the board
 				this.removeAllMoveHints();
+				this.removeAllValidDrop();
 			}
 
 		}
@@ -553,6 +596,7 @@ public class ChessboardMediator extends BaseMediator
 		m.piece = p;
 		m.beatenPiece = this.getPieceAt( toPosition );
 
+		this.removeAllValidDrop();
 		this.removeAllMoveHints();
 		sendNotification( ApplicationFacade.TRY_TO_MOVE, m );
 	}

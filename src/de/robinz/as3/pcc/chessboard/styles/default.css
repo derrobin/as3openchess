@@ -58,22 +58,11 @@ global {
 	horizontalAlign: center;
 	verticalAlign: middle;
 }
-.fieldBlack,
-.fieldWhite,
-.fieldMoveHint {
+.boardField {
 	horizontalAlign: center;
 	verticalAlign: middle;
 	fontFamily: font1;
 	fontSize: 40;
-}
-.fieldBlack {
-	backgroundColor: #bbbbbb;
-}
-.fieldWhite {
-	backgroundColor: #ffffff;
-}
-.fieldMoveHint {
-	backgroundColor: #ccff99;
 }
 .mystyle1 {
 	fontFamily: font1;

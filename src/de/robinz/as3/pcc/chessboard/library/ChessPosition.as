@@ -7,7 +7,7 @@ import mx.logging.ILogger;
 import mx.logging.Log;
 
 /**
- * de.robinz.as3.pcc.chessboard.library
+ * ChessPosition
  *
  * @author robin heinel
  */
