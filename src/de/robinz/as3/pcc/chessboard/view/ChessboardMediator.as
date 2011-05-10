@@ -590,6 +590,7 @@ public class ChessboardMediator extends BaseMediator
 		var toPosition : FieldNotation = FieldNotation.createNotationByString( tb.id );
 
 		var m : ChessboardMove = new ChessboardMove();
+		m.validMoves = this._validMoves;
 		m.fromPosition = fromPosition;
 		m.toPosition = toPosition;
 		m.piece = p;
@@ -597,6 +598,7 @@ public class ChessboardMediator extends BaseMediator
 
 		this.removeAllValidDrop();
 		this.removeAllMoveHints();
+
 		sendNotification( ApplicationFacade.TRY_TO_MOVE, m );
 	}
 

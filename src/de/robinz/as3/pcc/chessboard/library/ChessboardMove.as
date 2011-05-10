@@ -23,6 +23,8 @@ public class ChessboardMove
 	public var isMoveForward : Boolean = false;
 	public var isMoveJump : Boolean = false;
 
+	public var validMoves : ChessboardMoveCollection;
+
 	public function ChessboardMove()
 	{
 	}
