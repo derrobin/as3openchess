@@ -3,22 +3,15 @@ package de.robinz.as3.pcc.chessboard.view
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.library.vo.PanelVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PanelVOCollection;
-import de.robinz.as3.pcc.chessboard.tests.ApplicationTest;
 import de.robinz.as3.pcc.chessboard.view.views.ApplicationView;
 import de.robinz.as3.pcc.chessboard.view.views.Chessboard;
 
 import flash.events.Event;
 
-import flash.events.MouseEvent;
-
-import flexunit.framework.TestSuite;
-
 import mx.containers.Panel;
-import mx.core.Application;
 import mx.core.Container;
 
 import org.puremvc.as3.interfaces.INotification;
-import org.puremvc.as3.patterns.mediator.Mediator;
 
 /**
  * ApplicationMediator
@@ -27,7 +20,6 @@ import org.puremvc.as3.patterns.mediator.Mediator;
  */
 public class ApplicationMediator extends BaseMediator
 {
-	public static const UNIT_TESTS : Boolean = false;
 	public static const NAME : String = "ApplicationMediator";
 
 	private var _panels : PanelVOCollection;
@@ -35,14 +27,6 @@ public class ApplicationMediator extends BaseMediator
 
 	public function ApplicationMediator( m : mainapp ) {
 		super( NAME, m );
-
-		if ( UNIT_TESTS ) {
-			chessboard.visible = false;
-			chessboard.includeInLayout = false;
-
-			view.testRunner.test = createSuite();
-			view.testRunner.startTest();
-		}
 
 		this._panels = this.registerPanels();
 		this.setDefaultPanelSize();
@@ -124,12 +108,6 @@ public class ApplicationMediator extends BaseMediator
 	private function switchContainer( c : Container, visible : Boolean = true ) : void {
 		c.visible = visible;
 		c.includeInLayout = visible;
-	}
-
-	private function createSuite() : TestSuite {
-		var ts:TestSuite = new TestSuite();
-		ts.addTest( ApplicationTest.suite() );
-		return ts;
 	}
 
 	private function toggleContainer( c : Container ) : Boolean {

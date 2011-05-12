@@ -1,27 +1,8 @@
 package de.robinz.as3.pcc.chessboard.view
 {
-import de.robinz.as3.pcc.chessboard.ApplicationFacade;
-import de.robinz.as3.pcc.chessboard.library.common.LoggerFactory;
-import de.robinz.as3.pcc.chessboard.library.common.ReflectionUtil;
-import de.robinz.as3.pcc.chessboard.library.vo.PanelVO;
-import de.robinz.as3.pcc.chessboard.library.vo.PanelVOCollection;
-import de.robinz.as3.pcc.chessboard.tests.ApplicationTest;
-import de.robinz.as3.pcc.chessboard.view.views.ApplicationView;
-import de.robinz.as3.pcc.chessboard.view.views.Chessboard;
-
-import flash.events.Event;
-
-import flash.events.MouseEvent;
-
 import flash.utils.getQualifiedClassName;
 
-import flexunit.framework.TestSuite;
-
-import mx.containers.Panel;
-import mx.core.Container;
-
 import mx.logging.ILogger;
-
 import mx.logging.Log;
 
 import org.puremvc.as3.interfaces.INotification;
