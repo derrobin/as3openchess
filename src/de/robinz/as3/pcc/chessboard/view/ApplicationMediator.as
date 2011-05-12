@@ -14,6 +14,7 @@ import flash.events.MouseEvent;
 import flexunit.framework.TestSuite;
 
 import mx.containers.Panel;
+import mx.core.Application;
 import mx.core.Container;
 
 import org.puremvc.as3.interfaces.INotification;

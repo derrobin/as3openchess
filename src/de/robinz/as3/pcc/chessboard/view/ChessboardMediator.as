@@ -8,7 +8,6 @@ import de.robinz.as3.pcc.chessboard.library.ChessboardUtil;
 import de.robinz.as3.pcc.chessboard.library.CssSelectors;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.FontManager;
-import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
@@ -21,11 +20,9 @@ import flash.display.DisplayObject;
 import flash.display.DisplayObjectContainer;
 import flash.events.Event;
 import flash.events.MouseEvent;
-import flash.utils.setTimeout;
 
 import mx.collections.ArrayCollection;
 import mx.containers.Box;
-import mx.containers.VBox;
 import mx.controls.Alert;
 import mx.controls.Spacer;
 import mx.controls.Text;
@@ -34,10 +31,7 @@ import mx.core.DragSource;
 import mx.events.DragEvent;
 import mx.managers.DragManager;
 
-import mx.utils.object_proxy;
-
 import org.puremvc.as3.interfaces.INotification;
-import org.puremvc.as3.patterns.mediator.Mediator;
 
 /**
  * Chessboard Mediator
@@ -64,6 +58,7 @@ public class ChessboardMediator extends BaseMediator
 	private var _cachedFields : ChessboardFieldCollection;
 	private var _hasMoveHints : Boolean = false;
 	private var _hasValidDrop : Boolean = false;
+	private var _dragMove : ChessboardMove;
 
 	public function ChessboardMediator( viewComponent : Chessboard ) {
 		super( NAME, viewComponent );
@@ -71,6 +66,7 @@ public class ChessboardMediator extends BaseMediator
 		viewComponent.addEventListener( MouseEvent.CLICK, onMouseClick, true );
 		viewComponent.addEventListener( DragEvent.DRAG_ENTER, onDragEnter, true );
 		viewComponent.addEventListener( DragEvent.DRAG_DROP, onDragDrop, true );
+		viewComponent.addEventListener( DragEvent.DRAG_COMPLETE, onDragComplete, true );
 		viewComponent.addEventListener( MouseEvent.MOUSE_MOVE, onMouseMove, true );
 		viewComponent.addEventListener( MouseEvent.MOUSE_DOWN, onMouseDown, true );
 		viewComponent.addEventListener( MouseEvent.MOUSE_UP, onMouseUp, true );
@@ -80,6 +76,7 @@ public class ChessboardMediator extends BaseMediator
 
 
 	// Start Innerclass Methods
+
 	private function createFields() : void {
 		var spacer : Spacer;
 		var field : ChessboardField;
@@ -284,7 +281,7 @@ public class ChessboardMediator extends BaseMediator
 			if ( style != resetStyle ) {
 				continue;
 			}
-			if ( isValidDrop && this._validMoves.hasNotationToPosition( vo.notation.toString() ) ) {
+			if ( isValidDrop && this._validMoves != null && this._validMoves.hasNotationToPosition( vo.notation.toString() ) ) {
 				// log.debug( "resetStyleForAllFields: set move hint to {0} at {1}", f.id, vo.notation.toString() );
 				f.setStyle( styleProperty, FIELD_COLOR_MOVE_HINT );
 				continue;
@@ -322,7 +319,7 @@ public class ChessboardMediator extends BaseMediator
 
 	private function removeAllValidDrop() : void {
 		this.resetStyleForAllFields( FIELD_COLOR_VALID_DROP, "backgroundColor", true );
-		this._hasMoveHints = false;
+		this._hasValidDrop = false;
 	}
 
 	private function removeAllMoveHints() : void {
@@ -503,16 +500,11 @@ public class ChessboardMediator extends BaseMediator
 				return;
 			}
 			this.prepareDrag( e );
-
-			if ( ! DragManager.isDragging && this._hasMoveHints ) {
-				this.removeAllMoveHints();
-			}
 		}
 
 	}
 
 	private function onMouseUp( e : MouseEvent ) : void {
-		// TODO: MOUSE_UP event is not triggering when dragging is started before
 		this.removeAllMoveHints();
 	}
 
@@ -555,26 +547,50 @@ public class ChessboardMediator extends BaseMediator
 			if ( e.target is ChessboardField ) {
 				var f : ChessboardField = e.target as ChessboardField;
 				var notation : String = f.id;
-				log.debug( "onDragEnter: {0}", notation );
+				log.debug( "onDragEnter: piece at {0}", notation );
 
-				DragManager.acceptDragDrop( f );
+
 				if ( this._validMoves.hasNotationToPosition( notation ) ) {
 					log.debug( "onDragEnter: validMoves has notation to position {0}", notation.toString() );
+					DragManager.acceptDragDrop( f );
+
 					this.removeAllValidDrop();
 					this.markValidDrop( notation );
 				}
-
-			} else if ( ! ( e.target is Text ) && ( e.target is VBox && e.target.id.indexOf( "board" ) > 0 ) )  {
-				// dragging is inside the board
-				this.removeAllMoveHints();
-				this.removeAllValidDrop();
 			}
+			// TODO: check if board field boundary is touched
+			/*
+			else if ( ! ( e.target is Text ) && ( e.target is Box && e.target.id != null && e.target.id.indexOf( "board" ) > -1 ) )  {
+				if ( e.target.id == "board" ) {
+					log.debug( "onDragEnter: dragging is inside the board" );
+				}
+			} else if ( e.target is Box || e.target is Text ) {
+				log.debug( "onDragEnter: id:" + UIComponent( e.target ).id );
+			} else if ( e.target is Text ) {
 
+			} else {
+				log.debug( "onDragEnter: dragging is outside the board" );
+			}
+			*/
 		}
 
 	}
 
+	private function onDragComplete( e : DragEvent ) : void {
+		log.debug( "onDragComplete: " );
+		if ( this._dragMove == null ) {
+			log.debug( "onDragComplete: no drag move found." );
+			this.removeAllValidDrop();
+			this.removeAllMoveHints();
+			return;
+		}
+
+		sendNotification( ApplicationFacade.TRY_TO_MOVE, this._dragMove );
+		this._dragMove = null;
+	}
+
 	private function onDragDrop( e : DragEvent ) : void {
+		log.debug( "onDragDrop: " );
 		if ( this._isBoardLocked ) {
 			Alert.show( "All Movements are looked. You have to go to the end of the game for making the next move.", "Movement looked!" );
 			return;
@@ -596,10 +612,11 @@ public class ChessboardMediator extends BaseMediator
 		m.piece = p;
 		m.beatenPiece = this.getPieceAt( toPosition );
 
-		this.removeAllValidDrop();
+		this._validMoves = null;
 		this.removeAllMoveHints();
+		this.removeAllValidDrop();
 
-		sendNotification( ApplicationFacade.TRY_TO_MOVE, m );
+		this._dragMove = m;
 	}
 
 	private function onMouseClick( e : Event ) : void {
