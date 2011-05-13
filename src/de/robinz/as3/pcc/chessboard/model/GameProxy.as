@@ -133,7 +133,7 @@ public class GameProxy extends BaseProxy
 			}
 		}
 
-		if ( ! m.isCastingRookMovement ) {
+		if ( ! m.isCastlingRookMovement ) {
 			this._currentPlayer = this._currentPlayer.isWhite ? this._black : this._white;
 		}
 

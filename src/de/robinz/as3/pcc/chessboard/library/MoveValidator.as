@@ -1,12 +1,17 @@
 package de.robinz.as3.pcc.chessboard.library {
 import de.robinz.as3.pcc.chessboard.library.ChessboardMoveCollection;
+import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.common.LoggerFactory;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.pieces.King;
 import de.robinz.as3.pcc.chessboard.library.pieces.Pawn;
+import de.robinz.as3.pcc.chessboard.library.pieces.Rook;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
+
+import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
+import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
 
 import mx.logging.ILogger;
 
@@ -97,30 +102,9 @@ public class MoveValidator {
 		log.debug( "getSpecialMoves: currentPlayer: " + this._game.currentPlayer.name );
 
 		if ( this._piece is King ) {
-
-			var p : Player = this._game.currentPlayer;
-			if ( ! p.isKingMoved ) {
-				if ( p.isWhite ) {
-					if ( ! p.isRookRightMoved ) {
-						//log.debug( "add notation for short rochade" );
-						moves.add( FieldNotation.createNotationByString( "g1", CASTLING_SHORT ) );
-					}
-					if ( ! p.isRookLeftMoved ) {
-						//log.debug( "add notation for long rochade" );
-						moves.add( FieldNotation.createNotationByString( "c1", CASTLING_LONG ) );
-					}
-				} else {
-					if ( ! p.isRookRightMoved ) {
-						//log.debug( "add notation for short rochade" );
-						moves.add( FieldNotation.createNotationByString( "g8", CASTLING_SHORT ) );
-					}
-					if ( ! p.isRookLeftMoved ) {
-						//log.debug( "add notation for long rochade" );
-						moves.add( FieldNotation.createNotationByString( "c8", CASTLING_LONG ) );
-					}
-				}
-			}
+			moves.addCollection( this.getRochade() );
 		}
+
 //		if ( ! ( this._piece is Pawn ) ) {
 //			field = this.getEnPassion();
 //			moves.add( this.getEnPassion() );
@@ -130,13 +114,43 @@ public class MoveValidator {
 		return moves;
 	}
 
-//	private function getCastling() : FieldNotation {
-//		return null;
-//	}
-//
+	private function getRochade() : FieldNotationCollection {
+		var moves : FieldNotationCollection = new FieldNotationCollection();
+		var p : Player = this._game.currentPlayer;
+
+		if ( ! p.isKingMoved ) {
+			var npl : PiecePositionVO = getNextPieceOnLane( 0, -1 ); // next piece left
+			var npr : PiecePositionVO = getNextPieceOnLane( 0, +1 ); // next piece right
+
+			if ( p.isWhite ) {
+				if ( ! p.isRookRightMoved && npr != null && npr.piece is Rook && npr.notation.toString() == "h1" ) {
+					//log.debug( "add notation for short rochade" );
+					moves.add( FieldNotation.createNotationByString( "g1", CASTLING_SHORT ) );
+				}
+				if ( ! p.isRookLeftMoved && npl != null && npl.piece is Rook && npl.notation.toString() == "a1" ) {
+					//log.debug( "add notation for long rochade" );
+					moves.add( FieldNotation.createNotationByString( "c1", CASTLING_LONG ) );
+				}
+			} else {
+				if ( ! p.isRookRightMoved && npr != null && npr.piece is Rook && npr.notation.toString() == "h8" ) {
+					//log.debug( "add notation for short rochade" );
+					moves.add( FieldNotation.createNotationByString( "g8", CASTLING_SHORT ) );
+				}
+				if ( ! p.isRookLeftMoved && npl != null && npl.piece is Rook && npl.notation.toString() == "a8" ) {
+					//log.debug( "add notation for long rochade" );
+					moves.add( FieldNotation.createNotationByString( "c8", CASTLING_LONG ) );
+				}
+			}
+		}
+
+		return moves;
+	}
+
 //	private function getEnPassion() : FieldNotation {
 //		return null;
 //	}
+
+
 
 	private function getFieldBehindPawnFirstMove() : FieldNotation {
 		var pawn : Pawn = this._piece as Pawn;
@@ -204,11 +218,47 @@ public class MoveValidator {
 		return list;
 	}
 
+	private function getNextPieceOnLane( rowStep : int, columnStep : int ) : PiecePositionVO {
+		var walker : FieldNotation = _field.notation.clone();
+		var maxSteps : int = 8;
+		var i : int = 0;
+		var p : IPiece;
+		var pp : PiecePositionVO;
+
+		do {
+			if ( ! walker.checkRowSet( rowStep ) || ! walker.checkSetColumn( columnStep ) ) {
+				log.debug( "walker has reached boundaries so get off." );
+				break;
+			}
+
+			walker.setColumn( columnStep );
+			walker.setRow( rowStep );
+
+			log.debug( "walker is at field {0}.", walker.toString() );
+			p = this._position.getPieceAt( walker.toString() );
+
+			if ( p != null ) {
+				pp = new PiecePositionVO();
+				pp.notation = FieldNotation.createNotationByString( walker.getNotation() );
+				pp.piece = p;
+				return pp;
+			}
+
+			if ( i >= maxSteps ) {
+				log.warn( "loop exit condition failed, check your code!" );
+				break;
+			}
+
+			i++;
+		} while( true );
+
+		return null;
+	}
+
 	private function getFieldsBehind( rowStep : int, columnStep : int ) : FieldNotationCollection {
 		var walker : FieldNotation = _field.notation.clone();
 		var maxSteps : int = 8;
 		var i : int = 0;
-		var boundaryIndex : int;
 		var p : IPiece;
 		var excludeNextFields : Boolean = false;
 		var fieldsBehind : FieldNotationCollection = new FieldNotationCollection();

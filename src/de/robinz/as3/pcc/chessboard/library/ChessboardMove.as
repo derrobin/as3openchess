@@ -28,7 +28,7 @@ public class ChessboardMove
 	public var isCastlingLong : Boolean = false;
 	public var isCastlingShort : Boolean = false;
 
-	public var isCastingRookMovement : Boolean = false;
+	public var isCastlingRookMovement : Boolean = false;
 
 	public var validMoves : ChessboardMoveCollection;
 	public var validMove : ChessboardMove; // created by MoveValidator, holds more validation info about current move

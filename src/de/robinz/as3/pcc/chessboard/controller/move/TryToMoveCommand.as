@@ -45,7 +45,7 @@ public class TryToMoveCommand extends BaseCommand
 			return;
 		}
 
-		if( m.validMoves.hasNotationToPosition( m.toPosition.toString() ) ) {
+		if( m.validMoves == null || m.validMoves.hasNotationToPosition( m.toPosition.toString() ) ) {
 			if ( m.beatenPiece == null ) {
 				sendNotification( ApplicationFacade.MOVE, m );
 				return;

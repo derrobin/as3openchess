@@ -79,7 +79,7 @@ public class MoveCommand extends BaseCommand
 		move.toPosition = FieldNotation.createNotationByString( toNotation );
 		move.game = parentMove.game;
 		move.piece = parentMove.position.getPieceAt( fromNotation );
-		move.isCastingRookMovement = true;
+		move.isCastlingRookMovement = true;
 
 		sendNotification( ApplicationFacade.MOVE, move );
 	}
