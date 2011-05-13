@@ -2,6 +2,8 @@ package de.robinz.as3.pcc.chessboard.model
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.library.Player;
+import de.robinz.as3.pcc.chessboard.library.pieces.King;
+import de.robinz.as3.pcc.chessboard.library.pieces.Rook;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
@@ -108,7 +110,33 @@ public class GameProxy extends BaseProxy
 
 		this._currentMove++;
 		this._game.moves.add( m );
-		this._currentPlayer = this._currentPlayer.isWhite ? this._black : this._white;
+
+		// for rochade
+		if ( m.piece is King ) {
+			this._currentPlayer.moveKing();
+		}
+		if ( m.piece is Rook ) {
+			if ( this._currentPlayer.isWhite ) {
+				if ( m.fromPosition.toString() == "a1" ) {
+					this._white.rookLeftMoved();
+				}
+				if ( m.fromPosition.toString() == "h1" ) {
+					this._white.rookRightMoved();
+				}
+			} else {
+				if ( m.fromPosition.toString() == "a8" ) {
+					this._black.rookLeftMoved();
+				}
+				if ( m.fromPosition.toString() == "h8" ) {
+					this._black.rookRightMoved();
+				}
+			}
+		}
+
+		if ( ! m.isCastingRookMovement ) {
+			this._currentPlayer = this._currentPlayer.isWhite ? this._black : this._white;
+		}
+
 	}
 
 	public function getCurrentGame() : ChessboardGameVO {

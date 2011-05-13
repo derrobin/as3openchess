@@ -15,6 +15,9 @@ public class FieldNotationCollection extends TypedCollection
 	}
 
 	public function addCollection( notations : FieldNotationCollection ) : void {
+		if ( notations == null ) {
+			return;
+		}
 		var notation : FieldNotation;
 		for each( notation in notations.list ) {
 			this.add( notation );
@@ -22,6 +25,14 @@ public class FieldNotationCollection extends TypedCollection
 	}
 
 	/* Start TypedCollection Standard Methods */
+
+	public override function add( o : Object ) : void {
+		if ( o == null ) {
+			return;
+		}
+		super.add( o );
+	}
+
 
 	public function getAt( index : int ) : FieldNotationCollection {
 		return FieldNotationCollection( this._getAt( index ) );

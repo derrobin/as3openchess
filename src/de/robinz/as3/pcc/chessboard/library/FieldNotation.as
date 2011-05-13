@@ -23,7 +23,9 @@ public class FieldNotation
 	public var column : String;
 	public static var indexes : ArrayCollection = new ArrayCollection( [ "a", "b", "c", "d", "e", "f", "g", "h" ] );
 
-	public static function createNotationByString( input : String ) : FieldNotation {
+	public var name : String = "noname";
+
+	public static function createNotationByString( input : String, name : String = null ) : FieldNotation {
 		try {
 			var column : String = input.charAt( 0 ).toLowerCase();
 			var row : String = input.charAt( 1 );
@@ -41,6 +43,7 @@ public class FieldNotation
 			var n : FieldNotation = new FieldNotation();
 			n.column = column;
 			n.row = r;
+			n.name = name;
 
 			return n;
 

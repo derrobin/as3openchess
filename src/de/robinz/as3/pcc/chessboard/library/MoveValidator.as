@@ -1,8 +1,12 @@
 package de.robinz.as3.pcc.chessboard.library {
+import de.robinz.as3.pcc.chessboard.library.ChessboardMoveCollection;
 import de.robinz.as3.pcc.chessboard.library.common.LoggerFactory;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
+import de.robinz.as3.pcc.chessboard.library.pieces.King;
 import de.robinz.as3.pcc.chessboard.library.pieces.Pawn;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
+
+import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 
 import mx.logging.ILogger;
 
@@ -14,14 +18,21 @@ import mx.logging.ILogger;
 public class MoveValidator {
 	private var log : ILogger;
 
+	private var _game : ChessboardGameVO;
 	private var _field : ChessboardFieldVO;
 	private var _piece : IPiece;
 	private var _position : ChessPosition;
 
+	public static var CASTLING_SHORT : String = "castlingShort";
+	public static var CASTLING_LONG : String = "castlingLong";
+	public static var EN_PASSANT : String = "enPassant";
 
-	public function MoveValidator( field : ChessboardFieldVO, position : ChessPosition, piece : IPiece ) {
+
+
+	public function MoveValidator( game : ChessboardGameVO, field : ChessboardFieldVO, position : ChessPosition, piece : IPiece ) {
 		this.log = LoggerFactory.getLogger( this );
 
+		this._game = game;
 		this._field = field;
 		this._position = position;
 		this._piece = piece;
@@ -30,10 +41,33 @@ public class MoveValidator {
 	public function getValidMoves() : ChessboardMoveCollection {
 		var piece : IPiece = this._position.getPieceAt( this._field.notation.toString() );
 		var moves : ChessboardMoveCollection = this.getValidMovesByPieceGeometric();
+
 		var fieldsBehind : FieldNotationCollection = this.getFieldsBehindPieces();
 		moves.excludeToPositions( fieldsBehind );
 
+		// special moves
+		var specialMoves : FieldNotationCollection = this.getSpecialMoves();
+		log.info( "getValidMoves: specialMoves found {0}", specialMoves.length );
+		this.mergeMovesFromNotations( specialMoves, moves );
+
 		return moves;
+	}
+
+	private function mergeMovesFromNotations( notations : FieldNotationCollection, addToMoves : ChessboardMoveCollection ) : void {
+		var m : ChessboardMove;
+		var n : FieldNotation;
+		for each ( n in notations.list ) {
+			m = new ChessboardMove();
+			m.fromPosition = this._field.notation;
+			m.piece = this._piece;
+			m.toPosition = n;
+			m.game = this._game;
+
+			m.isCastlingLong = n.name == CASTLING_LONG;
+			m.isCastlingShort = n.name == CASTLING_SHORT;
+
+			addToMoves.add( m );
+		}
 	}
 
 	private function getFieldsBehindPieces() : FieldNotationCollection {
@@ -55,6 +89,54 @@ public class MoveValidator {
 
 		return list;
 	}
+
+	private function getSpecialMoves() : FieldNotationCollection {
+		var field : FieldNotation;
+		var moves : FieldNotationCollection = new FieldNotationCollection();
+
+		log.debug( "getSpecialMoves: currentPlayer: " + this._game.currentPlayer.name );
+
+		if ( this._piece is King ) {
+
+			var p : Player = this._game.currentPlayer;
+			if ( ! p.isKingMoved ) {
+				if ( p.isWhite ) {
+					if ( ! p.isRookRightMoved ) {
+						//log.debug( "add notation for short rochade" );
+						moves.add( FieldNotation.createNotationByString( "g1", CASTLING_SHORT ) );
+					}
+					if ( ! p.isRookLeftMoved ) {
+						//log.debug( "add notation for long rochade" );
+						moves.add( FieldNotation.createNotationByString( "c1", CASTLING_LONG ) );
+					}
+				} else {
+					if ( ! p.isRookRightMoved ) {
+						//log.debug( "add notation for short rochade" );
+						moves.add( FieldNotation.createNotationByString( "g8", CASTLING_SHORT ) );
+					}
+					if ( ! p.isRookLeftMoved ) {
+						//log.debug( "add notation for long rochade" );
+						moves.add( FieldNotation.createNotationByString( "c8", CASTLING_LONG ) );
+					}
+				}
+			}
+		}
+//		if ( ! ( this._piece is Pawn ) ) {
+//			field = this.getEnPassion();
+//			moves.add( this.getEnPassion() );
+//		}
+
+
+		return moves;
+	}
+
+//	private function getCastling() : FieldNotation {
+//		return null;
+//	}
+//
+//	private function getEnPassion() : FieldNotation {
+//		return null;
+//	}
 
 	private function getFieldBehindPawnFirstMove() : FieldNotation {
 		var pawn : Pawn = this._piece as Pawn;

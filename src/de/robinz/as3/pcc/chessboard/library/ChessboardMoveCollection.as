@@ -2,7 +2,10 @@ package de.robinz.as3.pcc.chessboard.library
 {
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
+import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.common.LoggerFactory;
+import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
+import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVOCollection;
 import de.robinz.as3.rzlib.collections.TypedCollection;
@@ -37,7 +40,7 @@ public class ChessboardMoveCollection extends TypedCollection
 	}
 
 	// TODO: check usage
-	public function getToPosition() : PiecePositionVOCollection {
+	public function getToPosition( to) : PiecePositionVOCollection {
 		var move : ChessboardMove;
 		var list : PiecePositionVOCollection = new PiecePositionVOCollection();
 		var p : PiecePositionVO;
@@ -52,6 +55,23 @@ public class ChessboardMoveCollection extends TypedCollection
 
 		return list;
 	}
+
+
+//	public function getToPosition() : PiecePositionVOCollection {
+//		var move : ChessboardMove;
+//		var list : PiecePositionVOCollection = new PiecePositionVOCollection();
+//		var p : PiecePositionVO;
+//
+//		for each( move in this._list ) {
+//			p = new PiecePositionVO();
+//			p.notation = move.toPosition;
+//			p.piece = move.piece;
+//
+//			list.add( p );
+//		}
+//
+//		return list;
+//	}
 
 	public function excludeToPositions( notations : FieldNotationCollection ) : void {
 		var move : ChessboardMove;

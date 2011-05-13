@@ -7,8 +7,19 @@ ChessboardField
 
 	<mx:Script>
 		<![CDATA[
-			import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
+		import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
+		import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 			import mx.controls.Text;
+
+			private var _validMove : ChessboardMove;
+
+			public function set validMove( move : ChessboardMove ) : void {
+				this._validMove = move;
+			}
+
+			public function get validMove() : ChessboardMove {
+				return this._validMove;
+			}
 
 			public function getNotation() : String {
 				return this.id;

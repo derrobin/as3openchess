@@ -16,6 +16,8 @@ public class ChessboardMove
 	public var fromPosition : FieldNotation;
 	public var toPosition : FieldNotation;
 
+	public var position : ChessPosition;
+
 	public var beatenPiece : IPiece;
 	public var game : ChessboardGameVO;
 
@@ -23,7 +25,14 @@ public class ChessboardMove
 	public var isMoveForward : Boolean = false;
 	public var isMoveJump : Boolean = false;
 
+	public var isCastlingLong : Boolean = false;
+	public var isCastlingShort : Boolean = false;
+
+	public var isCastingRookMovement : Boolean = false;
+
 	public var validMoves : ChessboardMoveCollection;
+	public var validMove : ChessboardMove; // created by MoveValidator, holds more validation info about current move
+
 
 	public function ChessboardMove()
 	{

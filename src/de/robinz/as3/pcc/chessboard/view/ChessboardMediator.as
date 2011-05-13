@@ -10,9 +10,12 @@ import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.FontManager;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
+import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 import de.robinz.as3.pcc.chessboard.view.views.Chessboard;
+import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardField;
+import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardField;
 import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardField;
 import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardFieldCollection;
 
@@ -291,20 +294,20 @@ public class ChessboardMediator extends BaseMediator
 		}
 	}
 
-	private function changeFieldStyle( notation : String, styleProperty : String, value : * ) : void {
-		var f : ChessboardField = this.getField( notation );
-
-		if ( f == null ) {
+	private function changeFieldStyle( field : ChessboardField, styleProperty : String, value : * ) : void {
+		if ( field == null ) {
 			return;
 		}
 
 		// dynamic font size, depends from piece settings
-		f.setStyle( "fontSize", this._pieceSettings.fontSizeCssValue );
-		f.setStyle( styleProperty, value );
+		field.setStyle( "fontSize", this._pieceSettings.fontSizeCssValue );
+		field.setStyle( styleProperty, value );
 	}
 
-	private function changeFieldColor( notation : String, color : int ) : void {
-		this.changeFieldStyle( notation, "backgroundColor", color );
+	private function changeFieldColor( notation : String, color : int ) : ChessboardField {
+		var field : ChessboardField = this.getField( notation );
+		this.changeFieldStyle( field, "backgroundColor", color );
+		return field;
 	}
 
 	private function markValidDrop( notation : String ) : void {
@@ -312,8 +315,14 @@ public class ChessboardMediator extends BaseMediator
 		this._hasValidDrop = true;
 	}
 
-	private function markMoveHint( notation : String ) : void {
-		this.changeFieldColor( notation, FIELD_COLOR_MOVE_HINT );
+//	private function markMoveHintByNotation( notation : String ) : void {
+//		var field : ChessboardField = this.changeFieldColor( notation, FIELD_COLOR_MOVE_HINT );
+//		this._hasMoveHints = true;
+//	}
+
+	private function markMoveHintByMove( validMove : ChessboardMove ) : void {
+		var field : ChessboardField = this.changeFieldColor( validMove.toPosition.toString(), FIELD_COLOR_MOVE_HINT );
+		field.validMove = validMove;
 		this._hasMoveHints = true;
 	}
 
@@ -332,7 +341,7 @@ public class ChessboardMediator extends BaseMediator
 		var move : ChessboardMove;
 
 		for each( move in validMoves.list ) {
-			this.markMoveHint( move.toPosition.toString() );
+			this.markMoveHintByMove( move );
 		}
 	}
 
@@ -431,7 +440,7 @@ public class ChessboardMediator extends BaseMediator
 	}
 
 	private function handleFieldHint( notation : String ) : void {
-		this.markMoveHint( notation );
+		//this.markMoveHintByMove( notation );
 	}
 
 	private function handleRemoveAllFieldHints() : void {
@@ -536,7 +545,7 @@ public class ChessboardMediator extends BaseMediator
 			var f : ChessboardField = t.parent as ChessboardField;
 
 			// TODO: get valid moves from command?
-			this._validMoves = ChessboardUtil.getValidMoves( f.data as ChessboardFieldVO, this.getPosition() );
+			this._validMoves = ChessboardUtil.getValidMoves( this._game, f.data as ChessboardFieldVO, this.getPosition() );
 
 			this.showMoveHints( f, p );
 		}
@@ -596,21 +605,25 @@ public class ChessboardMediator extends BaseMediator
 			return;
 		}
 
-		var tb : Box = Box( e.target ); // Target Box
-		var fb : Box = Box( e.dragInitiator.parent ); // From Box
+		var toField : ChessboardField = ChessboardField( e.target ); // Target Box
+		var fromField : ChessboardField = ChessboardField( e.dragInitiator.parent ); // From Box
 
 		var t : Text = Text( e.dragInitiator );
 		var p : IPiece = t.data as IPiece;
 
-		var fromPosition : FieldNotation = FieldNotation.createNotationByString( fb.id );
-		var toPosition : FieldNotation = FieldNotation.createNotationByString( tb.id );
+		var fromNotation : FieldNotation = FieldNotation.createNotationByString( fromField.id );
+		var toNotation : FieldNotation = FieldNotation.createNotationByString( toField.id );
 
 		var m : ChessboardMove = new ChessboardMove();
 		m.validMoves = this._validMoves;
-		m.fromPosition = fromPosition;
-		m.toPosition = toPosition;
+		m.validMove = toField.validMove;
+		m.position = this.getPosition();
+		m.game = this._game;
+
+		m.fromPosition = fromNotation;
+		m.toPosition = toNotation;
 		m.piece = p;
-		m.beatenPiece = this.getPieceAt( toPosition );
+		m.beatenPiece = this.getPieceAt( toNotation );
 
 		this._validMoves = null;
 		this.removeAllMoveHints();

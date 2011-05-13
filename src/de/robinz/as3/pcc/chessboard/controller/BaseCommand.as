@@ -28,7 +28,7 @@ import org.puremvc.as3.patterns.observer.Notification;
  */
 public class BaseCommand extends SimpleCommand implements INotifier
 {
-	protected var log : ILogger = LoggerFactory.getLogger( this );
+	protected var log : ILogger = LoggerFactory.getLogger( this, true );
 
 	// Start SimpleCommand overrides
 

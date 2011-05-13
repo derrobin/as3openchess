@@ -61,11 +61,11 @@ public class NewGameCommand extends BaseCommand
 		this.setWhitePiece( Pawn.NAME, "h2" );
 		this.setWhitePiece( Rook.NAME, "a1" );
 		this.setWhitePiece( Rook.NAME, "h1" );
-		this.setWhitePiece( Bishop.NAME, "c1" );
-		this.setWhitePiece( Bishop.NAME, "f1" );
-		this.setWhitePiece( Knight.NAME, "b1" );
-		this.setWhitePiece( Knight.NAME, "g1" );
-		this.setWhitePiece( Queen.NAME, "d1" );
+		//this.setWhitePiece( Bishop.NAME, "c1" );
+		//this.setWhitePiece( Bishop.NAME, "f1" );
+		//this.setWhitePiece( Knight.NAME, "b1" );
+		//this.setWhitePiece( Knight.NAME, "g1" );
+		//this.setWhitePiece( Queen.NAME, "d1" );
 		this.setWhitePiece( King.NAME, "e1" );
 
 		this.setBlackPiece( Pawn.NAME, "a7" );
@@ -78,11 +78,11 @@ public class NewGameCommand extends BaseCommand
 		this.setBlackPiece( Pawn.NAME, "h7" );
 		this.setBlackPiece( Rook.NAME, "a8" );
 		this.setBlackPiece( Rook.NAME, "h8" );
-		this.setBlackPiece( Bishop.NAME, "c8" );
-		this.setBlackPiece( Bishop.NAME, "f8" );
-		this.setBlackPiece( Knight.NAME, "b8" );
-		this.setBlackPiece( Knight.NAME, "g8" );
-		this.setBlackPiece( Queen.NAME, "d8" );
+		//this.setBlackPiece( Bishop.NAME, "c8" );
+		//this.setBlackPiece( Bishop.NAME, "f8" );
+		//this.setBlackPiece( Knight.NAME, "b8" );
+		//this.setBlackPiece( Knight.NAME, "g8" );
+		//this.setBlackPiece( Queen.NAME, "d8" );
 		this.setBlackPiece( King.NAME, "e8" );
 	}
 

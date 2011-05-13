@@ -3,6 +3,7 @@ import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 
+import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardFieldCollection;
 
 import mx.logging.ILogger;
@@ -38,9 +39,9 @@ public class ChessboardUtil {
 		return sequence;
 	}
 
-	public static function getValidMoves( field : ChessboardFieldVO, position : ChessPosition ) : ChessboardMoveCollection {
+	public static function getValidMoves( game : ChessboardGameVO, field : ChessboardFieldVO, position : ChessPosition ) : ChessboardMoveCollection {
 		var piece : IPiece = position.getPieceAt( field.notation.toString() );
-		var validator : MoveValidator = new MoveValidator( field, position, piece );
+		var validator : MoveValidator = new MoveValidator( game, field, position, piece );
 		return validator.getValidMoves();
 	}
 }
