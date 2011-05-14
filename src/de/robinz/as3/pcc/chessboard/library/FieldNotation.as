@@ -1,10 +1,5 @@
 package de.robinz.as3.pcc.chessboard.library
 {
-import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
-
-import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVOCollection;
-import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardFieldCollection;
-
 import mx.collections.ArrayCollection;
 import mx.logging.ILogger;
 import mx.logging.Log;
@@ -78,6 +73,9 @@ public class FieldNotation
 	public function checkSetColumn( value : int ) : Boolean {
 		var i : int = indexes.getItemIndex( this.column );
 		var index : int = i + value;
+		if ( index < 0 ) {
+			return false;
+		}
 		if ( index > indexes.length - 1 ) {
 			return false;
 		}

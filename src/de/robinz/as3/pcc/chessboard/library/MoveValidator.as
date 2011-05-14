@@ -1,16 +1,11 @@
 package de.robinz.as3.pcc.chessboard.library {
-import de.robinz.as3.pcc.chessboard.library.ChessboardMoveCollection;
-import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.common.LoggerFactory;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.pieces.King;
 import de.robinz.as3.pcc.chessboard.library.pieces.Pawn;
 import de.robinz.as3.pcc.chessboard.library.pieces.Rook;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
-
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
-
-import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
 
 import mx.logging.ILogger;
@@ -31,7 +26,6 @@ public class MoveValidator {
 	public static var CASTLING_SHORT : String = "castlingShort";
 	public static var CASTLING_LONG : String = "castlingLong";
 	public static var EN_PASSANT : String = "enPassant";
-
 
 
 	public function MoveValidator( game : ChessboardGameVO, field : ChessboardFieldVO, position : ChessPosition, piece : IPiece ) {
@@ -110,7 +104,6 @@ public class MoveValidator {
 //			moves.add( this.getEnPassion() );
 //		}
 
-
 		return moves;
 	}
 
@@ -150,8 +143,6 @@ public class MoveValidator {
 //		return null;
 //	}
 
-
-
 	private function getFieldBehindPawnFirstMove() : FieldNotation {
 		var pawn : Pawn = this._piece as Pawn;
 		var n : FieldNotation = this._field.notation.clone();
@@ -176,6 +167,7 @@ public class MoveValidator {
 		return null;
 	}
 
+	// get field range for line / diagonal
 	private function getFieldBehindCrossLanes() {
 		var list : FieldNotationCollection = new FieldNotationCollection();
 		log.info( "diagonal: get next piece for top left" );
@@ -218,12 +210,9 @@ public class MoveValidator {
 		return list;
 	}
 
-	private function getNextPieceOnLane( rowStep : int, columnStep : int ) : PiecePositionVO {
+	public function getLaneFields( rowStep : int, columnStep : int ) : FieldNotationCollection {
+		var fields : FieldNotationCollection = new FieldNotationCollection();
 		var walker : FieldNotation = _field.notation.clone();
-		var maxSteps : int = 8;
-		var i : int = 0;
-		var p : IPiece;
-		var pp : PiecePositionVO;
 
 		do {
 			if ( ! walker.checkRowSet( rowStep ) || ! walker.checkSetColumn( columnStep ) ) {
@@ -234,77 +223,70 @@ public class MoveValidator {
 			walker.setColumn( columnStep );
 			walker.setRow( rowStep );
 
-			log.debug( "walker is at field {0}.", walker.toString() );
-			p = this._position.getPieceAt( walker.toString() );
+			log.debug( "getLaneFields: walker at position {0}", walker.toString() );
+
+			fields.add( walker.clone() );
+		} while( true );
+
+		return fields;
+	}
+
+	private function getNextPieceOnLane( rowStep : int, columnStep : int ) : PiecePositionVO {
+		var fields : FieldNotationCollection = this.getLaneFields( rowStep, columnStep );
+		var p : IPiece;
+		var pp : PiecePositionVO;
+
+		for each( var field : FieldNotation in fields.list ) {
+			p = this._position.getPieceAt( field.toString() );
+
+			log.debug( "getNextPieceOnLane: field: {0}", field.toString() );
 
 			if ( p != null ) {
+				log.debug( "getNextPieceOnLane: piece: {0}", p.getName() );
+
 				pp = new PiecePositionVO();
-				pp.notation = FieldNotation.createNotationByString( walker.getNotation() );
+				pp.notation = FieldNotation.createNotationByString( field.getNotation() );
 				pp.piece = p;
 				return pp;
 			}
-
-			if ( i >= maxSteps ) {
-				log.warn( "loop exit condition failed, check your code!" );
-				break;
-			}
-
-			i++;
-		} while( true );
+		}
 
 		return null;
 	}
 
 	private function getFieldsBehind( rowStep : int, columnStep : int ) : FieldNotationCollection {
-		var walker : FieldNotation = _field.notation.clone();
-		var maxSteps : int = 8;
-		var i : int = 0;
+		var fields : FieldNotationCollection = this.getLaneFields( rowStep, columnStep );
+		var fieldsBehind : FieldNotationCollection = new FieldNotationCollection();
 		var p : IPiece;
 		var excludeNextFields : Boolean = false;
-		var fieldsBehind : FieldNotationCollection = new FieldNotationCollection();
 
-		do {
-			if ( ! walker.checkRowSet( rowStep ) || ! walker.checkSetColumn( columnStep ) ) {
-				log.debug( "walker has reached boundaries so get off." );
-				walker.checkRowSet( rowStep );
-				walker.checkSetColumn( columnStep );
-				break;
-			}
+		for each( var field : FieldNotation in fields.list ) {
+			p = this._position.getPieceAt( field.toString() );
 
-			walker.setColumn( columnStep );
-			walker.setRow( rowStep );
-
-			log.debug( "walker is at field {0}.", walker.toString() );
-			p = this._position.getPieceAt( walker.toString() );
+			log.debug( "getNextPieceOnLane: field: {0}", field.toString() );
 
 			if ( p != null ) {
 				if ( p.isWhite == this._piece.isWhite || !p.isWhite == !this._piece.isWhite ) {
-					log.debug( "walker has detected own figure at: {0}", walker.toString() );
-					fieldsBehind.add( walker.clone() );
+					log.debug( "walker has detected own figure at: {0}", field.toString() );
+					fieldsBehind.add( field.clone() );
 					log.debug( "getFieldsBehind: next fields are unvalid." );
 					excludeNextFields = true;
 				} else {
 					if ( excludeNextFields ) {
-						log.debug( "getFieldsBehind: {0} is a field behind.", walker.toString() );
-						fieldsBehind.add( walker.clone() );
+						log.debug( "getFieldsBehind: {0} is a field behind.", field.toString() );
+						fieldsBehind.add( field.clone() );
 					}
 					log.debug( "getFieldsBehind: next fields are unvalid." );
 					excludeNextFields = true;
 				}
 			} else {
 				if ( excludeNextFields ) {
-					log.debug( "getFieldsBehind: {0} is a field behind.", walker.toString() );
-					fieldsBehind.add( walker.clone() );
+					log.debug( "getFieldsBehind: {0} is a field behind.", field.toString() );
+					fieldsBehind.add( field.clone() );
 				}
 			}
 
-			if ( i >= maxSteps ) {
-				log.warn( "loop exit condition failed, check your code!" );
-				break;
-			}
-
-			i++;
-		} while( true );
+		}
 
 		return fieldsBehind;
 	}
