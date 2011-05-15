@@ -2,6 +2,7 @@ package de.robinz.as3.pcc.chessboard.view
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
+import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.view.views.ChessboardTakenPieces;
 import de.robinz.as3.pcc.chessboard.view.views.takenPieces.TakenPiece;
@@ -144,7 +145,7 @@ public class TakenPiecesMediator extends BaseMediator
 				this.handleNewGame();
 			break;
 			case ApplicationFacade.PIECE_REMOVED:
-				this.handlePieceRemoved( n.getBody() as ChessboardMove );
+				this.handlePieceRemoved( n.getBody() as IPiece );
 			break;
 		}
 	}
@@ -167,8 +168,8 @@ public class TakenPiecesMediator extends BaseMediator
 		this.reset();
 	}
 
-	private function handlePieceRemoved( m : ChessboardMove ) : void {
-		this.addPiece( m.beatenPiece );
+	private function handlePieceRemoved( piece : IPiece ) : void {
+		this.addPiece( piece );
 	}
 
 	// End Notification Handlers

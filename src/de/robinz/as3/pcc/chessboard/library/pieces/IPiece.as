@@ -14,9 +14,11 @@ public interface IPiece
 	function get notationChar() : String;
 	function get hasAbilityToBeatDiagonal() : Boolean;
 	function get hasAbilityToBeatLine() : Boolean;
+	function get hasMoved() : Boolean;
 
 	function setWhite() : void;
 	function setBlack() : void;
+	function move() : void;
 	function equals( piece : IPiece ) : Boolean;
 	function isMoveValide( m : ChessboardMove ) : Boolean;
 

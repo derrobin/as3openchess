@@ -13,6 +13,7 @@ public class Piece implements IPiece
 	private var _isWhite : Boolean = true;
 	private var _useFontKey : Boolean = false;
 	private var _fontKey : String;
+	private var _hasMoved : Boolean = false;
 
 	public static function createByParams( name : String, white : Boolean = true ) : IPiece {
 		var p : IPiece = factoryByName( name );
@@ -79,6 +80,14 @@ public class Piece implements IPiece
 
 		this._useFontKey = true;
 		this._fontKey = value;
+	}
+
+	public function get hasMoved() : Boolean {
+		return this._hasMoved;
+	}
+
+	public function move() : void {
+		this._hasMoved = true;
 	}
 
 	public function getName() : String {

@@ -39,12 +39,15 @@ public class MoveValidator {
 
 	public function getValidMoves() : ChessboardMoveCollection {
 		var piece : IPiece = this._position.getPieceAt( this._field.notation.toString() );
+
+		// get valid fields by geometric
 		var moves : ChessboardMoveCollection = this.getValidMovesByPieceGeometric();
 
+		// exclude fields behind pieces
 		var fieldsBehind : FieldNotationCollection = this.getFieldsBehindPieces();
 		moves.excludeToPositions( fieldsBehind );
 
-		// special moves
+		// merge special moves
 		var specialMoves : FieldNotationCollection = this.getSpecialMoves();
 		log.info( "getValidMoves: specialMoves found {0}", specialMoves.length );
 		this.mergeMovesFromNotations( specialMoves, moves );
@@ -64,6 +67,7 @@ public class MoveValidator {
 
 			m.isCastlingLong = n.name == CASTLING_LONG;
 			m.isCastlingShort = n.name == CASTLING_SHORT;
+			m.isEnPassant = n.name == EN_PASSANT;
 
 			addToMoves.add( m );
 		}
@@ -99,10 +103,9 @@ public class MoveValidator {
 			moves.addCollection( this.getRochade() );
 		}
 
-//		if ( ! ( this._piece is Pawn ) ) {
-//			field = this.getEnPassion();
-//			moves.add( this.getEnPassion() );
-//		}
+		if ( this._piece is Pawn && ! this._piece.hasMoved ) {
+			moves.add( this.getEnPassion() );
+		}
 
 		return moves;
 	}
@@ -139,9 +142,39 @@ public class MoveValidator {
 		return moves;
 	}
 
-//	private function getEnPassion() : FieldNotation {
-//		return null;
-//	}
+	private function getEnPassion() : FieldNotation {
+		var lastMove : ChessboardMove = this._game.moves.getLastMove();
+		var player : Player = this._game.currentPlayer;
+
+		if ( lastMove == null ) {
+			return null;
+		}
+
+		if ( lastMove.piece is Pawn && lastMove.isPawnDoubleJump ) {
+			log.debug( "last piece was pawn with double jump." );
+			var pawn : Pawn = lastMove.piece as Pawn;
+			var notation : String;
+			var rightColumn : String = FieldNotation.getColumn( this._field.notation.column, -1 );
+			var leftColumn : String = FieldNotation.getColumn( this._field.notation.column, +1 );
+			var newRow : int = player.isWhite ? this._field.notation.row + 1 : this._field.notation.row - 1;
+
+			if ( lastMove.toPosition.row == this._field.notation.row ) {
+				if ( lastMove.toPosition.column == rightColumn ) {
+					log.debug( "en passant on right" );
+					notation = rightColumn + newRow.toString();
+
+				}
+				if ( lastMove.toPosition.column == leftColumn ) {
+					log.debug( "en passant on left" );
+					notation = leftColumn + newRow.toString();
+				}
+
+				return FieldNotation.createNotationByString( notation, EN_PASSANT );
+			}
+		}
+
+		return null;
+	}
 
 	private function getFieldBehindPawnFirstMove() : FieldNotation {
 		var pawn : Pawn = this._piece as Pawn;

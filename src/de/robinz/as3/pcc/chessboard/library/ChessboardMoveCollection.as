@@ -27,6 +27,13 @@ public class ChessboardMoveCollection extends TypedCollection
 		this.log = LoggerFactory.getLogger( this );
 	}
 
+	public function getLastMove() : ChessboardMove {
+		if ( this._list.length == 0 ) {
+			return null;
+		}
+		return this.getAt( this._list.length - 1 );
+	}
+
 	public function hasNotationToPosition( notation : String ) : Boolean {
 		var move : ChessboardMove;
 
@@ -38,24 +45,6 @@ public class ChessboardMoveCollection extends TypedCollection
 
 		return false;
 	}
-
-	// TODO: check usage
-	public function getToPosition( to) : PiecePositionVOCollection {
-		var move : ChessboardMove;
-		var list : PiecePositionVOCollection = new PiecePositionVOCollection();
-		var p : PiecePositionVO;
-
-		for each( move in this._list ) {
-			p = new PiecePositionVO();
-			p.notation = move.toPosition;
-			p.piece = move.piece;
-
-			list.add( p );
-		}
-
-		return list;
-	}
-
 
 //	public function getToPosition() : PiecePositionVOCollection {
 //		var move : ChessboardMove;

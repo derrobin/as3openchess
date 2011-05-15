@@ -56,6 +56,14 @@ public class MoveCommand extends BaseCommand
 			}
 		}
 
+		if ( m.validMove.isEnPassant ) {
+			var field : FieldNotation = m.toPosition.clone();
+			field.setRow( m.game.currentPlayer.isWhite ? -1 : +1 );
+
+			log.debug( "remove enemy pawn at {0}", field.toString() );
+			sendNotification( ApplicationFacade.REMOVE_PIECE, field );
+		}
+
 		if ( m.isMoveForward == false ) {
 			this.gameProxy.move( m );
 		}

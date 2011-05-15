@@ -109,6 +109,7 @@ public class GameProxy extends BaseProxy
 		}
 
 		this._currentMove++;
+		m.piece.move();
 		this._game.moves.add( m );
 
 		// for rochade

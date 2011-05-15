@@ -27,6 +27,8 @@ public class ChessboardMove
 
 	public var isCastlingLong : Boolean = false;
 	public var isCastlingShort : Boolean = false;
+	public var isEnPassant : Boolean = false;
+	public var isPawnDoubleJump : Boolean = false;
 
 	public var isCastlingRookMovement : Boolean = false;
 

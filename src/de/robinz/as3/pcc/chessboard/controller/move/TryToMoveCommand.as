@@ -52,7 +52,7 @@ public class TryToMoveCommand extends BaseCommand
 			}
 
 			if ( movePiece.isWhite != m.beatenPiece.isWhite ) {
-				sendNotification( ApplicationFacade.REMOVE_PIECE, m );
+				sendNotification( ApplicationFacade.REMOVE_PIECE, m.toPosition );
 				sendNotification( ApplicationFacade.MOVE, m );
 			}
 

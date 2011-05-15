@@ -20,6 +20,25 @@ public class FieldNotation
 
 	public var name : String = "noname";
 
+	public static function getColumn( current : String, value : int ) : String {
+		var i : int = indexes.getItemIndex( current );
+		var index : int = i + value;
+
+		if ( index < 0 ) {
+			return null;
+		}
+		if ( index > indexes.length - 1 ) {
+			return null;
+		}
+
+		var n : Object = indexes.getItemAt( index < 0 ? 0 : index );
+		if ( n == null ) {
+			return null;
+		}
+
+		return n as String;
+	}
+
 	public static function createNotationByString( input : String, name : String = null ) : FieldNotation {
 		try {
 			var column : String = input.charAt( 0 ).toLowerCase();
@@ -71,6 +90,14 @@ public class FieldNotation
 	}
 
 	public function checkSetColumn( value : int ) : Boolean {
+		var column : String = getColumn( this.column, value );
+
+		if ( column == null ) {
+			return false;
+		}
+
+		return true;
+		/*
 		var i : int = indexes.getItemIndex( this.column );
 		var index : int = i + value;
 		if ( index < 0 ) {
@@ -85,6 +112,7 @@ public class FieldNotation
 		}
 
 		return true;
+		*/
 	}
 
 	public function setColumn( value : int ) {

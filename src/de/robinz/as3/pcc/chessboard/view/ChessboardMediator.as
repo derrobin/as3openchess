@@ -9,6 +9,7 @@ import de.robinz.as3.pcc.chessboard.library.CssSelectors;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.FontManager;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
+import de.robinz.as3.pcc.chessboard.library.pieces.Pawn;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
@@ -416,7 +417,8 @@ public class ChessboardMediator extends BaseMediator
 				this.handleDisableBoardInspectMode();
 			break;
 			case ApplicationFacade.REMOVE_PIECE:
-				this.handleRemovePiece( n.getBody() as ChessboardMove );
+				this.handleRemovePiece( n.getBody() as FieldNotation );
+
 			break;
 			case ApplicationFacade.REMOVE_ALL_PIECES:
 				this.handleRemoveAllPieces();
@@ -469,9 +471,10 @@ public class ChessboardMediator extends BaseMediator
 		this._isBoardInspectMode = false;
 	}
 
-	private function handleRemovePiece( m : ChessboardMove ) : void {
-		if ( this.removePieceByNotation( m.toPosition ) ) {
-			sendNotification( ApplicationFacade.PIECE_REMOVED, m );
+	private function handleRemovePiece( notation : FieldNotation ) : void {
+		var p : IPiece = this.getPieceAt( notation );
+		if ( this.removePieceByNotation( notation ) ) {
+			sendNotification( ApplicationFacade.PIECE_REMOVED, p );
 		}
 	}
 
@@ -556,9 +559,8 @@ public class ChessboardMediator extends BaseMediator
 			if ( e.target is ChessboardField ) {
 				var f : ChessboardField = e.target as ChessboardField;
 				var notation : String = f.id;
-				log.debug( "onDragEnter: piece at {0}", notation );
 
-
+				// log.debug( "onDragEnter: piece at {0}", notation );
 				if ( this._validMoves.hasNotationToPosition( notation ) ) {
 					log.debug( "onDragEnter: validMoves has notation to position {0}", notation.toString() );
 					DragManager.acceptDragDrop( f );
@@ -624,6 +626,7 @@ public class ChessboardMediator extends BaseMediator
 		m.toPosition = toNotation;
 		m.piece = p;
 		m.beatenPiece = this.getPieceAt( toNotation );
+		m.isPawnDoubleJump = p is Pawn && 2 == ( Math.max( toNotation.row, fromNotation.row ) - Math.min( toNotation.row, fromNotation.row ) );
 
 		this._validMoves = null;
 		this.removeAllMoveHints();
