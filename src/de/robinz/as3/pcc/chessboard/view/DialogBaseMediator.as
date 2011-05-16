@@ -37,6 +37,8 @@ public class DialogBaseMediator extends BaseMediator
 		view.title = title;
 		view.setStyle( "borderAlpha", 0.9 );
 		view.showCloseButton = true;
+
+		this._popup = view;
 		return view;
 	}
 

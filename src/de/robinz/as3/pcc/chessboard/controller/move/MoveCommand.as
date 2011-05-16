@@ -7,6 +7,8 @@ import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.MoveValidator;
 import de.robinz.as3.pcc.chessboard.library.Player;
+import de.robinz.as3.pcc.chessboard.library.pieces.Pawn;
+import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
 import de.robinz.as3.pcc.chessboard.model.GameProxy;
 
 import flash.sampler._getInvocationCount;
@@ -21,13 +23,16 @@ import org.puremvc.as3.patterns.command.SimpleCommand;
  */
 public class MoveCommand extends BaseCommand
 {
+	private var m : ChessboardMove;
+
 	// Start SimpleCommand overrides
 
 	public override function execute( n : INotification ) : void {
 		super.execute( n );
 
 		if ( n.getBody() is ChessboardMove ) {
-			this.move( n.getBody() as ChessboardMove );
+			this.m = n.getBody() as ChessboardMove ;
+			this.move();
 		}
 	}
 
@@ -36,11 +41,47 @@ public class MoveCommand extends BaseCommand
 
 	// Start Innerclass Methods
 
-	private function move( m : ChessboardMove ) : void {
-		// extra move for rochade
-		// MoveValidator( m.game, m.piece );
+	private function move() : void {
+		this.handleSpecialMoves();
+
+		if ( m.piece is Pawn ) {
+			this.checkPawnPromotion();
+		}
+
+		if ( m.isMoveForward == false ) {
+			this.gameProxy.move( m );
+		}
+
+		// give a reference to the corresponding game
+		// now currentMove is right
+		m.game = gameProxy.getCurrentGame();
+
+		if ( m.game.isLastMove ) {
+			sendNotification( ApplicationFacade.UNLOCK_BOARD );
+		} else {
+			sendNotification( ApplicationFacade.LOCK_BOARD );
+		}
+
+		log.debug( "next player: {0} ( {1} )", m.game.currentPlayer.name, m.game.currentPlayer.isWhite ? "white" : "black" );
+	}
+
+	private function checkPawnPromotion() : void {
+		var pp : PiecePositionVO = new PiecePositionVO();
+		pp.notation = m.toPosition;
+		pp.piece = m.piece;
+
+		var targetRow : int = m.game.currentPlayer.isWhite ? 8 : 1;
+
+		if ( m.toPosition.row == targetRow ) {
+			sendNotification( ApplicationFacade.PAWN_PROMOTION, pp );
+		}
+	}
+
+	private function handleSpecialMoves() : void {
 		var vm : ChessboardMove = m.validMove;
 		var p : Player = m.game.currentPlayer;
+
+		// check extra move for rochade
 		if ( vm != null ) {
 			if ( p.isWhite && vm.isCastlingShort ) {
 				this.moveRook( p, m, "h1", "f1" );
@@ -63,22 +104,6 @@ public class MoveCommand extends BaseCommand
 			log.debug( "remove enemy pawn at {0}", field.toString() );
 			sendNotification( ApplicationFacade.REMOVE_PIECE, field );
 		}
-
-		if ( m.isMoveForward == false ) {
-			this.gameProxy.move( m );
-		}
-
-		// give a reference to the corresponding game
-		// now currentMove is right
-		m.game = gameProxy.getCurrentGame();
-
-		if ( m.game.isLastMove ) {
-			sendNotification( ApplicationFacade.UNLOCK_BOARD );
-		} else {
-			sendNotification( ApplicationFacade.LOCK_BOARD );
-		}
-
-		log.debug( "next player: {0} ( {1} )", m.game.currentPlayer.name, m.game.currentPlayer.isWhite ? "white" : "black" );
 	}
 
 	private function moveRook( player : Player, parentMove : ChessboardMove, fromNotation : String, toNotation : String ) : void {

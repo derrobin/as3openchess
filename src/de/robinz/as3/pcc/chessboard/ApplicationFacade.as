@@ -44,6 +44,7 @@ public class ApplicationFacade extends Facade
 	public static const GET_MOVES : String = "getMoves";
 	public static const MOVE : String = "move";
 	public static const EXPORT_FEN : String = "exportFEN";
+	public static const PAWN_PROMOTION : String = "pawnPromotion";
 
 	// move history
 	public static const MOVE_START : String = "moveStart";
@@ -145,6 +146,7 @@ public class ApplicationFacade extends Facade
 		registerCommand( DISAPPEAR_GAME_ACTIONS_PANEL, PanelActionCommand );
 		registerCommand( DISAPPEAR_PIECE_SETTINGS, DialogActionCommand );
 		registerCommand( DISAPPEAR_MOVE_HISTORY_MODIFIER, DialogActionCommand );
+		registerCommand( PAWN_PROMOTION, DialogActionCommand );
 
 		registerCommand( TOGGLE_MOVE_HISTORY_PANEL, PanelActionCommand );
 		registerCommand( TOGGLE_TAKEN_PIECES_PANEL, PanelActionCommand );

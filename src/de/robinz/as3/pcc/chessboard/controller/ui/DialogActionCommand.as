@@ -5,6 +5,7 @@ import de.robinz.as3.pcc.chessboard.library.common.LoggerUtil;
 import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 import de.robinz.as3.pcc.chessboard.model.FontProxy;
 import de.robinz.as3.pcc.chessboard.view.MoveHistoryModifierMediator;
+import de.robinz.as3.pcc.chessboard.view.PawnConvertMediator;
 import de.robinz.as3.pcc.chessboard.view.PieceSettingsMediator;
 
 import org.puremvc.as3.interfaces.INotification;
@@ -28,6 +29,9 @@ public class DialogActionCommand extends BaseCommand {
 			case ApplicationFacade.APPEAR_PIECE_SETTINGS:
 				this.appearPieceSettings( n );
 			break;
+			case ApplicationFacade.PAWN_PROMOTION:
+				this.pawnPromotion( n );
+			break;
 
 			case ApplicationFacade.DISAPPEAR_MOVE_HISTORY_MODIFIER:
 				this.closeDialog( MoveHistoryModifierMediator.NAME );
@@ -45,7 +49,12 @@ public class DialogActionCommand extends BaseCommand {
 
 	// Start Innerclass Methods
 
-	public function appearPieceSettings( n:INotification ):void {
+	private function pawnPromotion( n : INotification ) : void {
+		this.facade.registerMediator( new PawnConvertMediator( appMediator.app ) );
+		this.facade.retrieveMediator( PawnConvertMediator.NAME ).handleNotification( n );
+	}
+
+	public function appearPieceSettings( n : INotification ) : void {
 		if ( this.facade.hasMediator( PieceSettingsMediator.NAME ) || this.appProxy.isDialogOpen( PieceSettingsMediator.NAME ) ) {
 			n.setType( PieceSettingsMediator.NOTIFICATION_TYPE_INTERRUPT_APPEAR );
 			return;
