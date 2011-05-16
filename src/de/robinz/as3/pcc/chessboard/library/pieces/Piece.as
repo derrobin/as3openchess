@@ -11,8 +11,8 @@ import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 public class Piece implements IPiece
 {
 	private var _isWhite : Boolean = true;
-	private var _useFontKey : Boolean = false;
-	private var _fontKey : String;
+	protected var _useFontKey : Boolean = false;
+	protected var _fontKey : String;
 	private var _hasMoved : Boolean = false;
 
 	public static function createByParams( name : String, white : Boolean = true ) : IPiece {

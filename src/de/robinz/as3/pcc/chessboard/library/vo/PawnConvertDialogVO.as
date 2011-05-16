@@ -1,4 +1,5 @@
 package de.robinz.as3.pcc.chessboard.library.vo {
+import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 
 /**
@@ -7,6 +8,8 @@ import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
  * @author robin heinel
  */
 public class PawnConvertDialogVO {
-	public var piece : IPiece;
+	public var pawn : PiecePositionVO;
+	public var notation : FieldNotation;
+	public var toPiece : IPiece;
 }
 }

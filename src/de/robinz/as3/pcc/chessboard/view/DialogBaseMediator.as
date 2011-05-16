@@ -16,7 +16,7 @@ import org.puremvc.as3.patterns.mediator.Mediator;
  */
 public class DialogBaseMediator extends BaseMediator
 {
-	protected var _popup : Container;
+	protected var _dialog : Container;
 
 	public function DialogBaseMediator( name : String, viewStage : DisplayObject ) {
 		super( name, viewStage );
@@ -26,7 +26,7 @@ public class DialogBaseMediator extends BaseMediator
 	// Start Innerclass Methods
 
 	protected function disappear() : void {
-		PopUpManager.removePopUp( this._popup );
+		PopUpManager.removePopUp( this._dialog );
 	}
 
 	protected function createDialog( title : String, width : int, height : int, target : Class, stage : DisplayObject, modalDialog : Boolean = false ) : TitleWindow {
@@ -38,7 +38,7 @@ public class DialogBaseMediator extends BaseMediator
 		view.setStyle( "borderAlpha", 0.9 );
 		view.showCloseButton = true;
 
-		this._popup = view;
+		this._dialog = view;
 		return view;
 	}
 

@@ -13,6 +13,7 @@ import de.robinz.as3.pcc.chessboard.library.pieces.Pawn;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
+import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 import de.robinz.as3.pcc.chessboard.view.views.Chessboard;
 import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardField;
@@ -100,7 +101,7 @@ public class ChessboardMediator extends BaseMediator
 			for( i; i <= rows.length; i++ ) {
 				c = rows.charAt( i - 1 );
 				notation = c + j.toString();
-				field = this.createField( notation, isWhite );
+				field = ChessboardUtil.createBoardField( notation, isWhite, FIELD_COLOR_WHITE, FIELD_COLOR_BLACK );
 
 				container = this.chessboard[ "row" + j ] as Container;
 				container.addChild( this.createFieldSpacer( FIELD_SPACE ) );
@@ -120,21 +121,21 @@ public class ChessboardMediator extends BaseMediator
 		return s;
 	}
 
-	private function createField( notation : String, isWhite : Boolean ) : ChessboardField {
-		var f : ChessboardField = new ChessboardField();
-		f.id = notation;
-		f.percentWidth = 12.5;
-		f.percentHeight = 100;
-		f.styleName = CssSelectors.BOARD_FIELD;
-		f.setStyle( "backgroundColor", isWhite ? FIELD_COLOR_WHITE : FIELD_COLOR_BLACK );
-
-		var vo : ChessboardFieldVO = new ChessboardFieldVO();
-		vo.isWhite = isWhite;
-		vo.notation = FieldNotation.createNotationByString( notation );
-		f.data = vo;
-
-		return f;
-	}
+//	private function createField( notation : String, isWhite : Boolean ) : ChessboardField {
+//		var f : ChessboardField = new ChessboardField();
+//		f.id = notation;
+//		f.percentWidth = 12.5;
+//		f.percentHeight = 100;
+//		f.styleName = CssSelectors.BOARD_FIELD;
+//		f.setStyle( "backgroundColor", isWhite ? FIELD_COLOR_WHITE : FIELD_COLOR_BLACK );
+//
+//		var vo : ChessboardFieldVO = new ChessboardFieldVO();
+//		vo.isWhite = isWhite;
+//		vo.notation = FieldNotation.createNotationByString( notation );
+//		f.data = vo;
+//
+//		return f;
+//	}
 
 	private function removePieceByNotation( n : FieldNotation ) : Boolean {
 		try {
@@ -256,19 +257,13 @@ public class ChessboardMediator extends BaseMediator
 			notation = FieldNotation.createNotationByString( field.id );
 			t.parent.removeChild( t );
 
-			this.setPiece( piece, notation );
+			this.setPiece( PiecePositionVO.create( piece, notation ) );
 		}
 	}
 
-	private function setPiece( p : IPiece, n : FieldNotation ) : void {
-		var field : Container = this.getField( n.toString() ) as Container;
-		var text : Text = new Text();
-
-		text.mouseChildren = false;
-		text.text = p.fontKey;
-		text.data = p;
-
-		field.addChild( text );
+	private function setPiece( pp : PiecePositionVO ) : void {
+		var field : ChessboardField = this.getField( pp.notation.toString() );
+		field.setPiece( pp.piece );
 	}
 
 	private function resetStyleForAllFields( resetStyle : *, styleProperty : String, isValidDrop : Boolean = false ) : void {
@@ -315,11 +310,6 @@ public class ChessboardMediator extends BaseMediator
 		this.changeFieldColor( notation, FIELD_COLOR_VALID_DROP );
 		this._hasValidDrop = true;
 	}
-
-//	private function markMoveHintByNotation( notation : String ) : void {
-//		var field : ChessboardField = this.changeFieldColor( notation, FIELD_COLOR_MOVE_HINT );
-//		this._hasMoveHints = true;
-//	}
 
 	private function markMoveHintByMove( validMove : ChessboardMove ) : void {
 		var field : ChessboardField = this.changeFieldColor( validMove.toPosition.toString(), FIELD_COLOR_MOVE_HINT );
@@ -418,13 +408,12 @@ public class ChessboardMediator extends BaseMediator
 			break;
 			case ApplicationFacade.REMOVE_PIECE:
 				this.handleRemovePiece( n.getBody() as FieldNotation );
-
 			break;
 			case ApplicationFacade.REMOVE_ALL_PIECES:
 				this.handleRemoveAllPieces();
 			break;
 			case ApplicationFacade.SET_PIECE:
-				this.handleSetPiece( n.getBody() as ChessboardMove );
+				this.handleSetPiece( n.getBody() as PiecePositionVO );
 			break;
 			case ApplicationFacade.MOVE:
 				this.handleMove( n.getBody() as ChessboardMove );
@@ -482,11 +471,8 @@ public class ChessboardMediator extends BaseMediator
 		this.removeAllPieces();
 	}
 
-	private function handleSetPiece( m : ChessboardMove ) : void {
-		var n : FieldNotation = m.toPosition;
-		var p : IPiece = m.piece;
-
-		this.setPiece( p, n );
+	private function handleSetPiece( pp : PiecePositionVO ) : void {
+		this.setPiece( pp );
 	}
 
 	private function handleMove( m : ChessboardMove ) : void {

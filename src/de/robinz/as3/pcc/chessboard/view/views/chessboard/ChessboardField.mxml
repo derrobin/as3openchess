@@ -46,6 +46,16 @@ ChessboardField
 				return null;
 			}
 
+			public function setPiece( piece : IPiece ) : void {
+				var text : Text = new Text();
+
+				text.mouseChildren = false;
+				text.text = piece.fontKey;
+				text.data = piece;
+
+				this.addChild( text );
+			}
+
 			public function getText() : Text {
 				var t : Text = this.getChildAt( 0 ) as Text;
 				return t;

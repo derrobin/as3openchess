@@ -41,7 +41,7 @@ public class MoveHistoryModifierMediator extends DialogBaseMediator
 		view.addEventListener( MoveHistoryModifier.EVENT_MOVE_FORWARD, onClickMoveForward );
 		view.addEventListener( MoveHistoryModifier.EVENT_MOVE_BACKWARD, onClickMoveBackward );
 
-		this._popup = view as MoveHistoryModifier;
+		this._dialog = view as MoveHistoryModifier;
 		//this._popup.addEventListener( MouseEvent.CLICK, onMouseClick );
 	}
 

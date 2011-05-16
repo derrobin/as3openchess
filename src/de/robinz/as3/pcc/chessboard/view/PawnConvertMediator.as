@@ -1,18 +1,19 @@
 package de.robinz.as3.pcc.chessboard.view
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
-import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
+import de.robinz.as3.pcc.chessboard.library.ChessboardUtil;
+import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
+import de.robinz.as3.pcc.chessboard.library.pieces.Piece;
 import de.robinz.as3.pcc.chessboard.library.vo.PawnConvertDialogVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
-import de.robinz.as3.pcc.chessboard.library.vo.SaveGameDialogVO;
+import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardField;
 import de.robinz.as3.pcc.chessboard.view.views.game.PawnConvertDialog;
-import de.robinz.as3.pcc.chessboard.view.views.game.SaveGameDialog;
 
 import flash.display.DisplayObject;
 import flash.events.Event;
+import flash.events.MouseEvent;
 
-import mx.containers.TitleWindow;
-import mx.events.CloseEvent;
+import mx.controls.Text;
 
 import org.puremvc.as3.interfaces.INotification;
 
@@ -35,14 +36,52 @@ public class PawnConvertMediator extends DialogBaseMediator
 
 	// Start Innerclass Methods
 
+	private function createField( pieceName : String, notation : String, isWhite : Boolean, size : int = 75 ) : ChessboardField {
+		var field : ChessboardField = ChessboardUtil.createBoardField( notation, true );
+
+		field.setPiece( Piece.createByParams( pieceName, isWhite ) );
+		field.width = size;
+		field.height = size;
+
+		field.setStyle( "borderColor", 0xbbbbbb );
+		field.setStyle( "borderThickness", 1 );
+		field.setStyle( "borderStyle", "solid" );
+		field.setStyle( "borderSides", "top bottom right left" );
+
+		field.addEventListener( MouseEvent.MOUSE_OVER, function() { field.setStyle( "borderColor", 0xff0000 ); } );
+		field.addEventListener( MouseEvent.MOUSE_OUT, function() { field.setStyle( "borderColor", 0xbbbbbb ); } );
+
+		return field;
+	}
+
+	private function convertPawn( toPiece : IPiece ) : void {
+		var newPiece : PiecePositionVO = new PiecePositionVO();
+		newPiece.notation = this._data.pawn.notation;
+		newPiece.piece = Piece.createByParams( toPiece.getName(), toPiece.isWhite );
+		newPiece.piece.move();
+
+		sendNotification( ApplicationFacade.REMOVE_PIECE, this._data.pawn.notation );
+		sendNotification( ApplicationFacade.SET_PIECE, newPiece );
+	}
+
 	private function appear() : void {
-		var view : TitleWindow = this.createDialog( "Choose Piece: ", 500, 210, PawnConvertDialog, this.stage, true );
-		view.addEventListener( PawnConvertDialog.EVENT_CHOOSE_PIECE, onChoosePiece );
+		var view : PawnConvertDialog = this.createDialog( "Convert Pawn to: ", 380, 170, PawnConvertDialog, this.stage, true ) as PawnConvertDialog;
+		var isWhite : Boolean = this._data.pawn.piece.isWhite;
+
+		view.fieldStage.addChild( createField( "queen", "a1", isWhite ) );
+		view.fieldStage.addChild( createField( "rook", "a2", isWhite ) );
+		view.fieldStage.addChild( createField( "bishop", "a3", isWhite ) );
+		view.fieldStage.addChild( createField( "knight", "a4", isWhite ) );
+
+		view.initialize();
+
+		view.fieldStage.addEventListener( MouseEvent.CLICK, onMouseClick );
+
 		this.flushData();
 	}
 
 	private function flushData() : void {
-		if ( this.popup == null ) {
+		if ( this.popUp == null ) {
 			return;
 		}
 	}
@@ -71,7 +110,8 @@ public class PawnConvertMediator extends DialogBaseMediator
 
 	// Start Notification Handlers
 
-	private function handlePawnPromotion( piece : PiecePositionVO ) : void {
+	private function handlePawnPromotion( pawn : PiecePositionVO ) : void {
+		this._data.pawn = pawn;
 		this.appear();
 	}
 
@@ -80,14 +120,27 @@ public class PawnConvertMediator extends DialogBaseMediator
 
 	// Start Event Handlers
 
-	protected function onPopupClose( e : CloseEvent ) : void {
-		this.disappear();
-	}
+	private function onMouseClick( e : Event ) : void {
+		var piece : IPiece = null;
 
-	private function onChoosePiece( e : Event ) : void {
-		log.debug( "piece choosed!" );
-		this.disappear();
-		this.facade.removeMediator( PawnConvertMediator.NAME );
+		if ( e.target is Text ) {
+			var t : Text = e.target as Text;
+			if ( t.data is IPiece ) {
+				piece = t.data as IPiece;
+			}
+		}
+		if ( e.target is ChessboardField ) {
+			var field : ChessboardField = e.target as ChessboardField;
+			piece = ( field.getChildAt( 0 ) as Text ).data as IPiece;
+		}
+
+		if ( piece != null ) {
+			log.debug( "piece {0} choosen",  piece.getName() );
+			this.convertPawn( piece );
+			this.disappear();
+			this.facade.removeMediator( PawnConvertMediator.NAME );
+		}
+
 	}
 
 	// End Event Handlers
@@ -95,8 +148,8 @@ public class PawnConvertMediator extends DialogBaseMediator
 
 	// Start Getter / Setters
 
-	protected function get popup() : PawnConvertDialog {
-		return this._popup as PawnConvertDialog;
+	protected function get popUp() : PawnConvertDialog {
+		return this._dialog as PawnConvertDialog;
 	}
 
 	// End Getter / Setters

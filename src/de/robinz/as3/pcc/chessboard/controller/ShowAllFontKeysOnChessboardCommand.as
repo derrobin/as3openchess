@@ -4,7 +4,9 @@ import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 import de.robinz.as3.pcc.chessboard.library.pieces.FakedPiece;
+import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.pieces.Piece;
+import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
 import de.robinz.as3.pcc.chessboard.model.GameProxy;
 
 import org.puremvc.as3.interfaces.INotification;
@@ -67,15 +69,24 @@ public class ShowAllFontKeysOnChessboardCommand extends BaseCommand
 	}
 
 	private function setPiece( fontKey : String, shortenNotation : String ) : void {
-		var m : ChessboardMove = new ChessboardMove();
+		var pp : PiecePositionVO = new PiecePositionVO();
+		var fake : FakedPiece = new FakedPiece();
+		fake.setFontKey( fontKey );
 
-		var fake : Piece = new FakedPiece();
-		fake.fontKey = fontKey;
+		pp.piece = new FakedPiece();
+		pp.piece = fake;
+		pp.notation = FieldNotation.createNotationByString( shortenNotation );
 
-		m.piece = fake;
-		m.toPosition = FieldNotation.createNotationByString( shortenNotation );
+		sendNotification( ApplicationFacade.SET_PIECE, pp );
 
-		sendNotification( ApplicationFacade.SET_PIECE, m );
+//		var m : ChessboardMove = new ChessboardMove();
+//
+//		var fake : Piece = new FakedPiece();
+//		fake.fontKey = fontKey;
+//
+//		m.piece = fake;
+//		m.toPosition = FieldNotation.createNotationByString( shortenNotation );
+//		sendNotification( ApplicationFacade.SET_PIECE, m );
 	}
 
 	// End Innerclass Methods

@@ -30,7 +30,7 @@ public class NewGameCommand extends BaseCommand
 		sendNotification( ApplicationFacade.DISABLE_BOARD_INSPECT_PIECE_MODE );
 		sendNotification( ApplicationFacade.UNLOCK_BOARD );
 
-		this.setEnPassantTest();
+		this.setDefault();
 		this.gameProxy.reset();
 
 		this.gameProxy.start(
@@ -80,6 +80,26 @@ public class NewGameCommand extends BaseCommand
 		this.setBlackPiece( Knight.NAME, "g8" );
 		this.setBlackPiece( Queen.NAME, "d8" );
 		this.setBlackPiece( King.NAME, "e8" );
+	}
+
+	private function setPawnPromotionTest() : void {
+		this.setWhitePiece( Pawn.NAME, "a7" );
+		this.setWhitePiece( Pawn.NAME, "b7" );
+		this.setWhitePiece( Pawn.NAME, "c7" );
+		this.setWhitePiece( Pawn.NAME, "d7" );
+		this.setWhitePiece( Pawn.NAME, "e7" );
+		this.setWhitePiece( Pawn.NAME, "f7" );
+		this.setWhitePiece( Pawn.NAME, "g7" );
+		this.setWhitePiece( Pawn.NAME, "h7" );
+
+		this.setBlackPiece( Pawn.NAME, "a2" );
+		this.setBlackPiece( Pawn.NAME, "b2" );
+		this.setBlackPiece( Pawn.NAME, "c2" );
+		this.setBlackPiece( Pawn.NAME, "d2" );
+		this.setBlackPiece( Pawn.NAME, "e2" );
+		this.setBlackPiece( Pawn.NAME, "f2" );
+		this.setBlackPiece( Pawn.NAME, "g2" );
+		this.setBlackPiece( Pawn.NAME, "h2" );
 	}
 
 	private function setEnPassantTest() : void {

@@ -39,7 +39,7 @@ public class SaveGameDialogMediator extends DialogBaseMediator
 		view.addEventListener( CloseEvent.CLOSE, onPopupClose );
 		view.addEventListener( SaveGameDialog.EVENT_SAVE_GAME, onSaveGame );
 
-		this._popup = view as SaveGameDialog;
+		this._dialog = view as SaveGameDialog;
 		this.flushData();
 	}
 
@@ -139,7 +139,7 @@ public class SaveGameDialogMediator extends DialogBaseMediator
 	// Start Getter / Setters
 
 	protected function get popup() : SaveGameDialog {
-		return this._popup as SaveGameDialog;
+		return this._dialog as SaveGameDialog;
 	}
 
 	// End Getter / Setters

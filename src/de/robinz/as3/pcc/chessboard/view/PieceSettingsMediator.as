@@ -68,7 +68,7 @@ public class PieceSettingsMediator extends DialogBaseMediator
 	}
 
 	private function refreshStyleEntries() : void {
-		if ( this._popup == null ) {
+		if ( this._dialog == null ) {
 			return;
 		}
 
@@ -108,8 +108,8 @@ public class PieceSettingsMediator extends DialogBaseMediator
 		view.addEventListener( PieceSettingsDialog.EVENT_CLOSE, onClose );
 
 
-		this._popup = view as PieceSettingsDialog;
-		this._popup.addEventListener( MouseEvent.CLICK, onMouseClick );
+		this._dialog = view as PieceSettingsDialog;
+		this._dialog.addEventListener( MouseEvent.CLICK, onMouseClick );
 	}
 
 	private function close() : void {
@@ -195,7 +195,7 @@ public class PieceSettingsMediator extends DialogBaseMediator
 	// Start Getter / Setters
 
 	protected function get popup() : PieceSettingsDialog {
-		return this._popup as PieceSettingsDialog;
+		return this._dialog as PieceSettingsDialog;
 	}
 
 	// End Getter / Setters

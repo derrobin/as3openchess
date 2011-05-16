@@ -2,6 +2,7 @@ package de.robinz.as3.pcc.chessboard.model
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.library.Player;
+import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.pieces.King;
 import de.robinz.as3.pcc.chessboard.library.pieces.Rook;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
@@ -9,6 +10,8 @@ import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMoveCollection;
 import de.robinz.as3.pcc.chessboard.library.pieces.Piece;
+
+import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
 
 import org.puremvc.as3.patterns.proxy.Proxy;
 
@@ -152,13 +155,11 @@ public class GameProxy extends BaseProxy
 		return this._game;
 	}
 
-	public function setPiece( piece : String, shortenNotation : String, isWhite : Boolean ) : void {
-		var m : ChessboardMove = new ChessboardMove();
+	public function setPiece( pieceName : String, shortenNotation : String, isWhite : Boolean ) : void {
+		var piece : IPiece = Piece.createByParams( pieceName, isWhite );
+		var notation : FieldNotation = FieldNotation.createNotationByString( shortenNotation );
 
-		m.piece = Piece.createByParams( piece, isWhite );
-		m.toPosition = FieldNotation.createNotationByString( shortenNotation );
-
-		sendNotification( ApplicationFacade.SET_PIECE, m );
+		sendNotification( ApplicationFacade.SET_PIECE, PiecePositionVO.create( piece, notation ) );
 	}
 
 	// End Proxy Interface

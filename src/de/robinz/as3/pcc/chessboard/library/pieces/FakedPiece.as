@@ -10,6 +10,7 @@ public class FakedPiece extends Piece implements IPiece
 	public static var NAME : String = "fakedPiece";
 
 	public function FakedPiece() {
+		this._useFontKey = true;
 	}
 
 	public override function getName() : String {
@@ -23,5 +24,10 @@ public class FakedPiece extends Piece implements IPiece
 	public override function get notationChar() : String {
 		return "X";
 	}
+
+	public function setFontKey( value : String ) : void {
+		this._fontKey = value;
+	}
+
 }
 }
