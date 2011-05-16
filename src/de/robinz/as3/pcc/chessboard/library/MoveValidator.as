@@ -103,7 +103,7 @@ public class MoveValidator {
 			moves.addCollection( this.getRochade() );
 		}
 
-		if ( this._piece is Pawn && ! this._piece.hasMoved ) {
+		if ( this._piece is Pawn ) {
 			moves.add( this.getEnPassion() );
 		}
 

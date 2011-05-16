@@ -30,7 +30,7 @@ public class NewGameCommand extends BaseCommand
 		sendNotification( ApplicationFacade.DISABLE_BOARD_INSPECT_PIECE_MODE );
 		sendNotification( ApplicationFacade.UNLOCK_BOARD );
 
-		this.setDefaultPieces();
+		this.setDefault();
 		this.gameProxy.reset();
 
 		this.gameProxy.start(
@@ -46,54 +46,49 @@ public class NewGameCommand extends BaseCommand
 
 	// Start Innerclass Methods
 
-	/**
-	 * Create Chess Start Positions
-	 *
-	 */
-	private function setDefaultPieces() : void {
+	private function setDefault() : void {
+		this.setWhitePiece( Pawn.NAME, "a2" );
+		this.setWhitePiece( Pawn.NAME, "b2" );
+		this.setWhitePiece( Pawn.NAME, "c2" );
+		this.setWhitePiece( Pawn.NAME, "d2" );
+		this.setWhitePiece( Pawn.NAME, "e2" );
+		this.setWhitePiece( Pawn.NAME, "f2" );
+		this.setWhitePiece( Pawn.NAME, "g2" );
+		this.setWhitePiece( Pawn.NAME, "h2" );
+		this.setWhitePiece( Rook.NAME, "a1" );
+		this.setWhitePiece( Rook.NAME, "h1" );
+		this.setWhitePiece( Bishop.NAME, "c1" );
+		this.setWhitePiece( Bishop.NAME, "f1" );
+		this.setWhitePiece( Knight.NAME, "b1" );
+		this.setWhitePiece( Knight.NAME, "g1" );
+		this.setWhitePiece( Queen.NAME, "d1" );
+		this.setWhitePiece( King.NAME, "e1" );
+
+		this.setBlackPiece( Pawn.NAME, "a7" );
+		this.setBlackPiece( Pawn.NAME, "b7" );
+		this.setBlackPiece( Pawn.NAME, "c7" );
+		this.setBlackPiece( Pawn.NAME, "d7" );
+		this.setBlackPiece( Pawn.NAME, "e7" );
+		this.setBlackPiece( Pawn.NAME, "f7" );
+		this.setBlackPiece( Pawn.NAME, "g7" );
+		this.setBlackPiece( Pawn.NAME, "h7" );
+		this.setBlackPiece( Rook.NAME, "a8" );
+		this.setBlackPiece( Rook.NAME, "h8" );
+		this.setBlackPiece( Bishop.NAME, "c8" );
+		this.setBlackPiece( Bishop.NAME, "f8" );
+		this.setBlackPiece( Knight.NAME, "b8" );
+		this.setBlackPiece( Knight.NAME, "g8" );
+		this.setBlackPiece( Queen.NAME, "d8" );
+		this.setBlackPiece( King.NAME, "e8" );
+	}
+
+	private function setEnPassantTest() : void {
 		this.setBlackPiece( Pawn.NAME, "b7" );
 		this.setWhitePiece( Pawn.NAME, "c5" );
-
 		this.setBlackPiece( Pawn.NAME, "e4" );
 		this.setWhitePiece( Pawn.NAME, "f2" );
-
 		this.setWhitePiece( Bishop.NAME, "c1" );
 		this.setBlackPiece( Bishop.NAME, "c2" );
-
-
-//		this.setWhitePiece( Pawn.NAME, "a2" );
-//		this.setWhitePiece( Pawn.NAME, "b2" );
-//		this.setWhitePiece( Pawn.NAME, "c2" );
-//		this.setWhitePiece( Pawn.NAME, "d2" );
-//		this.setWhitePiece( Pawn.NAME, "e2" );
-//		this.setWhitePiece( Pawn.NAME, "f2" );
-//		this.setWhitePiece( Pawn.NAME, "g2" );
-//		this.setWhitePiece( Pawn.NAME, "h2" );
-//		this.setWhitePiece( Rook.NAME, "a1" );
-//		this.setWhitePiece( Rook.NAME, "h1" );
-//		this.setWhitePiece( Bishop.NAME, "c1" );
-//		this.setWhitePiece( Bishop.NAME, "f1" );
-//		this.setWhitePiece( Knight.NAME, "b1" );
-//		this.setWhitePiece( Knight.NAME, "g1" );
-//		this.setWhitePiece( Queen.NAME, "d1" );
-//		this.setWhitePiece( King.NAME, "e1" );
-//
-//		this.setBlackPiece( Pawn.NAME, "a7" );
-//		this.setBlackPiece( Pawn.NAME, "b7" );
-//		this.setBlackPiece( Pawn.NAME, "c7" );
-//		this.setBlackPiece( Pawn.NAME, "d7" );
-//		this.setBlackPiece( Pawn.NAME, "e7" );
-//		this.setBlackPiece( Pawn.NAME, "f7" );
-//		this.setBlackPiece( Pawn.NAME, "g7" );
-//		this.setBlackPiece( Pawn.NAME, "h7" );
-//		this.setBlackPiece( Rook.NAME, "a8" );
-//		this.setBlackPiece( Rook.NAME, "h8" );
-//		this.setBlackPiece( Bishop.NAME, "c8" );
-//		this.setBlackPiece( Bishop.NAME, "f8" );
-//		this.setBlackPiece( Knight.NAME, "b8" );
-//		this.setBlackPiece( Knight.NAME, "g8" );
-//		this.setBlackPiece( Queen.NAME, "d8" );
-//		this.setBlackPiece( King.NAME, "e8" );
 	}
 
 	private function setWhitePiece( piece : String, shortenNotation : String ) : void {
