@@ -12,6 +12,10 @@ global {
 	paddingBottom: 0;
 	paddingTop: 0px;
 }
+DragManager {
+	moveCursor: Embed(source="/de/robinz/as3/pcc/chessboard/resources/images/drop-valid.png");
+	rejectCursor: Embed(source="/de/robinz/as3/pcc/chessboard/resources/images/drop-unvalid.png");
+}
 .chessboardLeftPanelContainer {
 	horizontalGap: 20;
 	verticalGap: 20;

@@ -120,20 +120,16 @@ public class MoveValidator {
 
 			if ( p.isWhite ) {
 				if ( ! p.isRookRightMoved && npr != null && npr.piece is Rook && npr.notation.toString() == "h1" ) {
-					//log.debug( "add notation for short rochade" );
 					moves.add( FieldNotation.createNotationByString( "g1", CASTLING_SHORT ) );
 				}
 				if ( ! p.isRookLeftMoved && npl != null && npl.piece is Rook && npl.notation.toString() == "a1" ) {
-					//log.debug( "add notation for long rochade" );
 					moves.add( FieldNotation.createNotationByString( "c1", CASTLING_LONG ) );
 				}
 			} else {
 				if ( ! p.isRookRightMoved && npr != null && npr.piece is Rook && npr.notation.toString() == "h8" ) {
-					//log.debug( "add notation for short rochade" );
 					moves.add( FieldNotation.createNotationByString( "g8", CASTLING_SHORT ) );
 				}
 				if ( ! p.isRookLeftMoved && npl != null && npl.piece is Rook && npl.notation.toString() == "a8" ) {
-					//log.debug( "add notation for long rochade" );
 					moves.add( FieldNotation.createNotationByString( "c8", CASTLING_LONG ) );
 				}
 			}
@@ -203,13 +199,13 @@ public class MoveValidator {
 	// get field range for line / diagonal
 	private function getFieldBehindCrossLanes() {
 		var list : FieldNotationCollection = new FieldNotationCollection();
-		log.info( "diagonal: get next piece for top left" );
+		// diagonal: get next piece for top left
 		var topLeft : FieldNotationCollection = getFieldsBehind( +1, -1 );
-		log.info( "diagonal: get next piece for top left" );
+		// diagonal: get next piece for top left
 		var topRight : FieldNotationCollection = getFieldsBehind( +1, +1 );
-		log.info( "diagonal: get next piece for down left" );
+		// diagonal: get next piece for down left
 		var downLeft : FieldNotationCollection = getFieldsBehind( -1, -1 );
-		log.info( "diagonal: get next piece for down right" );
+		// diagonal: get next piece for down right
 		var downRight : FieldNotationCollection = getFieldsBehind( -1, +1 );
 
 		list.addCollection( topLeft );
@@ -224,14 +220,13 @@ public class MoveValidator {
 	// get field range for line / horizontal
 	private function getFieldBehindDirectLanes() {
 		var list : FieldNotationCollection = new FieldNotationCollection();
-
-		log.info( "line: get next piece for top" );
+		// line: get next piece for top
 		var top : FieldNotationCollection = getFieldsBehind( +1, 0 );
-		log.info( "line: get next piece for bottom" );
+		// line: get next piece for bottom
 		var bottom : FieldNotationCollection = getFieldsBehind( -1, 0 );
-		log.info( "line: get next piece for left" );
+		// line: get next piece for left
 		var left : FieldNotationCollection = getFieldsBehind(  0, -1 );
-		log.info( "line: get next piece for right" );
+		// line: get next piece for right
 		var right : FieldNotationCollection = getFieldsBehind( 0, +1 );
 
 		list.addCollection( top );

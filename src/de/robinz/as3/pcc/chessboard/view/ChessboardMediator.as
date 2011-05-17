@@ -26,6 +26,8 @@ import flash.display.DisplayObjectContainer;
 import flash.events.Event;
 import flash.events.MouseEvent;
 
+import flash.ui.Mouse;
+
 import mx.collections.ArrayCollection;
 import mx.containers.Box;
 import mx.controls.Alert;
@@ -120,22 +122,6 @@ public class ChessboardMediator extends BaseMediator
 		s.width = width;
 		return s;
 	}
-
-//	private function createField( notation : String, isWhite : Boolean ) : ChessboardField {
-//		var f : ChessboardField = new ChessboardField();
-//		f.id = notation;
-//		f.percentWidth = 12.5;
-//		f.percentHeight = 100;
-//		f.styleName = CssSelectors.BOARD_FIELD;
-//		f.setStyle( "backgroundColor", isWhite ? FIELD_COLOR_WHITE : FIELD_COLOR_BLACK );
-//
-//		var vo : ChessboardFieldVO = new ChessboardFieldVO();
-//		vo.isWhite = isWhite;
-//		vo.notation = FieldNotation.createNotationByString( notation );
-//		f.data = vo;
-//
-//		return f;
-//	}
 
 	private function removePieceByNotation( n : FieldNotation ) : Boolean {
 		try {
@@ -481,18 +467,25 @@ public class ChessboardMediator extends BaseMediator
 
 	private function prepareDrag( e : MouseEvent ) : void {
 		var t : Text = e.target as Text;
+
 		var piece : IPiece = t.data as IPiece;
 
 		if ( piece == null ) {
 			return;
 		}
 
-		var fm : FontManager = FontManager.getInstance();
 		var ds : DragSource = new DragSource();
-
 		ds.addData( t, "piece" );
 
-		DragManager.doDrag( t, ds, e /* , fm.convertTextToFlexImage( piece.fontKey ) */ );
+		// TODO: a copy of text is necessary, otherwise the Text will loose ChessboardField as parent
+		var dragImage : Text = new Text();
+		dragImage.mouseChildren = false;
+		dragImage.mouseEnabled = false;
+		dragImage.text = t.text;
+		dragImage.setStyle( "fontFamily", this._pieceSettings.fontId );
+		dragImage.setStyle( "fontSize", this._pieceSettings.fontSizeCssValue );
+
+		DragManager.doDrag( t, ds, e, dragImage, 0, 0, 1 );
 	}
 
 	private function onMouseDown( e : MouseEvent ) : void {

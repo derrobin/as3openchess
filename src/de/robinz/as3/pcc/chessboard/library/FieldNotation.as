@@ -97,22 +97,6 @@ public class FieldNotation
 		}
 
 		return true;
-		/*
-		var i : int = indexes.getItemIndex( this.column );
-		var index : int = i + value;
-		if ( index < 0 ) {
-			return false;
-		}
-		if ( index > indexes.length - 1 ) {
-			return false;
-		}
-		var n : Object = indexes.getItemAt( index < 0 ? 0 : index );
-		if ( n == null ) {
-			return false;
-		}
-
-		return true;
-		*/
 	}
 
 	public function setColumn( value : int ) {

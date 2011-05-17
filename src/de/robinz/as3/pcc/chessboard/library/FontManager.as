@@ -95,37 +95,5 @@ public class FontManager
 		throw new Error( "No Font Key Found!" );
 	}
 
-	/* public function convertTextToFlexImage( text : String ) : Image {
-		var img : Image = new Image();
-		var b : Bitmap = this.textToBitmap( text );
-
-
-		img.source = b;
-
-		return img;
-	} */
-
-	// TODO: Funktion auslagern, Font-Param adden ( common )
-	/* public function textToBitmap( str : String ) : Bitmap {
-		var fmt : TextFormat;
-		var bmd : BitmapData;
-		var bm : Bitmap;
-		var tf : TextField;
-
-		var list : Array = Font.enumerateFonts(false);
-
-		var tt : Class = font1;
-
-		tf = new TextField();
-		tf.defaultTextFormat = new TextFormat( "font1", 30 );
-		tf.text = str;
-		tf.autoSize = TextFieldAutoSize.LEFT;
-		bmd = new BitmapData( tf.width, tf.height, true, 0 );
-		bmd.draw( tf );
-		bm = new Bitmap( bmd );
-		bm.smoothing = true;
-		return bm;
-	} */
-
 }
 }
