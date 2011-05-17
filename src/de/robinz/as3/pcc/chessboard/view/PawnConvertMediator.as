@@ -60,7 +60,7 @@ public class PawnConvertMediator extends DialogBaseMediator
 		newPiece.piece = Piece.createByParams( toPiece.getName(), toPiece.isWhite );
 		newPiece.piece.move();
 
-		sendNotification( ApplicationFacade.REMOVE_PIECE, this._data.pawn.notation );
+		sendNotification( ApplicationFacade.REMOVE_PIECE, this._data.pawn.notation, ApplicationFacade.PAWN_PROMOTION );
 		sendNotification( ApplicationFacade.SET_PIECE, newPiece );
 	}
 

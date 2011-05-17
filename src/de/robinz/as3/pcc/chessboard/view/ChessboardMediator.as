@@ -366,7 +366,7 @@ public class ChessboardMediator extends BaseMediator
 				this.handleDisableBoardInspectMode();
 			break;
 			case ApplicationFacade.REMOVE_PIECE:
-				this.handleRemovePiece( n.getBody() as FieldNotation );
+				this.handleRemovePiece( n.getBody() as FieldNotation, n.getType() );
 			break;
 			case ApplicationFacade.REMOVE_ALL_PIECES:
 				this.handleRemoveAllPieces();
@@ -419,10 +419,10 @@ public class ChessboardMediator extends BaseMediator
 		this._isBoardInspectMode = false;
 	}
 
-	private function handleRemovePiece( notation : FieldNotation ) : void {
+	private function handleRemovePiece( notation : FieldNotation, type : String ) : void {
 		var p : IPiece = this.getPieceAt( notation );
 		if ( this.removePieceByNotation( notation ) ) {
-			sendNotification( ApplicationFacade.PIECE_REMOVED, p );
+			sendNotification( ApplicationFacade.PIECE_REMOVED, p, type );
 		}
 	}
 

@@ -145,7 +145,10 @@ public class TakenPiecesMediator extends BaseMediator
 				this.handleNewGame();
 			break;
 			case ApplicationFacade.PIECE_REMOVED:
-				this.handlePieceRemoved( n.getBody() as IPiece );
+				if ( n.getType() == null ) {
+					this.handlePieceRemoved( n.getBody() as IPiece );
+				}
+
 			break;
 		}
 	}
