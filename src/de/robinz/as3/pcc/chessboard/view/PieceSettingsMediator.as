@@ -124,7 +124,7 @@ public class PieceSettingsMediator extends DialogBaseMediator
 
 	public override function listNotificationInterests() : Array {
 		return [
-			ApplicationFacade.SET_FONT_SETTINGS,
+			ApplicationFacade.SET_PIECE_SETTINGS,
 			ApplicationFacade.APPEAR_PIECE_SETTINGS,
 			ApplicationFacade.DISAPPEAR_PIECE_SETTINGS
 		];
@@ -132,7 +132,7 @@ public class PieceSettingsMediator extends DialogBaseMediator
 
 	public override function handleNotification( n : INotification ) : void {
 		switch( n.getName() ) {
-			case ApplicationFacade.SET_FONT_SETTINGS:
+			case ApplicationFacade.SET_PIECE_SETTINGS:
 				this.handleSetFontSettings( n.getBody() as PieceSettingsVO );
 			break;
 			case ApplicationFacade.APPEAR_PIECE_SETTINGS:

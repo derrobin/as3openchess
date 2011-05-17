@@ -37,7 +37,7 @@ public class ApplicationFacade extends Facade
 	public static const INFO : String = "info";
 
 	// TODO: rename it to set piece settings
-	public static const SET_FONT_SETTINGS : String = "setFontSettings";
+	public static const SET_PIECE_SETTINGS : String = "setFontSettings";
 
 	public static const TRY_TO_MOVE : String = "tryToMove";
 	public static const REJECT_MOVE : String = "rejectMove";
@@ -104,7 +104,9 @@ public class ApplicationFacade extends Facade
 
 	public static const ENABLE_BOARD_INSPECT_PIECE_MODE : String = "enableBoardInspectPieceMode";
 	public static const DISABLE_BOARD_INSPECT_PIECE_MODE : String = "disableBoardInspectPieceMode";
+
 	public static const CHANGE_PIECE_SETTINGS : String = "changePieceSettings";
+	public static const PIECE_SETTINGS_CHANGED : String = "pieceSettingsChanged";
 
 	public static const FIELD_HINT : String = "fieldHint";
 	public static const REMOVE_ALL_FIELD_HINTS : String = "removeAllFieldHints";

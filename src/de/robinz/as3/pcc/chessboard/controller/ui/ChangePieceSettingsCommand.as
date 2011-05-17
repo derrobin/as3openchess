@@ -1,5 +1,6 @@
 package de.robinz.as3.pcc.chessboard.controller.ui
 {
+import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
 import de.robinz.as3.pcc.chessboard.library.CssSelectors;
 import de.robinz.as3.pcc.chessboard.library.FontManager;
@@ -44,11 +45,14 @@ public class ChangePieceSettingsCommand extends BaseCommand
 		fontProxy.currentFont = settings.font;
 		fontProxy.currentFontSize = settings.fontSize;
 
-		this.overrideCssProperty( "." + CssSelectors.BOARD_FIELD, "fontFamily", fontProxy.currentFont.id );
-		this.overrideCssProperty( "." + CssSelectors.BOARD_FIELD, "fontSize", fontProxy.currentFontSizeCssValue );
-		this.overrideCssProperty( "." + CssSelectors.BOARD_FIELD, "fontFamily", settings.font.id );
-		this.overrideCssProperty( "." + CssSelectors.BOARD_FIELD, "fontSize", fontProxy.currentFontSizeCssValue );
-		this.overrideCssProperty( ".piece", "fontFamily", fontProxy.currentFont.id );
+		settings.fontSizeCssValue = fontProxy.currentFontSizeCssValue;
+		settings.fontId = fontProxy.currentFont.id;
+
+		this.overrideCssProperty( "." + CssSelectors.BOARD_FIELD, "fontFamily", settings.fontId );
+		this.overrideCssProperty( "." + CssSelectors.BOARD_FIELD, "fontSize",  settings.fontSizeCssValue );
+		this.overrideCssProperty( ".piece", "fontFamily", settings.fontId );
+
+		sendNotification( ApplicationFacade.PIECE_SETTINGS_CHANGED, settings );
 	}
 
 	private function overrideCssProperty( selector : String, property : String, value : * ) : void {

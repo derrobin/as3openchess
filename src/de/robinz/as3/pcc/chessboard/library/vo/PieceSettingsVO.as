@@ -9,14 +9,10 @@ import flash.text.Font;
  */
 public class PieceSettingsVO
 {
+	public var fontId : String;
 	public var font : FontVO;
 	public var fonts : FontVOCollection;
 	public var fontSize : int;
 	public var fontSizeCssValue : int;
-
-	public function PieceSettingsVO()
-	{
-	}
-
 }
 }

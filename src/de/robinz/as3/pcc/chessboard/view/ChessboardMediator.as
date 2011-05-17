@@ -220,44 +220,17 @@ public class ChessboardMediator extends BaseMediator
 		return p;
 	}
 
-	/**
-	 *
-	 * @return List of mx.controls.Text
-	 *
-	 */
-	private function getCurrentPieceWrappers() : ArrayCollection {
+	private function refreshPieces() : void {
+		var piece : IPiece;
 		var fields : ChessboardFieldCollection = this.getFields();
 		var field : ChessboardField;
-		var list : ArrayCollection = new ArrayCollection();
-		var text : Text;
 
 		for each( field in fields.list ) {
-			if ( ! field.hasPiece() ) {
-				continue;
+			field.refreshFontKey();
+
+			if ( field.hasPiece() ) {
+				field.getText().setStyle( "fontSize", this._pieceSettings.fontSizeCssValue );
 			}
-
-			text = field.getText();
-			list.addItem( text );
-		}
-
-		return list;
-	}
-
-	private function refreshPieces() : void {
-		var wl : ArrayCollection = getCurrentPieceWrappers(); // wrapper list
-		var piece : IPiece;
-		var notation : FieldNotation;
-		var c : DisplayObjectContainer;
-		var d : DisplayObject;
-		var field : ChessboardField;
-
-		for each( var t : Text in wl ) {
-			piece = t.data as IPiece;
-			field = t.parent as ChessboardField;
-			notation = FieldNotation.createNotationByString( field.id );
-			t.parent.removeChild( t );
-
-			this.setPiece( PiecePositionVO.create( piece, notation ) );
 		}
 	}
 
@@ -370,7 +343,7 @@ public class ChessboardMediator extends BaseMediator
 			ApplicationFacade.REMOVE_ALL_FIELD_HINTS,
 			ApplicationFacade.LOCK_BOARD,
 			ApplicationFacade.UNLOCK_BOARD,
-			ApplicationFacade.CHANGE_PIECE_SETTINGS,
+			ApplicationFacade.PIECE_SETTINGS_CHANGED,
 			ApplicationFacade.ENABLE_BOARD_INSPECT_PIECE_MODE,
 			ApplicationFacade.DISABLE_BOARD_INSPECT_PIECE_MODE,
 			ApplicationFacade.REMOVE_PIECE,
@@ -397,8 +370,8 @@ public class ChessboardMediator extends BaseMediator
 			case ApplicationFacade.UNLOCK_BOARD:
 				this.handleUnlockBoard();
 			break;
-			case ApplicationFacade.CHANGE_PIECE_SETTINGS:
-				this.handleChangePieceSettings( n.getBody() as PieceSettingsVO );
+			case ApplicationFacade.PIECE_SETTINGS_CHANGED:
+				this.handlePieceSettingsChanged( n.getBody() as PieceSettingsVO );
 			break;
 			case ApplicationFacade.ENABLE_BOARD_INSPECT_PIECE_MODE:
 				this.handleEnableBoardInspectMode();
@@ -446,7 +419,7 @@ public class ChessboardMediator extends BaseMediator
 		this._isBoardLocked = false;
 	}
 
-	private function handleChangePieceSettings( settings : PieceSettingsVO ) : void {
+	private function handlePieceSettingsChanged( settings : PieceSettingsVO ) : void {
 		// TODO: make condition to internal state
 		this._pieceSettings = settings;
 		this.refreshPieces();

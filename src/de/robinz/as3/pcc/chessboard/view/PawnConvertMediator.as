@@ -66,8 +66,8 @@ public class PawnConvertMediator extends DialogBaseMediator
 
 	private function appear() : void {
 		var view : PawnConvertDialog = this.createDialog( "Convert Pawn to: ", 380, 170, PawnConvertDialog, this.stage, true ) as PawnConvertDialog;
-		var isWhite : Boolean = this._data.pawn.piece.isWhite;
 
+		var isWhite : Boolean = this._data.pawn.piece.isWhite;
 		view.fieldStage.addChild( createField( "queen", "a1", isWhite ) );
 		view.fieldStage.addChild( createField( "rook", "a2", isWhite ) );
 		view.fieldStage.addChild( createField( "bishop", "a3", isWhite ) );
@@ -76,6 +76,8 @@ public class PawnConvertMediator extends DialogBaseMediator
 		view.initialize();
 
 		view.fieldStage.addEventListener( MouseEvent.CLICK, onMouseClick );
+
+		view.showCloseButton = false;
 
 		this.flushData();
 	}

@@ -56,6 +56,14 @@ ChessboardField
 				this.addChild( text );
 			}
 
+			public function refreshFontKey() : void {
+				if ( ! this.hasPiece() ) {
+					return;
+				}
+
+				this.getText().text = this.getPiece().fontKey;
+			}
+
 			public function getText() : Text {
 				var t : Text = this.getChildAt( 0 ) as Text;
 				return t;
