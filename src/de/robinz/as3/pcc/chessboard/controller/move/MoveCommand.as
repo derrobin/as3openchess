@@ -145,6 +145,7 @@ public class MoveCommand extends BaseCommand
 		var move : ChessboardMove = new ChessboardMove();
 		move.fromPosition = FieldNotation.createNotationByString( fromNotation );
 		move.toPosition = FieldNotation.createNotationByString( toNotation );
+		move.position = parentMove.position;
 		move.game = parentMove.game;
 		move.piece = parentMove.position.getPieceAt( fromNotation );
 		move.isCastlingRookMovement = true;
