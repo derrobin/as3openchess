@@ -2,6 +2,7 @@ package de.robinz.as3.pcc.chessboard.library {
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
+import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
 import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardField;
 import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardField;
 
@@ -53,9 +54,8 @@ public class ChessboardUtil {
 		return sequence;
 	}
 
-	public static function getValidMoves( game : ChessboardGameVO, field : ChessboardFieldVO, position : ChessPosition ) : ChessboardMoveCollection {
-		var piece : IPiece = position.getPieceAt( field.notation.toString() );
-		var validator : MoveValidator = new MoveValidator( game, field, position, piece );
+	public static function getValidMoves( game : ChessboardGameVO, position : ChessPosition, piece : PiecePositionVO ) : ChessboardMoveCollection {
+		var validator : MoveValidator = new MoveValidator( game, position, piece );
 		return validator.getValidMoves();
 	}
 }

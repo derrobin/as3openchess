@@ -1,5 +1,13 @@
 package de.robinz.as3.pcc.chessboard.library {
+import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
+
+import de.robinz.as3.pcc.chessboard.library.pieces.King;
+
+import de.robinz.as3.pcc.chessboard.library.pieces.PieceCollection;
+
+import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
+import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVOCollection;
 
 import flash.utils.Dictionary;
 
@@ -34,17 +42,64 @@ public class ChessPosition {
 		log.debug( "initPosition: {0} notations created.", i.toString() );
 	}
 
-	public function setPiece( piece : IPiece, notation : String ) : void {
+	public function setPiece( piece : IPiece, notation : String, overWrite : Boolean = false ) : void {
 		if ( ! this._position.hasOwnProperty( notation ) ) {
 			log.warn( "unvalid position!" );
 			return;
 		}
-		if ( this._position[ notation ] != null ) {
+		if ( !overWrite && this._position[ notation ] != null ) {
 			log.warn( "position already set!" );
 			return;
 		}
 
 		this._position[ notation ] = piece;
+	}
+
+	public function removePiece( notation : String ) : void {
+		if ( ! this._position.hasOwnProperty( notation ) ) {
+			log.warn( "unvalid position!" );
+			return;
+		}
+
+		this._position[ notation ] = null;
+	}
+
+	public function getPieces( white : Boolean ) : PiecePositionVOCollection {
+		var list : PiecePositionVOCollection = new PiecePositionVOCollection();
+		var piece : IPiece;
+
+		for ( var notation : String in this._position ) {
+			piece = this._position[ notation ];
+
+			if ( piece == null ) {
+				continue;
+			}
+
+			if ( piece.isWhite == white ) {
+				list.add( PiecePositionVO.create( piece, FieldNotation.createNotationByString( notation ) ) );
+			}
+		}
+
+		return list;
+	}
+
+	public function getKing( white : Boolean ) : PiecePositionVO {
+		var king : IPiece;
+		var piece : IPiece;
+
+		for ( var notation : String in this._position ) {
+			piece = this._position[ notation ];
+
+			if ( piece == null ) {
+				continue;
+			}
+
+			if ( piece.isWhite == white && piece is King ) {
+				return PiecePositionVO.create( piece, FieldNotation.createNotationByString( notation ) );
+			}
+		}
+
+		return null;
 	}
 
 	public function setPosition( position : ChessPosition ) : void {

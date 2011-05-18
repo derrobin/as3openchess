@@ -4,14 +4,14 @@ import de.robinz.as3.pcc.chessboard.library.*;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMoveCollection;
 
 /**
- * ChessboardGame
+ * ChessboardGameVO
  *
  * @author robin heinel
  */
-// TODO: move to VO
 public class ChessboardGameVO
 {
 	public var moves : ChessboardMoveCollection;
+	public var check : ChessCheckVO;
 	public var name : String;
 	public var dateStored : Date;
 	public var currentMove : int;

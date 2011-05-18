@@ -114,6 +114,8 @@ public class GameProxy extends BaseProxy
 		this._currentMove++;
 		m.piece.move();
 		this._game.moves.add( m );
+		m.position.removePiece( m.fromPosition.toString() );
+		m.position.setPiece( m.piece, m.toPosition.toString(), true );
 
 		// for rochade
 		if ( m.piece is King ) {

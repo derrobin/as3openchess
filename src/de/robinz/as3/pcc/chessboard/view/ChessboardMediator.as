@@ -2,6 +2,7 @@ package de.robinz.as3.pcc.chessboard.view
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.library.ChessPosition;
+import de.robinz.as3.pcc.chessboard.library.ChessPosition;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMoveCollection;
 import de.robinz.as3.pcc.chessboard.library.ChessboardUtil;
@@ -497,10 +498,13 @@ public class ChessboardMediator extends BaseMediator
 				return;
 			}
 
+			var position : ChessPosition = this.getPosition();
 			var f : ChessboardField = t.parent as ChessboardField;
+			var fvo : ChessboardFieldVO = f.data as ChessboardFieldVO;
+			var piece : IPiece = position.getPieceAt( fvo.notation.toString() );
+			var pp : PiecePositionVO = PiecePositionVO.create( piece, fvo.notation );
 
-			// TODO: get valid moves from command?
-			this._validMoves = ChessboardUtil.getValidMoves( this._game, f.data as ChessboardFieldVO, this.getPosition() );
+			this._validMoves = ChessboardUtil.getValidMoves( this._game, position, pp );
 
 			this.showMoveHints( f, p );
 		}

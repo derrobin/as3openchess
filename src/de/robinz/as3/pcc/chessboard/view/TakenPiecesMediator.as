@@ -148,7 +148,6 @@ public class TakenPiecesMediator extends BaseMediator
 				if ( n.getType() == null ) {
 					this.handlePieceRemoved( n.getBody() as IPiece );
 				}
-
 			break;
 		}
 	}

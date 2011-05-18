@@ -19,8 +19,7 @@ public class MoveValidator {
 	private var log : ILogger;
 
 	private var _game : ChessboardGameVO;
-	private var _field : ChessboardFieldVO;
-	private var _piece : IPiece;
+	private var _piece : PiecePositionVO;
 	private var _position : ChessPosition;
 
 	public static var CASTLING_SHORT : String = "castlingShort";
@@ -28,17 +27,16 @@ public class MoveValidator {
 	public static var EN_PASSANT : String = "enPassant";
 
 
-	public function MoveValidator( game : ChessboardGameVO, field : ChessboardFieldVO, position : ChessPosition, piece : IPiece ) {
+	public function MoveValidator( game : ChessboardGameVO, position : ChessPosition, piece : PiecePositionVO ) {
 		this.log = LoggerFactory.getLogger( this );
 
 		this._game = game;
-		this._field = field;
 		this._position = position;
 		this._piece = piece;
 	}
 
 	public function getValidMoves() : ChessboardMoveCollection {
-		var piece : IPiece = this._position.getPieceAt( this._field.notation.toString() );
+		var piece : IPiece = this._position.getPieceAt( this._piece.notation.toString() );
 
 		// get valid fields by geometric
 		var moves : ChessboardMoveCollection = this.getValidMovesByPieceGeometric();
@@ -46,6 +44,10 @@ public class MoveValidator {
 		// exclude fields behind pieces
 		var fieldsBehind : FieldNotationCollection = this.getFieldsBehindPieces();
 		moves.excludeToPositions( fieldsBehind );
+
+		if ( this._game.check ) {
+			log.info( "getValidMoves: check from {0} to {1}", this._game.check.fromPiece.piece.getName(), this._game.check.toKing.piece.isWhite ? "white" : "black" );
+		}
 
 		// merge special moves
 		var specialMoves : FieldNotationCollection = this.getSpecialMoves();
@@ -60,8 +62,8 @@ public class MoveValidator {
 		var n : FieldNotation;
 		for each ( n in notations.list ) {
 			m = new ChessboardMove();
-			m.fromPosition = this._field.notation;
-			m.piece = this._piece;
+			m.fromPosition = this._piece.notation;
+			m.piece = this._piece.piece;
 			m.toPosition = n;
 			m.game = this._game;
 
@@ -76,14 +78,14 @@ public class MoveValidator {
 	private function getFieldsBehindPieces() : FieldNotationCollection {
 		var list : FieldNotationCollection = new FieldNotationCollection(); // cross lanes
 
-		if ( this._piece.hasAbilityToBeatDiagonal ) {
+		if ( this._piece.piece.hasAbilityToBeatDiagonal ) {
 			list.addCollection( this.getFieldBehindCrossLanes() );
 		}
-		if ( this._piece.hasAbilityToBeatLine ) {
+		if ( this._piece.piece.hasAbilityToBeatLine ) {
 			list.addCollection( this.getFieldBehindDirectLanes() );
 		}
 
-		if ( this._piece is Pawn ) {
+		if ( this._piece.piece is Pawn ) {
 			var notation : FieldNotation = this.getFieldBehindPawnFirstMove();
 			if ( notation != null ) {
 				list.add( notation );
@@ -99,11 +101,11 @@ public class MoveValidator {
 
 		log.debug( "getSpecialMoves: currentPlayer: " + this._game.currentPlayer.name );
 
-		if ( this._piece is King ) {
+		if ( this._piece.piece is King ) {
 			moves.addCollection( this.getRochade() );
 		}
 
-		if ( this._piece is Pawn ) {
+		if ( this._piece.piece is Pawn ) {
 			moves.add( this.getEnPassion() );
 		}
 
@@ -150,11 +152,11 @@ public class MoveValidator {
 			log.debug( "last piece was pawn with double jump." );
 			var pawn : Pawn = lastMove.piece as Pawn;
 			var notation : String;
-			var rightColumn : String = FieldNotation.getColumn( this._field.notation.column, -1 );
-			var leftColumn : String = FieldNotation.getColumn( this._field.notation.column, +1 );
-			var newRow : int = player.isWhite ? this._field.notation.row + 1 : this._field.notation.row - 1;
+			var rightColumn : String = FieldNotation.getColumn( this._piece.notation.column, -1 );
+			var leftColumn : String = FieldNotation.getColumn( this._piece.notation.column, +1 );
+			var newRow : int = player.isWhite ? this._piece.notation.row + 1 : this._piece.notation.row - 1;
 
-			if ( lastMove.toPosition.row == this._field.notation.row ) {
+			if ( lastMove.toPosition.row == this._piece.notation.row ) {
 				if ( lastMove.toPosition.column == rightColumn ) {
 					log.debug( "en passant on right" );
 					notation = rightColumn + newRow.toString();
@@ -173,14 +175,14 @@ public class MoveValidator {
 	}
 
 	private function getFieldBehindPawnFirstMove() : FieldNotation {
-		var pawn : Pawn = this._piece as Pawn;
-		var n : FieldNotation = this._field.notation.clone();
+		var pawn : Pawn = this._piece.piece as Pawn;
+		var n : FieldNotation = this._piece.notation.clone();
 
 		if ( pawn.isStartPosition( n ) ) {
 			var p : IPiece;
 			var setRow : int = 1;
 
-			if ( ! this._piece.isWhite ) {
+			if ( ! this._piece.piece.isWhite ) {
 				setRow = -1;
 			}
 
@@ -240,7 +242,7 @@ public class MoveValidator {
 
 	public function getLaneFields( rowStep : int, columnStep : int ) : FieldNotationCollection {
 		var fields : FieldNotationCollection = new FieldNotationCollection();
-		var walker : FieldNotation = _field.notation.clone();
+		var walker : FieldNotation = _piece.notation.clone();
 
 		do {
 			if ( ! walker.checkRowSet( rowStep ) || ! walker.checkSetColumn( columnStep ) ) {
@@ -294,7 +296,7 @@ public class MoveValidator {
 			log.debug( "getNextPieceOnLane: field: {0}", field.toString() );
 
 			if ( p != null ) {
-				if ( p.isWhite == this._piece.isWhite || !p.isWhite == !this._piece.isWhite ) {
+				if ( p.isWhite == this._piece.piece.isWhite || !p.isWhite == !this._piece.piece.isWhite ) {
 					log.debug( "walker has detected own figure at: {0}", field.toString() );
 					fieldsBehind.add( field.clone() );
 					log.debug( "getFieldsBehind: next fields are unvalid." );
@@ -320,7 +322,7 @@ public class MoveValidator {
 	}
 
 	private function getValidMovesByPieceGeometric() : ChessboardMoveCollection {
-		var fromPosition : FieldNotation = FieldNotation.createNotationByString( _field.notation.toString() );
+		var fromPosition : FieldNotation = FieldNotation.createNotationByString( _piece.notation.toString() );
 		var moves : ChessboardMoveCollection = new ChessboardMoveCollection();
 		var move : ChessboardMove;
 		var sequence : Array = ChessboardUtil.getNotationSequence();
@@ -334,9 +336,9 @@ public class MoveValidator {
 			move.fromPosition = fromPosition;
 			move.toPosition = toNotation;
 			move.beatenPiece = this._position.getPieceAt( notation.toString() );
-			move.piece = this._piece;
+			move.piece = this._piece.piece;
 
-			if ( this._piece.isMoveValide( move ) ) {
+			if ( this._piece.piece.isMoveValide( move ) ) {
 				moves.add( move );
 			}
 		}

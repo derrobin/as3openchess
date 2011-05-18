@@ -4,6 +4,8 @@ import de.robinz.as3.pcc.chessboard.model.FontProxy;
 
 import mx.logging.Log;
 import mx.logging.LogEventLevel;
+import mx.logging.targets.LineFormattedTarget;
+import mx.logging.targets.MiniDebugTarget;
 import mx.logging.targets.TraceTarget;
 
 import org.puremvc.as3.interfaces.INotification;
@@ -33,12 +35,14 @@ public class InitCommand extends SimpleCommand {
 	// Start Innerclass Methods
 
 	private function prepareLogging():void {
-		// Create a target.
-		var target:TraceTarget = new TraceTarget();
+		this.prepareLoggingTarget( new TraceTarget() );
+		// this.prepareLoggingTarget( new MiniDebugTarget() );
+	}
 
+	private function prepareLoggingTarget( target : LineFormattedTarget ) : void {
 		// Log only messages for the classes in the mx.rpc.* and
 		// mx.messaging packages.
-		target.filters = [];
+		target.filters = [ "*" ];
 
 		// Log all log levels.
 		target.level = LogEventLevel.ALL;
@@ -49,7 +53,7 @@ public class InitCommand extends SimpleCommand {
 		target.includeCategory = true;
 		target.includeLevel = true;
 
-		// Begin logging.
+		// Start logging.
 		Log.addTarget( target );
 	}
 

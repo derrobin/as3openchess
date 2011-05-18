@@ -3,18 +3,21 @@ package de.robinz.as3.pcc.chessboard.controller.move
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
-import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
+import de.robinz.as3.pcc.chessboard.library.ChessboardMoveCollection;
+import de.robinz.as3.pcc.chessboard.library.ChessboardUtil;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
-import de.robinz.as3.pcc.chessboard.library.MoveValidator;
 import de.robinz.as3.pcc.chessboard.library.Player;
+import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.pieces.Pawn;
+import de.robinz.as3.pcc.chessboard.library.pieces.PieceCollection;
+import de.robinz.as3.pcc.chessboard.library.vo.ChessCheckVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
-import de.robinz.as3.pcc.chessboard.model.GameProxy;
 
-import flash.sampler._getInvocationCount;
+import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVOCollection;
+
+import flash.utils.setTimeout;
 
 import org.puremvc.as3.interfaces.INotification;
-import org.puremvc.as3.patterns.command.SimpleCommand;
 
 /**
  * MoveCommand
@@ -52,6 +55,8 @@ public class MoveCommand extends BaseCommand
 			this.gameProxy.move( m );
 		}
 
+		this.verifyCheck();
+
 		// give a reference to the corresponding game
 		// now currentMove is right
 		m.game = gameProxy.getCurrentGame();
@@ -63,6 +68,31 @@ public class MoveCommand extends BaseCommand
 		}
 
 		log.debug( "next player: {0} ( {1} )", m.game.currentPlayer.name, m.game.currentPlayer.isWhite ? "white" : "black" );
+	}
+
+	private function verifyCheck() : Boolean {
+		var nextPlayer : Player = this.gameProxy.getCurrentGame().currentPlayer;
+		var currentKing : PiecePositionVO = m.position.getKing( nextPlayer.isWhite );
+		var enemyPieces : PiecePositionVOCollection = m.position.getPieces( ! nextPlayer.isWhite );
+
+		var ep : PiecePositionVO; // enemy piece
+		var validMoves : ChessboardMoveCollection;
+		var validMove : ChessboardMove;
+		for each( ep in enemyPieces.list ) {
+			log.debug( "enemy piece {0} {1}", ep.notation.toString(), ep.piece.getName() );
+			validMoves = ChessboardUtil.getValidMoves( m.game, m.position, ep );
+			for each ( validMove in validMoves.list ) {
+				log.debug( "valid move to {0} for piece {1}", validMove.toPosition.toString(), ep.piece.getName() );
+				if ( validMove.toPosition.toString() == currentKing.notation.toString() ) {
+					log.info( "cheek to player {0}", m.game.currentPlayer.name );
+					m.game.check = ChessCheckVO.create( ep, currentKing );
+					return true;
+				}
+			}
+		}
+
+		m.game.check = null;
+		return false;
 	}
 
 	private function checkPawnPromotion() : void {
