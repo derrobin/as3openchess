@@ -1,4 +1,5 @@
 package de.robinz.as3.pcc.chessboard.library {
+import de.robinz.as3.pcc.chessboard.controller.ui.ChangePieceSettingsCommand;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 
@@ -112,6 +113,16 @@ public class ChessPosition {
 
 	public function getPieceAt( notation : String ) : IPiece {
 		return this._position[ notation ];
+	}
+
+	public function clone() : ChessPosition {
+		var o : ChessPosition = new ChessPosition();
+
+		for ( var notation : String in this._position ) {
+			o.setPiece( this._position[ notation ], notation );
+		}
+
+		return o;
 	}
 
 }
