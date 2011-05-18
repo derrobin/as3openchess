@@ -51,11 +51,12 @@ public class MoveCommand extends BaseCommand
 			this.checkPawnPromotion();
 		}
 
-		if ( m.isMoveForward == false ) {
+		if ( m.isMoveForward == false && m.isMoveBack == false && m.isMoveJump == false ) {
 			this.gameProxy.move( m );
-		}
+			this.verifyCheck();
+		} else {
 
-		this.verifyCheck();
+		}
 
 		// give a reference to the corresponding game
 		// now currentMove is right
@@ -108,6 +109,10 @@ public class MoveCommand extends BaseCommand
 	}
 
 	private function handleSpecialMoves() : void {
+		if ( m.validMove == null ) {
+			return;
+		}
+
 		var vm : ChessboardMove = m.validMove;
 		var p : Player = m.game.currentPlayer;
 
