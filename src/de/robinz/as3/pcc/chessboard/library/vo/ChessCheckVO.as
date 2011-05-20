@@ -1,7 +1,4 @@
 package de.robinz.as3.pcc.chessboard.library.vo {
-import de.robinz.as3.pcc.chessboard.library.Player;
-import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
-
 /**
  * de.robinz.as3.pcc.chessboard.library.vo
  *

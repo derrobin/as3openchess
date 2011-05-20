@@ -1,20 +1,14 @@
 package de.robinz.as3.pcc.chessboard.controller
 {
 import de.robinz.as3.pcc.chessboard.library.common.LoggerFactory;
-
-import de.robinz.as3.pcc.chessboard.library.common.ReflectionUtil;
-
 import de.robinz.as3.pcc.chessboard.model.ApplicationProxy;
-
 import de.robinz.as3.pcc.chessboard.model.GameProxy;
 import de.robinz.as3.pcc.chessboard.view.ApplicationMediator;
-
 import de.robinz.as3.pcc.chessboard.view.ChessboardMediator;
 
 import flash.utils.getQualifiedClassName;
 
 import mx.logging.ILogger;
-import mx.logging.Log;
 
 import org.puremvc.as3.interfaces.INotification;
 import org.puremvc.as3.interfaces.INotifier;

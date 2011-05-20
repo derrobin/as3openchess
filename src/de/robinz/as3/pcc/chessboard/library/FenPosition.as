@@ -1,22 +1,14 @@
 package de.robinz.as3.pcc.chessboard.library {
-import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.common.LoggerFactory;
 import de.robinz.as3.pcc.chessboard.library.pieces.Bishop;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
-
 import de.robinz.as3.pcc.chessboard.library.pieces.King;
-
 import de.robinz.as3.pcc.chessboard.library.pieces.Knight;
 import de.robinz.as3.pcc.chessboard.library.pieces.Pawn;
-
 import de.robinz.as3.pcc.chessboard.library.pieces.Queen;
-
 import de.robinz.as3.pcc.chessboard.library.pieces.Rook;
 
-import flash.utils.Dictionary;
-
 import mx.logging.ILogger;
-import mx.logging.Log;
 
 /**
  * FENPosition

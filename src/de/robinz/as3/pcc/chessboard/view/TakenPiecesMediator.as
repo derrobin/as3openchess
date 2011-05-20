@@ -1,8 +1,6 @@
 package de.robinz.as3.pcc.chessboard.view
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
-import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
-import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.view.views.ChessboardTakenPieces;
 import de.robinz.as3.pcc.chessboard.view.views.takenPieces.TakenPiece;
@@ -10,7 +8,6 @@ import de.robinz.as3.pcc.chessboard.view.views.takenPieces.TakenPiece;
 import mx.core.Container;
 
 import org.puremvc.as3.interfaces.INotification;
-import org.puremvc.as3.patterns.mediator.Mediator;
 
 /**
  * UI Control for Info Panel - Taken Pieces

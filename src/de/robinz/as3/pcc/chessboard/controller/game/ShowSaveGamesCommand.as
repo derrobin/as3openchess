@@ -3,11 +3,9 @@ package de.robinz.as3.pcc.chessboard.controller.game
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
 import de.robinz.as3.pcc.chessboard.model.SaveGameProxy;
-import de.robinz.as3.pcc.chessboard.view.ApplicationMediator;
 import de.robinz.as3.pcc.chessboard.view.ShowSaveGamesDialogMediator;
 
 import org.puremvc.as3.interfaces.INotification;
-import org.puremvc.as3.patterns.command.SimpleCommand;
 
 /**
  * ShowSaveGamesCommand

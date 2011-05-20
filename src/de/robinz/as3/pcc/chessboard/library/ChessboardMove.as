@@ -1,8 +1,7 @@
 package de.robinz.as3.pcc.chessboard.library
 {
-import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
-import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
+import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 
 /**
  * represents a move of a piece on chessboard

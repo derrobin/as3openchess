@@ -5,7 +5,6 @@ import de.robinz.as3.pcc.chessboard.model.FontProxy;
 import mx.logging.Log;
 import mx.logging.LogEventLevel;
 import mx.logging.targets.LineFormattedTarget;
-import mx.logging.targets.MiniDebugTarget;
 import mx.logging.targets.TraceTarget;
 
 import org.puremvc.as3.interfaces.INotification;

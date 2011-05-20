@@ -2,15 +2,10 @@ package de.robinz.as3.pcc.chessboard.controller
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
-import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 import de.robinz.as3.pcc.chessboard.library.pieces.FakedPiece;
-import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
-import de.robinz.as3.pcc.chessboard.library.pieces.Piece;
 import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
-import de.robinz.as3.pcc.chessboard.model.GameProxy;
 
 import org.puremvc.as3.interfaces.INotification;
-import org.puremvc.as3.patterns.command.SimpleCommand;
 
 /**
  * ShowAllFontKeysOnChessboardCommand

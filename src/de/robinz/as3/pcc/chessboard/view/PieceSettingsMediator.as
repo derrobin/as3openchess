@@ -13,7 +13,6 @@ import flash.events.MouseEvent;
 import mx.collections.ArrayCollection;
 import mx.containers.TitleWindow;
 import mx.controls.Button;
-import mx.events.CloseEvent;
 
 import org.puremvc.as3.interfaces.INotification;
 

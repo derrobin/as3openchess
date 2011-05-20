@@ -7,8 +7,6 @@ import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 
 import flash.text.Font;
 
-import org.puremvc.as3.patterns.proxy.Proxy;
-
 /**
  * FontProxy
  *

@@ -1,7 +1,5 @@
 package de.robinz.as3.pcc.chessboard.library.vo
 {
-import flash.text.Font;
-
 /**
  * PieceSettingsVO
  *

@@ -1,6 +1,4 @@
 package de.robinz.as3.pcc.chessboard.library {
-import flash.utils.Dictionary;
-
 /**
  * Player
  *

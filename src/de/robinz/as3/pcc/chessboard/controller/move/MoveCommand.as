@@ -7,17 +7,10 @@ import de.robinz.as3.pcc.chessboard.library.ChessboardMoveCollection;
 import de.robinz.as3.pcc.chessboard.library.ChessboardUtil;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.Player;
-import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.pieces.Pawn;
-import de.robinz.as3.pcc.chessboard.library.pieces.PieceCollection;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessCheckVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
-
 import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVOCollection;
-
-import de.robinz.as3.pcc.chessboard.view.ChessboardMediator;
-
-import flash.utils.setTimeout;
 
 import org.puremvc.as3.interfaces.INotification;
 

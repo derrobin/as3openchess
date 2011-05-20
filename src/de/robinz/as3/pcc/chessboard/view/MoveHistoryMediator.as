@@ -10,7 +10,6 @@ import flash.display.DisplayObject;
 import flash.events.MouseEvent;
 
 import org.puremvc.as3.interfaces.INotification;
-import org.puremvc.as3.patterns.mediator.Mediator;
 
 /**
  * UI Control for Info Panel - Move History

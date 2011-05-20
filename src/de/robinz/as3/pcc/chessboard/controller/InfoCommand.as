@@ -3,7 +3,6 @@ package de.robinz.as3.pcc.chessboard.controller
 import mx.controls.Alert;
 
 import org.puremvc.as3.interfaces.INotification;
-import org.puremvc.as3.patterns.command.SimpleCommand;
 
 /**
  * InfoCommand

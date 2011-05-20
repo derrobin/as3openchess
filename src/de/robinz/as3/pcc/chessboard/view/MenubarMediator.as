@@ -5,8 +5,6 @@ import de.robinz.as3.pcc.chessboard.view.views.ChessboardMenubar;
 
 import mx.events.MenuEvent;
 
-import org.puremvc.as3.patterns.mediator.Mediator;
-
 /**
  * UI Control for Application Menu Bar
  *

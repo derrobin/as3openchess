@@ -2,8 +2,6 @@ package de.robinz.as3.pcc.chessboard.model
 {
 import flash.utils.Dictionary;
 
-import org.puremvc.as3.patterns.proxy.Proxy;
-
 /**
  * ApplicationProxy
  *

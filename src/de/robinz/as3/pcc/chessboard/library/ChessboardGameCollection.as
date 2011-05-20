@@ -5,7 +5,6 @@ import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import flash.utils.Dictionary;
 
 import mx.collections.ArrayCollection;
-import mx.events.CollectionEvent;
 
 /**
  * ChessboardGame

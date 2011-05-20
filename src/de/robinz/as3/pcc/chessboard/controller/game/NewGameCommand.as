@@ -9,10 +9,8 @@ import de.robinz.as3.pcc.chessboard.library.pieces.Knight;
 import de.robinz.as3.pcc.chessboard.library.pieces.Pawn;
 import de.robinz.as3.pcc.chessboard.library.pieces.Queen;
 import de.robinz.as3.pcc.chessboard.library.pieces.Rook;
-import de.robinz.as3.pcc.chessboard.model.GameProxy;
 
 import org.puremvc.as3.interfaces.INotification;
-import org.puremvc.as3.patterns.command.SimpleCommand;
 
 /**
  * NewGameCommand

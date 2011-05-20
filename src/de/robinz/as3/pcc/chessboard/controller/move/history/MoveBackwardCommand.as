@@ -3,11 +3,8 @@ package de.robinz.as3.pcc.chessboard.controller.move.history
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
-import de.robinz.as3.pcc.chessboard.library.ChessboardUtil;
-import de.robinz.as3.pcc.chessboard.model.GameProxy;
 
 import org.puremvc.as3.interfaces.INotification;
-import org.puremvc.as3.patterns.command.SimpleCommand;
 
 /**
  * MoveBackwardCommand

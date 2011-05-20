@@ -1,12 +1,9 @@
 package de.robinz.as3.pcc.chessboard.library {
-import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
 import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardField;
-import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardField;
 
-import mx.controls.Text;
 import mx.logging.ILogger;
 import mx.logging.Log;
 

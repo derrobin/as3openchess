@@ -2,8 +2,6 @@ package de.robinz.as3.pcc.chessboard.library {
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 
-import mx.effects.Move;
-
 /**
  * de.robinz.as3.pcc.chessboard.library
  *

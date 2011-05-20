@@ -1,11 +1,9 @@
 package de.robinz.as3.pcc.chessboard.model
 {
-import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import de.robinz.as3.pcc.chessboard.library.ChessboardGameCollection;
+import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 
 import flash.utils.Dictionary;
-
-import org.puremvc.as3.patterns.proxy.Proxy;
 
 /**
  * SaveGameProxy

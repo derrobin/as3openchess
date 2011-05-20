@@ -3,18 +3,11 @@ package de.robinz.as3.pcc.chessboard.controller.ui
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
 import de.robinz.as3.pcc.chessboard.library.common.LoggerUtil;
-import de.robinz.as3.pcc.chessboard.model.ApplicationProxy;
-import de.robinz.as3.pcc.chessboard.view.ApplicationMediator;
 import de.robinz.as3.pcc.chessboard.view.GameActionsMediator;
 import de.robinz.as3.pcc.chessboard.view.MoveHistoryMediator;
-
 import de.robinz.as3.pcc.chessboard.view.TakenPiecesMediator;
 
-import flash.utils.Dictionary;
-
-import org.puremvc.as3.interfaces.IMediator;
 import org.puremvc.as3.interfaces.INotification;
-import org.puremvc.as3.patterns.command.SimpleCommand;
 
 /**
  * SetPanelCommand

@@ -1,8 +1,5 @@
 package de.robinz.as3.pcc.chessboard.tests
 {
-import flexunit.framework.TestCase;
-import flexunit.framework.TestSuite;
-
 /**
  * ApplicationTest
  *

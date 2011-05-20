@@ -2,34 +2,22 @@ package de.robinz.as3.pcc.chessboard.view
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.library.ChessPosition;
-import de.robinz.as3.pcc.chessboard.library.ChessPosition;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMoveCollection;
 import de.robinz.as3.pcc.chessboard.library.ChessboardUtil;
-import de.robinz.as3.pcc.chessboard.library.CssSelectors;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
-import de.robinz.as3.pcc.chessboard.library.FontManager;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
-import de.robinz.as3.pcc.chessboard.library.pieces.Pawn;
-import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 import de.robinz.as3.pcc.chessboard.view.views.Chessboard;
 import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardField;
-import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardField;
-import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardField;
 import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardFieldCollection;
 
-import flash.display.DisplayObject;
-import flash.display.DisplayObjectContainer;
 import flash.events.Event;
 import flash.events.MouseEvent;
 
-import flash.ui.Mouse;
-
-import mx.collections.ArrayCollection;
 import mx.containers.Box;
 import mx.controls.Alert;
 import mx.controls.Spacer;

@@ -4,10 +4,7 @@ import flash.display.DisplayObject;
 
 import mx.containers.TitleWindow;
 import mx.core.Container;
-import mx.events.CloseEvent;
 import mx.managers.PopUpManager;
-
-import org.puremvc.as3.patterns.mediator.Mediator;
 
 /**
  * SaveGameDialogMediator

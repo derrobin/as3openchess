@@ -9,66 +9,66 @@ ChessboardField
 		<![CDATA[
 		import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 		import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
-			import mx.controls.Text;
 
-			private var _validMove : ChessboardMove;
+		import mx.controls.Text;
 
-			public function set validMove( move : ChessboardMove ) : void {
-				this._validMove = move;
+		private var _validMove:ChessboardMove;
+
+		public function set validMove( move:ChessboardMove ):void {
+			this._validMove = move;
+		}
+
+		public function get validMove():ChessboardMove {
+			return this._validMove;
+		}
+
+		public function getNotation():String {
+			return this.id;
+		}
+
+		public function hasPiece():Boolean {
+			if ( this.numChildren > 0 ) {
+				return true;
 			}
 
-			public function get validMove() : ChessboardMove {
-				return this._validMove;
-			}
+			return false;
+		}
 
-			public function getNotation() : String {
-				return this.id;
-			}
-
-			public function hasPiece() : Boolean {
-				if ( this.numChildren > 0 ) {
-					return true;
-				}
-
-				return false;
-			}
-
-			public function getPiece() : IPiece {
-				try {
-					var t : Text = this.getText();
-					var piece : IPiece = t.data as IPiece;
-					return piece;
-				} catch( e : Error ) {
-					trace( e.getStackTrace() );
-					return null;
-				}
-
+		public function getPiece():IPiece {
+			try {
+				var t:Text = this.getText();
+				var piece:IPiece = t.data as IPiece;
+				return piece;
+			} catch( e:Error ) {
+				trace( e.getStackTrace() );
 				return null;
 			}
 
-			public function setPiece( piece : IPiece ) : void {
-				var text : Text = new Text();
+			return null;
+		}
 
-				text.mouseChildren = false;
-				text.text = piece.fontKey;
-				text.data = piece;
+		public function setPiece( piece:IPiece ):void {
+			var text:Text = new Text();
 
-				this.addChild( text );
+			text.mouseChildren = false;
+			text.text = piece.fontKey;
+			text.data = piece;
+
+			this.addChild( text );
+		}
+
+		public function refreshFontKey():void {
+			if ( ! this.hasPiece() ) {
+				return;
 			}
 
-			public function refreshFontKey() : void {
-				if ( ! this.hasPiece() ) {
-					return;
-				}
+			this.getText().text = this.getPiece().fontKey;
+		}
 
-				this.getText().text = this.getPiece().fontKey;
-			}
-
-			public function getText() : Text {
-				var t : Text = this.getChildAt( 0 ) as Text;
-				return t;
-			}
-
+		public function getText():Text {
+			var t:Text = this.getChildAt( 0 ) as Text;
+			return t;
+		}
 		]]>
 	</mx:Script>
 

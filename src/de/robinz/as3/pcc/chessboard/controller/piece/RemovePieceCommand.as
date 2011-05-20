@@ -1,11 +1,8 @@
 package de.robinz.as3.pcc.chessboard.controller.piece
 {
 import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
-import de.robinz.as3.pcc.chessboard.view.ApplicationMediator;
-import de.robinz.as3.pcc.chessboard.view.TakenPiecesMediator;
 
 import org.puremvc.as3.interfaces.INotification;
-import org.puremvc.as3.patterns.command.SimpleCommand;
 
 /**
  * RemovePieceCommand

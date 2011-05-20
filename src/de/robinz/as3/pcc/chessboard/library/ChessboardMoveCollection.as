@@ -1,13 +1,6 @@
 package de.robinz.as3.pcc.chessboard.library
 {
-import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
-import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
-import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.common.LoggerFactory;
-import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
-import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
-import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
-import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVOCollection;
 import de.robinz.as3.rzlib.collections.TypedCollection;
 
 import mx.logging.ILogger;

@@ -1,12 +1,6 @@
 package de.robinz.as3.pcc.chessboard.library {
-import de.robinz.as3.pcc.chessboard.controller.ui.ChangePieceSettingsCommand;
-import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
-
 import de.robinz.as3.pcc.chessboard.library.pieces.King;
-
-import de.robinz.as3.pcc.chessboard.library.pieces.PieceCollection;
-
 import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVOCollection;
 
