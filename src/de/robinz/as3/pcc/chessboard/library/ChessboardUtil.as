@@ -54,7 +54,7 @@ public class ChessboardUtil {
 		return sequence;
 	}
 
-	public static function getPieceMove( player : Player, parentMove : ChessboardMove, fromNotation : String, toNotation : String ) : ChessboardMove {
+	public static function getPieceMove( parentMove : ChessboardMove, fromNotation : String, toNotation : String ) : ChessboardMove {
 		var move : ChessboardMove = new ChessboardMove();
 		move.fromPosition = FieldNotation.createNotationByString( fromNotation );
 		move.toPosition = FieldNotation.createNotationByString( toNotation );

@@ -46,11 +46,11 @@ public class ChangePieceSettingsCommand extends BaseCommand
 		fontProxy.currentFontSize = settings.fontSize;
 
 		settings.fontSizeCssValue = fontProxy.currentFontSizeCssValue;
-		settings.fontId = fontProxy.currentFont.id;
+		settings.font = fontProxy.currentFont;
 
-		this.overrideCssProperty( "." + CssSelectors.BOARD_FIELD, "fontFamily", settings.fontId );
+		this.overrideCssProperty( "." + CssSelectors.BOARD_FIELD, "fontFamily", settings.font.id );
 		this.overrideCssProperty( "." + CssSelectors.BOARD_FIELD, "fontSize",  settings.fontSizeCssValue );
-		this.overrideCssProperty( ".piece", "fontFamily", settings.fontId );
+		this.overrideCssProperty( ".piece", "fontFamily", settings.font.id );
 
 		sendNotification( ApplicationFacade.PIECE_SETTINGS_CHANGED, settings );
 	}

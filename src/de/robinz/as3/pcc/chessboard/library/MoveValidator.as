@@ -4,7 +4,6 @@ import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.pieces.King;
 import de.robinz.as3.pcc.chessboard.library.pieces.Pawn;
 import de.robinz.as3.pcc.chessboard.library.pieces.Rook;
-import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
 
@@ -248,8 +247,14 @@ public class MoveValidator {
 		var fields : FieldNotationCollection = new FieldNotationCollection();
 		var walker : FieldNotation = _piece.notation.clone();
 
+		var rowCheck : Boolean;
+		var columnCheck : Boolean;
+
 		do {
-			if ( ! walker.checkRowSet( rowStep ) || ! walker.checkSetColumn( columnStep ) ) {
+			rowCheck = FieldNotation.checkSetRow( walker.row, rowStep );
+			columnCheck = FieldNotation.checkSetColumn( walker.column, columnStep );
+
+			if ( rowCheck == false || columnCheck == false ) {
 				log.debug( "walker has reached boundaries so get off." );
 				break;
 			}
@@ -326,7 +331,7 @@ public class MoveValidator {
 	}
 
 	private function getValidMovesByPieceGeometric() : ChessboardMoveCollection {
-		var fromPosition : FieldNotation = FieldNotation.createNotationByString( _piece.notation.toString() );
+		var fromNotation : FieldNotation = FieldNotation.createNotationByString( _piece.notation.toString() );
 		var moves : ChessboardMoveCollection = new ChessboardMoveCollection();
 		var move : ChessboardMove;
 		var sequence : Array = ChessboardUtil.getNotationSequence();
@@ -337,12 +342,13 @@ public class MoveValidator {
 			toNotation = FieldNotation.createNotationByString( notation );
 
 			move = new ChessboardMove();
-			move.fromPosition = fromPosition;
+			move.fromPosition = fromNotation;
 			move.toPosition = toNotation;
 			move.beatenPiece = this._position.getPieceAt( notation.toString() );
 			move.piece = this._piece.piece;
 
 			if ( this._piece.piece.isMoveValide( move ) ) {
+				move.isPawnDoubleJump = move.piece is Pawn && 2 == ( Math.max( toNotation.row, fromNotation.row ) - Math.min( toNotation.row, fromNotation.row ) );
 				moves.add( move );
 			}
 		}

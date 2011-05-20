@@ -54,36 +54,6 @@ public class MoveBackwardCommand extends BaseCommand
 			sendNotification( ApplicationFacade.RESTORE_PIECE, moveBack.beatenPiece );
 		}
 
-		if ( moveBack.validMove != null ) {
-			var vm : ChessboardMove = moveBack.validMove;
-			var pm : ChessboardMove; // piece move
-			if ( m.piece.isWhite && vm.isCastlingShort ) {
-				pm = ChessboardUtil.getPieceMove( moveBack.game.currentPlayer, moveBack, "f1", "h1" );
-				pm.isCastlingRookMovement = true;
-				//this.moveRook( m.piece, m, "f1", "h1" );
-			}
-			if ( m.piece.isWhite && vm.isCastlingLong ) {
-				pm = ChessboardUtil.getPieceMove( moveBack.game.currentPlayer, moveBack, "d1", "a1" );
-				pm.isCastlingRookMovement = true;
-				//this.moveRook( m.piece, m, "d1", "a1" );
-			}
-			if ( ! m.piece.isWhite && vm.isCastlingShort ) {
-				pm = ChessboardUtil.getPieceMove( moveBack.game.currentPlayer, moveBack, "f8", "h8" );
-				pm.isCastlingRookMovement = true;
-				//this.moveRook( m.piece, m, "f8", "h8" );
-			}
-			if ( ! m.piece.isWhite && vm.isCastlingLong ) {
-				pm = ChessboardUtil.getPieceMove( moveBack.game.currentPlayer, moveBack, "d8", "a8" );
-				pm.isCastlingRookMovement = true;
-				//this.moveRook( m.piece, m, "d8", "a8" );
-			}
-
-			if ( pm != null ) {
-				pm.isMoveBack = true;
-				sendNotification( ApplicationFacade.MOVE, pm );
-			}
-		}
-
 		sendNotification( ApplicationFacade.MOVE_BACKWARD_SUCCEED );
 		sendNotification( ApplicationFacade.SELECT_MOVE_HISTORY_ENTRY, moveBack );
 	}

@@ -16,7 +16,6 @@ import de.robinz.as3.pcc.chessboard.library.vo.FontVO;
  *
  * @author robin heinel
  */
-// TODO: Remove / Refactor this class
 public class FontManager
 {
 	public static const FONT_ID_1 : String = "font1";
@@ -24,21 +23,20 @@ public class FontManager
 	public static const FONT_ID_3 : String = "font3";
 	public static const FONT_ID_4 : String = "font4";
 	public static const FONT_ID_5 : String = "font5";
-	public static const FONT_ID_6 : String = "font6";
 
-	[Embed(source='../resources/fonts/Alpha.ttf',fontName='font1',fontFamily='font1',mimeType='application/x-font')]
+	[Embed(source='../resources/fonts/Alpha.ttf',fontName='font1',mimeType='application/x-font')]
 	private var font1 : Class;
 
-	[Embed(source='../resources/fonts/chessole.TTF',fontName='font2',fontFamily='font2',mimeType='application/x-font')]
+	[Embed(source='../resources/fonts/chessole.TTF',fontName='font2',mimeType='application/x-font')]
 	private var font2 : Class;
 
-	[Embed(source='../resources/fonts/merida.ttf',fontName='font3',fontFamily='font3',mimeType='application/x-font')]
+	[Embed(source='../resources/fonts/merida.ttf',fontName='font3',mimeType='application/x-font')]
 	private var font3 : Class;
 
-	[Embed(source='../resources/fonts/traveller.ttf',fontName='font4',fontFamily='font4',mimeType='application/x-font')]
+	[Embed(source='../resources/fonts/traveller.ttf',fontName='font4',mimeType='application/x-font')]
 	private var font4 : Class;
 
-	[Embed(source='../resources/fonts/avenfont.ttf',fontName='font5',fontFamily='font5',mimeType='application/x-font')]
+	[Embed(source='../resources/fonts/avenfont.ttf',fontName='font5',mimeType='application/x-font')]
 	private var font5 : Class;
 
 	private var _currentFont : FontVO;

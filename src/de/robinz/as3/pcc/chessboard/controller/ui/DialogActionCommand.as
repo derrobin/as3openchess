@@ -69,9 +69,7 @@ public class DialogActionCommand extends BaseCommand {
 		settings.fontSize = this.fontProxy.currentFontSize;
 		settings.fontSizeCssValue = this.fontProxy.currentFontSizeCssValue;
 
-		this.pieceSettingsMediator.handleNotification(
-				new Notification( ApplicationFacade.SET_PIECE_SETTINGS, settings )
-				);
+		this.pieceSettingsMediator.handleNotification( new Notification( ApplicationFacade.SET_PIECE_SETTINGS, settings ) );
 
 		// second resend notification only to piece settings mediator for appear
 		this.pieceSettingsMediator.handleNotification( n );

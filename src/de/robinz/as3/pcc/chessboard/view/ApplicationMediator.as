@@ -88,7 +88,7 @@ public class ApplicationMediator extends BaseMediator
 					space = space - diff;
 					continue;
 				}
-				// TODO: add maxHeight to calculcation
+				// TODO: check: add maxHeight to calculation
 				if ( space > 0 ) {
 					p.panel.percentHeight = p.panel.percentHeight + space;
 				}

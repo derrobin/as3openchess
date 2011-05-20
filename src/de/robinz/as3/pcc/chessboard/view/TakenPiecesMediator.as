@@ -49,7 +49,7 @@ public class TakenPiecesMediator extends BaseMediator
 
 		targetContainer.addChild( tp );
 
-		// TODO: Sort Piece Queue ( mb use of outcommented insertPiece )
+		// TODO: optional: sort piece queue ( mb use of out-commented method insertPiece() )
 	}
 
 	private function removePiece( p : IPiece ) : void {
@@ -162,7 +162,7 @@ public class TakenPiecesMediator extends BaseMediator
 	}
 
 	private function handleChangePieceSettings() : void {
-		// TODO: make condition to internal state
+		// TODO: performance: make condition to internal state
 		this.refreshPieces();
 	}
 

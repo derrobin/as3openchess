@@ -132,46 +132,32 @@ public class MoveCommand extends BaseCommand
 	}
 
 	private function handleCastlingRookMove() : void {
-		if ( m.isCastlingRookMovement == true || m.isMoveBack ) {
+		if ( m.isCastlingRookMovement == true ) {
 			return;
 		}
 
-		var vm : ChessboardMove = m.validMove;
-		var p : Player = m.game.currentPlayer;
+		var from : String = null;
+		var to : String = null;
 
 		// check extra move for rochade
+		if ( m.isMoveBack ) {
+			if ( m.piece.isWhite && m.isCastlingShort ) { from = "f1"; to = "h1"; }
+			if ( m.piece.isWhite && m.isCastlingLong ) { from = "d1"; to = "a1"; }
+			if ( ! m.piece.isWhite && m.isCastlingShort ) { from = "f8"; to = "h8"; }
+			if ( ! m.piece.isWhite && m.isCastlingLong ) { from = "d8"; to = "a8"; }
+		} else {
+			if ( m.piece.isWhite && m.isCastlingShort ) { from = "h1"; to = "f1"; }
+			if ( m.piece.isWhite && m.isCastlingLong ) { from = "a1"; to = "d1"; }
+			if ( ! m.piece.isWhite && m.isCastlingShort ) { from = "h8"; to = "f8"; }
+			if ( ! m.piece.isWhite && m.isCastlingLong ) { from = "a8"; to = "d8"; }
+		}
 
-		if ( vm != null ) {
-			var pm : ChessboardMove = null;
-			if ( m.piece.isWhite && vm.isCastlingShort ) {
-				pm = ChessboardUtil.getPieceMove( p, m, "h1", "f1" );
-				pm.isCastlingRookMovement = true;
-				//this.moveRook( p, m, "h1", "f1" );
-			}
-			if ( m.piece.isWhite && vm.isCastlingLong ) {
-				pm = ChessboardUtil.getPieceMove( p, m, "a1", "d1" );
-				pm.isCastlingRookMovement = true;
-				//this.moveRook( p, m, "a1", "d1" );
-			}
-			if ( ! m.piece.isWhite && vm.isCastlingShort ) {
-				pm = ChessboardUtil.getPieceMove( p, m, "h8", "f8" );
-				pm.isCastlingRookMovement = true;
-				// this.moveRook( p, m, "h8", "f8" );
-			}
-			if ( ! m.piece.isWhite && vm.isCastlingLong ) {
-				pm = ChessboardUtil.getPieceMove( p, m, "a8", "d8" );
-				pm.isCastlingRookMovement = true;
-				//this.moveRook( p, m, "a8", "d8" );
-			}
-
-			if ( pm != null ) {
-				sendNotification( ApplicationFacade.MOVE, pm );
-			}
-
+		if ( from != null && to != null ) {
+			var pm : ChessboardMove = ChessboardUtil.getPieceMove( m, from, to );
+			pm.isCastlingRookMovement = true;
+			sendNotification( ApplicationFacade.MOVE, pm );
 		}
 	}
-
-
 
 	// End Innerclass Methods
 

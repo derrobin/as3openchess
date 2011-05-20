@@ -97,7 +97,6 @@ public class ChessboardMediator extends BaseMediator
 		var notation : String;
 		var isWhite : Boolean = true;
 
-		// TODO: encapsulate this algorithm, mb use of ChessboardUtil.getNotationSequence()
 		for( j; j <= 8; j++ ) {
 			isWhite = isWhite ? false : true;
 
@@ -163,7 +162,7 @@ public class ChessboardMediator extends BaseMediator
 		return c;
 	}
 
-	// TODO: performance refactoring: use dictionary for indexing
+	// TODO: performance: use dictionary for indexing
 	private function getField( notation : String ) : ChessboardField {
 		var fields : ChessboardFieldCollection = this.getFields();
 		var field : ChessboardField;
@@ -407,7 +406,7 @@ public class ChessboardMediator extends BaseMediator
 	}
 
 	private function handlePieceSettingsChanged( settings : PieceSettingsVO ) : void {
-		// TODO: make condition to internal state
+		// TODO: performance: condition to internal state
 		this._pieceSettings = settings;
 		this.refreshPieces();
 	}
@@ -478,12 +477,12 @@ public class ChessboardMediator extends BaseMediator
 		var ds : DragSource = new DragSource();
 		ds.addData( t, "piece" );
 
-		// TODO: a copy of text is necessary, otherwise the Text will loose ChessboardField as parent
+		// a copy of text is necessary, otherwise the Text will loose ChessboardField as parent
 		var dragImage : Text = new Text();
 		dragImage.mouseChildren = false;
 		dragImage.mouseEnabled = false;
 		dragImage.text = t.text;
-		dragImage.setStyle( "fontFamily", this._pieceSettings.fontId );
+		dragImage.setStyle( "fontFamily", this._pieceSettings.font.id );
 		dragImage.setStyle( "fontSize", this._pieceSettings.fontSizeCssValue );
 
 		DragManager.doDrag( t, ds, e, dragImage, 0, 0, 1 );
@@ -515,8 +514,6 @@ public class ChessboardMediator extends BaseMediator
 			if ( e.target is ChessboardField ) {
 				var f : ChessboardField = e.target as ChessboardField;
 				var notation : String = f.id;
-
-				// log.debug( "onDragEnter: piece at {0}", notation );
 				if ( this._validMoves.hasNotationToPosition( notation ) ) {
 					log.debug( "onDragEnter: validMoves has notation to position {0}", notation.toString() );
 					DragManager.acceptDragDrop( f );
@@ -525,26 +522,11 @@ public class ChessboardMediator extends BaseMediator
 					this.markValidDrop( notation );
 				}
 			}
-			// TODO: check if board field boundary is touched
-			/*
-			else if ( ! ( e.target is Text ) && ( e.target is Box && e.target.id != null && e.target.id.indexOf( "board" ) > -1 ) )  {
-				if ( e.target.id == "board" ) {
-					log.debug( "onDragEnter: dragging is inside the board" );
-				}
-			} else if ( e.target is Box || e.target is Text ) {
-				log.debug( "onDragEnter: id:" + UIComponent( e.target ).id );
-			} else if ( e.target is Text ) {
-
-			} else {
-				log.debug( "onDragEnter: dragging is outside the board" );
-			}
-			*/
 		}
 
 	}
 
 	private function onDragComplete( e : DragEvent ) : void {
-		log.debug( "onDragComplete: " );
 		if ( this._dragMove == null ) {
 			log.debug( "onDragComplete: no drag move found." );
 			this.removeAllValidDrop();
@@ -557,7 +539,6 @@ public class ChessboardMediator extends BaseMediator
 	}
 
 	private function onDragDrop( e : DragEvent ) : void {
-		log.debug( "onDragDrop: " );
 		if ( this._isBoardLocked ) {
 			Alert.show( "All Movements are looked. You have to go to the end of the game for making the next move.", "Movement looked!" );
 			return;
@@ -582,7 +563,8 @@ public class ChessboardMediator extends BaseMediator
 		m.toPosition = toNotation;
 		m.piece = p;
 		m.beatenPiece = this.getPieceAt( toNotation );
-		m.isPawnDoubleJump = p is Pawn && 2 == ( Math.max( toNotation.row, fromNotation.row ) - Math.min( toNotation.row, fromNotation.row ) );
+		// TODO: move this logic to MoveValidator or MoveCommand
+		// m.isPawnDoubleJump = p is Pawn && 2 == ( Math.max( toNotation.row, fromNotation.row ) - Math.min( toNotation.row, fromNotation.row ) );
 
 		this._validMoves = null;
 		this.removeAllMoveHints();

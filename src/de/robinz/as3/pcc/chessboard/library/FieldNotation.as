@@ -20,6 +20,10 @@ public class FieldNotation
 
 	public var name : String = "noname";
 
+	public static function checkSetColumn( column : String, value : int ) : Boolean {
+		return getColumn( column, value ) != null;
+	}
+
 	public static function getColumn( current : String, value : int ) : String {
 		var i : int = indexes.getItemIndex( current );
 		var index : int = i + value;
@@ -39,77 +43,61 @@ public class FieldNotation
 		return n as String;
 	}
 
+	public static function checkSetRow( row : int, value : int ) : Boolean {
+		return getRow( row, value ) != -1;
+	}
+
+	public static function getRow( current : int, value : int ) : int {
+		var n : int = current + value;
+		if ( n < 1 || n > 8 ) {
+			return -1;
+		}
+
+		return n;
+	}
+
 	public static function createNotationByString( input : String, name : String = null ) : FieldNotation {
-		try {
-			var column : String = input.charAt( 0 ).toLowerCase();
-			var row : String = input.charAt( 1 );
-			var r : int = int( row );
+		var column : String = input.charAt( 0 ).toLowerCase();
+		var row : int = int( input.charAt( 1 ) );
 
-			if ( r < 1 || r > 8 ) {
-				log.warn( "createNotationByString: unvalid row input." );
-				return null;
-			}
-			if ( ! indexes.contains( column ) ) {
-				log.warn( "createNotationByString: unvalid column input." );
-				return null;
-			}
+		row = getRow( row, 0 );
+		column = getColumn( column, 0 );
 
-			var n : FieldNotation = new FieldNotation();
-			n.column = column;
-			n.row = r;
-			n.name = name;
-
-			return n;
-
-		} catch( e : Error ) {
-			log.error( "createNotationByString: reason: {0}", e.message );
-			log.debug( "createNotationByString: stacktrace: {0}", e.getStackTrace() );
+		if ( row == -1 ) {
+			log.warn( "createNotationByString: unvalid row input." );
+			return null;
+		}
+		if ( ! indexes.contains( column ) ) {
+			log.warn( "createNotationByString: unvalid column input." );
 			return null;
 		}
 
-		return null;
-	}
+		var n : FieldNotation = new FieldNotation();
+		n.column = column;
+		n.row = row;
+		n.name = name;
 
-	public function checkRowSet( value : int ) : Boolean {
-		var n : int = this.row + value;
-		if ( n < 1 || n > 8 ) {
-			return false;
-		}
-		return true;
+		return n;
 	}
 
 	public function setRow( value : int ) {
-		if ( ! checkRowSet( value ) ) {
-			log.warn( "unvalid row update ( {0} ) !", n );
+		var row : int = getRow( this.row, value );
+		if ( row == -1 ) {
+			log.warn( "unvalid row update current: {0} set: {1} !", this.row.toString(), value.toString() );
 			return;
 		}
 
-		// TODO: refactoring set checkRowSet()
-		var n : int = this.row + value;
-		this.row = n;
+		this.row = row;
 	}
 
-	public function checkSetColumn( value : int ) : Boolean {
+	public function setColumn( value : int ) : void {
 		var column : String = getColumn( this.column, value );
-
 		if ( column == null ) {
-			return false;
-		}
-
-		return true;
-	}
-
-	public function setColumn( value : int ) {
-		if ( ! checkSetColumn( value ) ) {
-			log.warn( "unvalid column update ( {0} ) !", n );
+			log.warn( "unvalid column update current: {0} set: {1} !", this.column, value.toString() );
 			return;
 		}
 
-		// TODO: refactoring see checkSetColumn()
-		var i : int = indexes.getItemIndex( this.column );
-		var index : int = i + value;
-		var n : Object = indexes.getItemAt( index < 0 ? 0 : index );
-		this.column = n as String;
+		this.column = column;
 	}
 
 	public function clone() : FieldNotation {

@@ -1,14 +1,12 @@
 package de.robinz.as3.pcc.chessboard.library.vo {
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
-import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 
 /**
- * de.robinz.as3.pcc.chessboard.library.vo
+ * ChessboardFieldVO
  *
  * @author robin heinel
  */
 public class ChessboardFieldVO {
-	// TODO: place IPiece here
 	public var isWhite : Boolean;
 	public var notation : FieldNotation;
 

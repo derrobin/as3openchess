@@ -126,7 +126,7 @@ public class SaveGameDialogMediator extends DialogBaseMediator
 			return;
 		}
 
-		// TODO: gamename validation
+		// TODO: optional: gamename validation
 		this._game.name = this.popup.gameName.text;
 		this._game.dateStored = new Date();
 

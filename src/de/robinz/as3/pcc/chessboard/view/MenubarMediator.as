@@ -85,7 +85,6 @@ public class MenubarMediator extends BaseMediator
 	// Start Event Handlers
 
 	private function onMenuBarChange( e : MenuEvent ) : void {
-		// TODO: error logging
 		var selectedValue : String = String( e.item.@data );
 		this.menuSelect( selectedValue );
 	}

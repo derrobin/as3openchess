@@ -67,7 +67,6 @@ public class FontProxy extends BaseProxy
 	}
 
 	public function getFonts() : FontVOCollection {
-		// TODO: return as cloned object
 		return this._fonts;
 	}
 

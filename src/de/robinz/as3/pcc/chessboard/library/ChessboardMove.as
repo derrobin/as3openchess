@@ -9,7 +9,6 @@ import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
  *
  * @author robin heinel
  */
-// TODO: move to VO
 public class ChessboardMove
 {
 	public var piece : IPiece;
@@ -25,21 +24,15 @@ public class ChessboardMove
 	public var isMoveForward : Boolean = false;
 	public var isMoveJump : Boolean = false;
 
-	// TODO: remove this member block, because they are located at validMove!
-	public var isCastlingLong : Boolean = false;
-	public var isCastlingShort : Boolean = false;
-	public var isEnPassant : Boolean = false;
-	public var isPawnDoubleJump : Boolean = false;
+	private var _isCastlingLong : Boolean = false;
+	private var _isCastlingShort : Boolean = false;
+	private var _isEnPassant : Boolean = false;
+	private var _isPawnDoubleJump : Boolean = false;
 
 	public var isCastlingRookMovement : Boolean = false;
 
 	public var validMoves : ChessboardMoveCollection;
 	public var validMove : ChessboardMove; // created by MoveValidator, holds more validation info about current move
-
-
-	public function ChessboardMove()
-	{
-	}
 
 	public function equals( move : ChessboardMove ) : Boolean {
 		var c1 : Boolean = this.fromPosition.toString() == move.fromPosition.toString();
@@ -70,6 +63,50 @@ public class ChessboardMove
 		o.validMoves = this.validMoves;
 		return o;
 	}
+
+	// Start Getters / Setters
+
+	public function set isCastlingLong( value : Boolean ) {
+		this._isCastlingLong = value;
+	}
+	public function get isCastlingLong() : Boolean {
+		if ( this.validMove == null ) {
+			return this._isCastlingLong;
+		}
+		return this.validMove.isCastlingLong;
+	}
+
+	public function set isCastlingShort( value : Boolean ) {
+		this._isCastlingShort = value;
+	}
+	public function get isCastlingShort() : Boolean {
+		if ( this.validMove == null ) {
+			return this._isCastlingShort;
+		}
+		return this.validMove.isCastlingShort;
+	}
+
+	public function set isEnPassant( value : Boolean ) {
+		this._isEnPassant = value;
+	}
+	public function get isEnPassant() : Boolean {
+		if ( this.validMove == null ) {
+			return this._isEnPassant;
+		}
+		return this.validMove.isEnPassant;
+	}
+
+	public function set isPawnDoubleJump( value : Boolean ) {
+		this._isPawnDoubleJump = value;
+	}
+	public function get isPawnDoubleJump() : Boolean {
+		if ( this.validMove == null ) {
+			return this._isPawnDoubleJump;
+		}
+		return this.validMove.isPawnDoubleJump;
+	}
+
+	// End Getters / Setters
 
 }
 }
