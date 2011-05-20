@@ -42,15 +42,15 @@ public class MoveJumpCommand extends BaseCommand
 		}
 
 		if ( jumps > 0 ) {
-			this.resendNotitifation( ApplicationFacade.MOVE_BACKWARD, jumps );
+			this.resendNotification( ApplicationFacade.MOVE_BACKWARD, jumps );
 		} else {
-			this.resendNotitifation( ApplicationFacade.MOVE_FORWARD, -jumps );
+			this.resendNotification( ApplicationFacade.MOVE_FORWARD, -jumps );
 		}
 
 		sendNotification( ApplicationFacade.SELECT_MOVE_HISTORY_ENTRY, move );
 	}
 
-	private function resendNotitifation( notification : String, amount : int ) : void {
+	private function resendNotification( notification : String, amount : int ) : void {
 		while( amount > 0 ) {
 			sendNotification( notification );
 			amount--;

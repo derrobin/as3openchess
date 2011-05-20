@@ -54,6 +54,19 @@ public class ChessboardUtil {
 		return sequence;
 	}
 
+	public static function getPieceMove( player : Player, parentMove : ChessboardMove, fromNotation : String, toNotation : String ) : ChessboardMove {
+		var move : ChessboardMove = new ChessboardMove();
+		move.fromPosition = FieldNotation.createNotationByString( fromNotation );
+		move.toPosition = FieldNotation.createNotationByString( toNotation );
+		move.position = parentMove.position;
+		move.game = parentMove.game;
+		move.piece = parentMove.position.getPieceAt( fromNotation );
+		move.validMoves = parentMove.validMoves;
+		move.validMove = parentMove.validMove;
+
+		return move;
+	}
+
 	public static function getValidMoves( game : ChessboardGameVO, position : ChessPosition, piece : PiecePositionVO ) : ChessboardMoveCollection {
 		var validator : MoveValidator = new MoveValidator( game, position, piece );
 		return validator.getValidMoves();

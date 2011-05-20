@@ -25,6 +25,7 @@ public class ChessboardMove
 	public var isMoveForward : Boolean = false;
 	public var isMoveJump : Boolean = false;
 
+	// TODO: remove this member block, because they are located at validMove!
 	public var isCastlingLong : Boolean = false;
 	public var isCastlingShort : Boolean = false;
 	public var isEnPassant : Boolean = false;
@@ -55,6 +56,19 @@ public class ChessboardMove
 
 		//return c5;
 		return c1 && c2 && c3 && c4 && c5;
+	}
+
+	public function clone() : ChessboardMove {
+		var o : ChessboardMove = new ChessboardMove();
+		o.beatenPiece = this.beatenPiece;
+		o.fromPosition = this.fromPosition;
+		o.toPosition = this.toPosition;
+		o.piece = this.piece;
+		o.game = this.game;
+		o.position = this.position;
+		o.validMove = this.validMove;
+		o.validMoves = this.validMoves;
+		return o;
 	}
 
 }

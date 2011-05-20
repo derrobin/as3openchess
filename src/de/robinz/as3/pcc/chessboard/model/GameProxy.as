@@ -107,15 +107,13 @@ public class GameProxy extends BaseProxy
 	}
 
 	public function move( m : ChessboardMove ) : void {
-		if ( m.isMoveBack || m.isMoveForward) {
+		if ( m.isMoveBack || m.isMoveForward ) {
 			return;
 		}
-
-		this._currentMove++;
-		m.piece.move();
-		this._game.moves.add( m );
-		m.position.removePiece( m.fromPosition.toString() );
-		m.position.setPiece( m.piece, m.toPosition.toString(), true );
+		if ( ! m.isCastlingRookMovement ) {
+			this._currentMove++;
+			this._game.moves.add( m );
+		}
 
 		// for rochade
 		if ( m.piece is King ) {
@@ -151,9 +149,7 @@ public class GameProxy extends BaseProxy
 		this._game.isLastMove = this._currentMove == this._game.moves.length
 			? true
 			: false;
-		if ( this._game.moves.length > this._currentMove ) {
-			this._game
-		}
+
 		return this._game;
 	}
 

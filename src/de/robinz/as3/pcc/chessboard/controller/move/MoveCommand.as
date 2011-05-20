@@ -15,6 +15,8 @@ import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
 
 import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVOCollection;
 
+import de.robinz.as3.pcc.chessboard.view.ChessboardMediator;
+
 import flash.utils.setTimeout;
 
 import org.puremvc.as3.interfaces.INotification;
@@ -51,11 +53,16 @@ public class MoveCommand extends BaseCommand
 			this.checkPawnPromotion();
 		}
 
-		if ( m.isMoveForward == false && m.isMoveBack == false && m.isMoveJump == false ) {
-			this.gameProxy.move( m );
-			this.verifyCheck();
-		} else {
 
+		m.piece.move();
+		m.position.removePiece( m.fromPosition.toString() );
+		m.position.setPiece( m.piece, m.toPosition.toString(), true );
+
+		if ( m.isMoveForward == false ) {
+			this.gameProxy.move( m );
+			if ( m.isMoveBack == false && m.isMoveJump == false ) {
+				this.verifyCheck();
+			}
 		}
 
 		// give a reference to the corresponding game
@@ -113,24 +120,7 @@ public class MoveCommand extends BaseCommand
 			return;
 		}
 
-		var vm : ChessboardMove = m.validMove;
-		var p : Player = m.game.currentPlayer;
-
-		// check extra move for rochade
-		if ( vm != null ) {
-			if ( p.isWhite && vm.isCastlingShort ) {
-				this.moveRook( p, m, "h1", "f1" );
-			}
-			if ( p.isWhite && vm.isCastlingLong ) {
-				this.moveRook( p, m, "a1", "d1" );
-			}
-			if ( p.isBlack && vm.isCastlingShort ) {
-				this.moveRook( p, m, "h8", "f8" );
-			}
-			if ( p.isBlack && vm.isCastlingLong ) {
-				this.moveRook( p, m, "a8", "d8" );
-			}
-		}
+		this.handleCastlingRookMove();
 
 		if ( m.validMove.isEnPassant ) {
 			var field : FieldNotation = m.toPosition.clone();
@@ -141,17 +131,47 @@ public class MoveCommand extends BaseCommand
 		}
 	}
 
-	private function moveRook( player : Player, parentMove : ChessboardMove, fromNotation : String, toNotation : String ) : void {
-		var move : ChessboardMove = new ChessboardMove();
-		move.fromPosition = FieldNotation.createNotationByString( fromNotation );
-		move.toPosition = FieldNotation.createNotationByString( toNotation );
-		move.position = parentMove.position;
-		move.game = parentMove.game;
-		move.piece = parentMove.position.getPieceAt( fromNotation );
-		move.isCastlingRookMovement = true;
+	private function handleCastlingRookMove() : void {
+		if ( m.isCastlingRookMovement == true || m.isMoveBack ) {
+			return;
+		}
 
-		sendNotification( ApplicationFacade.MOVE, move );
+		var vm : ChessboardMove = m.validMove;
+		var p : Player = m.game.currentPlayer;
+
+		// check extra move for rochade
+
+		if ( vm != null ) {
+			var pm : ChessboardMove = null;
+			if ( m.piece.isWhite && vm.isCastlingShort ) {
+				pm = ChessboardUtil.getPieceMove( p, m, "h1", "f1" );
+				pm.isCastlingRookMovement = true;
+				//this.moveRook( p, m, "h1", "f1" );
+			}
+			if ( m.piece.isWhite && vm.isCastlingLong ) {
+				pm = ChessboardUtil.getPieceMove( p, m, "a1", "d1" );
+				pm.isCastlingRookMovement = true;
+				//this.moveRook( p, m, "a1", "d1" );
+			}
+			if ( ! m.piece.isWhite && vm.isCastlingShort ) {
+				pm = ChessboardUtil.getPieceMove( p, m, "h8", "f8" );
+				pm.isCastlingRookMovement = true;
+				// this.moveRook( p, m, "h8", "f8" );
+			}
+			if ( ! m.piece.isWhite && vm.isCastlingLong ) {
+				pm = ChessboardUtil.getPieceMove( p, m, "a8", "d8" );
+				pm.isCastlingRookMovement = true;
+				//this.moveRook( p, m, "a8", "d8" );
+			}
+
+			if ( pm != null ) {
+				sendNotification( ApplicationFacade.MOVE, pm );
+			}
+
+		}
 	}
+
+
 
 	// End Innerclass Methods
 

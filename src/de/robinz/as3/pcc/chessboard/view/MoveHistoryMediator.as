@@ -88,14 +88,25 @@ public class MoveHistoryMediator extends BaseMediator
 	}
 
 	private function add( m : ChessboardMove ) : void {
+		if ( m.validMove == null || m.isCastlingRookMovement ) {
+			return;
+		}
+
 		var me : ChessboardMoveEntry = new ChessboardMoveEntry();
 		me.initialize();
 		me.data = m;
 
 		me.moveNumber.text = m.game.currentMove + ".";
-		var divider : String = m.beatenPiece == null ? "-" : "x";
-		var notationChar : String = m.piece.getName() == Pawn.NAME ? "" : m.piece.notationChar;
-		me.moveDescription.text = notationChar + m.fromPosition.toString() + divider + m.toPosition.toString();
+
+		if ( m.validMove.isCastlingShort ) {
+			me.moveDescription.text = "O-O";
+		} else if ( m.validMove.isCastlingLong ) {
+			me.moveDescription.text = "O-O-O";
+		} else {
+			var divider : String = m.beatenPiece == null ? "-" : "x";
+			var notationChar : String = m.piece.getName() == Pawn.NAME ? "" : m.piece.notationChar;
+			me.moveDescription.text = notationChar + m.fromPosition.toString() + divider + m.toPosition.toString();
+		}
 
 		me.mouseChildren = false;
 		me.mouseEnabled = true;

@@ -37,12 +37,7 @@ public class MoveForwardCommand extends BaseCommand
 		}
 
 		// move piece forward
-		var m : ChessboardMove = new ChessboardMove();
-		m.beatenPiece = moveForward.beatenPiece;
-		m.fromPosition = moveForward.fromPosition;
-		m.toPosition = moveForward.toPosition;
-		m.piece = moveForward.piece;
-		m.game = moveForward.game;
+		var m : ChessboardMove = moveForward.clone();
 		m.isMoveForward = true;
 
 		sendNotification( ApplicationFacade.TRY_TO_MOVE, m );

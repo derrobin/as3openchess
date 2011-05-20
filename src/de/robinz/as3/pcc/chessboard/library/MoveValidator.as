@@ -167,6 +167,10 @@ public class MoveValidator {
 					notation = leftColumn + newRow.toString();
 				}
 
+				if ( notation == null ) {
+					return null;
+				}
+
 				return FieldNotation.createNotationByString( notation, EN_PASSANT );
 			}
 		}
