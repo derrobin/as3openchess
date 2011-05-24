@@ -3,6 +3,7 @@ package de.robinz.as3.pcc.chessboard.library.vo
 import de.robinz.as3.rzlib.collections.TypedCollection;
 
 import mx.containers.Panel;
+import mx.core.Container;
 
 /**
  * FontVOCollection
@@ -31,11 +32,10 @@ public class PanelVOCollection extends TypedCollection
 		return this.getVisiblePanels().length > 0;
 	}
 
-	public function getByPanel( panel : Panel ) : PanelVO {
-		var p : Panel;
+	public function getByPanel( panel : Container ) : PanelVO {
 		var vo : PanelVO;
 		for each( vo in this._list ) {
-			if ( vo.panel == panel ) {
+			if ( vo.container == panel ) {
 				return vo;
 			}
 		}

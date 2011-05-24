@@ -1,24 +1,21 @@
 package de.robinz.as3.pcc.chessboard.library.vo
 {
 import mx.containers.Panel;
+import mx.core.Container;
 
 public class PanelVO
 {
-	public var panel : Panel;
-	public var minHeight : int;
-	public var maxHeight : int;
+	public var container : Container;
 	public var visible : Boolean = false;
 
 	public function PanelVO()
 	{
 	}
 
-	public static function createByParams( panel : Panel, minHeight : int, maxHeight : int ) : PanelVO {
+	public static function createByParams( c : Container ) : PanelVO {
 		var o : PanelVO = new PanelVO();
 
-		o.panel = panel;
-		o.maxHeight = maxHeight;
-		o.minHeight = minHeight;
+		o.container = c;
 
 		return o;
 	}

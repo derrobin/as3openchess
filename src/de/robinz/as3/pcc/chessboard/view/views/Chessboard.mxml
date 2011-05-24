@@ -3,8 +3,10 @@
 Chessboard
 @author robin heinel
 -->
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml"
 	xmlns:chessboard="de.robinz.as3.pcc.chessboard.view.views.chessboard.*"
+	verticalAlign="middle"
+	horizontalAlign="center"
 >
 
 	<mx:Script>
@@ -22,7 +24,7 @@ Chessboard
 		]]>
 	</mx:Script>
 
-	<mx:VBox id="board" width="100%" height="100%" horizontalAlign="center" backgroundColor="{ boardSpaceColor }">
+	<mx:VBox id="board" width="100%" height="100%" horizontalAlign="center" verticalAlign="middle" backgroundColor="{ boardSpaceColor }">
 
 		<!--
 		<mx:VBox height="80" width="100%" id="infoboard">
@@ -31,7 +33,7 @@ Chessboard
 		</mx:VBox>
 		-->
 
-		<mx:HBox id="boardOuter" width="100%" height="30" backgroundColor="#ffffff">
+		<mx:HBox id="boardOuter" width="100%" verticalAlign="middle" horizontalAlign="center" height="30" backgroundColor="#ffffff">
 
 			<mx:Spacer width="50%" />
 
@@ -185,4 +187,4 @@ Chessboard
 
 	</mx:VBox>
 
-</mx:Canvas>
+</mx:Box>

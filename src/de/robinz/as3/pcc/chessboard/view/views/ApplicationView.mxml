@@ -5,14 +5,13 @@ ApplicationView
 -->
 <mx:Box xmlns:mx="http://www.adobe.com/2006/mxml"
 	xmlns:components="de.robinz.as3.pcc.chessboard.view.views.*"
-	xmlns:moveHistory="de.robinz.as3.pcc.chessboard.view.views.moveHistory.*"
-	xmlns:takenPieces="de.robinz.as3.pcc.chessboard.view.views.takenPieces.*"
 >
 
 	<mx:Script>
 		<![CDATA[
+		import mx.events.ResizeEvent;
 
-			[Bindable]
+		[Bindable]
 			private var _mainHeight : int = 700;
 			[Bindable]
 			private var _mainWidth : int = 1000;
@@ -31,52 +30,70 @@ ApplicationView
 				return this._mainHeight;
 			}
 
+			private function onBoardResize( e : ResizeEvent ) : void {
+				if ( chessboard.height >= boardStage.width ) {
+					chessboard.height = chessboard.width = boardStage.width;
+				} else{
+					chessboard.width = chessboard.height;
+				}
+			}
 
 		]]>
 	</mx:Script>
 
-	<components:ChessboardMenubar id="chessboardMenubar" />
-
-<!--	<mx:TextInput id="value1" />
-	<mx:Button id="value1Button" label="set value" />-->
+	<components:ChessboardMenubar id="chessboardMenubar" barColor="#ffffff" backgroundDisabledColor="0xf0e68c" />
 
 	<mx:Box id="chessboardStage" width="100%" height="100%"
-		styleName="chessboardStage">
+		styleName="chessboardStage" backgroundColor="#ffffff">
 
-		<mx:HBox width="{_mainWidth}" height="{_mainHeight}"
-			styleName="boardContainer"
-			horizontalGap="20"
-			verticalGap="20">
-
-			<components:Chessboard id="chessboard" width="700" height="700" />
-
-			<mx:VBox id="leftPanelContainer" styleName="chessboardLeftPanelContainer" width="250" height="100%"
-				visible="false"
-				includeInLayout="false"
-			>
-
-				<components:ChessboardMoveHistory id="chessboardMoveHistory" width="100%"
-					title="Move History"
-					visible="false"
-					includeInLayout="false"
-				/>
-
-				<components:ChessboardGameActions id="chessboardGameActions" width="100%"
-					title="Game Actions"
-					visible="false"
-					includeInLayout="false"
-				/>
-
-				<components:ChessboardTakenPieces id="chessboardTakenPieces" width="100%"
-					title="Taken Pieces"
-					visible="false"
-					includeInLayout="false"
-				/>
-
-
+		<mx:HDividedBox width="100%" height="100%">
+			<mx:VBox width="75%" height="100%" backgroundColor="#ffffff">
+				<mx:Box width="100%" height="25" backgroundColor="#ffffff"
+						borderSides="right"
+						borderColor="#aaaaaa"
+					    borderThickness="1"
+					    borderStyle="solid"></mx:Box>
+				<mx:VDividedBox id="boardStage" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" dividerColor="#dddddd"
+						borderSides="right"
+						borderColor="#aaaaaa"
+					    borderThickness="1"
+					    borderStyle="solid">
+					<components:Chessboard id="chessboard" width="100%" height="100%" minHeight="550" minWidth="550" resize="onBoardResize( event )"
+						borderSides="top left bottom right"
+						borderColor="#cdcdcd"
+					    borderThickness="1"
+					    borderStyle="solid"
+						/>
+					<mx:Box width="100%" height="100%" backgroundColor="#ffffff"
+						borderSides="top"
+						borderColor="#aaaaaa"
+						borderThickness="1"
+						borderStyle="solid"
+					/>
+				</mx:VDividedBox>
 			</mx:VBox>
+			<mx:VDividedBox width="25%" height="100%">
+				<components:ChessboardMoveHistory id="chessboardMoveHistory" width="100%" height="100%"
+					borderSides="bottom"
+					borderColor="#aaaaaa"
+					borderThickness="1"
+					borderStyle="solid"
+				/>
+				<components:ChessboardGameActions id="chessboardGameActions" width="100%" height="75"
+					borderSides="bottom"
+					borderColor="#aaaaaa"
+					borderThickness="1"
+					borderStyle="solid"
+				/>
+				<components:ChessboardTakenPieces id="chessboardTakenPieces" width="100%" height="140"
+					borderSides="bottom"
+					borderColor="#aaaaaa"
+					borderThickness="1"
+					borderStyle="solid"
+				/>
 
-		</mx:HBox>
+			</mx:VDividedBox>
+		</mx:HDividedBox>
 
 	</mx:Box>
 

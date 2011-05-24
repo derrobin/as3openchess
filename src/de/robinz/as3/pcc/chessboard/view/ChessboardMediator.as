@@ -438,15 +438,6 @@ public class ChessboardMediator extends BaseMediator
 	// Start Event Handlers
 
 	private function onMouseMove( e : MouseEvent ) : void {
-		var p : IPiece = __getPiece( e.target );
-
-		if ( p != null ) {
-			if ( this._game.currentPlayer.isWhite != p.isWhite ) {
-				return;
-			}
-			this.prepareDrag( e );
-		}
-
 	}
 
 	private function onMouseUp( e : MouseEvent ) : void {
@@ -494,10 +485,20 @@ public class ChessboardMediator extends BaseMediator
 			this._validMoves = ChessboardUtil.getValidMoves( this._game, position, pp );
 
 			this.showMoveHints( f, p );
+
+			if ( p != null ) {
+				if ( this._game.currentPlayer.isWhite != p.isWhite ) {
+					return;
+				}
+				this.prepareDrag( e );
+			}
 		}
 	}
 
 	private function onDragEnter( e : DragEvent ) : void {
+		if ( this._validMoves == null ) {
+			return;
+		}
 		if ( e.dragSource.hasFormat( "piece" ) ) {
 			if ( e.target is ChessboardField ) {
 				var f : ChessboardField = e.target as ChessboardField;
@@ -597,17 +598,17 @@ public class ChessboardMediator extends BaseMediator
 
 	// Start internal class getters
 
-	private function __getPiece( o : Object ) : IPiece {
-		if ( o is Text ) {
-			var t : Text = o as Text;
-			if ( t.data is IPiece ) {
-				var p : IPiece = t.data as IPiece;
-				return p;
-			}
-		}
-
-		return null;
-	}
+//	private function __getPiece( o : Object ) : IPiece {
+//		if ( o is Text ) {
+//			var t : Text = o as Text;
+//			if ( t.data is IPiece ) {
+//				var p : IPiece = t.data as IPiece;
+//				return p;
+//			}
+//		}
+//
+//		return null;
+//	}
 
 	// End internal class getters
 

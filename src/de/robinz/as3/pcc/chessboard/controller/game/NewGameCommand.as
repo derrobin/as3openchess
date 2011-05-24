@@ -28,7 +28,7 @@ public class NewGameCommand extends BaseCommand
 		sendNotification( ApplicationFacade.DISABLE_BOARD_INSPECT_PIECE_MODE );
 		sendNotification( ApplicationFacade.UNLOCK_BOARD );
 
-		this.setCastlingTest();
+		this.setDefault();
 		this.gameProxy.reset();
 
 		this.gameProxy.start(

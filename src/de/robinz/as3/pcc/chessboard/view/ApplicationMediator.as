@@ -27,82 +27,32 @@ public class ApplicationMediator extends BaseMediator
 
 	public function ApplicationMediator( m : mainapp ) {
 		super( NAME, m );
-
-		this._panels = this.registerPanels();
-		this.setDefaultPanelSize();
+		this.registerPanels();
 	}
 
 
 	// Start Innerclass Methods
 
-	private function setDefaultPanelSize() : void {
-		this.view.chessboardMoveHistory.percentHeight = this._panels.getAt( 0 ).minHeight;
-		this.view.chessboardTakenPieces.percentHeight = this._panels.getAt( 1 ).minHeight;
-		this.view.chessboardGameActions.percentHeight = this._panels.getAt( 2 ).minHeight;
+	private function registerPanels() : void {
+		this._panels = new PanelVOCollection();
+		this._panels.add( PanelVO.createByParams( this.view.chessboardMoveHistory ) );
+		this._panels.add( PanelVO.createByParams( this.view.chessboardTakenPieces ) );
+		this._panels.add( PanelVO.createByParams( this.view.chessboardGameActions ) );
 	}
 
-	private function registerPanels() : PanelVOCollection {
-		var c : PanelVOCollection = new PanelVOCollection();
-		c.add( PanelVO.createByParams( this.view.chessboardMoveHistory, 65, 100 ) );
-		c.add( PanelVO.createByParams( this.view.chessboardTakenPieces, 35, 35 ) );
-		c.add( PanelVO.createByParams( this.view.chessboardGameActions, 15, 15 ) );
-		return c;
-	}
-
-	private function hidePanel( panel : Panel ) : void {
+	private function hidePanel( panel : Container ) : void {
 		this.switchPanel( panel, false );
 	}
-	private function showPanel( panel : Panel ) : void {
-		this.switchPanel( panel, true );
+	private function showPanel( c : Container ) : void {
+		this.switchPanel( c, true );
 	}
 
-	private function switchLeftContainer() : void {
-		if ( this._panels.isVisiblePanels() ) {
-			this.switchContainer( this.view.leftPanelContainer, true );
-			return;
-		}
-		this.switchContainer( this.view.leftPanelContainer, false );
-	}
 
-	private function managePanelSizes() : void {
-		var avs : int = 100; // availible space in percent
-		var visiblePanels : PanelVOCollection = this._panels.getVisiblePanels();
-
-		var p : PanelVO;
-		var avg : int = Math.ceil( 100 / visiblePanels.length ); // average
-		var value : int;
-		var space : int = 100;
-
-		for each( p in visiblePanels.list ) {
-			value = p.minHeight;
-			space = space - value;
-			p.panel.percentHeight = value;
-		}
-
-		if ( space > 0 ) {
-			var diff : int;
-			for each( p in visiblePanels.list ) {
-				diff = p.maxHeight - p.minHeight;
-				if ( space >= diff ) {
-					p.panel.percentHeight = p.maxHeight;
-					space = space - diff;
-					continue;
-				}
-				// TODO: check: add maxHeight to calculation
-				if ( space > 0 ) {
-					p.panel.percentHeight = p.panel.percentHeight + space;
-				}
-			}
-		}
-	}
-
-	private function switchPanel( panel : Panel, visible : Boolean = true ) : void {
+	private function switchPanel( panel : Container, visible : Boolean = true ) : void {
 		var vo : PanelVO = this._panels.getByPanel( panel );
 		vo.visible = visible;
 
 		this.switchContainer( panel, visible );
-		this.managePanelSizes();
-		this.switchLeftContainer();
 	}
 
 	private function switchContainer( c : Container, visible : Boolean = true ) : void {

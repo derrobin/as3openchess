@@ -21,10 +21,10 @@ DragManager {
 	verticalGap: 20;
 }
 .chessboardStage {
-	paddingLeft: 20;
-	paddingRight: 20;
-	paddingBottom: 20;
-	paddingTop: 20;
+	paddingLeft: 0;
+	paddingRight: 0;
+	paddingBottom: 0;
+	paddingTop: 0;
 	verticalAlign: middle;
 	horizontalAlign: center;
 }
