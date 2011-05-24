@@ -10,7 +10,19 @@ ChessboardMoveEntry
 	verticalGap="10"
 	verticalAlign="bottom"
 >
+
+	<mx:Script>
+		<![CDATA[
+			public function get moveNumber() : Text {
+				return this._moveNumber;
+			}
+			public function get moveDescription() : Text {
+				return this._moveDescription;
+			}
+		]]>
+	</mx:Script>
+
 	<mx:Spacer width="1" height="1" />
-	<mx:Text id="moveNumber" styleName="historyMoveNumber" textAlign="right" width="25" height="20" />
-	<mx:Text id="moveDescription" styleName="historyMoveDescription" width="100%" height="22" />
+	<mx:Text id="_moveNumber" styleName="historyMoveNumber" textAlign="right" width="25" height="20" />
+	<mx:Text id="_moveDescription" styleName="historyMoveDescription" width="100%" height="22" />
 </mx:HBox>
