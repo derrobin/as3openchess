@@ -48,11 +48,13 @@ ApplicationView
 
 		<mx:HDividedBox width="100%" height="100%">
 			<mx:VBox width="75%" height="100%" backgroundColor="#ffffff">
+				<!--
 				<mx:Box width="100%" height="25" backgroundColor="#ffffff"
 						borderSides="right"
 						borderColor="#aaaaaa"
 					    borderThickness="1"
 					    borderStyle="solid"></mx:Box>
+				-->
 				<mx:VDividedBox id="boardStage" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" dividerColor="#dddddd"
 						borderSides="right"
 						borderColor="#aaaaaa"
@@ -64,12 +66,14 @@ ApplicationView
 					    borderThickness="1"
 					    borderStyle="solid"
 						/>
+					<!--
 					<mx:Box width="100%" height="100%" backgroundColor="#ffffff"
 						borderSides="top"
 						borderColor="#aaaaaa"
 						borderThickness="1"
 						borderStyle="solid"
 					/>
+					-->
 				</mx:VDividedBox>
 			</mx:VBox>
 			<mx:VDividedBox width="25%" height="100%">
