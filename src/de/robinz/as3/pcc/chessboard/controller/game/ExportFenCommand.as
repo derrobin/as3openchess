@@ -1,7 +1,7 @@
 package de.robinz.as3.pcc.chessboard.controller.game
 {
 import de.robinz.as3.pcc.chessboard.controller.*;
-import de.robinz.as3.pcc.chessboard.library.FENPosition;
+import de.robinz.as3.pcc.chessboard.library.FenPosition;
 
 import mx.controls.Alert;
 
@@ -19,7 +19,7 @@ public class ExportFenCommand extends BaseCommand
 	public override function execute( n : INotification ) : void {
 		super.execute( n );
 
-		var fen : FENPosition = new FENPosition();
+		var fen : FenPosition = new FenPosition();
 		fen.setPosition( boardMediator.getPosition() );
 
 		Alert.show( fen.toString(), "FEN Notation" );

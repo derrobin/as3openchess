@@ -15,10 +15,10 @@ import mx.logging.ILogger;
  *
  * @author robin heinel
  */
-public class FENPosition extends ChessPosition {
+public class FenPosition extends ChessPosition {
 	private var log : ILogger;
 
-	public function FENPosition() {
+	public function FenPosition() {
 		super();
 		this.log = LoggerFactory.getLogger( this, false );
 	}
