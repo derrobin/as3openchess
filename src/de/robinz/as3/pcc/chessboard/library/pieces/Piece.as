@@ -1,7 +1,10 @@
 package de.robinz.as3.pcc.chessboard.library.pieces
 {
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
+import de.robinz.as3.pcc.chessboard.library.FieldNotation;
+import de.robinz.as3.pcc.chessboard.library.FieldNotationCollection;
 import de.robinz.as3.pcc.chessboard.library.FontManager;
+import de.robinz.as3.pcc.chessboard.library.pieces.moverange.IMoveRange;
 
 /**
  * Piece
@@ -14,6 +17,8 @@ public class Piece implements IPiece
 	protected var _useFontKey : Boolean = false;
 	protected var _fontKey : String;
 	private var _hasMoved : Boolean = false;
+
+	protected var _range : IMoveRange;
 
 	public static function createByParams( name : String, white : Boolean = true ) : IPiece {
 		var p : IPiece = factoryByName( name );
@@ -33,7 +38,7 @@ public class Piece implements IPiece
 			case Knight.NAME:	return new Knight();
 			case Queen.NAME:	return new Queen();
 			case King.NAME:		return new King();
-		};
+		}
 
 		throw new Error( "No Piece not Found!" );
 	}
@@ -111,6 +116,10 @@ public class Piece implements IPiece
 	}
 	public function get hasAbilityToBeatLine() : Boolean {
 		return false;
+	}
+
+	public function getGeometricValidMoviesToField( field:FieldNotation ):FieldNotationCollection {
+		return this._range.getRangeToField( field );
 	}
 }
 }

@@ -2,6 +2,7 @@ package de.robinz.as3.pcc.chessboard.library.pieces
 {
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
+import de.robinz.as3.pcc.chessboard.library.pieces.moverange.PawnRange;
 
 /**
  * Pawn
@@ -13,6 +14,7 @@ public class Pawn extends Piece implements IPiece
 	public static var NAME : String = "pawn";
 
 	public function Pawn() {
+		this._range = new PawnRange();
 	}
 
 	public override function getName() : String {

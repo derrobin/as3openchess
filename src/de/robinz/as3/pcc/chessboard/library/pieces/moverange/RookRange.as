@@ -9,7 +9,7 @@ import de.robinz.as3.pcc.chessboard.library.FieldNotationCollection;
 
 public class RookRange extends MoveRange {
 
-	public function RookRange( depth : int = 9 ) {
+	public function RookRange( depth : int = 8 ) {
 		super( depth );
 	}
 

@@ -2,6 +2,7 @@ package de.robinz.as3.pcc.chessboard.library.pieces
 {
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
+import de.robinz.as3.pcc.chessboard.library.pieces.moverange.KingRange;
 
 /**
  * King
@@ -13,6 +14,7 @@ public class King extends Piece implements IPiece
 	public static var NAME : String = "king";
 
 	public function King() {
+		this._range = new KingRange();
 	}
 
 	public override function getName() : String {

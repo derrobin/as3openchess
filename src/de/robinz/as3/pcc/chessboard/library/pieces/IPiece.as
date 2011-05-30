@@ -1,6 +1,8 @@
 package de.robinz.as3.pcc.chessboard.library.pieces
 {
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
+import de.robinz.as3.pcc.chessboard.library.FieldNotation;
+import de.robinz.as3.pcc.chessboard.library.FieldNotationCollection;
 
 /**
  * IPiece
@@ -15,6 +17,7 @@ public interface IPiece
 	function get hasAbilityToBeatDiagonal() : Boolean;
 	function get hasAbilityToBeatLine() : Boolean;
 	function get hasMoved() : Boolean;
+	function getGeometricValidMoviesToField( field : FieldNotation  ) : FieldNotationCollection;
 
 	function setWhite() : void;
 	function setBlack() : void;

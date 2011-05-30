@@ -8,11 +8,11 @@ import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.FieldNotationCollection;
 
 public class MoveRange implements IMoveRange {
-	protected const TOP:int = 1;
-	protected const BOTTOM:int = -1;
-	protected const RIGHT:int = 1;
-	protected const LEFT:int = -1;
-	protected const SAME:int = 0;
+	public static const TOP:int = 1;
+	public static const BOTTOM:int = -1;
+	public static const RIGHT:int = 1;
+	public static const LEFT:int = -1;
+	public static const SAME:int = 0;
 
 	private var _depth:int = 8;
 	public function MoveRange( depth : int = 8 ) {

@@ -9,17 +9,17 @@ import de.robinz.as3.pcc.chessboard.library.FieldNotationCollection;
 
 public class BishopRange extends MoveRange {
 
-	public function BishopRange( depth : int = 9 ) {
+	public function BishopRange( depth : int = 8 ) {
 		super( depth );
 	}
 
 	override public function getRangeToField( field:FieldNotation ):FieldNotationCollection {
 		var res : FieldNotationCollection = new FieldNotationCollection();
 
+		res.addCollection( getLineFromField( field, LEFT, BOTTOM ) );
+		res.addCollection( getLineFromField( field, LEFT, TOP ) );
 		res.addCollection( getLineFromField( field, RIGHT, TOP ) );
 		res.addCollection( getLineFromField( field, RIGHT, BOTTOM ) );
-		res.addCollection( getLineFromField( field, LEFT, TOP ) );
-		res.addCollection( getLineFromField( field, LEFT, BOTTOM ) );
 
 		return res;
 	}

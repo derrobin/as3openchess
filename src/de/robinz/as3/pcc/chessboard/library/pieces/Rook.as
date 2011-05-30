@@ -2,6 +2,7 @@ package de.robinz.as3.pcc.chessboard.library.pieces
 {
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
+import de.robinz.as3.pcc.chessboard.library.pieces.moverange.RookRange;
 
 /**
  * Rook
@@ -13,6 +14,7 @@ public class Rook extends Piece implements IPiece
 	public static var NAME : String = "rook";
 
 	public function Rook() {
+		this._range = new RookRange();
 	}
 
 	public override function getName() : String {
