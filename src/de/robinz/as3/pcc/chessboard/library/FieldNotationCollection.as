@@ -34,8 +34,8 @@ public class FieldNotationCollection extends TypedCollection
 	}
 
 
-	public function getAt( index : int ) : FieldNotationCollection {
-		return FieldNotationCollection( this._getAt( index ) );
+	public function getAt( index : int ) : FieldNotation {
+		return FieldNotation( this._getAt( index ) );
 	}
 
 	public function removeAt( index : int ) : FieldNotationCollection {

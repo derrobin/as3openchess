@@ -3,7 +3,7 @@
  * Date: 5/23/11
  * Time: 10:46 AM
  */
-package flex.moverange {
+package flex.move.range {
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.FieldNotationCollection;
 import de.robinz.as3.pcc.chessboard.library.pieces.moverange.BishopRange;

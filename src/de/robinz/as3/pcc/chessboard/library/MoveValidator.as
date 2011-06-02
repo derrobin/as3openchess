@@ -29,9 +29,9 @@ public class MoveValidator {
 	public function MoveValidator( game : ChessboardGameVO, position : ChessPosition, piece : PiecePositionVO ) {
 		this.log = LoggerFactory.getLogger( this );
 
-		this._game = game;
-		this._position = position;
-		this._piece = piece;
+		this._game 		= game;
+		this._position 	= position;
+		this._piece 	= piece;
 	}
 
 	public function getValidMoves() : ChessboardMoveCollection {
@@ -41,8 +41,8 @@ public class MoveValidator {
 		var moves : ChessboardMoveCollection = this.getValidMovesByPieceGeometric();
 
 		// exclude fields behind pieces
-		var fieldsBehind : FieldNotationCollection = this.getFieldsBehindPieces();
-		moves.excludeToPositions( fieldsBehind );
+		//var fieldsBehind : FieldNotationCollection = this.getFieldsBehindPieces();
+		//moves.excludeToPositions( fieldsBehind );
 
 		if ( this._game.check ) {
 			log.info( "getValidMoves: check from {0} to {1}", this._game.check.fromPiece.piece.getName(), this._game.check.toKing.piece.isWhite ? "white" : "black" );
@@ -333,7 +333,20 @@ public class MoveValidator {
 	private function getValidMovesByPieceGeometric() : ChessboardMoveCollection {
 		var fromNotation : FieldNotation = FieldNotation.createNotationByString( _piece.notation.toString() );
 		var moves : ChessboardMoveCollection = new ChessboardMoveCollection();
+
 		var move : ChessboardMove;
+		var moveNotations : FieldNotationCollection = _piece.piece.getGeometricValidMoviesToField( _piece.notation );
+
+		for( var i : int = 0; i < moveNotations.length; i++ ) {
+			move = new ChessboardMove();
+			move.fromPosition = fromNotation;
+			move.toPosition = moveNotations.getAt( i );
+			move.beatenPiece = this._position.getPieceAt( moveNotations.getAt( i ).getNotation() );
+			move.piece = this._piece.piece;
+
+			moves.add( move );
+		}
+		/*
 		var sequence : Array = ChessboardUtil.getNotationSequence();
 		var toNotation : FieldNotation;
 		var notation : String;
@@ -352,6 +365,7 @@ public class MoveValidator {
 				moves.add( move );
 			}
 		}
+		*/
 
 		return moves;
 	}

@@ -37,6 +37,7 @@ public class ChessboardUtil {
 		var sequence : Array = new Array();
 		var rows : String = "abcdefgh";
 		var notation : String;
+
 		var i : int = 1;
 		var j : int = 1;
 
