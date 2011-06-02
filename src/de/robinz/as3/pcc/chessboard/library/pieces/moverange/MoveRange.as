@@ -4,6 +4,8 @@
  * Time: 9:24 PM
  */
 package de.robinz.as3.pcc.chessboard.library.pieces.moverange {
+
+import de.robinz.as3.pcc.chessboard.library.ChessPosition;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.FieldNotationCollection;
 
@@ -20,11 +22,11 @@ public class MoveRange implements IMoveRange {
 	}
 
 
-	public function getRangeToField( field:FieldNotation ):FieldNotationCollection {
+	public function getRange( field:FieldNotation, position:ChessPosition ):FieldNotationCollection {
 		return null;
 	}
 
-	protected function getLineFromField( field:FieldNotation, columnDirection:int, rowDirection:int ):FieldNotationCollection {
+	protected function getLineFromField( field:FieldNotation, columnDirection:int, rowDirection:int, position : ChessPosition ):FieldNotationCollection {
 
 		var res:FieldNotationCollection = new FieldNotationCollection();
 
@@ -41,10 +43,21 @@ public class MoveRange implements IMoveRange {
 				return res;
 			}
 
+
 			f2add = FieldNotation.createNotationByString(
 					FieldNotation.indexes[ field.columnIndex + inc * columnDirection ] +
 							(field.row + inc * rowDirection)
 					);
+
+			if( position && position.getPieceAt( f2add.getNotation() ) ) {
+				if(
+					position.getPieceAt( field.getNotation() ).isWhite
+					!= position.getPieceAt( f2add.getNotation() ).isWhite
+				) {
+					res.add( f2add );
+				}
+				return res;
+			}
 
 			if ( !f2add.equals( field ) ) {
 				res.add( f2add );

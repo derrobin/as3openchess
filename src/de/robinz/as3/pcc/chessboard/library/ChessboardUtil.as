@@ -1,4 +1,6 @@
 package de.robinz.as3.pcc.chessboard.library {
+
+import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
@@ -63,6 +65,29 @@ public class ChessboardUtil {
 		move.validMove = parentMove.validMove;
 
 		return move;
+	}
+
+	public static function convertNotationCollection2ChessboardMoveCollection(
+		from : FieldNotation,
+		fields : FieldNotationCollection,
+		position:ChessPosition,
+		piece : IPiece) : ChessboardMoveCollection {
+
+		var moves:ChessboardMoveCollection = new ChessboardMoveCollection();
+		var move:ChessboardMove;
+
+		for ( var i:int = 0; i < fields.length; i++ ) {
+			move = new ChessboardMove();
+			move.fromPosition = from;
+			move.toPosition   = fields.getAt( i );
+			move.beatenPiece  = position.getPieceAt( fields.getAt( i ).getNotation() );
+			move.piece = piece;
+			moves.add( move );
+
+		}
+
+		return moves;
+
 	}
 
 	public static function getValidMoves( game : ChessboardGameVO, position : ChessPosition, piece : PiecePositionVO ) : ChessboardMoveCollection {

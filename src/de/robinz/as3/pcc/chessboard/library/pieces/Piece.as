@@ -1,6 +1,10 @@
 package de.robinz.as3.pcc.chessboard.library.pieces
 {
+
+import de.robinz.as3.pcc.chessboard.library.ChessPosition;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
+import de.robinz.as3.pcc.chessboard.library.ChessboardMoveCollection;
+import de.robinz.as3.pcc.chessboard.library.ChessboardUtil;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.FieldNotationCollection;
 import de.robinz.as3.pcc.chessboard.library.FontManager;
@@ -13,10 +17,11 @@ import de.robinz.as3.pcc.chessboard.library.pieces.moverange.IMoveRange;
  */
 public class Piece implements IPiece
 {
-	private var _isWhite : Boolean = true;
-	protected var _useFontKey : Boolean = false;
-	protected var _fontKey : String;
-	private var _hasMoved : Boolean = false;
+	private 	var _isWhite 	: Boolean = true;
+	protected 	var _useFontKey : Boolean = false;
+	private 	var _isMoved 	: Boolean = false;
+
+	protected 	var _fontKey 	: String;
 
 	protected var _range : IMoveRange;
 
@@ -43,10 +48,6 @@ public class Piece implements IPiece
 		throw new Error( "No Piece not Found!" );
 	}
 
-	public function setWhite() : void {
-		this._isWhite = true;
-	}
-
 	public function setBlack() : void {
 		this._isWhite  = false;
 	}
@@ -62,7 +63,7 @@ public class Piece implements IPiece
 		return false;
 	}
 
-	public function isMoveValide( m : ChessboardMove ) : Boolean {
+	public function isMoveValid( m : ChessboardMove ) : Boolean {
 		if( m.beatenPiece ) {
 			if( m.beatenPiece.isWhite == this.isWhite ) {
 				return false;
@@ -87,12 +88,12 @@ public class Piece implements IPiece
 		this._fontKey = value;
 	}
 
-	public function get hasMoved() : Boolean {
-		return this._hasMoved;
+	public function get isMoved() : Boolean {
+		return this._isMoved;
 	}
 
 	public function move() : void {
-		this._hasMoved = true;
+		this._isMoved = true;
 	}
 
 	public function getName() : String {
@@ -111,15 +112,25 @@ public class Piece implements IPiece
 		return this._isWhite;
 	}
 
-	public function get hasAbilityToBeatDiagonal() : Boolean {
-		return false;
-	}
-	public function get hasAbilityToBeatLine() : Boolean {
-		return false;
+	public function getGeometricValidMoviesToField( field:FieldNotation, position:ChessPosition ):ChessboardMoveCollection {
+		var fields : FieldNotationCollection = this._range.getRange( field, position );
+		return ChessboardUtil.convertNotationCollection2ChessboardMoveCollection( field,  fields, position, this );;
 	}
 
-	public function getGeometricValidMoviesToField( field:FieldNotation ):FieldNotationCollection {
-		return this._range.getRangeToField( field );
+	protected function getValidRange( from : FieldNotation, fields:FieldNotationCollection, position:ChessPosition ):ChessboardMoveCollection {
+		var moves:ChessboardMoveCollection = ChessboardUtil.convertNotationCollection2ChessboardMoveCollection( from,  fields, position, this );
+		var res : ChessboardMoveCollection = new ChessboardMoveCollection();
+
+		for ( var i:int = 0; i < moves.length; i++ ) {
+
+			if ( isMoveValid( moves.getAt( i ) ) ) {
+				res.add( moves.getAt( i ) );
+			}
+
+		}
+
+		return res;
 	}
+
 }
 }

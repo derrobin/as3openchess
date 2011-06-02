@@ -1,7 +1,11 @@
 package de.robinz.as3.pcc.chessboard.library.pieces
 {
+
+import de.robinz.as3.pcc.chessboard.library.ChessPosition;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
+import de.robinz.as3.pcc.chessboard.library.ChessboardMoveCollection;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
+import de.robinz.as3.pcc.chessboard.library.FieldNotationCollection;
 import de.robinz.as3.pcc.chessboard.library.pieces.moverange.PawnRange;
 
 /**
@@ -32,8 +36,8 @@ public class Pawn extends Piece implements IPiece
 		return this.isWhite && notation.row == 2 || ( ! this.isWhite && notation.row == 7 );
 	}
 
-	public override function isMoveValide( m : ChessboardMove ) : Boolean {
-		if( super.isMoveValide( m ) ) {
+	public override function isMoveValid( m : ChessboardMove ) : Boolean {
+		if( super.isMoveValid( m ) ) {
 			var maxDiffRow : int = 1;
 			var maxDiffCol : int = 0;
 			var diffRow : int;

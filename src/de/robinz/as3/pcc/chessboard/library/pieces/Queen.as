@@ -28,8 +28,8 @@ public class Queen extends Piece implements IPiece
 		return "D";
 	}
 
-	public override function isMoveValide( m : ChessboardMove ) : Boolean {
-		if( super.isMoveValide( m ) ) {
+	public override function isMoveValid( m : ChessboardMove ) : Boolean {
+		if( super.isMoveValid( m ) ) {
 			var maxDiffRow : int = 8;
 			var maxDiffCol : int = 8;
 			var diffRow : int;
@@ -53,14 +53,6 @@ public class Queen extends Piece implements IPiece
 		}
 
 		return false;
-	}
-
-	public override function get hasAbilityToBeatDiagonal() : Boolean {
-		return true;
-	}
-
-	public override function get hasAbilityToBeatLine() : Boolean {
-		return true;
 	}
 
 }

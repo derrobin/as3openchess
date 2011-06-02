@@ -19,7 +19,7 @@ public class MoveRangeTest {
 		public function testRookRange() : void {
 			var testField : FieldNotation = FieldNotation.createNotationByString("e1");
 
-			var range : FieldNotationCollection = new RookRange().getRangeToField( testField );
+			var range : FieldNotationCollection = new RookRange().getRange( testField, null );
 
 			Assert.assertEquals( "e2", ( range.list.getItemAt(0) as FieldNotation ).getNotation() );
 			Assert.assertEquals( "e3", ( range.list.getItemAt(1) as FieldNotation ).getNotation() );
@@ -33,7 +33,7 @@ public class MoveRangeTest {
 		public function testBishopRange() : void {
 			var testField : FieldNotation = FieldNotation.createNotationByString("e1");
 
-			var range : FieldNotationCollection = new BishopRange().getRangeToField( testField );
+			var range : FieldNotationCollection = new BishopRange().getRange( testField, null );
 			Assert.assertEquals( "d2", ( range.list.getItemAt(0) as FieldNotation ).getNotation() );
 			Assert.assertEquals( "c3", ( range.list.getItemAt(1) as FieldNotation ).getNotation() );
 			Assert.assertEquals( "b4", ( range.list.getItemAt(2) as FieldNotation ).getNotation() );
@@ -48,7 +48,7 @@ public class MoveRangeTest {
 		public function testKingRange() : void {
 			var testField : FieldNotation = FieldNotation.createNotationByString("e2");
 
-			var range : FieldNotationCollection = new KingRange().getRangeToField( testField );
+			var range : FieldNotationCollection = new KingRange().getRange( testField, null );
 			Assert.assertEquals( 8, range.length );
 
 			Assert.assertEquals( "e3", ( range.list.getItemAt(0) as FieldNotation).getNotation() );
@@ -66,7 +66,7 @@ public class MoveRangeTest {
 		public function testKnightRange() : void {
 			var testField : FieldNotation  = FieldNotation.createNotationByString("e5");
 
-			var range : FieldNotationCollection = new KnightRange().getRangeToField( testField );
+			var range : FieldNotationCollection = new KnightRange().getRange( testField, null );
 			Assert.assertEquals( 8, range.length );
 
 			Assert.assertEquals( "c6", ( range.list.getItemAt(0) as FieldNotation).getNotation() );

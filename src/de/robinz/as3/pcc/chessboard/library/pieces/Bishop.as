@@ -29,8 +29,8 @@ public class Bishop extends Piece implements IPiece
 		return "L";
 	}
 
-	public override function isMoveValide( m : ChessboardMove ) : Boolean {
-		if( super.isMoveValide( m ) ) {
+	public override function isMoveValid( m : ChessboardMove ) : Boolean {
+		if( super.isMoveValid( m ) ) {
 			var diffRow : int;
 			var diffCol : int;
 
@@ -44,10 +44,6 @@ public class Bishop extends Piece implements IPiece
 		}
 
 		return false;
-	}
-
-	public override function get hasAbilityToBeatDiagonal() : Boolean {
-		return true;
 	}
 
 }

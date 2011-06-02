@@ -24,8 +24,8 @@ public class King extends Piece implements IPiece
 		return "K";
 	}
 
-	public override function isMoveValide( m : ChessboardMove ) : Boolean {
-		if( super.isMoveValide( m ) ) {
+	public override function isMoveValid( m : ChessboardMove ) : Boolean {
+		if( super.isMoveValid( m ) ) {
 			var maxDiffRow : int = 1;
 			var maxDiffCol : int = 1;
 			var diffRow : int;

@@ -28,8 +28,8 @@ public class Knight extends Piece implements IPiece
 		return "S";
 	}
 
-	public override function isMoveValide( m : ChessboardMove ) : Boolean {
-		if( super.isMoveValide( m ) ) {
+	public override function isMoveValid( m : ChessboardMove ) : Boolean {
+		if( super.isMoveValid( m ) ) {
 			var diffRow : int;
 			var diffCol : int;
 

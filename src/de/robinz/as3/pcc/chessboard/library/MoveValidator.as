@@ -38,21 +38,24 @@ public class MoveValidator {
 		var piece : IPiece = this._position.getPieceAt( this._piece.notation.toString() );
 
 		// get valid fields by geometric
-		var moves : ChessboardMoveCollection = this.getValidMovesByPieceGeometric();
+		var moves : ChessboardMoveCollection = this._piece.piece.getGeometricValidMoviesToField( this._piece.notation, this._position );
 
 		// exclude fields behind pieces
 		//var fieldsBehind : FieldNotationCollection = this.getFieldsBehindPieces();
 		//moves.excludeToPositions( fieldsBehind );
 
+		/*
 		if ( this._game.check ) {
 			log.info( "getValidMoves: check from {0} to {1}", this._game.check.fromPiece.piece.getName(), this._game.check.toKing.piece.isWhite ? "white" : "black" );
 		}
+		*/
 
 		// merge special moves
+		/*
 		var specialMoves : FieldNotationCollection = this.getSpecialMoves();
 		log.info( "getValidMoves: specialMoves found {0}", specialMoves.length );
 		this.mergeMovesFromNotations( specialMoves, moves );
-
+        */
 		return moves;
 	}
 
@@ -72,26 +75,6 @@ public class MoveValidator {
 
 			addToMoves.add( m );
 		}
-	}
-
-	private function getFieldsBehindPieces() : FieldNotationCollection {
-		var list : FieldNotationCollection = new FieldNotationCollection(); // cross lanes
-
-		if ( this._piece.piece.hasAbilityToBeatDiagonal ) {
-			list.addCollection( this.getFieldBehindCrossLanes() );
-		}
-		if ( this._piece.piece.hasAbilityToBeatLine ) {
-			list.addCollection( this.getFieldBehindDirectLanes() );
-		}
-
-		if ( this._piece.piece is Pawn ) {
-			var notation : FieldNotation = this.getFieldBehindPawnFirstMove();
-			if ( notation != null ) {
-				list.add( notation );
-			}
-		}
-
-		return list;
 	}
 
 	private function getSpecialMoves() : FieldNotationCollection {
@@ -116,6 +99,7 @@ public class MoveValidator {
 		var p : Player = this._game.currentPlayer;
 
 		if ( ! p.isKingMoved ) {
+			/*
 			var npl : PiecePositionVO = getNextPieceOnLane( 0, -1 ); // next piece left
 			var npr : PiecePositionVO = getNextPieceOnLane( 0, +1 ); // next piece right
 
@@ -134,6 +118,7 @@ public class MoveValidator {
 					moves.add( FieldNotation.createNotationByString( "c8", CASTLING_LONG ) );
 				}
 			}
+			*/
 		}
 
 		return moves;
@@ -177,197 +162,6 @@ public class MoveValidator {
 		return null;
 	}
 
-	private function getFieldBehindPawnFirstMove() : FieldNotation {
-		var pawn : Pawn = this._piece.piece as Pawn;
-		var n : FieldNotation = this._piece.notation.clone();
 
-		if ( pawn.isStartPosition( n ) ) {
-			var p : IPiece;
-			var setRow : int = 1;
-
-			if ( ! this._piece.piece.isWhite ) {
-				setRow = -1;
-			}
-
-			n.setRow( setRow );
-			p = this._position.getPieceAt( n.toString() );
-			if ( p != null ) {
-				log.debug( "move collision / pawn at {0}", n.toString() );
-				n.setRow( setRow );
-				return n;
-			}
-		}
-
-		return null;
-	}
-
-	// get field range for line / diagonal
-	private function getFieldBehindCrossLanes() {
-		var list : FieldNotationCollection = new FieldNotationCollection();
-		// diagonal: get next piece for top left
-		var topLeft : FieldNotationCollection = getFieldsBehind( +1, -1 );
-		// diagonal: get next piece for top left
-		var topRight : FieldNotationCollection = getFieldsBehind( +1, +1 );
-		// diagonal: get next piece for down left
-		var downLeft : FieldNotationCollection = getFieldsBehind( -1, -1 );
-		// diagonal: get next piece for down right
-		var downRight : FieldNotationCollection = getFieldsBehind( -1, +1 );
-
-		list.addCollection( topLeft );
-		list.addCollection( topRight );
-		list.addCollection( downLeft );
-		list.addCollection( downRight );
-
-		log.debug( "getFieldsBehindPieces: affected diagonal fields: {0}", list.toString() );
-		return list;
-	}
-
-	// get field range for line / horizontal
-	private function getFieldBehindDirectLanes() {
-		var list : FieldNotationCollection = new FieldNotationCollection();
-		// line: get next piece for top
-		var top : FieldNotationCollection = getFieldsBehind( +1, 0 );
-		// line: get next piece for bottom
-		var bottom : FieldNotationCollection = getFieldsBehind( -1, 0 );
-		// line: get next piece for left
-		var left : FieldNotationCollection = getFieldsBehind(  0, -1 );
-		// line: get next piece for right
-		var right : FieldNotationCollection = getFieldsBehind( 0, +1 );
-
-		list.addCollection( top );
-		list.addCollection( bottom );
-		list.addCollection( left );
-		list.addCollection( right );
-
-		log.debug( "getFieldsBehindPieces: affected line fields: {0}", list.toString() );
-		return list;
-	}
-
-	public function getLaneFields( rowStep : int, columnStep : int ) : FieldNotationCollection {
-		var fields : FieldNotationCollection = new FieldNotationCollection();
-		var walker : FieldNotation = _piece.notation.clone();
-
-		var rowCheck : Boolean;
-		var columnCheck : Boolean;
-
-		do {
-			rowCheck = FieldNotation.checkSetRow( walker.row, rowStep );
-			columnCheck = FieldNotation.checkSetColumn( walker.column, columnStep );
-
-			if ( rowCheck == false || columnCheck == false ) {
-				log.debug( "walker has reached boundaries so get off." );
-				break;
-			}
-
-			walker.setColumn( columnStep );
-			walker.setRow( rowStep );
-
-			log.debug( "getLaneFields: walker at position {0}", walker.toString() );
-
-			fields.add( walker.clone() );
-		} while( true );
-
-		return fields;
-	}
-
-	private function getNextPieceOnLane( rowStep : int, columnStep : int ) : PiecePositionVO {
-		var fields : FieldNotationCollection = this.getLaneFields( rowStep, columnStep );
-		var p : IPiece;
-		var pp : PiecePositionVO;
-
-		for each( var field : FieldNotation in fields.list ) {
-			p = this._position.getPieceAt( field.toString() );
-
-			log.debug( "getNextPieceOnLane: field: {0}", field.toString() );
-
-			if ( p != null ) {
-				log.debug( "getNextPieceOnLane: piece: {0}", p.getName() );
-
-				pp = new PiecePositionVO();
-				pp.notation = FieldNotation.createNotationByString( field.getNotation() );
-				pp.piece = p;
-				return pp;
-			}
-		}
-
-		return null;
-	}
-
-	private function getFieldsBehind( rowStep : int, columnStep : int ) : FieldNotationCollection {
-		var fields : FieldNotationCollection = this.getLaneFields( rowStep, columnStep );
-		var fieldsBehind : FieldNotationCollection = new FieldNotationCollection();
-		var p : IPiece;
-		var excludeNextFields : Boolean = false;
-
-		for each( var field : FieldNotation in fields.list ) {
-			p = this._position.getPieceAt( field.toString() );
-
-			log.debug( "getNextPieceOnLane: field: {0}", field.toString() );
-
-			if ( p != null ) {
-				if ( p.isWhite == this._piece.piece.isWhite || !p.isWhite == !this._piece.piece.isWhite ) {
-					log.debug( "walker has detected own figure at: {0}", field.toString() );
-					fieldsBehind.add( field.clone() );
-					log.debug( "getFieldsBehind: next fields are unvalid." );
-					excludeNextFields = true;
-				} else {
-					if ( excludeNextFields ) {
-						log.debug( "getFieldsBehind: {0} is a field behind.", field.toString() );
-						fieldsBehind.add( field.clone() );
-					}
-					log.debug( "getFieldsBehind: next fields are unvalid." );
-					excludeNextFields = true;
-				}
-			} else {
-				if ( excludeNextFields ) {
-					log.debug( "getFieldsBehind: {0} is a field behind.", field.toString() );
-					fieldsBehind.add( field.clone() );
-				}
-			}
-
-		}
-
-		return fieldsBehind;
-	}
-
-	private function getValidMovesByPieceGeometric() : ChessboardMoveCollection {
-		var fromNotation : FieldNotation = FieldNotation.createNotationByString( _piece.notation.toString() );
-		var moves : ChessboardMoveCollection = new ChessboardMoveCollection();
-
-		var move : ChessboardMove;
-		var moveNotations : FieldNotationCollection = _piece.piece.getGeometricValidMoviesToField( _piece.notation );
-
-		for( var i : int = 0; i < moveNotations.length; i++ ) {
-			move = new ChessboardMove();
-			move.fromPosition = fromNotation;
-			move.toPosition = moveNotations.getAt( i );
-			move.beatenPiece = this._position.getPieceAt( moveNotations.getAt( i ).getNotation() );
-			move.piece = this._piece.piece;
-
-			moves.add( move );
-		}
-		/*
-		var sequence : Array = ChessboardUtil.getNotationSequence();
-		var toNotation : FieldNotation;
-		var notation : String;
-
-		for each( notation in sequence ) {
-			toNotation = FieldNotation.createNotationByString( notation );
-
-			move = new ChessboardMove();
-			move.fromPosition = fromNotation;
-			move.toPosition = toNotation;
-			move.beatenPiece = this._position.getPieceAt( notation.toString() );
-			move.piece = this._piece.piece;
-
-			if ( this._piece.piece.isMoveValide( move ) ) {
-				move.isPawnDoubleJump = move.piece is Pawn && 2 == ( Math.max( toNotation.row, fromNotation.row ) - Math.min( toNotation.row, fromNotation.row ) );
-				moves.add( move );
-			}
-		}
-		*/
-
-		return moves;
-	}
 }
 }

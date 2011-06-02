@@ -5,6 +5,7 @@
  */
 package de.robinz.as3.pcc.chessboard.library.pieces.moverange {
 
+import de.robinz.as3.pcc.chessboard.library.ChessPosition;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.FieldNotationCollection;
 
@@ -12,45 +13,45 @@ public class KnightRange implements IMoveRange {
 	public function KnightRange() {
 	}
 
-	public function getRangeToField( field:FieldNotation ):FieldNotationCollection {
+	public function getRange( field:FieldNotation, position:ChessPosition ):FieldNotationCollection {
 		var res : FieldNotationCollection = new FieldNotationCollection();
 
-		if( getKnightMoveFromField(field, MoveRange.LEFT * 2, MoveRange.TOP*1) ) {
-			res.add(getKnightMoveFromField(field, MoveRange.LEFT * 2, MoveRange.TOP*1));
+		if( getKnightMoveFromField( field, MoveRange.LEFT * 2, MoveRange.TOP * 1, position ) ) {
+			res.add(getKnightMoveFromField( field, MoveRange.LEFT * 2, MoveRange.TOP * 1, position ));
 		}
 
-		if( getKnightMoveFromField(field, MoveRange.LEFT * 1, MoveRange.TOP*2) ) {
-			res.add(getKnightMoveFromField(field, MoveRange.LEFT * 1, MoveRange.TOP*2));
+		if( getKnightMoveFromField( field, MoveRange.LEFT * 1, MoveRange.TOP * 2, position ) ) {
+			res.add(getKnightMoveFromField( field, MoveRange.LEFT * 1, MoveRange.TOP * 2, position ));
 		}
 
-		if( getKnightMoveFromField(field, MoveRange.RIGHT * 2, MoveRange.TOP*1) ) {
-			res.add(getKnightMoveFromField(field, MoveRange.RIGHT * 2, MoveRange.TOP*1));
+		if( getKnightMoveFromField( field, MoveRange.RIGHT * 2, MoveRange.TOP * 1, position ) ) {
+			res.add(getKnightMoveFromField( field, MoveRange.RIGHT * 2, MoveRange.TOP * 1, position ));
 		}
 
-		if( getKnightMoveFromField(field, MoveRange.RIGHT * 1, MoveRange.TOP*2) ) {
-			res.add(getKnightMoveFromField(field, MoveRange.RIGHT * 1, MoveRange.TOP*2));
+		if( getKnightMoveFromField( field, MoveRange.RIGHT * 1, MoveRange.TOP * 2, position ) ) {
+			res.add(getKnightMoveFromField( field, MoveRange.RIGHT * 1, MoveRange.TOP * 2, position ));
 		}
 
-		if( getKnightMoveFromField(field, MoveRange.LEFT * 2, MoveRange.BOTTOM*1) ) {
-			res.add(getKnightMoveFromField(field, MoveRange.LEFT * 2, MoveRange.BOTTOM*1));
+		if( getKnightMoveFromField( field, MoveRange.LEFT * 2, MoveRange.BOTTOM * 1, position ) ) {
+			res.add(getKnightMoveFromField( field, MoveRange.LEFT * 2, MoveRange.BOTTOM * 1, position ));
 		}
 
-		if( getKnightMoveFromField(field, MoveRange.LEFT * 1, MoveRange.BOTTOM*2) ) {
-			res.add(getKnightMoveFromField(field, MoveRange.LEFT * 1, MoveRange.BOTTOM*2));
+		if( getKnightMoveFromField( field, MoveRange.LEFT * 1, MoveRange.BOTTOM * 2, position ) ) {
+			res.add(getKnightMoveFromField( field, MoveRange.LEFT * 1, MoveRange.BOTTOM * 2, position ));
 		}
 
-		if( getKnightMoveFromField(field, MoveRange.RIGHT * 2, MoveRange.BOTTOM*1) ) {
-			res.add(getKnightMoveFromField(field, MoveRange.RIGHT * 2, MoveRange.BOTTOM*1));
+		if( getKnightMoveFromField( field, MoveRange.RIGHT * 2, MoveRange.BOTTOM * 1, position ) ) {
+			res.add(getKnightMoveFromField( field, MoveRange.RIGHT * 2, MoveRange.BOTTOM * 1, position ));
 		}
 
-		if( getKnightMoveFromField(field, MoveRange.RIGHT * 1, MoveRange.BOTTOM*2) ) {
-			res.add(getKnightMoveFromField( field, MoveRange.RIGHT * 1, MoveRange.BOTTOM*2 ) );
+		if( getKnightMoveFromField( field, MoveRange.RIGHT * 1, MoveRange.BOTTOM * 2, position ) ) {
+			res.add(getKnightMoveFromField( field, MoveRange.RIGHT * 1, MoveRange.BOTTOM * 2, position ) );
 		}
 
 		return res;
 	}
 
-	private function getKnightMoveFromField( field:FieldNotation, column:int, row:int ):FieldNotation {
+	private function getKnightMoveFromField( field:FieldNotation, column:int, row:int, position:ChessPosition ):FieldNotation {
 
 		var res:FieldNotationCollection = new FieldNotationCollection();
 
@@ -62,10 +63,21 @@ public class KnightRange implements IMoveRange {
 			return null;
 		}
 
-		return FieldNotation.createNotationByString(
+		f2add = FieldNotation.createNotationByString(
 				FieldNotation.indexes[ field.columnIndex + column ] +
-				(field.row + row)
-		);
+				(field.row + row) );
+
+		if( position && position.getPieceAt( f2add.getNotation() ) ) {
+			if(
+				position.getPieceAt( field.getNotation() ).isWhite
+				== position.getPieceAt( f2add.getNotation() ).isWhite
+			) {
+				res.add( f2add );
+			}
+			return null;
+		}
+
+		return f2add;
 	}
 
 }
