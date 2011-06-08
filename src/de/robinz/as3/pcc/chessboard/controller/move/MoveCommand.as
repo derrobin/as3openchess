@@ -48,8 +48,8 @@ public class MoveCommand extends BaseCommand
 
 
 		m.piece.move();
-		m.position.removePiece( m.fromPosition.toString() );
-		m.position.setPiece( m.piece, m.toPosition.toString(), true );
+		m.position.removePiece( m.fromField.getNotation() );
+		m.position.setPiece( m.piece, m.toField.getNotation(), true );
 
 		if ( m.isMoveForward == false ) {
 			this.gameProxy.move( m );
@@ -83,8 +83,8 @@ public class MoveCommand extends BaseCommand
 			log.debug( "enemy piece {0} {1}", ep.notation.toString(), ep.piece.getName() );
 			validMoves = ChessboardUtil.getValidMoves( m.game, m.position, ep );
 			for each ( validMove in validMoves.list ) {
-				log.debug( "valid move to {0} for piece {1}", validMove.toPosition.toString(), ep.piece.getName() );
-				if ( validMove.toPosition.toString() == currentKing.notation.toString() ) {
+				log.debug( "valid move to {0} for piece {1}", validMove.toField.toString(), ep.piece.getName() );
+				if ( validMove.toField.toString() == currentKing.notation.toString() ) {
 					log.info( "cheek to player {0}", m.game.currentPlayer.name );
 					m.game.check = ChessCheckVO.create( ep, currentKing );
 					return true;
@@ -98,12 +98,12 @@ public class MoveCommand extends BaseCommand
 
 	private function checkPawnPromotion() : void {
 		var pp : PiecePositionVO = new PiecePositionVO();
-		pp.notation = m.toPosition;
+		pp.notation = m.toField;
 		pp.piece = m.piece;
 
 		var targetRow : int = m.game.currentPlayer.isWhite ? 8 : 1;
 
-		if ( m.toPosition.row == targetRow ) {
+		if ( m.toField.row == targetRow ) {
 			sendNotification( ApplicationFacade.PAWN_PROMOTION, pp );
 		}
 	}
@@ -116,7 +116,7 @@ public class MoveCommand extends BaseCommand
 		this.handleCastlingRookMove();
 
 		if ( m.validMove.isEnPassant ) {
-			var field : FieldNotation = m.toPosition.clone();
+			var field : FieldNotation = m.toField.clone();
 			field.setRow( m.game.currentPlayer.isWhite ? -1 : +1 );
 
 			log.debug( "remove enemy pawn at {0}", field.toString() );

@@ -56,8 +56,8 @@ public class ChessboardUtil {
 
 	public static function getPieceMove( parentMove : ChessboardMove, fromNotation : String, toNotation : String ) : ChessboardMove {
 		var move : ChessboardMove = new ChessboardMove();
-		move.fromPosition = FieldNotation.createNotationByString( fromNotation );
-		move.toPosition = FieldNotation.createNotationByString( toNotation );
+		move.fromField = FieldNotation.createNotationByString( fromNotation );
+		move.toField = FieldNotation.createNotationByString( toNotation );
 		move.position = parentMove.position;
 		move.game = parentMove.game;
 		move.piece = parentMove.position.getPieceAt( fromNotation );
@@ -78,8 +78,8 @@ public class ChessboardUtil {
 
 		for ( var i:int = 0; i < fields.length; i++ ) {
 			move = new ChessboardMove();
-			move.fromPosition = from;
-			move.toPosition   = fields.getAt( i );
+			move.fromField = from;
+			move.toField   = fields.getAt( i );
 			move.beatenPiece  = position.getPieceAt( fields.getAt( i ).getNotation() );
 			move.piece = piece;
 			moves.add( move );

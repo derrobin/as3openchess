@@ -64,9 +64,9 @@ public class MoveValidator {
 		var n : FieldNotation;
 		for each ( n in notations.list ) {
 			m = new ChessboardMove();
-			m.fromPosition = this._piece.notation;
+			m.fromField = this._piece.notation;
 			m.piece = this._piece.piece;
-			m.toPosition = n;
+			m.toField = n;
 			m.game = this._game;
 
 			m.isCastlingLong = n.name == CASTLING_LONG;
@@ -140,13 +140,13 @@ public class MoveValidator {
 			var leftColumn : String = FieldNotation.getColumn( this._piece.notation.column, +1 );
 			var newRow : int = player.isWhite ? this._piece.notation.row + 1 : this._piece.notation.row - 1;
 
-			if ( lastMove.toPosition.row == this._piece.notation.row ) {
-				if ( lastMove.toPosition.column == rightColumn ) {
+			if ( lastMove.toField.row == this._piece.notation.row ) {
+				if ( lastMove.toField.column == rightColumn ) {
 					log.debug( "en passant on right" );
 					notation = rightColumn + newRow.toString();
 
 				}
-				if ( lastMove.toPosition.column == leftColumn ) {
+				if ( lastMove.toField.column == leftColumn ) {
 					log.debug( "en passant on left" );
 					notation = leftColumn + newRow.toString();
 				}

@@ -33,8 +33,8 @@ public class Knight extends Piece implements IPiece
 			var diffRow : int;
 			var diffCol : int;
 
-			diffRow = Math.abs( m.toPosition.row - m.fromPosition.row );
-			diffCol = Math.abs( FieldNotation.indexes.getItemIndex( m.fromPosition.column ) - FieldNotation.indexes.getItemIndex( m.toPosition.column ) );
+			diffRow = Math.abs( m.toField.row - m.fromField.row );
+			diffCol = Math.abs( FieldNotation.indexes.getItemIndex( m.fromField.column ) - FieldNotation.indexes.getItemIndex( m.toField.column ) );
 
 			if( diffCol == 2 && diffRow == 1 ) {
 				return true;

@@ -18,20 +18,26 @@ public class ChessPosition {
 	private var log : ILogger = Log.getLogger( "ChessPosition" );
 
 	protected var _position : Dictionary;
+	protected var _lastMove : ChessboardMove;
 
 	public function ChessPosition() {
 		this._position = new Dictionary();
 		this.initPosition();
 	}
 
-	private function initPosition() : void {
-		var sequence = ChessboardUtil.getNotationSequence();
-		var notation : String;
-		var i : int = 0;
+	public function set lastMove( _val : ChessboardMove ) : void {
+		this._lastMove = _val;
+	}
 
-		for each ( notation in sequence ) {
-			this._position[ notation ] = null;
-			i++;
+	public function get lastMove() : ChessboardMove {
+		return this._lastMove;
+	}
+
+	private function initPosition() : void {
+		var sequence : Array = ChessboardUtil.getNotationSequence();
+
+		for ( var i : int = 0; i < sequence.length; i++ ) {
+			this._position[ sequence[ i ] ] = null;
 		}
 
 		log.debug( "initPosition: {0} notations created.", i.toString() );

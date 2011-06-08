@@ -104,7 +104,7 @@ public class MoveHistoryMediator extends BaseMediator
 		} else {
 			var divider : String = m.beatenPiece == null ? "-" : "x";
 			var notationChar : String = m.piece.getName() == Pawn.NAME ? "" : m.piece.notationChar;
-			me.moveDescription.text = notationChar + m.fromPosition.toString() + divider + m.toPosition.toString();
+			me.moveDescription.text = notationChar + m.fromField.toString() + divider + m.toField.toString();
 		}
 
 		me.mouseChildren = false;

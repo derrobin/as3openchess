@@ -34,7 +34,7 @@ public class TryToMoveCommand extends BaseCommand
 		var movePiece : IPiece = m.piece;
 
 		// ignore
-		if ( m.fromPosition.equals( m.toPosition ) ) {
+		if ( m.fromField.equals( m.toField ) ) {
 			return;
 		}
 
@@ -43,14 +43,14 @@ public class TryToMoveCommand extends BaseCommand
 			return;
 		}
 
-		if( m.validMoves == null || m.validMoves.hasNotationToPosition( m.toPosition.toString() ) ) {
+		if( m.validMoves == null || m.validMoves.hasNotationToPosition( m.toField.toString() ) ) {
 			if ( m.beatenPiece == null ) {
 				sendNotification( ApplicationFacade.MOVE, m );
 				return;
 			}
 
 			if ( movePiece.isWhite != m.beatenPiece.isWhite ) {
-				sendNotification( ApplicationFacade.REMOVE_PIECE, m.toPosition );
+				sendNotification( ApplicationFacade.REMOVE_PIECE, m.toField );
 				sendNotification( ApplicationFacade.MOVE, m );
 			}
 

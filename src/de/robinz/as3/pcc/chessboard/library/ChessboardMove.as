@@ -1,6 +1,7 @@
 package de.robinz.as3.pcc.chessboard.library
 {
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
+import de.robinz.as3.pcc.chessboard.library.pieces.Pawn;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 
 /**
@@ -11,8 +12,8 @@ import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 public class ChessboardMove
 {
 	public var piece : IPiece;
-	public var fromPosition : FieldNotation;
-	public var toPosition : FieldNotation;
+	public var fromField : FieldNotation;
+	public var toField : FieldNotation;
 
 	public var position : ChessPosition;
 
@@ -26,7 +27,6 @@ public class ChessboardMove
 	private var _isCastlingLong : Boolean = false;
 	private var _isCastlingShort : Boolean = false;
 	private var _isEnPassant : Boolean = false;
-	private var _isPawnDoubleJump : Boolean = false;
 
 	public var isCastlingRookMovement : Boolean = false;
 
@@ -34,12 +34,12 @@ public class ChessboardMove
 	public var validMove : ChessboardMove; // created by MoveValidator, holds more validation info about current move
 
 	public function equals( move : ChessboardMove ) : Boolean {
-		var c1 : Boolean = this.fromPosition.toString() == move.fromPosition.toString();
-		var c2 : Boolean = this.toPosition.toString() == move.toPosition.toString();
+		var c1 : Boolean = this.fromField.toString() == move.fromField.toString();
+		var c2 : Boolean = this.toField.toString() == move.toField.toString();
 
 		if ( move.isMoveBack ) {
-			c1 = this.toPosition.toString() == move.fromPosition.toString();
-			c2 = this.fromPosition.toString() == move.toPosition.toString();
+			c1 = this.toField.toString() == move.fromField.toString();
+			c2 = this.fromField.toString() == move.toField.toString();
 		}
 
 		var c3 : Boolean = this.piece.getName() == move.piece.getName();
@@ -53,8 +53,8 @@ public class ChessboardMove
 	public function clone() : ChessboardMove {
 		var o : ChessboardMove = new ChessboardMove();
 		o.beatenPiece = this.beatenPiece;
-		o.fromPosition = this.fromPosition;
-		o.toPosition = this.toPosition;
+		o.fromField = this.fromField;
+		o.toField = this.toField;
 		o.piece = this.piece;
 		o.game = this.game;
 		o.position = this.position;
@@ -95,14 +95,13 @@ public class ChessboardMove
 		return this.validMove.isEnPassant;
 	}
 
-	public function set isPawnDoubleJump( value : Boolean ) {
-		this._isPawnDoubleJump = value;
-	}
 	public function get isPawnDoubleJump() : Boolean {
-		if ( this.validMove == null ) {
-			return this._isPawnDoubleJump;
+		if ( this.piece.getName() == Pawn.NAME ) {
+			if( Math.abs(this.toField.row - this.fromField.row) == 2  ) {
+				return true;
+			}
 		}
-		return this.validMove.isPawnDoubleJump;
+		return false;
 	}
 
 	// End Getters / Setters

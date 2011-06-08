@@ -114,7 +114,7 @@ public class Piece implements IPiece
 
 	public function getGeometricValidMoviesToField( field:FieldNotation, position:ChessPosition ):ChessboardMoveCollection {
 		var fields : FieldNotationCollection = this._range.getRange( field, position );
-		return ChessboardUtil.convertNotationCollection2ChessboardMoveCollection( field,  fields, position, this );;
+		return ChessboardUtil.convertNotationCollection2ChessboardMoveCollection( field,  fields, position, this );
 	}
 
 	protected function getValidRange( from : FieldNotation, fields:FieldNotationCollection, position:ChessPosition ):ChessboardMoveCollection {

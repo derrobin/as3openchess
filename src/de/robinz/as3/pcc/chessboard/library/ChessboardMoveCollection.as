@@ -28,10 +28,9 @@ public class ChessboardMoveCollection extends TypedCollection
 	}
 
 	public function hasNotationToPosition( notation : String ) : Boolean {
-		var move : ChessboardMove;
 
-		for each( move in this._list ) {
-			if ( move.toPosition.toString() == notation ) {
+		for( var i : int; i < this.length; i++ ) {
+			if ( getAt(i).toField.toString() == notation ) {
 				return true;
 			}
 		}

@@ -11,7 +11,7 @@ import de.robinz.as3.pcc.chessboard.library.FieldNotationCollection;
 
 public class PawnRange extends MoveRange {
 	public function PawnRange() {
-		super(2);
+		super(1);
 	}
 
 	override public function getRange( field:FieldNotation, position:ChessPosition ) : FieldNotationCollection {

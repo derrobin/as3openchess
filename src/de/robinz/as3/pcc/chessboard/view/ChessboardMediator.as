@@ -11,6 +11,7 @@ import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
+import de.robinz.as3.pcc.chessboard.model.GameProxy;
 import de.robinz.as3.pcc.chessboard.view.views.Chessboard;
 import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardField;
 import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardFieldCollection;
@@ -259,7 +260,7 @@ public class ChessboardMediator extends BaseMediator
 	}
 
 	private function markMoveHintByMove( validMove : ChessboardMove ) : void {
-		var field : ChessboardField = this.changeFieldColor( validMove.toPosition.toString(), FIELD_COLOR_MOVE_HINT );
+		var field : ChessboardField = this.changeFieldColor( validMove.toField.toString(), FIELD_COLOR_MOVE_HINT );
 		field.validMove = validMove;
 		this._hasMoveHints = true;
 	}
@@ -301,6 +302,8 @@ public class ChessboardMediator extends BaseMediator
 
 			position.setPiece( p, notation );
 		}
+
+		position.lastMove = this.gameProxy.getCurrentGame().moves.getLastMove();
 
 		return position;
 	}
@@ -423,9 +426,9 @@ public class ChessboardMediator extends BaseMediator
 	}
 
 	private function handleMove( m : ChessboardMove ) : void {
-		var fromBox : Box = this.getField( m.fromPosition.toString() );
+		var fromBox : Box = this.getField( m.fromField.toString() );
 		var fromText : Text = fromBox.getChildAt( 0 ) as Text;
-		var toBox : Box = this.getField( m.toPosition.toString() );
+		var toBox : Box = this.getField( m.toField.toString() );
 
 		toBox.addChild( fromText );
 
@@ -548,8 +551,8 @@ public class ChessboardMediator extends BaseMediator
 		m.position = this.getPosition();
 		m.game = this._game;
 
-		m.fromPosition = fromNotation;
-		m.toPosition = toNotation;
+		m.fromField = fromNotation;
+		m.toField = toNotation;
 		m.piece = p;
 		m.beatenPiece = this.getPieceAt( toNotation );
 		// TODO: move this logic to MoveValidator or MoveCommand
@@ -591,6 +594,10 @@ public class ChessboardMediator extends BaseMediator
 
 	private function get chessboard() : Chessboard {
 		return this.viewComponent as Chessboard;
+	}
+
+	private function get gameProxy() : GameProxy {
+		return this.facade.retrieveProxy( GameProxy.NAME ) as GameProxy;
 	}
 
 	// End Getter / Setters

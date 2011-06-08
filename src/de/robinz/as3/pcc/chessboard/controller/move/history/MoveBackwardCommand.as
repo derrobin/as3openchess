@@ -38,8 +38,8 @@ public class MoveBackwardCommand extends BaseCommand
 
 		// move piece back
 		var m : ChessboardMove = moveBack.clone();
-		m.fromPosition = moveBack.toPosition;
-		m.toPosition = moveBack.fromPosition;
+		m.fromField = moveBack.toField;
+		m.toField = moveBack.fromField;
 		m.isMoveBack = true;
 
 		sendNotification( ApplicationFacade.MOVE, m );
@@ -47,7 +47,7 @@ public class MoveBackwardCommand extends BaseCommand
 		// restore beaten piece
 		// remove beaten piece from taken pieces panel
 		if ( moveBack.beatenPiece != null ) {
-			gameProxy.setPiece( moveBack.beatenPiece.getName(), m.fromPosition.toString(), moveBack.beatenPiece.isWhite );
+			gameProxy.setPiece( moveBack.beatenPiece.getName(), m.fromField.toString(), moveBack.beatenPiece.isWhite );
 			sendNotification( ApplicationFacade.RESTORE_PIECE, moveBack.beatenPiece );
 		}
 

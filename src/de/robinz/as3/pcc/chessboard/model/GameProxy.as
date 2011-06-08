@@ -118,17 +118,17 @@ public class GameProxy extends BaseProxy
 		}
 		if ( m.piece is Rook ) {
 			if ( this._currentPlayer.isWhite ) {
-				if ( m.fromPosition.toString() == "a1" ) {
+				if ( m.fromField.toString() == "a1" ) {
 					this._white.rookLeftMoved();
 				}
-				if ( m.fromPosition.toString() == "h1" ) {
+				if ( m.fromField.toString() == "h1" ) {
 					this._white.rookRightMoved();
 				}
 			} else {
-				if ( m.fromPosition.toString() == "a8" ) {
+				if ( m.fromField.toString() == "a8" ) {
 					this._black.rookLeftMoved();
 				}
-				if ( m.fromPosition.toString() == "h8" ) {
+				if ( m.fromField.toString() == "h8" ) {
 					this._black.rookRightMoved();
 				}
 			}
