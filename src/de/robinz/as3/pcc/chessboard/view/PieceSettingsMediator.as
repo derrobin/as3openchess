@@ -26,8 +26,6 @@ public class PieceSettingsMediator extends DialogBaseMediator
 {
 	public static const NAME : String = "PieceSettingsMediator";
 
-	protected const TARGET_ID_APPLY_CHANGES : String = "applyChanges";
-
 	private var _pieceSettings : PieceSettingsVO;
 
 	public function PieceSettingsMediator( viewStage : mainapp ) {
@@ -175,7 +173,7 @@ public class PieceSettingsMediator extends DialogBaseMediator
 	private function onMouseClick( e : MouseEvent ) : void {
 		if ( e.target is Button ) {
 			var b : Button = e.target as Button;
-			if ( b.id == TARGET_ID_APPLY_CHANGES ) {
+			if ( b.id == this.popup.applyChanges.id ) {
 				this.applyChanges();
 			}
 		}
