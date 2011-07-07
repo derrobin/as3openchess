@@ -1,5 +1,6 @@
 package de.robinz.as3.pcc.chessboard.view {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
+import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 
 import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
 import de.robinz.as3.pcc.chessboard.view.views.game.ColorSettingsDialog;
@@ -21,7 +22,6 @@ import org.puremvc.as3.interfaces.INotification;
 public class ColorSettingsMediator extends DialogBaseMediator {
 
 	public static const NAME : String = "ColorSettingsMediator";
-	public static const NOTIFICATION_TYPE_INTERRUPT_APPEAR : String = "interruptAppear";
 
 	private var _settings : ColorSettingsVO;
 
@@ -90,7 +90,7 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 	// Start Notification Handlers
 
 	private function handleAppearColorSettings( type : String ) : void {
-		if ( type == NOTIFICATION_TYPE_INTERRUPT_APPEAR ) {
+		if ( type == ApplicationFacade.NOTIFICATION_TYPE_INTERRUPT_APPEAR ) {
 			return;
 		}
 

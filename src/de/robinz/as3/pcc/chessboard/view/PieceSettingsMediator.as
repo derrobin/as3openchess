@@ -1,6 +1,7 @@
 package de.robinz.as3.pcc.chessboard.view
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
+import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.library.vo.FontVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 import de.robinz.as3.pcc.chessboard.view.views.game.PieceSettingsDialog;
@@ -25,12 +26,8 @@ public class PieceSettingsMediator extends DialogBaseMediator
 {
 	public static const NAME : String = "PieceSettingsMediator";
 
-	public static const NOTIFICATION_TYPE_INTERRUPT_APPEAR : String = "interruptAppear";
-
 	protected const TARGET_ID_APPLY_CHANGES : String = "applyChanges";
 
-
-	//private var _popup : PieceSettingsDialog;
 	private var _pieceSettings : PieceSettingsVO;
 
 	public function PieceSettingsMediator( viewStage : mainapp ) {
@@ -155,7 +152,7 @@ public class PieceSettingsMediator extends DialogBaseMediator
 	}
 
 	private function handleAppearPieceSettings( type : String ) : void {
-		if ( type == NOTIFICATION_TYPE_INTERRUPT_APPEAR ) {
+		if ( type == ApplicationFacade.NOTIFICATION_TYPE_INTERRUPT_APPEAR ) {
 			return;
 		}
 		this.appear();

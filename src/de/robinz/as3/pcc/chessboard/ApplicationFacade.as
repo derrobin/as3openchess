@@ -117,6 +117,8 @@ public class ApplicationFacade extends Facade
 
 	public static const SHOW_PIECE_MOVE_HINTS : String = "showPieceMoveHints";
 
+	public static const NOTIFICATION_TYPE_INTERRUPT_APPEAR : String = "notificationTypeInterruptAppear";
+
 	public static function getInstance() : ApplicationFacade {
 		if ( ! instance ) {
 			instance = new ApplicationFacade();

@@ -19,7 +19,6 @@ import org.puremvc.as3.interfaces.INotification;
 public class MoveHistoryModifierMediator extends DialogBaseMediator
 {
 	public static const NAME : String = "MoveHistoryModifierMediator";
-	public static const NOTIFICATION_TYPE_INTERRUPT_APPEAR : String = "interruptAppear";
 
 	public function MoveHistoryModifierMediator( viewStage : DisplayObject ) {
 		super( NAME, viewStage );
@@ -74,7 +73,7 @@ public class MoveHistoryModifierMediator extends DialogBaseMediator
 	// Start Notification Handlers
 
 	private function handleAppearMoveHistoryModifier( type : String ) : void {
-		if ( type == NOTIFICATION_TYPE_INTERRUPT_APPEAR ) {
+		if ( type == ApplicationFacade.NOTIFICATION_TYPE_INTERRUPT_APPEAR ) {
 			return;
 		}
 		this.appear();

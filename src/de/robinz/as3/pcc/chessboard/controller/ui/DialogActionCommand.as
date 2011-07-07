@@ -12,6 +12,11 @@ import de.robinz.as3.pcc.chessboard.view.PieceSettingsMediator;
 
 import de.robinz.as3.pcc.chessboard.view.views.game.ColorSettingsDialog;
 
+import flash.net.getClassByAlias;
+
+import org.puremvc.as3.interfaces.IMediator;
+import org.puremvc.as3.interfaces.IMediator;
+import org.puremvc.as3.interfaces.IMediator;
 import org.puremvc.as3.interfaces.INotification;
 import org.puremvc.as3.patterns.observer.Notification;
 
@@ -26,29 +31,31 @@ public class DialogActionCommand extends BaseCommand {
 	public override function execute( n : INotification ) : void {
 		super.execute( n );
 
+		var stage : mainapp = appMediator.app;
+
 		switch ( n.getName() ) {
 			case ApplicationFacade.APPEAR_MOVE_HISTORY_MODIFIER:
-				this.appearMoveHistoryModifier( n );
-				break;
-			case ApplicationFacade.APPEAR_PIECE_SETTINGS:
-				this.appearPieceSettings( n );
-				break;
-			case ApplicationFacade.APPEAR_COLOR_SETTINGS:
-				this.appearColorSettings( n );
-				break;
+				this.appearDialog( new MoveHistoryModifierMediator( stage ), n );
+			break;
 			case ApplicationFacade.PAWN_PROMOTION:
-				this.pawnPromotion( n );
-				break;
+				this.appearDialog( new PawnConvertMediator( stage ), n );
+			break;
+			case ApplicationFacade.APPEAR_PIECE_SETTINGS:
+				this.appearPieceSettings( new PieceSettingsMediator( stage ), n );
+			break;
+			case ApplicationFacade.APPEAR_COLOR_SETTINGS:
+				this.appearColorSettings( new ColorSettingsMediator( stage ), n );
+			break;
 
 			case ApplicationFacade.DISAPPEAR_MOVE_HISTORY_MODIFIER:
 				this.closeDialog( MoveHistoryModifierMediator.NAME );
-				break;
+			break;
 			case ApplicationFacade.DISAPPEAR_PIECE_SETTINGS:
 				this.closeDialog( PieceSettingsMediator.NAME );
-				break;
+			break;
 			case ApplicationFacade.DISAPPEAR_COLOR_SETTINGS:
 				this.closeDialog( ColorSettingsMediator.NAME );
-				break;
+			break;
 		}
 
 		log.debug( LoggerUtil.outDictionary( appProxy.getOpenDialogs() ) );
@@ -59,65 +66,38 @@ public class DialogActionCommand extends BaseCommand {
 
 	// Start Innerclass Methods
 
-	private function pawnPromotion( n : INotification ) : void {
-		this.facade.registerMediator( new PawnConvertMediator( appMediator.app ) );
-		this.facade.retrieveMediator( PawnConvertMediator.NAME ).handleNotification( n );
-	}
-
-
-	public function appearColorSettings( n : INotification ) : void {
-		if ( this.facade.hasMediator( ColorSettingsMediator.NAME ) || this.appProxy.isDialogOpen( ColorSettingsMediator.NAME ) ) {
-			n.setType( ColorSettingsMediator.NOTIFICATION_TYPE_INTERRUPT_APPEAR );
+	private function appearDialog( mediator : IMediator, n : INotification, handle : INotification = null ) : void {
+		if ( this.facade.hasMediator( mediator.getMediatorName() ) || this.appProxy.isDialogOpen( mediator.getMediatorName() ) ) {
+			n.setType( ApplicationFacade.NOTIFICATION_TYPE_INTERRUPT_APPEAR );
 			return;
 		}
 
-		this.facade.registerMediator( new ColorSettingsMediator( appMediator.app ) );
+		this.facade.registerMediator( mediator );
 
-		var settings : ColorSettingsVO = new ColorSettingsVO();
-		settings.color1 = 0x00ff00;
-
-		this.colorSettingsMediator.handleNotification( new Notification( ApplicationFacade.COLOR_SETTINGS_CHANGED, settings ) );
-
-		// second resend notification only to piece settings mediator for appear
-		this.colorSettingsMediator.handleNotification( n );
-
-		appProxy.openDialog( ColorSettingsMediator.NAME );
-	}
-
-	public function appearPieceSettings( n : INotification ) : void {
-		if ( this.facade.hasMediator( PieceSettingsMediator.NAME ) || this.appProxy.isDialogOpen( PieceSettingsMediator.NAME ) ) {
-			n.setType( PieceSettingsMediator.NOTIFICATION_TYPE_INTERRUPT_APPEAR );
-			return;
+		if ( handle != null ) {
+			mediator.handleNotification( handle )
 		}
 
-		this.facade.registerMediator( new PieceSettingsMediator( appMediator.app ) );
-
-		// first set fonts
-		var settings : PieceSettingsVO = new PieceSettingsVO();
-		settings.fonts = this.fontProxy.getFonts();
-		settings.font = this.fontProxy.currentFont;
-		settings.fontSize = this.fontProxy.currentFontSize;
-		settings.fontSizeCssValue = this.fontProxy.currentFontSizeCssValue;
-
-		this.pieceSettingsMediator.handleNotification( new Notification( ApplicationFacade.SET_PIECE_SETTINGS, settings ) );
-
-		// second resend notification only to piece settings mediator for appear
-		this.pieceSettingsMediator.handleNotification( n );
-
-		appProxy.openDialog( PieceSettingsMediator.NAME );
+		mediator.handleNotification( n );
+		appProxy.openDialog( mediator.getMediatorName() );
 	}
 
-	public function appearMoveHistoryModifier( n : INotification ) : void {
-		if ( this.facade.hasMediator( MoveHistoryModifierMediator.NAME ) || appProxy.isDialogOpen( MoveHistoryModifierMediator.NAME ) ) {
-			// will interrupt appear on mediator
-			n.setType( MoveHistoryModifierMediator.NOTIFICATION_TYPE_INTERRUPT_APPEAR );
-			return;
-		}
+	public function appearColorSettings( mediator : IMediator, n : INotification ) : void {
+		var sets : ColorSettingsVO = new ColorSettingsVO();
+		sets.color1 = 0x00ff00;
+		var handle : INotification = new Notification( ApplicationFacade.COLOR_SETTINGS_CHANGED, sets );
+		this.appearDialog( mediator, n, handle );
+	}
 
-		this.facade.registerMediator( new MoveHistoryModifierMediator( appMediator.app ) );
-		this.modifierMediator.handleNotification( n );
+	public function appearPieceSettings( mediator : IMediator, n : INotification ) : void {
+		var sets : PieceSettingsVO = new PieceSettingsVO();
+		sets.fonts = this.fontProxy.getFonts();
+		sets.font = this.fontProxy.currentFont;
+		sets.fontSize = this.fontProxy.currentFontSize;
+		sets.fontSizeCssValue = this.fontProxy.currentFontSizeCssValue;
 
-		appProxy.openDialog( MoveHistoryModifierMediator.NAME );
+		var handle : INotification = new Notification( ApplicationFacade.SET_PIECE_SETTINGS, sets );
+		this.appearDialog( mediator, n, handle );
 	}
 
 	private function closeDialog( mediatorName : String ) : void {
