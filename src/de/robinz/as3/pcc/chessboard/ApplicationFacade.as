@@ -40,6 +40,10 @@ public class ApplicationFacade extends Facade
 	public static const CHANGE_PIECE_SETTINGS : String = "changePieceSettings";
 	public static const PIECE_SETTINGS_CHANGED : String = "pieceSettingsChanged";
 
+	public static const SET_COLOR_SETTINGS : String = "setColorSettings";
+	public static const CHANGE_COLOR_SETTINGS : String = "changeColorSettings";
+	public static const COLOR_SETTINGS_CHANGED : String = "colorSettingsChanged";
+
 	public static const TRY_TO_MOVE : String = "tryToMove";
 	public static const REJECT_MOVE : String = "rejectMove";
 	public static const GET_MOVES : String = "getMoves";
@@ -80,12 +84,14 @@ public class ApplicationFacade extends Facade
 	public static const APPEAR_MOVE_HISTORY_PANEL : String = "appearMoveHistoryPanel";
 	public static const APPEAR_TAKEN_PIECES_PANEL : String = "appearTakenPiecesPanel";
 	public static const APPEAR_PIECE_SETTINGS : String = "appearPieceSettings";
+	public static const APPEAR_COLOR_SETTINGS : String = "appearColorSettings";
 	public static const APPEAR_MOVE_HISTORY_MODIFIER : String = "appearMoveHistoryModifier";
 	public static const APPEAR_GAME_ACTIONS_PANEL : String = "appearGameActionsPanel";
 
 	public static const DISAPPEAR_MOVE_HISTORY_PANEL : String = "disappearMoveHistoryPanel";
 	public static const DISAPPEAR_TAKEN_PIECES_PANEL : String = "disappearTakenPiecesPanel";
 	public static const DISAPPEAR_PIECE_SETTINGS : String = "disappearPieceSettings";
+	public static const DISAPPEAR_COLOR_SETTINGS : String = "disappearColorSettings";
 	public static const DISAPPEAR_MOVE_HISTORY_MODIFIER : String = "disappearMoveHistoryModifier";
 	public static const DISAPPEAR_GAME_ACTIONS_PANEL : String = "disappearGameActionsPanel";
 
@@ -138,19 +144,20 @@ public class ApplicationFacade extends Facade
 		registerCommand( APPEAR_MOVE_HISTORY_PANEL, PanelActionCommand );
 		registerCommand( APPEAR_TAKEN_PIECES_PANEL, PanelActionCommand );
 		registerCommand( APPEAR_GAME_ACTIONS_PANEL, PanelActionCommand );
-		registerCommand( APPEAR_PIECE_SETTINGS, DialogActionCommand );
-		registerCommand( APPEAR_MOVE_HISTORY_MODIFIER, DialogActionCommand );
-
 		registerCommand( DISAPPEAR_MOVE_HISTORY_PANEL, PanelActionCommand );
 		registerCommand( DISAPPEAR_TAKEN_PIECES_PANEL, PanelActionCommand );
 		registerCommand( DISAPPEAR_GAME_ACTIONS_PANEL, PanelActionCommand );
-		registerCommand( DISAPPEAR_PIECE_SETTINGS, DialogActionCommand );
-		registerCommand( DISAPPEAR_MOVE_HISTORY_MODIFIER, DialogActionCommand );
-		registerCommand( PAWN_PROMOTION, DialogActionCommand );
-
 		registerCommand( TOGGLE_MOVE_HISTORY_PANEL, PanelActionCommand );
 		registerCommand( TOGGLE_TAKEN_PIECES_PANEL, PanelActionCommand );
 		registerCommand( TOGGLE_GAME_ACTIONS_PANEL, PanelActionCommand );
+
+		registerCommand( APPEAR_PIECE_SETTINGS, DialogActionCommand );
+		registerCommand( APPEAR_COLOR_SETTINGS, DialogActionCommand );
+		registerCommand( APPEAR_MOVE_HISTORY_MODIFIER, DialogActionCommand );
+		registerCommand( DISAPPEAR_PIECE_SETTINGS, DialogActionCommand );
+		registerCommand( DISAPPEAR_COLOR_SETTINGS, DialogActionCommand );
+		registerCommand( DISAPPEAR_MOVE_HISTORY_MODIFIER, DialogActionCommand );
+		registerCommand( PAWN_PROMOTION, DialogActionCommand );
 
 		registerCommand( MOVE_START, MoveStartCommand );
 		registerCommand( MOVE_END, MoveEndCommand );

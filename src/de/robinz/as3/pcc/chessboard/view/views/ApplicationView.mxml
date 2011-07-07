@@ -9,9 +9,10 @@ ApplicationView
 
 	<mx:Script>
 		<![CDATA[
-		import mx.events.ResizeEvent;
 
-		[Bindable]
+			import mx.events.ResizeEvent;
+
+			[Bindable]
 			private var _mainHeight : int = 700;
 			[Bindable]
 			private var _mainWidth : int = 1000;

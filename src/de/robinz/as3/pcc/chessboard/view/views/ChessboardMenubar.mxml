@@ -27,6 +27,7 @@ ChessboardMenubar
 			public static const MENU_ENTRY_PANEL_GAME_ACTIONS : String = "panelGameActions";
 
 			public static const MENU_ENTRY_PIECE_SETTINGS : String = "pieceSettings";
+			public static const MENU_ENTRY_COLOR_SETTINGS : String = "colorSettings";
 			public static const MENU_ENTRY_BOARD_STYLE : String = "boardStyle";
 			public static const MENU_ENTRY_ABOUT_GAME : String = "aboutGame";
 			public static const MENU_ENTRY_REVERT_MOVES : String = "revertMoves";
@@ -94,6 +95,7 @@ full menu:
 					<menuitem label="Game Actions" data="panelGameActions" type="check" toggled="true" />
 				</menuitem>
 				<menuitem label="Piece Settings.." data="pieceSettings" />
+				<menuitem label="Color Settings.." data="{ MENU_ENTRY_COLOR_SETTINGS }" />
 				<menuitem label="Browse Move History.." data="revertMoves" />
 			</menuitem>
 			<menuitem label="Export">

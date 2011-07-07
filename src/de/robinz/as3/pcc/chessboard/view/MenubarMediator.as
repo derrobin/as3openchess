@@ -49,6 +49,9 @@ public class MenubarMediator extends BaseMediator
 			case ChessboardMenubar.MENU_ENTRY_PIECE_SETTINGS:
 				sendNotification( ApplicationFacade.APPEAR_PIECE_SETTINGS );
 			break;
+			case ChessboardMenubar.MENU_ENTRY_COLOR_SETTINGS:
+				sendNotification( ApplicationFacade.APPEAR_COLOR_SETTINGS );
+			break;
 			case ChessboardMenubar.MENU_ENTRY_REVERT_MOVES:
 				sendNotification( ApplicationFacade.APPEAR_MOVE_HISTORY_MODIFIER );
 			break;
