@@ -16,11 +16,6 @@ ChessboardMenubar
 			public static const MENU_ENTRY_MEW_GAME : String = "newGame";
 			public static const MENU_ENTRY_LOAD_GAME : String = "loadGame";
 			public static const MENU_ENTRY_SAVE_GAME : String = "saveGame";
-			public static const MENU_ENTRY_RECENT_GAMES : String = "recentGames";
-			public static const MENU_ENTRY_IMPORT_GAME : String = "importGame";
-			public static const MENU_ENTRY_EXPORT_GAME : String = "exportGame";
-			public static const MENU_ENTRY_GAME_COLORS : String = "gameColors";
-			public static const MENU_ENTRY_BOARD_SIZE : String = "boardSize";
 
 			public static const MENU_ENTRY_PANEL_MOVE_HISTORY : String = "panelMoveHistory";
 			public static const MENU_ENTRY_PANEL_TAKEN_PIECES : String = "panelTakenPieces";
@@ -28,8 +23,6 @@ ChessboardMenubar
 
 			public static const MENU_ENTRY_PIECE_SETTINGS : String = "pieceSettings";
 			public static const MENU_ENTRY_COLOR_SETTINGS : String = "colorSettings";
-			public static const MENU_ENTRY_BOARD_STYLE : String = "boardStyle";
-			public static const MENU_ENTRY_ABOUT_GAME : String = "aboutGame";
 			public static const MENU_ENTRY_REVERT_MOVES : String = "revertMoves";
 
 			public static const MENU_ENTRY_SET_TEST_PIECES : String = "setTestPieces";
@@ -38,68 +31,27 @@ ChessboardMenubar
 		]]>
 	</mx:Script>
 
-<!--
-<menuitem label="Recent Games..">
-	<menuitem label="Game Name 0 | xxxx/xx/xx | Open Result" />
-	<menuitem label="Game Name 1 | xxxx/xx/xx | Open Result" />
-	<menuitem label="Game Name 2 | 2010/10/10 | Win" />
-	<menuitem label="Game Name 3 | 2010/10/10 | Win" />
-	<menuitem label="Game Name 4 | 2010/10/10 | Loose" />
-</menuitem>
-<menuitem label="Help">
-	<menuitem label="Search.." data="searchHelp" />
-	<menuitem label="Show Themes" data="showHelpThemes" />
-</menuitem>
--->
-
-
-<!--
-full menu:
-			<menuitem label="Chessboard Menu">
-				<menuitem label="New Game" data="newGame" />
-				<menuitem type="separator" />
-				<menuitem label="Load Game" data="loadGame" />
-				<menuitem label="Save Game" data="saveGame" />
-				<menuitem label="Recent Games.." data="recentGames" />
-				<menuitem type="separator" />
-				<menuitem label="Export Game.." data="exportGame" />
-				<menuitem label="Import Game.." data="importGame" />
-			</menuitem>
-			<menuitem label="Settings">
-				<menuitem label="Game Colors" data="gameColors" />
-				<menuitem label="Board Size" data="boardSize" />
-				<menuitem label="Panels..">
-					<menuitem label="Move History" data="panelMoveHistory" type="check" toggled="true" />
-					<menuitem label="Taken Pieces" data="panelTakenPieces" type="check" toggled="true" />
-				</menuitem>
-				<menuitem label="Piece Style" data="pieceStyle" />
-				<menuitem label="Board Style" data="boardStyle" />
-			</menuitem>
-			<menuitem label="Info">
-				<menuitem label="About" data="aboutGame" />
-			</menuitem>
--->
 	<mx:MenuBar id="menuBar" styleName="menuBar" labelField="@label">
 		<mx:XMLList>
 			<menuitem label="Menu">
-				<menuitem label="New Game" data="newGame" />
+				<menuitem label="New Game" data="{ MENU_ENTRY_MEW_GAME }" />
 				<menuitem type="separator" />
-				<menuitem label="Load Game" data="loadGame" />
-				<menuitem label="Save Game" data="saveGame" />
-				<menuitem label="Test Chessfont" data="setTestPieces" />
+				<menuitem label="Load Game" data="{ MENU_ENTRY_LOAD_GAME }" />
+				<menuitem label="Save Game" data="{ MENU_ENTRY_SAVE_GAME }" />
+				<menuitem label="Test Chessfont" data="{ MENU_ENTRY_SET_TEST_PIECES }" />
 			</menuitem>
 			<menuitem label="Settings">
 				<menuitem label="Panels..">
-					<menuitem label="Move History" data="panelMoveHistory" type="check" toggled="true" />
-					<menuitem label="Taken Pieces" data="panelTakenPieces" type="check" toggled="true" />
-					<menuitem label="Game Actions" data="panelGameActions" type="check" toggled="true" />
+					<menuitem label="Move History" data="{ MENU_ENTRY_PANEL_MOVE_HISTORY }" type="check" toggled="true" />
+					<menuitem label="Taken Pieces" data="{ MENU_ENTRY_PANEL_TAKEN_PIECES }" type="check" toggled="true" />
+					<menuitem label="Game Actions" data="{ MENU_ENTRY_PANEL_GAME_ACTIONS }" type="check" toggled="true" />
 				</menuitem>
-				<menuitem label="Piece Settings.." data="pieceSettings" />
+				<menuitem label="Piece Settings.." data="{ MENU_ENTRY_PIECE_SETTINGS }" />
 				<menuitem label="Color Settings.." data="{ MENU_ENTRY_COLOR_SETTINGS }" />
-				<menuitem label="Browse Move History.." data="revertMoves" />
+				<menuitem label="Browse Move History.." data="{ MENU_ENTRY_REVERT_MOVES }" />
 			</menuitem>
 			<menuitem label="Export">
-				<menuitem label="Position as FEN" data="exportFEN" />
+				<menuitem label="Position as FEN" data="{ MENU_EXPORT_FEN }" />
 			</menuitem>
 		</mx:XMLList>
 	</mx:MenuBar>

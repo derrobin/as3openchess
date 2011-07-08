@@ -61,15 +61,6 @@ public class MenuBarMediator extends BaseMediator
 			case ChessboardMenubar.MENU_ENTRY_PANEL_GAME_ACTIONS:
 				sendNotification( ApplicationFacade.TOGGLE_GAME_ACTIONS_PANEL );
 			break;
-			case ChessboardMenubar.MENU_ENTRY_RECENT_GAMES:
-			case ChessboardMenubar.MENU_ENTRY_IMPORT_GAME:
-			case ChessboardMenubar.MENU_ENTRY_EXPORT_GAME:
-			case ChessboardMenubar.MENU_ENTRY_GAME_COLORS:
-			case ChessboardMenubar.MENU_ENTRY_BOARD_SIZE:
-			case ChessboardMenubar.MENU_ENTRY_BOARD_STYLE:
-			case ChessboardMenubar.MENU_ENTRY_ABOUT_GAME:
-				sendNotification( ApplicationFacade.ERROR, new Error( "Sorry, not implemented yet." ) );
-			break;
 		}
 	}
 
