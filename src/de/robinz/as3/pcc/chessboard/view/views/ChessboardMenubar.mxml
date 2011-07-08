@@ -79,15 +79,7 @@ full menu:
 				<menuitem label="About" data="aboutGame" />
 			</menuitem>
 -->
-	<mx:MenuBar id="menuBar"
-		backgroundAlpha="0"
-		highlightAlphas="0,0"
-		fillAlphas="1,1"
-		fontFamily="Verdana"
-		fontSize="13"
-		fontWeight="bold"
-		textIndent="0"
-		labelField="@label">
+	<mx:MenuBar id="menuBar" styleName="menuBar" labelField="@label">
 		<mx:XMLList>
 			<menuitem label="Menu">
 				<menuitem label="New Game" data="newGame" />

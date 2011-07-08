@@ -93,3 +93,9 @@ DragManager {
 .boardFieldRow {
 	backgroundColor: #a0a0a0;
 }
+.menuBar {
+	fontFamily: Verdana;
+	fontSize: 13;
+	fontWeight: bold;
+	textIndent: 0;
+}
