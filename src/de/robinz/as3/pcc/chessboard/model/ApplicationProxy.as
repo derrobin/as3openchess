@@ -1,5 +1,7 @@
 package de.robinz.as3.pcc.chessboard.model
 {
+import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
+
 import flash.utils.Dictionary;
 
 /**
@@ -14,11 +16,15 @@ public class ApplicationProxy extends BaseProxy
 	private var _openPanels : Dictionary;
 	private var _openDialogs : Dictionary;
 
+	private var _colors : ColorSettingsVO;
+
 	public function ApplicationProxy( data : Object = null ) {
 		super( NAME, data );
 
 		this._openDialogs = new Dictionary( true );
 		this._openPanels = new Dictionary( true );
+
+		this._colors = new ColorSettingsVO();
 	}
 
 
@@ -79,6 +85,10 @@ public class ApplicationProxy extends BaseProxy
 
 	public function getOpenPanels() : Dictionary {
 		return this._openPanels;
+	}
+
+	public function get colors() : ColorSettingsVO {
+		return this._colors;
 	}
 
 	// End Getter / Setters

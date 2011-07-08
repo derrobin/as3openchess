@@ -9,6 +9,7 @@ import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
+import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 import de.robinz.as3.pcc.chessboard.model.GameProxy;
@@ -41,13 +42,9 @@ public class ChessboardMediator extends BaseMediator
 
 	public static const FIELD_SPACE : int = 1;
 
-	public static const FIELD_COLOR_VALID_DROP : int = 0xFFF8C6;
-	public static const FIELD_COLOR_MOVE_HINT : int = 0xccff99;
-	public static const FIELD_COLOR_WHITE : int = 0xffffff;
-	public static const FIELD_COLOR_BLACK : int = 0xbbbbbb;
-
 	private var _game : ChessboardGameVO;
 	private var _validMoves : ChessboardMoveCollection;
+	private var _colors : ColorSettingsVO = new ColorSettingsVO();
 
 	private var _isBoardInspectMode : Boolean = false;
 	private var _isBoardLocked : Boolean = false;
@@ -92,7 +89,7 @@ public class ChessboardMediator extends BaseMediator
 			for( i; i <= rows.length; i++ ) {
 				c = rows.charAt( i - 1 );
 				notation = c + j.toString();
-				field = ChessboardUtil.createBoardField( notation, isWhite, FIELD_COLOR_WHITE, FIELD_COLOR_BLACK );
+				field = ChessboardUtil.createBoardField( notation, isWhite, this._colors.fieldWhite, this._colors.fieldBlack );
 
 				container = this.chessboard[ "row" + j ] as Container;
 				container.addChild( this.createFieldSpacer( FIELD_SPACE ) );
@@ -214,6 +211,17 @@ public class ChessboardMediator extends BaseMediator
 		field.setPiece( pp.piece );
 	}
 
+	private function resetFieldColors() : void {
+			var c : ChessboardFieldCollection = this.getFields();
+		var f : ChessboardField;
+		var vo : ChessboardFieldVO;
+
+		for each( f in c.list ) {
+			vo = f.data as ChessboardFieldVO;
+			f.setStyle( "backgroundColor", vo.isWhite ? this._colors.fieldWhite : this._colors.fieldBlack );
+		}
+	}
+
 	private function resetStyleForAllFields( resetStyle : *, styleProperty : String, isValidDrop : Boolean = false ) : void {
 		var c : ChessboardFieldCollection = this.getFields();
 		var f : ChessboardField;
@@ -230,11 +238,11 @@ public class ChessboardMediator extends BaseMediator
 			}
 			if ( isValidDrop && this._validMoves != null && this._validMoves.hasNotationToPosition( vo.notation.toString() ) ) {
 				// log.debug( "resetStyleForAllFields: set move hint to {0} at {1}", f.id, vo.notation.toString() );
-				f.setStyle( styleProperty, FIELD_COLOR_MOVE_HINT );
+				f.setStyle( styleProperty, this._colors.fieldMoveHint );
 				continue;
 			}
 
-			f.setStyle( styleProperty, vo.isWhite ? FIELD_COLOR_WHITE : FIELD_COLOR_BLACK );
+			f.setStyle( styleProperty, vo.isWhite ? this._colors.fieldWhite : this._colors.fieldBlack );
 		}
 	}
 
@@ -255,23 +263,23 @@ public class ChessboardMediator extends BaseMediator
 	}
 
 	private function markValidDrop( notation : String ) : void {
-		this.changeFieldColor( notation, FIELD_COLOR_VALID_DROP );
+		this.changeFieldColor( notation, this._colors.fieldValidDrop );
 		this._hasValidDrop = true;
 	}
 
 	private function markMoveHintByMove( validMove : ChessboardMove ) : void {
-		var field : ChessboardField = this.changeFieldColor( validMove.toField.toString(), FIELD_COLOR_MOVE_HINT );
+		var field : ChessboardField = this.changeFieldColor( validMove.toField.toString(), this._colors.fieldMoveHint );
 		field.validMove = validMove;
 		this._hasMoveHints = true;
 	}
 
 	private function removeAllValidDrop() : void {
-		this.resetStyleForAllFields( FIELD_COLOR_VALID_DROP, "backgroundColor", true );
+		this.resetStyleForAllFields( this._colors.fieldValidDrop, "backgroundColor", true );
 		this._hasValidDrop = false;
 	}
 
 	private function removeAllMoveHints() : void {
-		this.resetStyleForAllFields( FIELD_COLOR_MOVE_HINT, "backgroundColor" );
+		this.resetStyleForAllFields( this._colors.fieldMoveHint, "backgroundColor" );
 		this._hasMoveHints = false;
 	}
 
@@ -315,6 +323,7 @@ public class ChessboardMediator extends BaseMediator
 
 	public override function listNotificationInterests() : Array {
 		return [
+			ApplicationFacade.SET_COLOR_SETTINGS,
 			ApplicationFacade.GAME_STARTED,
 			ApplicationFacade.FIELD_HINT,
 			ApplicationFacade.REMOVE_ALL_FIELD_HINTS,
@@ -332,6 +341,9 @@ public class ChessboardMediator extends BaseMediator
 
 	public override function handleNotification( n : INotification ) : void {
 		switch( n.getName() ) {
+			case ApplicationFacade.SET_COLOR_SETTINGS:
+				this.handleSetColors( n.getBody() as ColorSettingsVO );
+			break;
 			case ApplicationFacade.GAME_STARTED:
 				this.handleGameStarted( n.getBody() as ChessboardGameVO );
 			break;
@@ -375,6 +387,22 @@ public class ChessboardMediator extends BaseMediator
 
 
 	// Start Notification Handlers
+
+	private function handleSetColors( colors : ColorSettingsVO ) : void {
+		this._colors = colors;
+
+		this.chessboard.row1.setStyle( "backgroundColor", colors.boardGapColor );
+		this.chessboard.row2.setStyle( "backgroundColor", colors.boardGapColor );
+		this.chessboard.row3.setStyle( "backgroundColor", colors.boardGapColor );
+		this.chessboard.row4.setStyle( "backgroundColor", colors.boardGapColor );
+		this.chessboard.row5.setStyle( "backgroundColor", colors.boardGapColor );
+		this.chessboard.row6.setStyle( "backgroundColor", colors.boardGapColor );
+		this.chessboard.row7.setStyle( "backgroundColor", colors.boardGapColor );
+		this.chessboard.row8.setStyle( "backgroundColor", colors.boardGapColor );
+		this.chessboard.boardInner.setStyle( "backgroundColor", colors.boardGapColor );
+
+		this.resetFieldColors();
+	}
 
 	private function handleGameStarted( game : ChessboardGameVO ) : void {
 		this._game = game;

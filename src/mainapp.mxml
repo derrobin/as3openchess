@@ -5,6 +5,7 @@ application entry point
 -->
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
 				xmlns:components="de.robinz.as3.pcc.chessboard.view.views.*"
+				xmlns:kapit="fr.kapit.*"
 				pageTitle="PCC Chessboard"
 				creationComplete="onCreationComplete()"
 				layout="vertical"
@@ -27,9 +28,8 @@ application entry point
 
 			private var facade:ApplicationFacade=ApplicationFacade.getInstance();
 
-			private function onCreationComplete():void
-            {
-				facade.startup(this);
+			private function onCreationComplete() : void {
+				facade.startup( this );
 			}
 
             public function getApplicationView() : ApplicationView {
@@ -37,6 +37,8 @@ application entry point
             }
 		]]>
 	</mx:Script>
+
+	<kapit:KapInspect />
 
 	<components:ApplicationView id="applicationView"
 								width="100%"

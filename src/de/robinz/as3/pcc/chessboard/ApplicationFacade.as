@@ -18,6 +18,7 @@ import de.robinz.as3.pcc.chessboard.controller.move.history.MoveForwardCommand;
 import de.robinz.as3.pcc.chessboard.controller.move.history.MoveJumpCommand;
 import de.robinz.as3.pcc.chessboard.controller.move.history.MoveStartCommand;
 import de.robinz.as3.pcc.chessboard.controller.piece.RemovePieceCommand;
+import de.robinz.as3.pcc.chessboard.controller.ui.ChangeColorSettingsCommand;
 import de.robinz.as3.pcc.chessboard.controller.ui.ChangePieceSettingsCommand;
 import de.robinz.as3.pcc.chessboard.controller.ui.DialogActionCommand;
 import de.robinz.as3.pcc.chessboard.controller.ui.PanelActionCommand;
@@ -160,6 +161,8 @@ public class ApplicationFacade extends Facade
 		registerCommand( DISAPPEAR_COLOR_SETTINGS, DialogActionCommand );
 		registerCommand( DISAPPEAR_MOVE_HISTORY_MODIFIER, DialogActionCommand );
 		registerCommand( PAWN_PROMOTION, DialogActionCommand );
+
+		registerCommand( SET_COLOR_SETTINGS, ChangeColorSettingsCommand );
 
 		registerCommand( MOVE_START, MoveStartCommand );
 		registerCommand( MOVE_END, MoveEndCommand );

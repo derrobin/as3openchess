@@ -1,7 +1,6 @@
 package de.robinz.as3.pcc.chessboard.view {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
-import de.robinz.as3.pcc.chessboard.ApplicationFacade;
-
+import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
 import de.robinz.as3.pcc.chessboard.view.views.game.ColorSettingsDialog;
 
@@ -9,8 +8,9 @@ import flash.events.Event;
 import flash.events.MouseEvent;
 
 import mx.containers.TitleWindow;
-
 import mx.controls.Button;
+import mx.controls.ColorPicker;
+import mx.events.ColorPickerEvent;
 
 import org.puremvc.as3.interfaces.INotification;
 
@@ -36,7 +36,7 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 
 		view.addEventListener( MouseEvent.CLICK, onMouseClick );
 		view.addEventListener( ColorSettingsDialog.EVENT_CLOSE, onClose );
-
+		view.addEventListener( ColorPickerEvent.CHANGE, onColorChange, true );
 
 		this._dialog = view as ColorSettingsDialog;
 		this._dialog.addEventListener( MouseEvent.CLICK, onMouseClick );
@@ -71,15 +71,15 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 	}
 
 	public override function handleNotification( n : INotification ) : void {
-		switch( n.getName() ) {
+		switch ( n.getName() ) {
 			case ApplicationFacade.COLOR_SETTINGS_CHANGED:
-			break;
+				break;
 			case ApplicationFacade.APPEAR_COLOR_SETTINGS:
 				this.handleAppearColorSettings( n.getType() is String ? n.getType() as String : null );
-			break;
+				break;
 			case ApplicationFacade.DISAPPEAR_COLOR_SETTINGS:
 				this.handleDisappearColorSettings();
-			break;
+				break;
 
 		}
 	}
@@ -112,8 +112,37 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 
 	private function onMouseClick( e : MouseEvent ) : void {
 		if ( e.target is Button ) {
-			this.applyChanges();
+			var b : Button = e.target as Button;
+			if ( b.id == popup.applyChanges.id ) {
+				var sets : ColorSettingsVO = new ColorSettingsVO();
+				sets.backgroundMain = popup.backgroundMain.selectedColor;
+				sets.fieldWhite = popup.fieldWhite.selectedColor;
+				sets.fieldBlack = popup.fieldBlack.selectedColor;
+				sets.fieldValidDrop = popup.fieldValidDrop.selectedColor;
+				sets.fieldMoveHint = popup.fieldMoveHint.selectedColor;
+				sets.boardGapColor = popup.boardGapColor.selectedColor;
+				sendNotification( ApplicationFacade.SET_COLOR_SETTINGS, sets );
+			}
 		}
+	}
+
+	private function onColorChange( e : ColorPickerEvent ) : void {
+		/*
+		if ( e.target is ColorPicker ) {
+			var cp : ColorPicker = e.target as ColorPicker;
+			log.info( "new color: {0} for {1}", e.color, cp.id );
+
+			var changeSet : ColorSettingsVO = new ColorSettingsVO();
+
+			if ( changeSet.hasOwnProperty( cp.id ) ) {
+				changeSet[ cp.id ] = e.color;
+				sendNotification( ApplicationFacade.SET_COLOR_SETTINGS, changeSet );
+				return;
+			}
+		}
+		*/
+
+
 	}
 
 	// End Event Handlers

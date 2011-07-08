@@ -19,7 +19,7 @@ Chessboard
 			[Bindable]
 			private var boardSpace : int = 1;
 			[Bindable]
-			private var boardSpaceColor : int = 0xa0a0a0;
+			public var boardSpaceColor : int = 0xa0a0a0;
 
 		]]>
 	</mx:Script>

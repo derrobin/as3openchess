@@ -2,7 +2,7 @@ package de.robinz.as3.pcc.chessboard.controller
 {
 import de.robinz.as3.pcc.chessboard.view.ApplicationMediator;
 import de.robinz.as3.pcc.chessboard.view.ChessboardMediator;
-import de.robinz.as3.pcc.chessboard.view.MenubarMediator;
+import de.robinz.as3.pcc.chessboard.view.MenuBarMediator;
 
 import org.puremvc.as3.interfaces.INotification;
 import org.puremvc.as3.patterns.command.SimpleCommand;
@@ -21,7 +21,7 @@ public class PrepareViewCommand extends SimpleCommand
 
 		facade.registerMediator( new ApplicationMediator( app ) );
 		facade.registerMediator( new ChessboardMediator( app.applicationView.chessboard ) );
-		facade.registerMediator( new MenubarMediator( app.applicationView.chessboardMenubar ) );
+		facade.registerMediator( new MenuBarMediator( app.applicationView.chessboardMenubar ) );
 	}
 
 	// End SimpleCommand overrides

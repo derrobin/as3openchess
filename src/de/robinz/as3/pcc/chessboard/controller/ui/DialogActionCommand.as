@@ -84,7 +84,6 @@ public class DialogActionCommand extends BaseCommand {
 
 	public function appearColorSettings( mediator : IMediator, n : INotification ) : void {
 		var sets : ColorSettingsVO = new ColorSettingsVO();
-		sets.color1 = 0x00ff00;
 		var handle : INotification = new Notification( ApplicationFacade.COLOR_SETTINGS_CHANGED, sets );
 		this.appearDialog( mediator, n, handle );
 	}

@@ -1,6 +1,7 @@
 package de.robinz.as3.pcc.chessboard.view
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
+import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PanelVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PanelVOCollection;
 import de.robinz.as3.pcc.chessboard.view.views.ApplicationView;
@@ -79,6 +80,7 @@ public class ApplicationMediator extends BaseMediator
 
 	public override function listNotificationInterests() : Array {
 		return [
+			ApplicationFacade.SET_COLOR_SETTINGS,
 			ApplicationFacade.APPEAR_GAME_ACTIONS_PANEL,
 			ApplicationFacade.DISAPPEAR_GAME_ACTIONS_PANEL,
 			ApplicationFacade.APPEAR_MOVE_HISTORY_PANEL,
@@ -90,6 +92,9 @@ public class ApplicationMediator extends BaseMediator
 
 	public override function handleNotification( n : INotification ) : void {
 		switch( n.getName() ) {
+			case ApplicationFacade.SET_COLOR_SETTINGS:
+				this.handleSetColors( n.getBody() as ColorSettingsVO );
+			break;
 			case ApplicationFacade.APPEAR_GAME_ACTIONS_PANEL:
 				this.handleAppearGameActionsPanel();
 			break;
@@ -115,6 +120,12 @@ public class ApplicationMediator extends BaseMediator
 
 
 	// Start Notification Handlers
+
+	private function handleSetColors( sets : ColorSettingsVO ) : void {
+		view.setStyle( "backgroundColor", sets.backgroundMain );
+		this.view.chessboardStage.setStyle( "backgroundColor", sets.backgroundMain );
+		this.view.leftStage.setStyle( "backgroundColor", sets.backgroundMain );
+	}
 
 	private function handleAppearGameActionsPanel() : void {
 		this.showPanel( this.view.chessboardGameActions );
