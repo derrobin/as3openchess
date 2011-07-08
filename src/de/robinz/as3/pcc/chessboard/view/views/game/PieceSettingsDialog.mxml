@@ -6,12 +6,11 @@ PieceSettingsDialog
 <mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml">
 	<mx:Script>
 		<![CDATA[
-		public static const EVENT_CHANGE_STYLE:String = "changeStyle";
-		public static const EVENT_CHANGE_SIZE:String = "changeSize";
-		public static const EVENT_CLOSE:String = "close";
+		public static const EVENT_CHANGE_STYLE : String = "changeStyle";
+		public static const EVENT_CLOSE : String = "close";
 
 
-		private function close():void {
+		private function close() : void {
 			this.dispatchEvent( new Event( EVENT_CLOSE, true ) );
 		}
 		]]>

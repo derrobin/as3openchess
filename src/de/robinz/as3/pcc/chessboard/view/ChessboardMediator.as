@@ -5,6 +5,9 @@ import de.robinz.as3.pcc.chessboard.library.ChessPosition;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMoveCollection;
 import de.robinz.as3.pcc.chessboard.library.ChessboardUtil;
+import de.robinz.as3.pcc.chessboard.library.CssProperties;
+import de.robinz.as3.pcc.chessboard.library.CssSelectors;
+import de.robinz.as3.pcc.chessboard.library.CssUtil;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
@@ -218,7 +221,7 @@ public class ChessboardMediator extends BaseMediator
 
 		for each( f in c.list ) {
 			vo = f.data as ChessboardFieldVO;
-			f.setStyle( "backgroundColor", vo.isWhite ? this._colors.fieldWhite : this._colors.fieldBlack );
+			f.setStyle( CssProperties.BACKGROUND_COLOR, vo.isWhite ? this._colors.fieldWhite : this._colors.fieldBlack );
 		}
 	}
 
@@ -391,6 +394,7 @@ public class ChessboardMediator extends BaseMediator
 	private function handleSetColors( colors : ColorSettingsVO ) : void {
 		this._colors = colors;
 
+		// board gap
 		this.chessboard.row1.setStyle( "backgroundColor", colors.boardGapColor );
 		this.chessboard.row2.setStyle( "backgroundColor", colors.boardGapColor );
 		this.chessboard.row3.setStyle( "backgroundColor", colors.boardGapColor );
@@ -400,6 +404,21 @@ public class ChessboardMediator extends BaseMediator
 		this.chessboard.row7.setStyle( "backgroundColor", colors.boardGapColor );
 		this.chessboard.row8.setStyle( "backgroundColor", colors.boardGapColor );
 		this.chessboard.boardInner.setStyle( "backgroundColor", colors.boardGapColor );
+		CssUtil.overrideCssProperty( CssSelectors.BOARD, CssProperties.BORDER_COLOR, colors.boardGapColor );
+		CssUtil.overrideCssProperty( CssSelectors.BOARD_BORDER_BOTTOM, CssProperties.COLOR, colors.boardGapColor );
+		CssUtil.overrideCssProperty( CssSelectors.BOARD_BORDER_TOP, CssProperties.COLOR, colors.boardGapColor );
+
+		// board border background
+		CssUtil.overrideCssProperty( CssSelectors.BOARD_LEGEND_VERTICAL_ROW, CssProperties.BACKGROUND_COLOR, colors.boardBorderBackground );
+		CssUtil.overrideCssProperty( CssSelectors.BOARD_LEGEND_VERTICAL, CssProperties.BACKGROUND_COLOR, colors.boardBorderBackground );
+		CssUtil.overrideCssProperty( CssSelectors.BOARD_BORDER_TOP, CssProperties.BACKGROUND_COLOR, colors.boardBorderBackground );
+		CssUtil.overrideCssProperty( CssSelectors.BOARD_BORDER_BOTTOM, CssProperties.BACKGROUND_COLOR, colors.boardBorderBackground );
+
+		// piece
+		CssUtil.overrideCssProperty( CssSelectors.BOARD_FIELD, CssProperties.COLOR, colors.piece );
+
+		// board border font
+		CssUtil.overrideCssProperty( CssSelectors.BOARD_LEGEND_CONTAINER, CssProperties.COLOR, colors.boardBorderFont );
 
 		this.resetFieldColors();
 	}

@@ -12,32 +12,21 @@ Chessboard
 	<mx:Script>
 		<![CDATA[
 
-			[Bindable]
 			private var legendVerticalWidth : int = 25;
-			[Bindable]
 			private var legendHorizonalHeight : int = 25;
-			[Bindable]
 			private var boardSpace : int = 1;
-			[Bindable]
-			public var boardSpaceColor : int = 0xa0a0a0;
+			private var boardLegendSpace : int = 30;
 
 		]]>
 	</mx:Script>
 
-	<mx:VBox id="board" width="100%" height="100%" horizontalAlign="center" verticalAlign="middle" backgroundColor="{ boardSpaceColor }">
+	<mx:VBox id="board" width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
 
-		<!--
-		<mx:VBox height="80" width="100%" id="infoboard">
-			<mx:Text height="20" width="100%" id="info1" />
-			<mx:Text height="20" width="100%" id="info2" />
-		</mx:VBox>
-		-->
-
-		<mx:HBox id="boardOuter" width="100%" verticalAlign="middle" horizontalAlign="center" height="30" backgroundColor="#ffffff">
+		<mx:HBox styleName="boardBorderTop" width="100%" verticalAlign="middle" horizontalAlign="center" height="{ boardLegendSpace }">
 
 			<mx:Spacer width="50%" />
 
-			<mx:HBox width="{ row8.width }" height="100%" backgroundColor="#ff00ff">
+			<mx:HBox styleName="boardLegendContainer" width="{ row8.width }" height="100%" backgroundColor="#ff00ff">
 
 				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
 					<mx:Text text="A" />
@@ -72,7 +61,7 @@ Chessboard
 
 		<mx:HBox id="boardInner" width="100%" height="100%">
 
-			<mx:VBox width="{ legendVerticalWidth }" height="100%">
+			<mx:VBox styleName="boardLegendContainer" width="{ boardLegendSpace }" height="100%">
 				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
 					<mx:Text text="8" />
 				</mx:HBox>
@@ -101,25 +90,25 @@ Chessboard
 
 			<mx:VBox id="boardRows" width="100%" height="100%">
 				<mx:Spacer height="{ boardSpace }" />
-				<mx:HBox id="row8" height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }" />
+				<mx:HBox id="row8" height="12.5%" width="100%" styleName="boardFieldRow"/>
 				<mx:Spacer height="{ boardSpace }" />
-				<mx:HBox id="row7" height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }" />
+				<mx:HBox id="row7" height="12.5%" width="100%" styleName="boardFieldRow"/>
 				<mx:Spacer height="{ boardSpace }" />
-				<mx:HBox id="row6" height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }" />
+				<mx:HBox id="row6" height="12.5%" width="100%" styleName="boardFieldRow"/>
 				<mx:Spacer height="{ boardSpace }" />
-				<mx:HBox id="row5" height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }" />
+				<mx:HBox id="row5" height="12.5%" width="100%" styleName="boardFieldRow"/>
 				<mx:Spacer height="{ boardSpace }" />
-				<mx:HBox id="row4" height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }" />
+				<mx:HBox id="row4" height="12.5%" width="100%" styleName="boardFieldRow"/>
 				<mx:Spacer height="{ boardSpace }" />
-				<mx:HBox id="row3" height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }" />
+				<mx:HBox id="row3" height="12.5%" width="100%" styleName="boardFieldRow"/>
 				<mx:Spacer height="{ boardSpace }" />
-				<mx:HBox id="row2" height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }" />
+				<mx:HBox id="row2" height="12.5%" width="100%" styleName="boardFieldRow"/>
 				<mx:Spacer height="{ boardSpace }" />
-				<mx:HBox id="row1" height="12.5%" width="100%" backgroundColor="{ boardSpaceColor }" />
+				<mx:HBox id="row1" height="12.5%" width="100%" styleName="boardFieldRow"/>
 				<mx:Spacer height="{ boardSpace }" />
 			</mx:VBox>
 
-			<mx:VBox width="{ legendVerticalWidth }" height="100%">
+			<mx:VBox styleName="boardLegendContainer" width="{ boardLegendSpace }" height="100%">
 				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
 					<mx:Text text="8" />
 				</mx:HBox>
@@ -148,11 +137,11 @@ Chessboard
 
 		</mx:HBox>
 
-		<mx:HBox width="100%" height="30" backgroundColor="#ffffff">
+		<mx:HBox styleName="boardBorderBottom" width="100%" height="{ boardLegendSpace }">
 
 			<mx:Spacer width="50%" />
 
-			<mx:HBox width="{ row8.width }" height="100%" backgroundColor="#ff00ff">
+			<mx:HBox styleName="boardLegendContainer" width="{ row8.width }" height="100%" backgroundColor="#ff00ff">
 
 				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
 					<mx:Text text="A" />

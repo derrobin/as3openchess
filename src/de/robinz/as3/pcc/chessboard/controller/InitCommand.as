@@ -1,5 +1,6 @@
 package de.robinz.as3.pcc.chessboard.controller {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
+import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
 import de.robinz.as3.pcc.chessboard.model.FontProxy;
 
 import mx.logging.Log;
@@ -24,6 +25,7 @@ public class InitCommand extends SimpleCommand {
 		sendNotification( ApplicationFacade.APPEAR_MOVE_HISTORY_PANEL );
 		sendNotification( ApplicationFacade.APPEAR_GAME_ACTIONS_PANEL );
 		sendNotification( ApplicationFacade.APPEAR_TAKEN_PIECES_PANEL );
+		sendNotification( ApplicationFacade.SET_COLOR_SETTINGS, new ColorSettingsVO() );
 
 		this.prepareLogging();
 	}

@@ -52,6 +52,22 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 		sendNotification( ApplicationFacade.CHANGE_COLOR_SETTINGS, this._settings );
 	}
 
+	private function setColors() : void {
+		var sets : ColorSettingsVO = new ColorSettingsVO();
+
+		sets.backgroundMain = popup.backgroundMain.selectedColor;
+		sets.fieldWhite = popup.fieldWhite.selectedColor;
+		sets.fieldBlack = popup.fieldBlack.selectedColor;
+		sets.fieldValidDrop = popup.fieldValidDrop.selectedColor;
+		sets.fieldMoveHint = popup.fieldMoveHint.selectedColor;
+		sets.boardGapColor = popup.boardGapColor.selectedColor;
+		sets.boardBorderBackground = popup.boardBorderBackground.selectedColor;
+		sets.boardBorderFont = popup.boardBorderFont.selectedColor;
+		sets.piece = popup.pieceFont.selectedColor;
+
+		sendNotification( ApplicationFacade.SET_COLOR_SETTINGS, sets );
+	}
+
 	// End Innerclass Methods
 
 
@@ -114,14 +130,7 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 		if ( e.target is Button ) {
 			var b : Button = e.target as Button;
 			if ( b.id == popup.applyChanges.id ) {
-				var sets : ColorSettingsVO = new ColorSettingsVO();
-				sets.backgroundMain = popup.backgroundMain.selectedColor;
-				sets.fieldWhite = popup.fieldWhite.selectedColor;
-				sets.fieldBlack = popup.fieldBlack.selectedColor;
-				sets.fieldValidDrop = popup.fieldValidDrop.selectedColor;
-				sets.fieldMoveHint = popup.fieldMoveHint.selectedColor;
-				sets.boardGapColor = popup.boardGapColor.selectedColor;
-				sendNotification( ApplicationFacade.SET_COLOR_SETTINGS, sets );
+				this.setColors();
 			}
 		}
 	}

@@ -14,26 +14,42 @@ ColorSettingsDialog
 		]]>
 	</mx:Script>
 
-	<mx:Form label="Test" width="100%" height="100%">
-		<mx:FormItem label="main background:" width="100%">
-			<mx:ColorPicker id="backgroundMain" showTextField="true" selectedColor="0x006600"/>
-		</mx:FormItem>
-		<mx:FormItem label="black field:" width="100%">
-			<mx:ColorPicker id="fieldWhite" showTextField="true" selectedColor="0xFFFFFF"/>
-		</mx:FormItem>
-		<mx:FormItem label="white field:" width="100%">
-			<mx:ColorPicker id="fieldBlack" showTextField="true" selectedColor="0xFFFFFF"/>
-		</mx:FormItem>
-		<mx:FormItem label="field valid drop:" width="100%">
-			<mx:ColorPicker id="fieldValidDrop" showTextField="true" selectedColor="0xFFFFFF"/>
-		</mx:FormItem>
-		<mx:FormItem label="field move hint:" width="100%">
-			<mx:ColorPicker id="fieldMoveHint" showTextField="true" selectedColor="0xFFFFFF"/>
-		</mx:FormItem>
-		<mx:FormItem label="board gap:" width="100%">
-			<mx:ColorPicker id="boardGapColor" showTextField="true" selectedColor="0xFFFFFF"/>
-		</mx:FormItem>
-	</mx:Form>
+	<mx:HBox width="100%" height="100%">
+
+		<mx:Form label="Test" width="50%" height="100%">
+			<mx:FormItem label="main background:" width="100%">
+				<mx:ColorPicker id="backgroundMain" showTextField="true" selectedColor="0x006600"/>
+			</mx:FormItem>
+			<mx:FormItem label="black field:" width="100%">
+				<mx:ColorPicker id="fieldBlack" showTextField="true" selectedColor="0x999999"/>
+			</mx:FormItem>
+			<mx:FormItem label="white field:" width="100%">
+				<mx:ColorPicker id="fieldWhite" showTextField="true" selectedColor="0xFFFFFF"/>
+			</mx:FormItem>
+			<mx:FormItem label="field valid drop:" width="100%">
+				<mx:ColorPicker id="fieldValidDrop" showTextField="true" selectedColor="0xFFFF99"/>
+			</mx:FormItem>
+			<mx:FormItem label="field move hint:" width="100%">
+				<mx:ColorPicker id="fieldMoveHint" showTextField="true" selectedColor="0xFFFFCC"/>
+			</mx:FormItem>
+			<mx:FormItem label="board gap:" width="100%">
+				<mx:ColorPicker id="boardGapColor" showTextField="true" selectedColor="0x333333"/>
+			</mx:FormItem>
+		</mx:Form>
+
+		<mx:Form label="Test" width="50%" height="100%">
+			<mx:FormItem label="board border background:" width="100%">
+				<mx:ColorPicker id="boardBorderBackground" showTextField="true" selectedColor="0x009900"/>
+			</mx:FormItem>
+			<mx:FormItem label="board border font:" width="100%">
+				<mx:ColorPicker id="boardBorderFont" showTextField="true" selectedColor="0xFFFFFF"/>
+			</mx:FormItem>
+			<mx:FormItem label="piece color:" width="100%">
+				<mx:ColorPicker id="pieceFont" showTextField="true" selectedColor="0x000000"/>
+			</mx:FormItem>
+		</mx:Form>
+
+	</mx:HBox>
 
 	<mx:HBox width="100%"
 		horizontalAlign="center"
