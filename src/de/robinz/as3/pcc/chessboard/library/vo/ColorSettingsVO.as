@@ -14,7 +14,7 @@ public class ColorSettingsVO {
 	public var boardGapColor : int = 0x333333;
 	public var boardBorderFont : int = 0xffffff;
 	public var boardBorderBackground : int = 0x009900;
-	public var piece : int = 0x000000;
-
+	public var pieceBlack : int = 0x000000;
+	public var pieceWhite : int = 0xFFFFFF;
 }
 }

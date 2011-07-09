@@ -44,8 +44,17 @@ ColorSettingsDialog
 			<mx:FormItem label="board border font:" width="100%">
 				<mx:ColorPicker id="boardBorderFont" showTextField="true" selectedColor="0xFFFFFF"/>
 			</mx:FormItem>
-			<mx:FormItem label="piece color:" width="100%">
-				<mx:ColorPicker id="pieceFont" showTextField="true" selectedColor="0x000000"/>
+			<mx:FormItem label="piece white:" width="100%">
+				<mx:ColorPicker id="pieceWhite" showTextField="true" selectedColor="0xFFFFFF"/>
+			</mx:FormItem>
+			<mx:FormItem label="piece white borderline:" width="100%">
+				<mx:ColorPicker id="pieceWhiteBorder" showTextField="true" selectedColor="0x000000"/>
+			</mx:FormItem>
+			<mx:FormItem label="piece black:" width="100%">
+				<mx:ColorPicker id="pieceBlack" showTextField="true" selectedColor="0x000000"/>
+			</mx:FormItem>
+			<mx:FormItem label="piece black borderline:" width="100%">
+				<mx:ColorPicker id="pieceBlackBorder" showTextField="true" selectedColor="0xFFFFFF"/>
 			</mx:FormItem>
 		</mx:Form>
 

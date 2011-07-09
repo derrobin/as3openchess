@@ -81,12 +81,12 @@ public class FontManager
 	public function getFontKeyByPiece( piece : IPiece ) : String {
 		var map : Array = this._currentFont.keyMap;
 		switch( piece.getName() ) {
-			case Pawn.NAME:		return piece.isWhite ? map[ 0 ] : map[ 1 ];
-			case Rook.NAME:		return piece.isWhite ? map[ 2 ] : map[ 3 ];
-			case Bishop.NAME:	return piece.isWhite ? map[ 4 ] : map[ 5 ];
-			case King.NAME:		return piece.isWhite ? map[ 6 ] : map[ 7 ];
-			case Queen.NAME:	return piece.isWhite ? map[ 8 ] : map[ 9 ];
-			case Knight.NAME:	return piece.isWhite ? map[ 10 ] : map[ 11 ];
+			case Pawn.NAME:		return map[ 1 ];
+			case Rook.NAME:		return map[ 3 ];
+			case Bishop.NAME:	return map[ 5 ];
+			case King.NAME:		return map[ 7 ];
+			case Queen.NAME:	return map[ 9 ];
+			case Knight.NAME:	return map[ 11 ];
 		}
 
 		throw new Error( "No Font Key Found!" );

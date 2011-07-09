@@ -14,7 +14,8 @@ public class CssSelectors {
 	public static var BOARD : String = "chessboard";
 	public static var BOARD_LEGEND_CONTAINER : String = "boardLegendContainer";
 
-	public static var PIECE : String = "piece";
+	public static var FIELD_PIECE_WHITE : String = "fieldPieceWhite";
+	public static var FIELD_PIECE_BLACK : String = "fieldPieceBlack";
 
 }
 }

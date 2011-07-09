@@ -49,7 +49,8 @@ public class ChangePieceSettingsCommand extends BaseCommand
 
 		CssUtil.overrideCssProperty( CssSelectors.BOARD_FIELD, "fontFamily", settings.font.id );
 		CssUtil.overrideCssProperty( CssSelectors.BOARD_FIELD, "fontSize",  settings.fontSizeCssValue );
-		CssUtil.overrideCssProperty( CssSelectors.PIECE, "fontFamily", settings.font.id );
+		CssUtil.overrideCssProperty( CssSelectors.FIELD_PIECE_WHITE, "fontFamily", settings.font.id );
+		CssUtil.overrideCssProperty( CssSelectors.FIELD_PIECE_BLACK, "fontFamily", settings.font.id );
 
 		sendNotification( ApplicationFacade.PIECE_SETTINGS_CHANGED, settings );
 	}

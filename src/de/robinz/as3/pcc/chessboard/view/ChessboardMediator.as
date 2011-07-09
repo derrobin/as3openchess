@@ -1,5 +1,4 @@
-package de.robinz.as3.pcc.chessboard.view
-{
+package de.robinz.as3.pcc.chessboard.view {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.library.ChessPosition;
 import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
@@ -23,6 +22,9 @@ import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardFieldCollect
 import flash.events.Event;
 import flash.events.MouseEvent;
 
+import flash.filters.BitmapFilterQuality;
+import flash.filters.GlowFilter;
+
 import mx.containers.Box;
 import mx.controls.Alert;
 import mx.controls.Spacer;
@@ -39,8 +41,7 @@ import org.puremvc.as3.interfaces.INotification;
  *
  * @author robin heinel
  */
-public class ChessboardMediator extends BaseMediator
-{
+public class ChessboardMediator extends BaseMediator {
 	public static const NAME : String = "ChessboardMediator";
 
 	public static const FIELD_SPACE : int = 1;
@@ -86,10 +87,10 @@ public class ChessboardMediator extends BaseMediator
 		var notation : String;
 		var isWhite : Boolean = true;
 
-		for( j; j <= 8; j++ ) {
+		for ( j; j <= 8; j++ ) {
 			isWhite = isWhite ? false : true;
 
-			for( i; i <= rows.length; i++ ) {
+			for ( i; i <= rows.length; i++ ) {
 				c = rows.charAt( i - 1 );
 				notation = c + j.toString();
 				field = ChessboardUtil.createBoardField( notation, isWhite, this._colors.fieldWhite, this._colors.fieldBlack );
@@ -130,15 +131,15 @@ public class ChessboardMediator extends BaseMediator
 		}
 
 		var list : Array = new Array().concat(
-			this.chessboard[ 'row1' ].getChildren(),
-			this.chessboard[ 'row2' ].getChildren(),
-			this.chessboard[ 'row3' ].getChildren(),
-			this.chessboard[ 'row4' ].getChildren(),
-			this.chessboard[ 'row5' ].getChildren(),
-			this.chessboard[ 'row6' ].getChildren(),
-			this.chessboard[ 'row7' ].getChildren(),
-			this.chessboard[ 'row8' ].getChildren()
-		);
+				this.chessboard[ 'row1' ].getChildren(),
+				this.chessboard[ 'row2' ].getChildren(),
+				this.chessboard[ 'row3' ].getChildren(),
+				this.chessboard[ 'row4' ].getChildren(),
+				this.chessboard[ 'row5' ].getChildren(),
+				this.chessboard[ 'row6' ].getChildren(),
+				this.chessboard[ 'row7' ].getChildren(),
+				this.chessboard[ 'row8' ].getChildren()
+				);
 		var o : Object;
 		var c : ChessboardFieldCollection = new ChessboardFieldCollection();
 		for each( o in list ) {
@@ -211,11 +212,25 @@ public class ChessboardMediator extends BaseMediator
 
 	private function setPiece( pp : PiecePositionVO ) : void {
 		var field : ChessboardField = this.getField( pp.notation.toString() );
+		field.setStyle( CssProperties.COLOR, pp.piece.isWhite ? this._colors.pieceWhite : this._colors.pieceBlack );
+
 		field.setPiece( pp.piece );
+
+		// TODO: encapsulate filter init
+		var outline : GlowFilter = new GlowFilter();
+		outline.blurX = 1.5;
+		outline.blurY = 1.3;
+		outline.color = pp.piece.isWhite ? 0x000000 : 0xffffff;
+		outline.quality = BitmapFilterQuality.HIGH;
+		outline.strength = 4;
+
+		var filterArray : Array = new Array();
+		filterArray.push( outline );
+		field.getText().filters = filterArray;
 	}
 
 	private function resetFieldColors() : void {
-			var c : ChessboardFieldCollection = this.getFields();
+		var c : ChessboardFieldCollection = this.getFields();
 		var f : ChessboardField;
 		var vo : ChessboardFieldVO;
 
@@ -343,46 +358,46 @@ public class ChessboardMediator extends BaseMediator
 	}
 
 	public override function handleNotification( n : INotification ) : void {
-		switch( n.getName() ) {
+		switch ( n.getName() ) {
 			case ApplicationFacade.SET_COLOR_SETTINGS:
 				this.handleSetColors( n.getBody() as ColorSettingsVO );
-			break;
+				break;
 			case ApplicationFacade.GAME_STARTED:
 				this.handleGameStarted( n.getBody() as ChessboardGameVO );
-			break;
+				break;
 			case ApplicationFacade.FIELD_HINT:
 				this.handleFieldHint( n.getBody() as String );
-			break;
+				break;
 			case ApplicationFacade.REMOVE_ALL_FIELD_HINTS:
 				this.handleRemoveAllFieldHints();
-			break;
+				break;
 			case ApplicationFacade.LOCK_BOARD:
 				this.handleLookBoard();
-			break;
+				break;
 			case ApplicationFacade.UNLOCK_BOARD:
 				this.handleUnlockBoard();
-			break;
+				break;
 			case ApplicationFacade.PIECE_SETTINGS_CHANGED:
 				this.handlePieceSettingsChanged( n.getBody() as PieceSettingsVO );
-			break;
+				break;
 			case ApplicationFacade.ENABLE_BOARD_INSPECT_PIECE_MODE:
 				this.handleEnableBoardInspectMode();
-			break;
+				break;
 			case ApplicationFacade.DISABLE_BOARD_INSPECT_PIECE_MODE:
 				this.handleDisableBoardInspectMode();
-			break;
+				break;
 			case ApplicationFacade.REMOVE_PIECE:
 				this.handleRemovePiece( n.getBody() as FieldNotation, n.getType() );
-			break;
+				break;
 			case ApplicationFacade.REMOVE_ALL_PIECES:
 				this.handleRemoveAllPieces();
-			break;
+				break;
 			case ApplicationFacade.SET_PIECE:
 				this.handleSetPiece( n.getBody() as PiecePositionVO );
-			break;
+				break;
 			case ApplicationFacade.MOVE:
 				this.handleMove( n.getBody() as ChessboardMove );
-			break;
+				break;
 		}
 	}
 
@@ -415,7 +430,7 @@ public class ChessboardMediator extends BaseMediator
 		CssUtil.overrideCssProperty( CssSelectors.BOARD_BORDER_BOTTOM, CssProperties.BACKGROUND_COLOR, colors.boardBorderBackground );
 
 		// piece
-		CssUtil.overrideCssProperty( CssSelectors.BOARD_FIELD, CssProperties.COLOR, colors.piece );
+		CssUtil.overrideCssProperty( CssSelectors.BOARD_FIELD, CssProperties.COLOR, colors.pieceBlack );
 
 		// board border font
 		CssUtil.overrideCssProperty( CssSelectors.BOARD_LEGEND_CONTAINER, CssProperties.COLOR, colors.boardBorderFont );
@@ -476,9 +491,7 @@ public class ChessboardMediator extends BaseMediator
 		var fromBox : Box = this.getField( m.fromField.toString() );
 		var fromText : Text = fromBox.getChildAt( 0 ) as Text;
 		var toBox : Box = this.getField( m.toField.toString() );
-
 		toBox.addChild( fromText );
-
 		this._game = m.game;
 	}
 
@@ -625,9 +638,9 @@ public class ChessboardMediator extends BaseMediator
 
 			if ( _isBoardInspectMode ) {
 				Alert.show(
-					"Piece Name: " + piece.getName() + "\n" +
-					"Piece FontKey: " + piece.fontKey
-				, "Piece Inspection" );
+						"Piece Name: " + piece.getName() + "\n" +
+								"Piece FontKey: " + piece.fontKey
+						, "Piece Inspection" );
 			}
 
 			this.removeAllMoveHints();

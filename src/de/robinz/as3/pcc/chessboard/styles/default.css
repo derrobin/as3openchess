@@ -57,10 +57,24 @@ DragManager {
 	horizontalAlign: center;
 	background: #ff0000;
 }
+.piece,
+.pieceWhite,
+.pieceBlack {
+	fontFamily: font1;
+	fontSize: 25pt;
+}
+.pieceWhite {
+	color: #ffffff;
+}
+.pieceBlack {
+	color: #000000;
+}
+
 .piece {
 	fontFamily: font1;
 	fontSize: 25pt;
 }
+
 .legendVertical {
 	verticalAlign: middle;
 	horizontalAlign: center;
