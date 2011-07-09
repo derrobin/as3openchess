@@ -2,14 +2,17 @@ package de.robinz.as3.pcc.chessboard.controller.ui {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
 import de.robinz.as3.pcc.chessboard.library.common.LoggerUtil;
+import de.robinz.as3.pcc.chessboard.library.vo.BoardSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 import de.robinz.as3.pcc.chessboard.model.FontProxy;
+import de.robinz.as3.pcc.chessboard.view.BoardSettingsMediator;
 import de.robinz.as3.pcc.chessboard.view.ColorSettingsMediator;
 import de.robinz.as3.pcc.chessboard.view.MoveHistoryModifierMediator;
 import de.robinz.as3.pcc.chessboard.view.PawnConvertMediator;
 import de.robinz.as3.pcc.chessboard.view.PieceSettingsMediator;
 
+import de.robinz.as3.pcc.chessboard.view.views.game.BoardSettingsDialog;
 import de.robinz.as3.pcc.chessboard.view.views.game.ColorSettingsDialog;
 
 import flash.net.getClassByAlias;
@@ -46,6 +49,9 @@ public class DialogActionCommand extends BaseCommand {
 			case ApplicationFacade.APPEAR_COLOR_SETTINGS:
 				this.appearColorSettings( new ColorSettingsMediator( stage ), n );
 			break;
+			case ApplicationFacade.APPEAR_BOARD_SETTINGS:
+				this.appearBoardSettings( new BoardSettingsMediator( stage ), n );
+			break;
 
 			case ApplicationFacade.DISAPPEAR_MOVE_HISTORY_MODIFIER:
 				this.closeDialog( MoveHistoryModifierMediator.NAME );
@@ -55,6 +61,9 @@ public class DialogActionCommand extends BaseCommand {
 			break;
 			case ApplicationFacade.DISAPPEAR_COLOR_SETTINGS:
 				this.closeDialog( ColorSettingsMediator.NAME );
+			break;
+			case ApplicationFacade.DISAPPEAR_BOARD_SETTINGS:
+				this.closeDialog( BoardSettingsMediator.NAME );
 			break;
 		}
 
@@ -80,6 +89,12 @@ public class DialogActionCommand extends BaseCommand {
 
 		mediator.handleNotification( n );
 		appProxy.openDialog( mediator.getMediatorName() );
+	}
+
+	public function appearBoardSettings( mediator : IMediator, n : INotification ) : void {
+		var sets : BoardSettingsVO = new BoardSettingsVO();
+		var handle : INotification = new Notification( ApplicationFacade.COLOR_SETTINGS_CHANGED, sets );
+		this.appearDialog( mediator, n, handle );
 	}
 
 	public function appearColorSettings( mediator : IMediator, n : INotification ) : void {

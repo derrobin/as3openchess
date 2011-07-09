@@ -343,7 +343,7 @@ public class ChessboardMediator extends BaseMediator {
 
 	public override function listNotificationInterests() : Array {
 		return [
-			ApplicationFacade.SET_COLOR_SETTINGS,
+			ApplicationFacade.COLOR_SETTINGS_CHANGED,
 			ApplicationFacade.GAME_STARTED,
 			ApplicationFacade.FIELD_HINT,
 			ApplicationFacade.REMOVE_ALL_FIELD_HINTS,
@@ -361,8 +361,8 @@ public class ChessboardMediator extends BaseMediator {
 
 	public override function handleNotification( n : INotification ) : void {
 		switch ( n.getName() ) {
-			case ApplicationFacade.SET_COLOR_SETTINGS:
-				this.handleSetColors( n.getBody() as ColorSettingsVO );
+			case ApplicationFacade.COLOR_SETTINGS_CHANGED:
+				this.handleChangeColors( n.getBody() as ColorSettingsVO );
 				break;
 			case ApplicationFacade.GAME_STARTED:
 				this.handleGameStarted( n.getBody() as ChessboardGameVO );
@@ -408,19 +408,19 @@ public class ChessboardMediator extends BaseMediator {
 
 	// Start Notification Handlers
 
-	private function handleSetColors( colors : ColorSettingsVO ) : void {
+	private function handleChangeColors( colors : ColorSettingsVO ) : void {
 		this._colors = colors;
 
 		// board gap
-		this.chessboard.row1.setStyle( "backgroundColor", colors.boardGapColor );
-		this.chessboard.row2.setStyle( "backgroundColor", colors.boardGapColor );
-		this.chessboard.row3.setStyle( "backgroundColor", colors.boardGapColor );
-		this.chessboard.row4.setStyle( "backgroundColor", colors.boardGapColor );
-		this.chessboard.row5.setStyle( "backgroundColor", colors.boardGapColor );
-		this.chessboard.row6.setStyle( "backgroundColor", colors.boardGapColor );
-		this.chessboard.row7.setStyle( "backgroundColor", colors.boardGapColor );
-		this.chessboard.row8.setStyle( "backgroundColor", colors.boardGapColor );
-		this.chessboard.boardInner.setStyle( "backgroundColor", colors.boardGapColor );
+		this.chessboard.row1.setStyle( CssProperties.BACKGROUND_COLOR, colors.boardGapColor );
+		this.chessboard.row2.setStyle( CssProperties.BACKGROUND_COLOR, colors.boardGapColor );
+		this.chessboard.row3.setStyle( CssProperties.BACKGROUND_COLOR, colors.boardGapColor );
+		this.chessboard.row4.setStyle( CssProperties.BACKGROUND_COLOR, colors.boardGapColor );
+		this.chessboard.row5.setStyle( CssProperties.BACKGROUND_COLOR, colors.boardGapColor );
+		this.chessboard.row6.setStyle( CssProperties.BACKGROUND_COLOR, colors.boardGapColor );
+		this.chessboard.row7.setStyle( CssProperties.BACKGROUND_COLOR, colors.boardGapColor );
+		this.chessboard.row8.setStyle( CssProperties.BACKGROUND_COLOR, colors.boardGapColor );
+		this.chessboard.boardInner.setStyle( CssProperties.BACKGROUND_COLOR, colors.boardGapColor );
 		CssUtil.overrideCssProperty( CssSelectors.BOARD, CssProperties.BORDER_COLOR, colors.boardGapColor );
 		CssUtil.overrideCssProperty( CssSelectors.BOARD_BORDER_BOTTOM, CssProperties.COLOR, colors.boardGapColor );
 		CssUtil.overrideCssProperty( CssSelectors.BOARD_BORDER_TOP, CssProperties.COLOR, colors.boardGapColor );

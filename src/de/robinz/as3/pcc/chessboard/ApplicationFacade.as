@@ -18,6 +18,7 @@ import de.robinz.as3.pcc.chessboard.controller.move.history.MoveForwardCommand;
 import de.robinz.as3.pcc.chessboard.controller.move.history.MoveJumpCommand;
 import de.robinz.as3.pcc.chessboard.controller.move.history.MoveStartCommand;
 import de.robinz.as3.pcc.chessboard.controller.piece.RemovePieceCommand;
+import de.robinz.as3.pcc.chessboard.controller.ui.ChangeBoardSettingsCommand;
 import de.robinz.as3.pcc.chessboard.controller.ui.ChangeColorSettingsCommand;
 import de.robinz.as3.pcc.chessboard.controller.ui.ChangePieceSettingsCommand;
 import de.robinz.as3.pcc.chessboard.controller.ui.DialogActionCommand;
@@ -40,6 +41,11 @@ public class ApplicationFacade extends Facade
 	public static const SET_PIECE_SETTINGS : String = "setPieceSettings";
 	public static const CHANGE_PIECE_SETTINGS : String = "changePieceSettings";
 	public static const PIECE_SETTINGS_CHANGED : String = "pieceSettingsChanged";
+
+
+	public static const SET_BOARD_SETTINGS : String = "setBoardSettings";
+	public static const CHANGE_BOARD_SETTINGS : String = "changeBoardSettings";
+	public static const BOARD_SETTINGS_CHANGED : String = "boardSettingsChanged";
 
 	public static const SET_COLOR_SETTINGS : String = "setColorSettings";
 	public static const CHANGE_COLOR_SETTINGS : String = "changeColorSettings";
@@ -84,25 +90,29 @@ public class ApplicationFacade extends Facade
 	// panel and dialog actions
 	public static const APPEAR_MOVE_HISTORY_PANEL : String = "appearMoveHistoryPanel";
 	public static const APPEAR_TAKEN_PIECES_PANEL : String = "appearTakenPiecesPanel";
-	public static const APPEAR_PIECE_SETTINGS : String = "appearPieceSettings";
-	public static const APPEAR_COLOR_SETTINGS : String = "appearColorSettings";
 	public static const APPEAR_MOVE_HISTORY_MODIFIER : String = "appearMoveHistoryModifier";
 	public static const APPEAR_GAME_ACTIONS_PANEL : String = "appearGameActionsPanel";
+	public static const APPEAR_PANEL_SAVE_GAME : String = "appearPanelSaveGame";
 
 	public static const DISAPPEAR_MOVE_HISTORY_PANEL : String = "disappearMoveHistoryPanel";
 	public static const DISAPPEAR_TAKEN_PIECES_PANEL : String = "disappearTakenPiecesPanel";
-	public static const DISAPPEAR_PIECE_SETTINGS : String = "disappearPieceSettings";
-	public static const DISAPPEAR_COLOR_SETTINGS : String = "disappearColorSettings";
 	public static const DISAPPEAR_MOVE_HISTORY_MODIFIER : String = "disappearMoveHistoryModifier";
 	public static const DISAPPEAR_GAME_ACTIONS_PANEL : String = "disappearGameActionsPanel";
+	public static const DISAPPEAR_PANEL_SAVE_GAME : String = "disappearPanelSaveGame";
 
 	public static const TOGGLE_GAME_ACTIONS_PANEL : String = "toggleGameActionsPanel";
 	public static const TOGGLE_TAKEN_PIECES_PANEL : String = "toolgeTakenPiecesPanel";
 	public static const TOGGLE_MOVE_HISTORY_PANEL : String = "toggleMoveHistoryPanel";
 
+	public static const APPEAR_BOARD_SETTINGS : String = "appearBoardSettings";
+	public static const APPEAR_PIECE_SETTINGS : String = "appearPieceSettings";
+	public static const APPEAR_COLOR_SETTINGS : String = "appearColorSettings";
+
+	public static const DISAPPEAR_PIECE_SETTINGS : String = "disappearPieceSettings";
+	public static const DISAPPEAR_BOARD_SETTINGS : String = "disappearBoardSettings";
+	public static const DISAPPEAR_COLOR_SETTINGS : String = "disappearColorSettings";
+
 	// Save game dialog ( this is not handled by dialog action command )
-	public static const APPEAR_PANEL_SAVE_GAME : String = "appearPanelSaveGame";
-	public static const DISAPPEAR_PANEL_SAVE_GAME : String = "disappearPanelSaveGame";
 	public static const SET_SAVE_GAME : String = "setSaveGame";
 	public static const SET_SAVE_GAMES : String = "setSaveGames";
 	public static const DISAPPEAR_SAVE_GAMES : String = "disappearSaveGames";
@@ -147,22 +157,31 @@ public class ApplicationFacade extends Facade
 		registerCommand( APPEAR_MOVE_HISTORY_PANEL, PanelActionCommand );
 		registerCommand( APPEAR_TAKEN_PIECES_PANEL, PanelActionCommand );
 		registerCommand( APPEAR_GAME_ACTIONS_PANEL, PanelActionCommand );
+		registerCommand( APPEAR_MOVE_HISTORY_MODIFIER, DialogActionCommand );
+
 		registerCommand( DISAPPEAR_MOVE_HISTORY_PANEL, PanelActionCommand );
 		registerCommand( DISAPPEAR_TAKEN_PIECES_PANEL, PanelActionCommand );
 		registerCommand( DISAPPEAR_GAME_ACTIONS_PANEL, PanelActionCommand );
+		registerCommand( DISAPPEAR_MOVE_HISTORY_MODIFIER, DialogActionCommand );
+
 		registerCommand( TOGGLE_MOVE_HISTORY_PANEL, PanelActionCommand );
 		registerCommand( TOGGLE_TAKEN_PIECES_PANEL, PanelActionCommand );
 		registerCommand( TOGGLE_GAME_ACTIONS_PANEL, PanelActionCommand );
 
 		registerCommand( APPEAR_PIECE_SETTINGS, DialogActionCommand );
 		registerCommand( APPEAR_COLOR_SETTINGS, DialogActionCommand );
-		registerCommand( APPEAR_MOVE_HISTORY_MODIFIER, DialogActionCommand );
+		registerCommand( APPEAR_BOARD_SETTINGS, DialogActionCommand );
+
 		registerCommand( DISAPPEAR_PIECE_SETTINGS, DialogActionCommand );
 		registerCommand( DISAPPEAR_COLOR_SETTINGS, DialogActionCommand );
-		registerCommand( DISAPPEAR_MOVE_HISTORY_MODIFIER, DialogActionCommand );
+		registerCommand( DISAPPEAR_BOARD_SETTINGS, DialogActionCommand );
+
 		registerCommand( PAWN_PROMOTION, DialogActionCommand );
 
 		registerCommand( SET_COLOR_SETTINGS, ChangeColorSettingsCommand );
+
+		registerCommand( CHANGE_BOARD_SETTINGS, ChangeBoardSettingsCommand );
+		registerCommand( CHANGE_COLOR_SETTINGS, ChangeColorSettingsCommand );
 
 		registerCommand( MOVE_START, MoveStartCommand );
 		registerCommand( MOVE_END, MoveEndCommand );

@@ -15,15 +15,13 @@ import mx.events.ColorPickerEvent;
 import org.puremvc.as3.interfaces.INotification;
 
 /**
- * de.robinz.as3.pcc.chessboard.view
+ * ColorSettingsMediator
  *
  * @author robin heinel
  */
 public class ColorSettingsMediator extends DialogBaseMediator {
 
 	public static const NAME : String = "ColorSettingsMediator";
-
-	private var _settings : ColorSettingsVO;
 
 	public function ColorSettingsMediator( stage : mainapp ) {
 		super( NAME, stage );
@@ -48,27 +46,26 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 	}
 
 	private function applyChanges() : void {
-		this._settings = new ColorSettingsVO();
-		sendNotification( ApplicationFacade.CHANGE_COLOR_SETTINGS, this._settings );
+		sendNotification( ApplicationFacade.CHANGE_COLOR_SETTINGS, this.getColors() );
 	}
 
-	private function setColors() : void {
-		var sets : ColorSettingsVO = new ColorSettingsVO();
+	private function getColors() : ColorSettingsVO {
+		var colors : ColorSettingsVO = new ColorSettingsVO();
 
-		sets.backgroundMain = popup.backgroundMain.selectedColor;
-		sets.fieldWhite = popup.fieldWhite.selectedColor;
-		sets.fieldBlack = popup.fieldBlack.selectedColor;
-		sets.fieldValidDrop = popup.fieldValidDrop.selectedColor;
-		sets.fieldMoveHint = popup.fieldMoveHint.selectedColor;
-		sets.boardGapColor = popup.boardGapColor.selectedColor;
-		sets.boardBorderBackground = popup.boardBorderBackground.selectedColor;
-		sets.boardBorderFont = popup.boardBorderFont.selectedColor;
-		sets.pieceBlack = popup.pieceBlack.selectedColor;
-		sets.pieceBlackBorder = popup.pieceBlackBorder.selectedColor;
-		sets.pieceWhite = popup.pieceWhite.selectedColor;
-		sets.pieceWhiteBorder = popup.pieceWhiteBorder.selectedColor;
+		colors.backgroundMain = popup.backgroundMain.selectedColor;
+		colors.fieldWhite = popup.fieldWhite.selectedColor;
+		colors.fieldBlack = popup.fieldBlack.selectedColor;
+		colors.fieldValidDrop = popup.fieldValidDrop.selectedColor;
+		colors.fieldMoveHint = popup.fieldMoveHint.selectedColor;
+		colors.boardGapColor = popup.boardGapColor.selectedColor;
+		colors.boardBorderBackground = popup.boardBorderBackground.selectedColor;
+		colors.boardBorderFont = popup.boardBorderFont.selectedColor;
+		colors.pieceBlack = popup.pieceBlack.selectedColor;
+		colors.pieceBlackBorder = popup.pieceBlackBorder.selectedColor;
+		colors.pieceWhite = popup.pieceWhite.selectedColor;
+		colors.pieceWhiteBorder = popup.pieceWhiteBorder.selectedColor;
 
-		sendNotification( ApplicationFacade.SET_COLOR_SETTINGS, sets );
+		return colors;
 	}
 
 	// End Innerclass Methods
@@ -83,7 +80,6 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 
 	public override function listNotificationInterests() : Array {
 		return [
-			ApplicationFacade.COLOR_SETTINGS_CHANGED,
 			ApplicationFacade.APPEAR_COLOR_SETTINGS,
 			ApplicationFacade.DISAPPEAR_COLOR_SETTINGS
 		];
@@ -91,8 +87,6 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 
 	public override function handleNotification( n : INotification ) : void {
 		switch ( n.getName() ) {
-			case ApplicationFacade.COLOR_SETTINGS_CHANGED:
-				break;
 			case ApplicationFacade.APPEAR_COLOR_SETTINGS:
 				this.handleAppearColorSettings( n.getType() is String ? n.getType() as String : null );
 				break;
@@ -133,7 +127,7 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 		if ( e.target is Button ) {
 			var b : Button = e.target as Button;
 			if ( b.id == popup.applyChanges.id ) {
-				this.setColors();
+				this.applyChanges();
 			}
 		}
 	}

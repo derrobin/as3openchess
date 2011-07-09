@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+BoardSettingsDialog
+@author robin heinel
+-->
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml">
+	<mx:Script>
+		<![CDATA[
+		public static const EVENT_CLOSE : String = "close";
+
+		private function close():void {
+			this.dispatchEvent( new Event( EVENT_CLOSE, true ) );
+		}
+		]]>
+	</mx:Script>
+
+	<mx:HBox width="100%" height="100%">
+
+		<mx:Form label="Test" width="100%" height="100%">
+		</mx:Form>
+
+	</mx:HBox>
+
+	<mx:HBox width="100%"
+		horizontalAlign="center"
+		horizontalGap="5"
+	>
+		<mx:Button id="applyChanges" label="Apply Changes"/>
+		<mx:Button id="cancel" label="Cancel" click="close();" />
+	</mx:HBox>
+
+	<mx:Spacer height="5" />
+
+</mx:TitleWindow>

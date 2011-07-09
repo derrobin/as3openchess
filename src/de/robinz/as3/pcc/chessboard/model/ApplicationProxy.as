@@ -87,6 +87,9 @@ public class ApplicationProxy extends BaseProxy
 		return this._openPanels;
 	}
 
+	public function set colors( value : ColorSettingsVO ) : void {
+		this._colors = value;
+	}
 	public function get colors() : ColorSettingsVO {
 		return this._colors;
 	}

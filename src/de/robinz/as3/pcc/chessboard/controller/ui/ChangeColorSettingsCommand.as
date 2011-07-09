@@ -41,18 +41,8 @@ public class ChangeColorSettingsCommand extends BaseCommand
 	// Start Innerclass Methods
 
 	private function changeColorSettings( colors : ColorSettingsVO ) : void {
-		//sendNotification( ApplicationFacade.COLOR_SETTINGS_CHANGED, settings );
-	}
-
-	private function overrideCssProperty( selector : String, property : String, value : * ) : void {
-		var css : CSSStyleDeclaration = StyleManager.getStyleDeclaration( selector );
-
-		if ( css == null ) {
-			trace( "overrideCssProperty: CSS-Selector does not exists!" );
-			return;
-		}
-
-		css.setStyle( property, value );
+		this.appProxy.colors = colors;
+		sendNotification( ApplicationFacade.COLOR_SETTINGS_CHANGED, colors );
 	}
 
 	// End Innerclass Methods

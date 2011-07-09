@@ -12,10 +12,8 @@ Chessboard
 	<mx:Script>
 		<![CDATA[
 
-			private var legendVerticalWidth : int = 25;
-			private var legendHorizonalHeight : int = 25;
 			private var boardSpace : int = 1;
-			private var boardLegendSpace : int = 30;
+			private var boardLegendSpace : int = 22;
 
 		]]>
 	</mx:Script>

@@ -1,6 +1,7 @@
 package de.robinz.as3.pcc.chessboard.view
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
+import de.robinz.as3.pcc.chessboard.library.CssProperties;
 import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PanelVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PanelVOCollection;
@@ -80,7 +81,7 @@ public class ApplicationMediator extends BaseMediator
 
 	public override function listNotificationInterests() : Array {
 		return [
-			ApplicationFacade.SET_COLOR_SETTINGS,
+			ApplicationFacade.COLOR_SETTINGS_CHANGED,
 			ApplicationFacade.APPEAR_GAME_ACTIONS_PANEL,
 			ApplicationFacade.DISAPPEAR_GAME_ACTIONS_PANEL,
 			ApplicationFacade.APPEAR_MOVE_HISTORY_PANEL,
@@ -92,8 +93,8 @@ public class ApplicationMediator extends BaseMediator
 
 	public override function handleNotification( n : INotification ) : void {
 		switch( n.getName() ) {
-			case ApplicationFacade.SET_COLOR_SETTINGS:
-				this.handleSetColors( n.getBody() as ColorSettingsVO );
+			case ApplicationFacade.COLOR_SETTINGS_CHANGED:
+				this.handleColorChanged( n.getBody() as ColorSettingsVO );
 			break;
 			case ApplicationFacade.APPEAR_GAME_ACTIONS_PANEL:
 				this.handleAppearGameActionsPanel();
@@ -121,10 +122,10 @@ public class ApplicationMediator extends BaseMediator
 
 	// Start Notification Handlers
 
-	private function handleSetColors( sets : ColorSettingsVO ) : void {
-		view.setStyle( "backgroundColor", sets.backgroundMain );
-		this.view.chessboardStage.setStyle( "backgroundColor", sets.backgroundMain );
-		this.view.leftStage.setStyle( "backgroundColor", sets.backgroundMain );
+	private function handleColorChanged( sets : ColorSettingsVO ) : void {
+		view.setStyle( CssProperties.BACKGROUND_COLOR, sets.backgroundMain );
+		this.view.chessboardStage.setStyle( CssProperties.BACKGROUND_COLOR, sets.backgroundMain );
+		this.view.leftStage.setStyle( CssProperties.BACKGROUND_COLOR, sets.backgroundMain );
 	}
 
 	private function handleAppearGameActionsPanel() : void {

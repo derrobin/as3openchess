@@ -23,10 +23,13 @@ ChessboardMenubar
 
 			public static const MENU_ENTRY_PIECE_SETTINGS : String = "pieceSettings";
 			public static const MENU_ENTRY_COLOR_SETTINGS : String = "colorSettings";
+			public static const MENU_ENTRY_BOARD_SETTINGS : String = "boardSettings";
 			public static const MENU_ENTRY_REVERT_MOVES : String = "revertMoves";
 
 			public static const MENU_ENTRY_SET_TEST_PIECES : String = "setTestPieces";
 			public static const MENU_EXPORT_FEN : String = "exportFEN";
+
+
 
 		]]>
 	</mx:Script>
@@ -48,6 +51,7 @@ ChessboardMenubar
 				</menuitem>
 				<menuitem label="Piece Settings.." data="pieceSettings" />
 				<menuitem label="Color Settings.." data="colorSettings" />
+				<menuitem label="Board Settings.." data="boardSettings" />
 				<menuitem label="Browse Move History.." data="revertMoves" />
 			</menuitem>
 			<menuitem label="Export">

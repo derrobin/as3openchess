@@ -2,6 +2,7 @@ package de.robinz.as3.pcc.chessboard.controller.ui
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
+import de.robinz.as3.pcc.chessboard.library.vo.BoardSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 import de.robinz.as3.pcc.chessboard.model.FontProxy;
 
@@ -18,8 +19,7 @@ public class ChangeBoardSettingsCommand extends BaseCommand
 
 	public override function execute( n : INotification ) : void {
 		super.execute( n );
-
-		this.changeBoardSettings();
+		this.changeBoardSettings( n.getBody() as BoardSettingsVO );
 	}
 
 	// End SimpleCommand overrides
@@ -27,8 +27,8 @@ public class ChangeBoardSettingsCommand extends BaseCommand
 
 	// Start Innerclass Methods
 
-	private function changeBoardSettings() : void {
-		sendNotification( ApplicationFacade.BOARD_SETTINGS_CHANGED );
+	private function changeBoardSettings( sets : BoardSettingsVO ) : void {
+		sendNotification( ApplicationFacade.BOARD_SETTINGS_CHANGED, sets );
 	}
 
 	// End Innerclass Methods
