@@ -47,40 +47,22 @@ ApplicationView
 	<mx:Box id="chessboardStage" width="100%" height="100%"
 		styleName="chessboardStage" backgroundColor="#ffffff">
 
-		<mx:HDividedBox width="100%" height="100%">
-			<mx:VBox id="leftStage" width="75%" height="100%" backgroundColor="#ffffff">
-				<mx:VDividedBox id="boardStage" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" dividerColor="#dddddd"
-						borderSides="right"
-						borderColor="#aaaaaa"
-					    borderThickness="1"
-					    borderStyle="solid">
-					<components:Chessboard id="chessboard" width="100%" height="100%" minHeight="550" minWidth="550" resize="onBoardResize( event )"
-						styleName="chessboard"
-					/>
-				</mx:VDividedBox>
+		<mx:HBox width="100%" height="100%">
+			<mx:Spacer width="10" />
+			<mx:VBox id="leftStage" width="100%" height="100%" backgroundColor="#ffffff">
+				<mx:VBox id="boardStage" styleName="boardStage" width="100%" height="100%">
+					<mx:Spacer height="5" />
+					<components:Chessboard id="chessboard" styleName="chessboard" width="100%" height="100%" minHeight="300" minWidth="300" resize="onBoardResize( event )" />
+					<mx:Spacer height="5" />
+				</mx:VBox>
 			</mx:VBox>
-			<mx:VDividedBox width="25%" height="100%">
-				<components:ChessboardMoveHistory id="chessboardMoveHistory" width="100%" height="100%"
-					borderSides="bottom"
-					borderColor="#aaaaaa"
-					borderThickness="1"
-					borderStyle="solid"
-				/>
-				<components:ChessboardGameActions id="chessboardGameActions" width="100%" height="75"
-					borderSides="bottom"
-					borderColor="#aaaaaa"
-					borderThickness="1"
-					borderStyle="solid"
-				/>
-				<components:ChessboardTakenPieces id="chessboardTakenPieces" width="100%" height="140"
-					borderSides="bottom"
-					borderColor="#aaaaaa"
-					borderThickness="1"
-					borderStyle="solid"
-				/>
-
+			<mx:Spacer width="10" />
+			<mx:VDividedBox width="25%" height="100%" visible="false" includeInLayout="false">
+				<components:ChessboardMoveHistory id="chessboardMoveHistory" styleName="panel" width="100%" height="100%" />
+				<components:ChessboardGameActions id="chessboardGameActions" styleName="panel" width="100%" height="75" />
+				<components:ChessboardTakenPieces id="chessboardTakenPieces" styleName="panel" width="100%" height="140" />
 			</mx:VDividedBox>
-		</mx:HDividedBox>
+		</mx:HBox>
 
 	</mx:Box>
 

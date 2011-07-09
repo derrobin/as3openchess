@@ -43,6 +43,15 @@ DragManager {
 	verticalAlign: middle;
 	horizontalAlign: center;
 }
+.boardStage {
+	borderSides: right;
+	borderColor: #aaaaaa;
+	borderThickness: 1;
+	borderStyle: solid;
+	verticalAlign: top;
+	horizontalAlign: left;
+	dividerColor: #dddddd;
+}
 .boardContainer {
 	verticalAlign: middle;
 	horizontalAlign: center;
@@ -95,4 +104,10 @@ DragManager {
 }
 .boardFieldRow {
 	backgroundColor: #a0a0a0;
+}
+.panel {
+	borderSides: bottom;
+	borderColor: #aaaaaa;
+	borderThickness: 1;
+	borderStyle: solid;
 }
