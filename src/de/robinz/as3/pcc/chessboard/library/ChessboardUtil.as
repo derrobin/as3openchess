@@ -25,7 +25,7 @@ public class ChessboardUtil {
 		f.percentWidth = 12.5;
 		f.percentHeight = 100;
 		f.styleName = CssSelectors.BOARD_FIELD;
-		f.setStyle( "backgroundColor", isWhite ? whiteColor : blackColor );
+		f.setStyle( CssProperties.BACKGROUND_COLOR, isWhite ? whiteColor : blackColor );
 
 		var vo : ChessboardFieldVO = new ChessboardFieldVO();
 		vo.isWhite = isWhite;

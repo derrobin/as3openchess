@@ -2,6 +2,7 @@ package de.robinz.as3.pcc.chessboard.controller.ui
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
+import de.robinz.as3.pcc.chessboard.library.CssProperties;
 import de.robinz.as3.pcc.chessboard.library.CssSelectors;
 import de.robinz.as3.pcc.chessboard.library.CssUtil;
 import de.robinz.as3.pcc.chessboard.library.FontManager;
@@ -47,10 +48,10 @@ public class ChangePieceSettingsCommand extends BaseCommand
 		settings.fontSizeCssValue = fontProxy.currentFontSizeCssValue;
 		settings.font = fontProxy.currentFont;
 
-		CssUtil.overrideCssProperty( CssSelectors.BOARD_FIELD, "fontFamily", settings.font.id );
-		CssUtil.overrideCssProperty( CssSelectors.BOARD_FIELD, "fontSize",  settings.fontSizeCssValue );
-		CssUtil.overrideCssProperty( CssSelectors.FIELD_PIECE_WHITE, "fontFamily", settings.font.id );
-		CssUtil.overrideCssProperty( CssSelectors.FIELD_PIECE_BLACK, "fontFamily", settings.font.id );
+		CssUtil.overrideCssProperty( "pieceHolder", CssProperties.FONT_FAMILY, settings.font.id );
+		CssUtil.overrideCssProperty( "pieceHolder", CssProperties.FONT_SIZE, settings.fontSizeCssValue );
+		//CssUtil.overrideCssProperty( CssSelectors.FIELD_PIECE_WHITE, CssProperties.FONT_FAMILY, settings.font.id );
+		//CssUtil.overrideCssProperty( CssSelectors.FIELD_PIECE_BLACK, CssProperties.FONT_FAMILY, settings.font.id );
 
 		sendNotification( ApplicationFacade.PIECE_SETTINGS_CHANGED, settings );
 	}

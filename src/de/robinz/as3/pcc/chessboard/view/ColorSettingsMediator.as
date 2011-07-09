@@ -64,7 +64,9 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 		sets.boardBorderBackground = popup.boardBorderBackground.selectedColor;
 		sets.boardBorderFont = popup.boardBorderFont.selectedColor;
 		sets.pieceBlack = popup.pieceBlack.selectedColor;
+		sets.pieceBlackBorder = popup.pieceBlackBorder.selectedColor;
 		sets.pieceWhite = popup.pieceWhite.selectedColor;
+		sets.pieceWhiteBorder = popup.pieceWhiteBorder.selectedColor;
 
 		sendNotification( ApplicationFacade.SET_COLOR_SETTINGS, sets );
 	}

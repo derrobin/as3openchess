@@ -2,6 +2,7 @@ package de.robinz.as3.pcc.chessboard.view
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.library.ChessboardUtil;
+import de.robinz.as3.pcc.chessboard.library.CssProperties;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.pieces.Piece;
 import de.robinz.as3.pcc.chessboard.library.vo.PawnConvertDialogVO;
@@ -48,8 +49,8 @@ public class PawnConvertMediator extends DialogBaseMediator
 		field.setStyle( "borderStyle", "solid" );
 		field.setStyle( "borderSides", "top bottom right left" );
 
-		field.addEventListener( MouseEvent.MOUSE_OVER, function() { field.setStyle( "borderColor", 0xff0000 ); } );
-		field.addEventListener( MouseEvent.MOUSE_OUT, function() { field.setStyle( "borderColor", 0xbbbbbb ); } );
+		field.addEventListener( MouseEvent.MOUSE_OVER, function() { field.setStyle( CssProperties.BORDER_COLOR, 0xff0000 ); } );
+		field.addEventListener( MouseEvent.MOUSE_OUT, function() { field.setStyle( CssProperties.BORDER_COLOR, 0xbbbbbb ); } );
 
 		return field;
 	}

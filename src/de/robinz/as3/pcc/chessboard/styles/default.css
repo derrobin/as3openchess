@@ -16,6 +16,12 @@ DragManager {
 	moveCursor: Embed(source="/de/robinz/as3/pcc/chessboard/resources/images/drop-valid.png");
 	rejectCursor: Embed(source="/de/robinz/as3/pcc/chessboard/resources/images/drop-unvalid.png");
 }
+.menuBar {
+	fontFamily: Verdana;
+	fontSize: 13;
+	fontWeight: bold;
+	textIndent: 0;
+}
 .chessboard {
 	borderThicknessLeft: 1;
 	borderThicknessTop: 1;
@@ -52,25 +58,12 @@ DragManager {
 	background-color: #ff0000;
 	fontSize: 12;
 }
-.pieceContainer {
+.takenPiecesContainer {
 	verticalAlign: middle;
 	horizontalAlign: center;
 	background: #ff0000;
 }
-.piece,
-.pieceWhite,
-.pieceBlack {
-	fontFamily: font1;
-	fontSize: 25pt;
-}
-.pieceWhite {
-	color: #ffffff;
-}
-.pieceBlack {
-	color: #000000;
-}
-
-.piece {
+.pieceHolder {
 	fontFamily: font1;
 	fontSize: 25pt;
 }
@@ -94,10 +87,6 @@ DragManager {
 	fontFamily: font1;
 	fontSize: 40;
 }
-.mystyle1 {
-	fontFamily: font1;
-	fontSize: 32pt;
-}
 .boardBorderBottom {
 	backgroundColor: #ffffff;
 }
@@ -106,10 +95,4 @@ DragManager {
 }
 .boardFieldRow {
 	backgroundColor: #a0a0a0;
-}
-.menuBar {
-	fontFamily: Verdana;
-	fontSize: 13;
-	fontWeight: bold;
-	textIndent: 0;
 }

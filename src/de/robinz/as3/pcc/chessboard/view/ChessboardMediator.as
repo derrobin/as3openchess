@@ -200,33 +200,29 @@ public class ChessboardMediator extends BaseMediator {
 		var piece : IPiece;
 		var fields : ChessboardFieldCollection = this.getFields();
 		var field : ChessboardField;
+		var t : Text;
 
 		for each( field in fields.list ) {
 			field.refreshFontKey();
 
-			if ( field.hasPiece() ) {
-				field.getText().setStyle( "fontSize", this._pieceSettings.fontSizeCssValue );
+			t = field.getText();
+
+			if ( t == null ) {
+				continue;
 			}
+
+			t.setStyle( CssProperties.FONT_SIZE, this._pieceSettings.fontSizeCssValue );
 		}
 	}
 
 	private function setPiece( pp : PiecePositionVO ) : void {
 		var field : ChessboardField = this.getField( pp.notation.toString() );
-		field.setStyle( CssProperties.COLOR, pp.piece.isWhite ? this._colors.pieceWhite : this._colors.pieceBlack );
 
 		field.setPiece( pp.piece );
 
-		// TODO: encapsulate filter init
-		var outline : GlowFilter = new GlowFilter();
-		outline.blurX = 1.5;
-		outline.blurY = 1.3;
-		outline.color = pp.piece.isWhite ? 0x000000 : 0xffffff;
-		outline.quality = BitmapFilterQuality.HIGH;
-		outline.strength = 4;
+		field.setPieceFilter( this._colors.pieceBlackBorder, this._colors.pieceWhiteBorder );
 
-		var filterArray : Array = new Array();
-		filterArray.push( outline );
-		field.getText().filters = filterArray;
+		field.getText().setStyle( CssProperties.COLOR, pp.piece.isWhite ? this._colors.pieceWhite : this._colors.pieceBlack );
 	}
 
 	private function resetFieldColors() : void {
@@ -237,6 +233,12 @@ public class ChessboardMediator extends BaseMediator {
 		for each( f in c.list ) {
 			vo = f.data as ChessboardFieldVO;
 			f.setStyle( CssProperties.BACKGROUND_COLOR, vo.isWhite ? this._colors.fieldWhite : this._colors.fieldBlack );
+
+			if ( f.getText() != null && f.getPiece() != null ) {
+				f.getText().setStyle( CssProperties.COLOR, f.getPiece().isWhite ? this._colors.pieceWhite : this._colors.pieceBlack );
+				f.setPieceFilter( this._colors.pieceBlackBorder, this._colors.pieceWhiteBorder );
+			}
+
 		}
 	}
 
