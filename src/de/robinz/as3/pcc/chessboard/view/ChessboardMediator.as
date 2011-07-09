@@ -638,7 +638,6 @@ public class ChessboardMediator extends BaseMediator {
 
 		if ( e.target is Text ) {
 			var t : Text = ( e.target as Text );
-			// var f : ChessboardField = t.parent as ChessboardField;
 			var piece : IPiece = t.data as IPiece;
 
 			if ( _isBoardInspectMode ) {
