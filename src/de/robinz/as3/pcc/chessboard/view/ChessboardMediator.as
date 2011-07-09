@@ -220,7 +220,7 @@ public class ChessboardMediator extends BaseMediator {
 
 		field.setPiece( pp.piece );
 
-		field.setPieceFilter( this._colors.pieceBlackBorder, this._colors.pieceWhiteBorder );
+		field.setPieceFilter( pp.piece.isWhite ? this._colors.pieceWhiteBorder : this._colors.pieceBlackBorder );
 
 		field.getText().setStyle( CssProperties.COLOR, pp.piece.isWhite ? this._colors.pieceWhite : this._colors.pieceBlack );
 	}
@@ -236,7 +236,7 @@ public class ChessboardMediator extends BaseMediator {
 
 			if ( f.getText() != null && f.getPiece() != null ) {
 				f.getText().setStyle( CssProperties.COLOR, f.getPiece().isWhite ? this._colors.pieceWhite : this._colors.pieceBlack );
-				f.setPieceFilter( this._colors.pieceBlackBorder, this._colors.pieceWhiteBorder );
+				f.setPieceFilter( f.getPiece().isWhite ? this._colors.pieceWhiteBorder : this._colors.pieceBlackBorder );
 			}
 
 		}
@@ -522,14 +522,17 @@ public class ChessboardMediator extends BaseMediator {
 		ds.addData( t, "piece" );
 
 		// a copy of text is necessary, otherwise the Text will loose ChessboardField as parent
-		var dragImage : Text = new Text();
-		dragImage.mouseChildren = false;
-		dragImage.mouseEnabled = false;
-		dragImage.text = t.text;
-		dragImage.setStyle( "fontFamily", this._pieceSettings.font.id );
-		dragImage.setStyle( "fontSize", this._pieceSettings.fontSizeCssValue );
+		var icon : Text = new Text();
+		icon.mouseChildren = false;
+		icon.mouseEnabled = false;
+		icon.text = t.text;
+		icon.setStyle( CssProperties.COLOR, piece.isWhite ? this._colors.pieceWhite : this._colors.pieceBlack );
+		icon.setStyle( CssProperties.FONT_FAMILY, this._pieceSettings.font.id );
+		icon.setStyle( CssProperties.FONT_SIZE, this._pieceSettings.fontSizeCssValue );
+		var fs : Array = ChessboardUtil.getPieceFilters( piece.isWhite ? this._colors.pieceWhiteBorder : this._colors.pieceBlackBorder );
+		icon.filters = fs;
 
-		DragManager.doDrag( t, ds, e, dragImage, 0, 0, 1 );
+		DragManager.doDrag( t, ds, e, icon, 0, 0, 1 );
 	}
 
 	private function onMouseDown( e : MouseEvent ) : void {
@@ -663,23 +666,6 @@ public class ChessboardMediator extends BaseMediator {
 	}
 
 	// End Getter / Setters
-
-
-	// Start internal class getters
-
-//	private function __getPiece( o : Object ) : IPiece {
-//		if ( o is Text ) {
-//			var t : Text = o as Text;
-//			if ( t.data is IPiece ) {
-//				var p : IPiece = t.data as IPiece;
-//				return p;
-//			}
-//		}
-//
-//		return null;
-//	}
-
-	// End internal class getters
 
 }
 }

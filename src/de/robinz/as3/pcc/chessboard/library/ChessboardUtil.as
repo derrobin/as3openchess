@@ -6,6 +6,11 @@ import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
 import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardField;
 
+import flash.filters.BitmapFilter;
+import flash.filters.BitmapFilterQuality;
+import flash.filters.GlowFilter;
+
+import mx.effects.Glow;
 import mx.logging.ILogger;
 import mx.logging.Log;
 
@@ -18,6 +23,20 @@ public class ChessboardUtil {
 
 	private static const LOGGER : String = "ChessboardUtil";
 	private static var log : ILogger = Log.getLogger( LOGGER );
+
+
+	public static function getPieceFilters( color : int ) : Array {
+		var f : GlowFilter = new GlowFilter();
+		f.blurX = 1.5;
+		f.blurY = 1.3;
+		f.color = color;
+		f.quality = BitmapFilterQuality.HIGH;
+		f.strength = 4;
+
+		var filters : Array = new Array();
+		filters.push( f );
+		return filters;
+	}
 
 	public static function createBoardField( notation : String, isWhite : Boolean, whiteColor : int = 0xffffff, blackColor : int = 0xbbbbbb ) : ChessboardField {
 		var f : ChessboardField = new ChessboardField();

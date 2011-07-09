@@ -8,6 +8,7 @@ ChessboardField
 	<mx:Script>
 		<![CDATA[
 		import de.robinz.as3.pcc.chessboard.library.ChessboardMove;
+		import de.robinz.as3.pcc.chessboard.library.ChessboardUtil;
 		import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 
 		import mx.controls.Text;
@@ -47,23 +48,25 @@ ChessboardField
 			return null;
 		}
 
-		public function setPieceFilter( colorBlack : int = 0x000000, colorWhite : int = 0xffffff ) : void {
+		public function setPieceFilter( color : int ) : void {
 			var p : IPiece = getPiece();
 			var t : Text = getText();
+
 			if ( p == null || t == null ) {
 				return;
 			}
 
-			var f : GlowFilter = new GlowFilter();
-			f.blurX = 1.5;
-			f.blurY = 1.3;
-			f.color = p.isWhite ? colorWhite : colorBlack;
-			f.quality = BitmapFilterQuality.HIGH;
-			f.strength = 4;
-
-			var filterArray : Array = new Array();
-			filterArray.push( f );
-			t.filters = filterArray;
+			t.filters = ChessboardUtil.getPieceFilters( color );
+//			var f : GlowFilter = new GlowFilter();
+//			f.blurX = 1.5;
+//			f.blurY = 1.3;
+//			f.color = p.isWhite ? colorWhite : colorBlack;
+//			f.quality = BitmapFilterQuality.HIGH;
+//			f.strength = 4;
+//
+//			var filterArray : Array = new Array();
+//			filterArray.push( f );
+//			t.filters = filterArray;
 		}
 
 		public function setPiece( piece:IPiece ):void {
