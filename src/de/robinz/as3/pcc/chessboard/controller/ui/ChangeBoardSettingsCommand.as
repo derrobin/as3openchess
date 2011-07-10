@@ -28,6 +28,7 @@ public class ChangeBoardSettingsCommand extends BaseCommand
 	// Start Innerclass Methods
 
 	private function changeBoardSettings( sets : BoardSettingsVO ) : void {
+		appProxy.board = sets;
 		sendNotification( ApplicationFacade.BOARD_SETTINGS_CHANGED, sets );
 	}
 

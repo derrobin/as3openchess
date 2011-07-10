@@ -414,16 +414,8 @@ public class ChessboardMediator extends BaseMediator {
 		this._colors = colors;
 
 		// board gap
-		this.chessboard.row1.setStyle( CssProperties.BACKGROUND_COLOR, colors.boardGapColor );
-		this.chessboard.row2.setStyle( CssProperties.BACKGROUND_COLOR, colors.boardGapColor );
-		this.chessboard.row3.setStyle( CssProperties.BACKGROUND_COLOR, colors.boardGapColor );
-		this.chessboard.row4.setStyle( CssProperties.BACKGROUND_COLOR, colors.boardGapColor );
-		this.chessboard.row5.setStyle( CssProperties.BACKGROUND_COLOR, colors.boardGapColor );
-		this.chessboard.row6.setStyle( CssProperties.BACKGROUND_COLOR, colors.boardGapColor );
-		this.chessboard.row7.setStyle( CssProperties.BACKGROUND_COLOR, colors.boardGapColor );
-		this.chessboard.row8.setStyle( CssProperties.BACKGROUND_COLOR, colors.boardGapColor );
 		this.chessboard.boardInner.setStyle( CssProperties.BACKGROUND_COLOR, colors.boardGapColor );
-		CssUtil.overrideCssProperty( CssSelectors.BOARD, CssProperties.BORDER_COLOR, colors.boardGapColor );
+		CssUtil.overrideCssProperty( CssSelectors.BOARD_FIELD_ROW, CssProperties.BACKGROUND_COLOR, colors.boardGapColor );
 		CssUtil.overrideCssProperty( CssSelectors.BOARD_BORDER_BOTTOM, CssProperties.COLOR, colors.boardGapColor );
 		CssUtil.overrideCssProperty( CssSelectors.BOARD_BORDER_TOP, CssProperties.COLOR, colors.boardGapColor );
 

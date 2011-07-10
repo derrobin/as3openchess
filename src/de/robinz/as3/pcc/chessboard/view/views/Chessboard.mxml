@@ -10,19 +10,27 @@ Chessboard
 	<mx:Script>
 		<![CDATA[
 
+			import mx.events.ResizeEvent;
+
 			private var boardSpace : int = 1;
 			private var boardLegendSpace : int = 22;
+
+			private function onBoardResize( e : ResizeEvent ) : void {
+				if ( board.width != board.height ) {
+					board.width = board.height;
+				}
+			}
 
 		]]>
 	</mx:Script>
 
-	<mx:VBox id="board" width="400" height="400">
+	<mx:VBox id="board" width="400" height="400" resize="onBoardResize( event )">
 
-		<mx:HBox styleName="boardBorderTop" width="100%" verticalAlign="middle" horizontalAlign="center" height="{ boardLegendSpace }">
+		<mx:HBox styleName="boardBorderTop" width="100%" height="{ boardLegendSpace }">
 
 			<mx:Spacer width="50%" />
 
-			<mx:HBox styleName="boardLegendContainer" width="{ row8.width }" height="100%" backgroundColor="#ff00ff">
+			<mx:HBox styleName="boardLegendContainer" width="{ row8.width }" height="100%">
 
 				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
 					<mx:Text text="A" />
@@ -137,7 +145,7 @@ Chessboard
 
 			<mx:Spacer width="50%" />
 
-			<mx:HBox styleName="boardLegendContainer" width="{ row8.width }" height="100%" backgroundColor="#ff00ff">
+			<mx:HBox styleName="boardLegendContainer" width="{ row8.width }" height="100%">
 
 				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
 					<mx:Text text="A" />

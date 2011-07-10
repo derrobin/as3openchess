@@ -1,5 +1,6 @@
 package de.robinz.as3.pcc.chessboard.model
 {
+import de.robinz.as3.pcc.chessboard.library.vo.BoardSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
 
 import flash.utils.Dictionary;
@@ -17,6 +18,7 @@ public class ApplicationProxy extends BaseProxy
 	private var _openDialogs : Dictionary;
 
 	private var _colors : ColorSettingsVO;
+	private var _board : BoardSettingsVO;
 
 	public function ApplicationProxy( data : Object = null ) {
 		super( NAME, data );
@@ -24,7 +26,8 @@ public class ApplicationProxy extends BaseProxy
 		this._openDialogs = new Dictionary( true );
 		this._openPanels = new Dictionary( true );
 
-		this._colors = new ColorSettingsVO();
+		this.initColors();
+		this.initBoard();
 	}
 
 
@@ -74,6 +77,18 @@ public class ApplicationProxy extends BaseProxy
 
 	// Start Innerclass Methods
 
+	private function initColors() : void {
+		this._colors = new ColorSettingsVO();
+	}
+
+	private function initBoard() : void {
+		this._board = new BoardSettingsVO();
+		this._board.fixedSize = true;
+		this._board.size = 450;
+		this._board.horizontalAlign = "left";
+		this._board.verticalAlign = "top";
+	}
+
 	// End Innerclass Methods
 
 
@@ -85,6 +100,14 @@ public class ApplicationProxy extends BaseProxy
 
 	public function getOpenPanels() : Dictionary {
 		return this._openPanels;
+	}
+
+
+	public function set board( value : BoardSettingsVO ) : void {
+		this._board = value;
+	}
+	public function get board() : BoardSettingsVO {
+		return this._board;
 	}
 
 	public function set colors( value : ColorSettingsVO ) : void {

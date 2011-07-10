@@ -10,18 +10,10 @@ ApplicationView
 	<mx:Script>
 		<![CDATA[
 
-//			private function onBoardResize( e : ResizeEvent ) : void {
-//				if ( chessboard.height >= boardStage.width ) {
-//					chessboard.height = chessboard.width = boardStage.width;
-//				} else{
-//					chessboard.width = chessboard.height;
-//				}
-//			}
-
 		]]>
 	</mx:Script>
 
-	<components:ChessboardMenubar id="chessboardMenubar" barColor="#ffffff" backgroundDisabledColor="0xf0e68c" />
+	<components:ChessboardMenubar id="chessboardMenubar" barColor="#ffffff" backgroundDisabledColor="0xf0e68c" cornerRadius="0" />
 
 	<mx:VBox id="boardStage" styleName="boardStage" width="100%" height="100%">
 		<components:Chessboard id="chessboard" styleName="chessboard" width="100%" height="100%" />

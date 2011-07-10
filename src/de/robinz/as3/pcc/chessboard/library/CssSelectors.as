@@ -7,6 +7,7 @@ package de.robinz.as3.pcc.chessboard.library {
  */
 public class CssSelectors {
 	public static var BOARD_FIELD : String = "boardField";
+	public static var BOARD_FIELD_ROW : String = "boardFieldRow";
 	public static var BOARD_LEGEND_VERTICAL_ROW : String = "legendVerticalRow";
 	public static var BOARD_LEGEND_VERTICAL : String = "legendVertical";
 	public static var BOARD_BORDER_TOP : String = "boardBorderTop";

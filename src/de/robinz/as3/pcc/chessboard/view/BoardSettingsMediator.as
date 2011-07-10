@@ -33,7 +33,7 @@ public class BoardSettingsMediator extends DialogBaseMediator {
 
 	// Start Innerclass Methods
 
-	private function appear() : void {
+	private function appear( settings : BoardSettingsVO ) : void {
 		var view : TitleWindow = this.createDialog( "Board Settings", 450, 325, BoardSettingsDialog, this.stage );
 
 		view.addEventListener( MouseEvent.CLICK, onMouseClick );
@@ -41,6 +41,13 @@ public class BoardSettingsMediator extends DialogBaseMediator {
 
 		this._dialog = view as BoardSettingsDialog;
 		this._dialog.addEventListener( MouseEvent.CLICK, onMouseClick );
+
+		if ( settings != null ) {
+			this.popup.boardSize.text = String( settings.size );
+			this.popup.fixedSize.selected = settings.fixedSize;
+			this.popup.boardVerticalAlign.selectedItem = settings.verticalAlign;
+			this.popup.boardHorizontalAlign.selectedItem = settings.horizontalAlign;
+		}
 	}
 
 	private function close() : void {
@@ -49,15 +56,15 @@ public class BoardSettingsMediator extends DialogBaseMediator {
 	}
 
 	private function applyChanges() : void {
-		this._settings = new BoardSettingsVO();
+		var sets : BoardSettingsVO = new BoardSettingsVO();
 
 		// TODO: check numeric type
-		this._settings.size = int( this.popup.boardSize.text );
-		this._settings.fixedSize = this.popup.fixedSize.selected;
-		this._settings.verticalAlign = String( this.popup.boardVerticalAlign.value );
-		this._settings.horizontalAlign = String( this.popup.boardHorizontalAlign.value );
+		sets.size = int( this.popup.boardSize.text );
+		sets.fixedSize = this.popup.fixedSize.selected;
+		sets.verticalAlign = String( this.popup.boardVerticalAlign.value );
+		sets.horizontalAlign = String( this.popup.boardHorizontalAlign.value );
 
-		sendNotification( ApplicationFacade.CHANGE_BOARD_SETTINGS, this._settings );
+		sendNotification( ApplicationFacade.CHANGE_BOARD_SETTINGS, sets );
 	}
 
 	// End Innerclass Methods
@@ -72,6 +79,7 @@ public class BoardSettingsMediator extends DialogBaseMediator {
 
 	public override function listNotificationInterests() : Array {
 		return [
+			ApplicationFacade.BOARD_SETTINGS_CHANGED,
 			ApplicationFacade.APPEAR_BOARD_SETTINGS,
 			ApplicationFacade.DISAPPEAR_BOARD_SETTINGS
 		];
@@ -80,7 +88,7 @@ public class BoardSettingsMediator extends DialogBaseMediator {
 	public override function handleNotification( n : INotification ) : void {
 		switch ( n.getName() ) {
 			case ApplicationFacade.APPEAR_BOARD_SETTINGS:
-				this.handleAppearBoardSettings( n.getType() is String ? n.getType() as String : null );
+				this.handleAppearBoardSettings( n.getBody() as BoardSettingsVO, n.getType() is String ? n.getType() as String : null );
 			break;
 			case ApplicationFacade.DISAPPEAR_BOARD_SETTINGS:
 				this.handleDisappearBoardSettings();
@@ -94,12 +102,12 @@ public class BoardSettingsMediator extends DialogBaseMediator {
 
 	// Start Notification Handlers
 
-	private function handleAppearBoardSettings( type : String ) : void {
+	private function handleAppearBoardSettings( sets : BoardSettingsVO, type : String ) : void {
 		if ( type == ApplicationFacade.NOTIFICATION_TYPE_INTERRUPT_APPEAR ) {
 			return;
 		}
 
-		this.appear();
+		this.appear( sets );
 	}
 
 	private function handleDisappearBoardSettings() : void {

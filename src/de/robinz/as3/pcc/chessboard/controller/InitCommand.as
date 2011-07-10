@@ -16,7 +16,7 @@ import org.puremvc.as3.patterns.command.SimpleCommand;
  *
  * @author robin heinel
  */
-public class InitCommand extends SimpleCommand {
+public class InitCommand extends BaseCommand {
 	// Start SimpleCommand overrides
 
 	public override function execute( n : INotification ):void {
@@ -26,6 +26,8 @@ public class InitCommand extends SimpleCommand {
 		sendNotification( ApplicationFacade.APPEAR_GAME_ACTIONS_PANEL );
 		sendNotification( ApplicationFacade.APPEAR_TAKEN_PIECES_PANEL );
 		sendNotification( ApplicationFacade.SET_COLOR_SETTINGS, new ColorSettingsVO() );
+
+		sendNotification( ApplicationFacade.BOARD_SETTINGS_CHANGED, appProxy.board );
 
 		this.prepareLogging();
 	}
