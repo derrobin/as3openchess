@@ -79,7 +79,6 @@ public class BoardSettingsMediator extends DialogBaseMediator {
 
 	public override function listNotificationInterests() : Array {
 		return [
-			ApplicationFacade.BOARD_SETTINGS_CHANGED,
 			ApplicationFacade.APPEAR_BOARD_SETTINGS,
 			ApplicationFacade.DISAPPEAR_BOARD_SETTINGS
 		];

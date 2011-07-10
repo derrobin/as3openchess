@@ -26,13 +26,7 @@ public class ChangeColorSettingsCommand extends BaseCommand
 
 	public override function execute( n : INotification ) : void {
 		super.execute( n );
-
-		if ( n.getBody() is ColorSettingsVO ) {
-			this.changeColorSettings( n.getBody() as ColorSettingsVO );
-		}
-		if ( n.getBody() == null ) {
-			this.changeColorSettings( this.appProxy.colors );
-		}
+		this.changeColorSettings( n.getBody() as ColorSettingsVO );
 	}
 
 	// End SimpleCommand overrides
@@ -49,14 +43,6 @@ public class ChangeColorSettingsCommand extends BaseCommand
 
 
 	// Start Getter / Setters
-
-	private function get fontProxy() : FontProxy {
-		return this.facade.retrieveProxy( FontProxy.NAME ) as FontProxy;
-	}
-
-	private function get menuBarMediator() : MenuBarMediator {
-		return this.facade.retrieveMediator( MenuBarMediator.NAME ) as MenuBarMediator;
-	}
 
 	// End Getter / Setters
 }

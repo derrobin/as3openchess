@@ -92,15 +92,13 @@ public class DialogActionCommand extends BaseCommand {
 	}
 
 	public function appearBoardSettings( mediator : IMediator, n : INotification ) : void {
-		//var handle : INotification = new Notification( ApplicationFacade.BOARD_SETTINGS_CHANGED, appProxy.board );
 		n.setBody( appProxy.board );
 		this.appearDialog( mediator, n );
 	}
 
 	public function appearColorSettings( mediator : IMediator, n : INotification ) : void {
-		var sets : ColorSettingsVO = new ColorSettingsVO();
-		var handle : INotification = new Notification( ApplicationFacade.COLOR_SETTINGS_CHANGED, sets );
-		this.appearDialog( mediator, n, handle );
+		n.setBody( appProxy.colors );
+		this.appearDialog( mediator, n );
 	}
 
 	public function appearPieceSettings( mediator : IMediator, n : INotification ) : void {

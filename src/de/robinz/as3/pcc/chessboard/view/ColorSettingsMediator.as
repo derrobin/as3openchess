@@ -2,6 +2,8 @@ package de.robinz.as3.pcc.chessboard.view {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
+import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
+import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
 import de.robinz.as3.pcc.chessboard.view.views.game.ColorSettingsDialog;
 
 import flash.events.Event;
@@ -49,6 +51,21 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 		sendNotification( ApplicationFacade.CHANGE_COLOR_SETTINGS, this.getColors() );
 	}
 
+	private function setColors( colors : ColorSettingsVO ) : void {
+		popup.backgroundMain.selectedColor = colors.backgroundMain;
+		popup.fieldWhite.selectedColor = colors.fieldWhite;
+		popup.fieldBlack.selectedColor = colors.fieldBlack;
+		popup.fieldValidDrop.selectedColor = colors.fieldValidDrop;
+		popup.fieldMoveHint.selectedColor = colors.fieldMoveHint;
+		popup.boardGapColor.selectedColor = colors.boardGapColor;
+		popup.boardBorderBackground.selectedColor = colors.boardBorderBackground;
+		popup.boardBorderFont.selectedColor = colors.boardBorderFont;
+		popup.pieceBlack.selectedColor = colors.pieceBlack;
+		popup.pieceBlackBorder.selectedColor = colors.pieceBlackBorder;
+		popup.pieceWhite.selectedColor = colors.pieceWhite;
+		popup.pieceWhiteBorder.selectedColor = colors.pieceWhiteBorder;
+	}
+
 	private function getColors() : ColorSettingsVO {
 		var colors : ColorSettingsVO = new ColorSettingsVO();
 
@@ -88,11 +105,11 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 	public override function handleNotification( n : INotification ) : void {
 		switch ( n.getName() ) {
 			case ApplicationFacade.APPEAR_COLOR_SETTINGS:
-				this.handleAppearColorSettings( n.getType() is String ? n.getType() as String : null );
-				break;
+				this.handleAppearColorSettings( n.getBody() as ColorSettingsVO, n.getType() is String ? n.getType() as String : null );
+			break;
 			case ApplicationFacade.DISAPPEAR_COLOR_SETTINGS:
 				this.handleDisappearColorSettings();
-				break;
+			break;
 
 		}
 	}
@@ -102,12 +119,13 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 
 	// Start Notification Handlers
 
-	private function handleAppearColorSettings( type : String ) : void {
+	private function handleAppearColorSettings( colors : ColorSettingsVO, type : String ) : void {
 		if ( type == ApplicationFacade.NOTIFICATION_TYPE_INTERRUPT_APPEAR ) {
 			return;
 		}
 
 		this.appear();
+		this.setColors( colors );
 	}
 
 	private function handleDisappearColorSettings() : void {

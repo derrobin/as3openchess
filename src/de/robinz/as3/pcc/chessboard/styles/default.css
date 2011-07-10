@@ -22,14 +22,6 @@ DragManager {
 	fontWeight: bold;
 	textIndent: 0;
 }
-.chessboard {
-	/*borderThicknessLeft: 1;*/
-	/*borderThicknessTop: 1;*/
-	/*borderThicknessBottom: 1;*/
-	/*borderThicknessRight: 1;*/
-	/*borderColor: #cdcdcd;*/
-	/*borderStyle: solid;*/
-}
 .chessboardLeftPanelContainer {
 	horizontalGap: 20;
 	verticalGap: 20;
@@ -41,12 +33,6 @@ DragManager {
 	paddingTop: 0;
 }
 .boardStage {
-	/*
-	borderSides: right;
-	borderColor: #aaaaaa;
-	borderThickness: 1;
-	borderStyle: solid;
-	*/
 	paddingLeft: 10;
 	paddingRight: 10;
 	paddingBottom: 5;

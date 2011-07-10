@@ -37,10 +37,6 @@ public class ChangeBoardSettingsCommand extends BaseCommand
 
 	// Start Getter / Setters
 
-	private function get fontProxy() : FontProxy {
-		return this.facade.retrieveProxy( FontProxy.NAME ) as FontProxy;
-	}
-
 	// End Getter / Setters
 }
 }
