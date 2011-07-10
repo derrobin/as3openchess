@@ -2,6 +2,7 @@ package de.robinz.as3.pcc.chessboard.view
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.library.CssProperties;
+import de.robinz.as3.pcc.chessboard.library.vo.BoardSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PanelVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PanelVOCollection;
@@ -81,6 +82,7 @@ public class ApplicationMediator extends BaseMediator
 
 	public override function listNotificationInterests() : Array {
 		return [
+			ApplicationFacade.BOARD_SETTINGS_CHANGED,
 			ApplicationFacade.COLOR_SETTINGS_CHANGED,
 			ApplicationFacade.APPEAR_GAME_ACTIONS_PANEL,
 			ApplicationFacade.DISAPPEAR_GAME_ACTIONS_PANEL,
@@ -93,6 +95,9 @@ public class ApplicationMediator extends BaseMediator
 
 	public override function handleNotification( n : INotification ) : void {
 		switch( n.getName() ) {
+			case ApplicationFacade.BOARD_SETTINGS_CHANGED:
+					this.handleChangeBoard( n.getBody() as BoardSettingsVO );
+			break;
 			case ApplicationFacade.COLOR_SETTINGS_CHANGED:
 				this.handleColorChanged( n.getBody() as ColorSettingsVO );
 			break;
@@ -122,10 +127,21 @@ public class ApplicationMediator extends BaseMediator
 
 	// Start Notification Handlers
 
+	// TODO: Move to ChessboardMediator
+	private function handleChangeBoard( sets : BoardSettingsVO ) : void {
+		if ( ! sets.fixedSize ) {
+			this.view.chessboard.board.percentHeight = this.view.chessboard.board.percentWidth = 100;
+		} else {
+			this.view.chessboard.board.height = this.view.chessboard.board.width = sets.size;
+			this.view.chessboard.setStyle( CssProperties.VERTICAL_ALIGN, sets.verticalAlign );
+			this.view.chessboard.setStyle( CssProperties.HORIZONTAL_ALIGN, sets.horizontalAlign );
+		}
+	}
+
 	private function handleColorChanged( sets : ColorSettingsVO ) : void {
 		view.setStyle( CssProperties.BACKGROUND_COLOR, sets.backgroundMain );
-		this.view.chessboardStage.setStyle( CssProperties.BACKGROUND_COLOR, sets.backgroundMain );
-		this.view.leftStage.setStyle( CssProperties.BACKGROUND_COLOR, sets.backgroundMain );
+		this.view.chessboard.board.setStyle( CssProperties.BACKGROUND_COLOR, sets.backgroundMain );
+		//this.view.leftStage.setStyle( CssProperties.BACKGROUND_COLOR, sets.backgroundMain );
 	}
 
 	private function handleAppearGameActionsPanel() : void {

@@ -27,7 +27,6 @@ DragManager {
 	borderThicknessTop: 1;
 	borderThicknessBottom: 1;
 	borderThicknessRight: 1;
-	backgroundColor: #cdcdcd;
 	borderColor: #cdcdcd;
 	borderStyle: solid;
 }
@@ -40,21 +39,20 @@ DragManager {
 	paddingRight: 0;
 	paddingBottom: 0;
 	paddingTop: 0;
-	verticalAlign: middle;
-	horizontalAlign: center;
 }
 .boardStage {
+	/*
 	borderSides: right;
 	borderColor: #aaaaaa;
 	borderThickness: 1;
 	borderStyle: solid;
-	verticalAlign: top;
-	horizontalAlign: left;
-	dividerColor: #dddddd;
+	*/
+	paddingLeft: 10;
+	paddingRight: 10;
+	paddingBottom: 5;
+	paddingTop: 5;
 }
 .boardContainer {
-	verticalAlign: middle;
-	horizontalAlign: center;
 	horizontalGap: 20;
 	verticalGap: 20;
 }

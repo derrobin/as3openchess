@@ -50,6 +50,13 @@ public class BoardSettingsMediator extends DialogBaseMediator {
 
 	private function applyChanges() : void {
 		this._settings = new BoardSettingsVO();
+
+		// TODO: check numeric type
+		this._settings.size = int( this.popup.boardSize.text );
+		this._settings.fixedSize = this.popup.fixedSize.selected;
+		this._settings.verticalAlign = String( this.popup.boardVerticalAlign.value );
+		this._settings.horizontalAlign = String( this.popup.boardHorizontalAlign.value );
+
 		sendNotification( ApplicationFacade.CHANGE_BOARD_SETTINGS, this._settings );
 	}
 
@@ -112,7 +119,7 @@ public class BoardSettingsMediator extends DialogBaseMediator {
 		if ( e.target is Button ) {
 			var b : Button = e.target as Button;
 			if ( b.id == popup.applyChanges.id ) {
-
+				this.applyChanges();
 			}
 		}
 	}

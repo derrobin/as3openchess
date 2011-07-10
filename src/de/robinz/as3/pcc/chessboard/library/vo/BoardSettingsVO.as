@@ -7,7 +7,8 @@ package de.robinz.as3.pcc.chessboard.library.vo {
  */
 public class BoardSettingsVO {
 	public var fixedSize : Boolean;
-	public var width : int;
-	public var height : int;
+	public var size : int;
+	public var verticalAlign : String = "top";
+	public var horizontalAlign : String = "left";
 }
 }

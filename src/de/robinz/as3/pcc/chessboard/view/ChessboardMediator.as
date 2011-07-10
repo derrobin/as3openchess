@@ -9,6 +9,7 @@ import de.robinz.as3.pcc.chessboard.library.CssSelectors;
 import de.robinz.as3.pcc.chessboard.library.CssUtil;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
+import de.robinz.as3.pcc.chessboard.library.vo.BoardSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
@@ -407,6 +408,7 @@ public class ChessboardMediator extends BaseMediator {
 
 
 	// Start Notification Handlers
+
 
 	private function handleChangeColors( colors : ColorSettingsVO ) : void {
 		this._colors = colors;

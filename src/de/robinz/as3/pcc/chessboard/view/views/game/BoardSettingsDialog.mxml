@@ -11,12 +11,45 @@ BoardSettingsDialog
 		private function close():void {
 			this.dispatchEvent( new Event( EVENT_CLOSE, true ) );
 		}
+
+		private function onChangeFixedSize() : void {
+			if ( fixedSize.selected ) {
+				boardSize.enabled = true;
+			} else {
+				boardSize.enabled = false;
+			}
+		}
+
 		]]>
 	</mx:Script>
 
 	<mx:HBox width="100%" height="100%">
 
 		<mx:Form label="Test" width="100%" height="100%">
+			<mx:FormItem label="fix size:" width="100%">
+				<mx:CheckBox id="fixedSize" selected="false" change="onChangeFixedSize();"/>
+			</mx:FormItem>
+			<mx:FormItem label="width:" width="100%">
+				<mx:TextInput id="boardSize" width="50" text="400" />
+			</mx:FormItem>
+			<mx:FormItem label="vertical align:" width="100%">
+				<mx:ComboBox id="boardVerticalAlign" selectedIndex="0" >
+					<mx:dataProvider>
+						<mx:String>top</mx:String>
+						<mx:String>middle</mx:String>
+						<mx:String>bottom</mx:String>
+					</mx:dataProvider>
+				</mx:ComboBox>
+			</mx:FormItem>
+			<mx:FormItem label="horizontal align:" width="100%">
+				<mx:ComboBox id="boardHorizontalAlign" selectedIndex="0">
+					<mx:dataProvider>
+						<mx:String>left</mx:String>
+						<mx:String>center</mx:String>
+						<mx:String>right</mx:String>
+					</mx:dataProvider>
+				</mx:ComboBox>
+			</mx:FormItem>
 		</mx:Form>
 
 	</mx:HBox>

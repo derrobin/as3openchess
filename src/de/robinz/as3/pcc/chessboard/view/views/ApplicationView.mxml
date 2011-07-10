@@ -10,60 +10,27 @@ ApplicationView
 	<mx:Script>
 		<![CDATA[
 
-			import mx.events.ResizeEvent;
-
-			[Bindable]
-			private var _mainHeight : int = 700;
-			[Bindable]
-			private var _mainWidth : int = 1000;
-
-			public function set mainWidth( value : int ) : void {
-				this._mainWidth = value;
-			}
-			public function get mainWidth() : int {
-				return this._mainWidth;
-			}
-
-			public function set mainHeight( value : int ) : void {
-				this._mainHeight = value;
-			}
-			public function get mainHeight() : int {
-				return this._mainHeight;
-			}
-
-			private function onBoardResize( e : ResizeEvent ) : void {
-				if ( chessboard.height >= boardStage.width ) {
-					chessboard.height = chessboard.width = boardStage.width;
-				} else{
-					chessboard.width = chessboard.height;
-				}
-			}
+//			private function onBoardResize( e : ResizeEvent ) : void {
+//				if ( chessboard.height >= boardStage.width ) {
+//					chessboard.height = chessboard.width = boardStage.width;
+//				} else{
+//					chessboard.width = chessboard.height;
+//				}
+//			}
 
 		]]>
 	</mx:Script>
 
 	<components:ChessboardMenubar id="chessboardMenubar" barColor="#ffffff" backgroundDisabledColor="0xf0e68c" />
 
-	<mx:Box id="chessboardStage" width="100%" height="100%"
-		styleName="chessboardStage" backgroundColor="#ffffff">
+	<mx:VBox id="boardStage" styleName="boardStage" width="100%" height="100%">
+		<components:Chessboard id="chessboard" styleName="chessboard" width="100%" height="100%" />
+	</mx:VBox>
 
-		<mx:HBox width="100%" height="100%">
-			<mx:Spacer width="10" />
-			<mx:VBox id="leftStage" width="100%" height="100%" backgroundColor="#ffffff">
-				<mx:VBox id="boardStage" styleName="boardStage" width="100%" height="100%">
-					<mx:Spacer height="5" />
-					<components:Chessboard id="chessboard" styleName="chessboard" width="100%" height="100%" minHeight="300" minWidth="300" resize="onBoardResize( event )" />
-					<mx:Spacer height="5" />
-				</mx:VBox>
-			</mx:VBox>
-			<mx:Spacer width="10" />
-			<mx:VDividedBox width="25%" height="100%" visible="false" includeInLayout="false">
-				<components:ChessboardMoveHistory id="chessboardMoveHistory" styleName="panel" width="100%" height="100%" />
-				<components:ChessboardGameActions id="chessboardGameActions" styleName="panel" width="100%" height="75" />
-				<components:ChessboardTakenPieces id="chessboardTakenPieces" styleName="panel" width="100%" height="140" />
-			</mx:VDividedBox>
-		</mx:HBox>
-
-	</mx:Box>
+	<mx:VDividedBox width="25%" height="100%" visible="false" includeInLayout="false">
+		<components:ChessboardMoveHistory id="chessboardMoveHistory" styleName="panel" width="100%" height="100%" />
+		<components:ChessboardGameActions id="chessboardGameActions" styleName="panel" width="100%" height="75" />
+		<components:ChessboardTakenPieces id="chessboardTakenPieces" styleName="panel" width="100%" height="140" />
+	</mx:VDividedBox>
 
 </mx:Box>

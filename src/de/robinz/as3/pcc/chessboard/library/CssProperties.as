@@ -11,5 +11,8 @@ public class CssProperties {
 	public static const COLOR : String = "color";
 	public static const FONT_SIZE : String = "fontSize";
 	public static const FONT_FAMILY : String = "fontFamily";
+
+	public static const VERTICAL_ALIGN : String = "verticalAlign";
+	public static const HORIZONTAL_ALIGN : String = "horizontalAlign";
 }
 }
