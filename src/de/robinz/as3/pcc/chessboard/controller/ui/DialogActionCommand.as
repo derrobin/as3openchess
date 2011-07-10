@@ -106,10 +106,9 @@ public class DialogActionCommand extends BaseCommand {
 		sets.fonts = this.fontProxy.getFonts();
 		sets.font = this.fontProxy.currentFont;
 		sets.fontSize = this.fontProxy.currentFontSize;
-		sets.fontSizeCssValue = this.fontProxy.currentFontSizeCssValue;
 
-		var handle : INotification = new Notification( ApplicationFacade.SET_PIECE_SETTINGS, sets );
-		this.appearDialog( mediator, n, handle );
+		n.setBody( sets );
+		this.appearDialog( mediator, n );
 	}
 
 	private function closeDialog( mediatorName : String ) : void {

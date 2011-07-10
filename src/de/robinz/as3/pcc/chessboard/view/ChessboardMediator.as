@@ -212,7 +212,7 @@ public class ChessboardMediator extends BaseMediator {
 				continue;
 			}
 
-			t.setStyle( CssProperties.FONT_SIZE, this._pieceSettings.fontSizeCssValue );
+			t.setStyle( CssProperties.FONT_SIZE, this._pieceSettings.fontSize );
 		}
 	}
 
@@ -273,7 +273,7 @@ public class ChessboardMediator extends BaseMediator {
 		}
 
 		// dynamic font size, depends from piece settings
-		field.setStyle( "fontSize", this._pieceSettings.fontSizeCssValue );
+		field.setStyle( "fontSize", this._pieceSettings.fontSize );
 		field.setStyle( styleProperty, value );
 	}
 
@@ -522,7 +522,7 @@ public class ChessboardMediator extends BaseMediator {
 		icon.text = t.text;
 		icon.setStyle( CssProperties.COLOR, piece.isWhite ? this._colors.pieceWhite : this._colors.pieceBlack );
 		icon.setStyle( CssProperties.FONT_FAMILY, this._pieceSettings.font.id );
-		icon.setStyle( CssProperties.FONT_SIZE, this._pieceSettings.fontSizeCssValue );
+		icon.setStyle( CssProperties.FONT_SIZE, this._pieceSettings.fontSize );
 		var fs : Array = ChessboardUtil.getPieceFilters( piece.isWhite ? this._colors.pieceWhiteBorder : this._colors.pieceBlackBorder );
 		icon.filters = fs;
 

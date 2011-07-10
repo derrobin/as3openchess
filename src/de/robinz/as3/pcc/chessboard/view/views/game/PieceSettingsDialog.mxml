@@ -23,12 +23,12 @@ PieceSettingsDialog
 		<mx:Spacer height="10" />
 		<mx:FormItem label="Size:" width="100%">
 			<mx:HSlider id="pieceSize" width="300"
-				minimum="1"
-				maximum="3"
-				snapInterval="1"
-				tickInterval="1"
+				minimum="13"
+				maximum="124"
+				snapInterval="10"
+				tickInterval="0"
 				showDataTip="false"
-				labels="['small','medium', 'big']"
+				labels="[ 'small', 'medium', 'big' ]"
 			/>
 		</mx:FormItem>
 	</mx:Form>

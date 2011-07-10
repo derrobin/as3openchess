@@ -3,6 +3,8 @@ package de.robinz.as3.pcc.chessboard.view
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.library.vo.FontVO;
+import de.robinz.as3.pcc.chessboard.library.vo.FontVOCollection;
+import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 import de.robinz.as3.pcc.chessboard.view.views.game.PieceSettingsDialog;
 import de.robinz.as3.rzlib.ui.IListEntry;
@@ -26,7 +28,7 @@ public class PieceSettingsMediator extends DialogBaseMediator
 {
 	public static const NAME : String = "PieceSettingsMediator";
 
-	private var _pieceSettings : PieceSettingsVO;
+	// private var _pieceSettings : PieceSettingsVO;
 
 	public function PieceSettingsMediator( viewStage : mainapp ) {
 		super( NAME, viewStage );
@@ -39,59 +41,31 @@ public class PieceSettingsMediator extends DialogBaseMediator
 
 	// Start Innerclass Methods
 
-	private function preSelectItems() : void {
-		this.selectPieceStyle( this._pieceSettings.font );
-		this.selectPieceSize( this._pieceSettings.fontSize );
+	private function bindControls( sets : PieceSettingsVO ) : void {
+		this.popup.pieceSize.value = sets.fontSize;
+		this.popup.pieceStyle.dataProvider = this.createFontList( sets.fonts );
+		this.selectCurrentFont( sets.font );
 	}
 
-	private function selectPieceSize( fontSize : int ) : void {
-		this.popup.pieceSize.value = fontSize;
+	private function readControls() : PieceSettingsVO {
+		var sets : PieceSettingsVO = new PieceSettingsVO();
+		sets.font = this.popup.pieceStyle.selectedItem.data as FontVO;
+		sets.fontSize = this.popup.pieceSize.value as int;
+
+		return sets;
 	}
 
-	private function selectPieceStyle( font : FontVO ) : void {
-		var li : IListEntry;
-		var f : FontVO;
-		var ac : ArrayCollection = this.popup.pieceStyle.dataProvider as ArrayCollection;
-		for each( li in ac ) {
-			f = li.data as FontVO;
-			if ( f.id == font.id ) {
-				this.popup.pieceStyle.selectedItem = li;
-				return;
-			}
-		}
-	}
-
-	private function refreshStyleEntries() : void {
-		if ( this._dialog == null ) {
-			return;
-		}
-
-		var ac : ArrayCollection = new ArrayCollection();
-
-		var font : FontVO;
-		for each( font in this._pieceSettings.fonts.list ) {
-			ac.addItem( new ListEntry( font.name, font ) );
-		}
-
-		this.popup.pieceStyle.dataProvider = ac;
-		this.preSelectItems();
-	}
-
-	private function setPieceSettings( settings : PieceSettingsVO ) : void {
-		this._pieceSettings = settings;
-	}
 
 	private function applyChanges() : void {
 		var fontSize : int = this.popup.pieceSize.value as int;
-		var font : FontVO = this.popup.pieceStyle.selectedItem == null
-			? this._pieceSettings.font
-			: this.popup.pieceStyle.selectedItem.data as FontVO;
-		var ps : PieceSettingsVO = new PieceSettingsVO();
+		var font : FontVO = this.popup.pieceStyle.selectedItem.data as FontVO;
 
-		this._pieceSettings.font = font;
-		this._pieceSettings.fontSize = fontSize;
+		var sets : PieceSettingsVO = new PieceSettingsVO();
 
-		sendNotification( ApplicationFacade.CHANGE_PIECE_SETTINGS, this._pieceSettings );
+		sets.font = font;
+		sets.fontSize = fontSize;
+
+		sendNotification( ApplicationFacade.CHANGE_PIECE_SETTINGS, sets );
 	}
 
 	private function appear() : void {
@@ -101,9 +75,31 @@ public class PieceSettingsMediator extends DialogBaseMediator
 		view.addEventListener( MouseEvent.CLICK, onMouseClick );
 		view.addEventListener( PieceSettingsDialog.EVENT_CLOSE, onClose );
 
-
 		this._dialog = view as PieceSettingsDialog;
 		this._dialog.addEventListener( MouseEvent.CLICK, onMouseClick );
+	}
+
+	private function createFontList( fonts : FontVOCollection ) : ArrayCollection {
+		var list : ArrayCollection = new ArrayCollection();
+
+		for each( var font : FontVO in fonts.list ) {
+			list.addItem( new ListEntry( font.name, font ) );
+		}
+
+		return list;
+	}
+
+	private function selectCurrentFont( font : FontVO ) : void {
+		var ac : ArrayCollection = this.popup.pieceStyle.dataProvider as ArrayCollection;
+		var f : FontVO;
+
+		for each( var li : IListEntry in ac ) {
+			f = li.data as FontVO;
+			if ( f.id == font.id ) {
+				this.popup.pieceStyle.selectedItem = li;
+				return;
+			}
+		}
 	}
 
 	private function close() : void {
@@ -118,7 +114,6 @@ public class PieceSettingsMediator extends DialogBaseMediator
 
 	public override function listNotificationInterests() : Array {
 		return [
-			ApplicationFacade.SET_PIECE_SETTINGS,
 			ApplicationFacade.APPEAR_PIECE_SETTINGS,
 			ApplicationFacade.DISAPPEAR_PIECE_SETTINGS
 		];
@@ -126,11 +121,8 @@ public class PieceSettingsMediator extends DialogBaseMediator
 
 	public override function handleNotification( n : INotification ) : void {
 		switch( n.getName() ) {
-			case ApplicationFacade.SET_PIECE_SETTINGS:
-				this.handleSetFontSettings( n.getBody() as PieceSettingsVO );
-			break;
 			case ApplicationFacade.APPEAR_PIECE_SETTINGS:
-				this.handleAppearPieceSettings( n.getType() is String ? n.getType() as String : null );
+				this.handleAppearPieceSettings( n.getBody() as PieceSettingsVO, n.getType() is String ? n.getType() as String : null );
 			break;
 			case ApplicationFacade.DISAPPEAR_PIECE_SETTINGS:
 				this.handleDisappearPieceSettings();
@@ -144,17 +136,13 @@ public class PieceSettingsMediator extends DialogBaseMediator
 
 	// Start Notification Handlers
 
-	private function handleSetFontSettings( settings : PieceSettingsVO ) : void {
-		this.setPieceSettings( settings );
-		this.refreshStyleEntries();
-	}
-
-	private function handleAppearPieceSettings( type : String ) : void {
+	private function handleAppearPieceSettings( sets : PieceSettingsVO, type : String ) : void {
 		if ( type == ApplicationFacade.NOTIFICATION_TYPE_INTERRUPT_APPEAR ) {
 			return;
 		}
 		this.appear();
-		this.refreshStyleEntries();
+		this.bindControls( sets );
+		// this.refreshStyleEntries();
 	}
 
 	private function handleDisappearPieceSettings() : void {

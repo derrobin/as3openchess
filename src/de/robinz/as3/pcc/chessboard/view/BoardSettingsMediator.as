@@ -41,21 +41,16 @@ public class BoardSettingsMediator extends DialogBaseMediator {
 
 		this._dialog = view as BoardSettingsDialog;
 		this._dialog.addEventListener( MouseEvent.CLICK, onMouseClick );
-
-		if ( settings != null ) {
-			this.popup.boardSize.text = String( settings.size );
-			this.popup.fixedSize.selected = settings.fixedSize;
-			this.popup.boardVerticalAlign.selectedItem = settings.verticalAlign;
-			this.popup.boardHorizontalAlign.selectedItem = settings.horizontalAlign;
-		}
 	}
 
-	private function close() : void {
-		sendNotification( ApplicationFacade.DISAPPEAR_BOARD_SETTINGS );
-		this.disappear();
+	private function bindControls( sets : BoardSettingsVO ) : void {
+		this.popup.boardSize.text = String( sets.size );
+		this.popup.fixedSize.selected = sets.fixedSize;
+		this.popup.boardVerticalAlign.selectedItem = sets.verticalAlign;
+		this.popup.boardHorizontalAlign.selectedItem = sets.horizontalAlign;
 	}
 
-	private function applyChanges() : void {
+	private function readControls() : BoardSettingsVO {
 		var sets : BoardSettingsVO = new BoardSettingsVO();
 
 		// TODO: check numeric type
@@ -64,8 +59,19 @@ public class BoardSettingsMediator extends DialogBaseMediator {
 		sets.verticalAlign = String( this.popup.boardVerticalAlign.value );
 		sets.horizontalAlign = String( this.popup.boardHorizontalAlign.value );
 
-		sendNotification( ApplicationFacade.CHANGE_BOARD_SETTINGS, sets );
+		return sets;
 	}
+
+	private function close() : void {
+		sendNotification( ApplicationFacade.DISAPPEAR_BOARD_SETTINGS );
+		this.disappear();
+	}
+
+	private function applyChanges() : void {
+		sendNotification( ApplicationFacade.CHANGE_BOARD_SETTINGS, this.readControls() );
+	}
+
+
 
 	// End Innerclass Methods
 
@@ -107,6 +113,7 @@ public class BoardSettingsMediator extends DialogBaseMediator {
 		}
 
 		this.appear( sets );
+		this.bindControls( sets );
 	}
 
 	private function handleDisappearBoardSettings() : void {
@@ -126,6 +133,7 @@ public class BoardSettingsMediator extends DialogBaseMediator {
 		if ( e.target is Button ) {
 			var b : Button = e.target as Button;
 			if ( b.id == popup.applyChanges.id ) {
+				// TODO: change to custom event
 				this.applyChanges();
 			}
 		}

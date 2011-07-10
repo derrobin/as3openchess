@@ -48,10 +48,10 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 	}
 
 	private function applyChanges() : void {
-		sendNotification( ApplicationFacade.CHANGE_COLOR_SETTINGS, this.getColors() );
+		sendNotification( ApplicationFacade.CHANGE_COLOR_SETTINGS, this.readControls() );
 	}
 
-	private function setColors( colors : ColorSettingsVO ) : void {
+	private function bindControls( colors : ColorSettingsVO ) : void {
 		popup.backgroundMain.selectedColor = colors.backgroundMain;
 		popup.fieldWhite.selectedColor = colors.fieldWhite;
 		popup.fieldBlack.selectedColor = colors.fieldBlack;
@@ -66,7 +66,7 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 		popup.pieceWhiteBorder.selectedColor = colors.pieceWhiteBorder;
 	}
 
-	private function getColors() : ColorSettingsVO {
+	private function readControls() : ColorSettingsVO {
 		var colors : ColorSettingsVO = new ColorSettingsVO();
 
 		colors.backgroundMain = popup.backgroundMain.selectedColor;
@@ -125,7 +125,7 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 		}
 
 		this.appear();
-		this.setColors( colors );
+		this.bindControls( colors );
 	}
 
 	private function handleDisappearColorSettings() : void {

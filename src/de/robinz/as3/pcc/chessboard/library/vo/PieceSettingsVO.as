@@ -10,6 +10,5 @@ public class PieceSettingsVO
 	public var font : FontVO;
 	public var fonts : FontVOCollection;
 	public var fontSize : int;
-	public var fontSizeCssValue : int;
 }
 }

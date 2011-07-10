@@ -9,6 +9,8 @@ import de.robinz.as3.pcc.chessboard.library.FontManager;
 import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 import de.robinz.as3.pcc.chessboard.model.FontProxy;
 
+import de.robinz.as3.pcc.chessboard.view.views.game.PieceSettingsDialog;
+
 import mx.styles.CSSStyleDeclaration;
 import mx.styles.StyleManager;
 
@@ -26,12 +28,7 @@ public class ChangePieceSettingsCommand extends BaseCommand
 	public override function execute( n : INotification ) : void {
 		super.execute( n );
 
-		if ( n.getBody() is PieceSettingsVO ) {
-			this.changePieceSettings( n.getBody() as PieceSettingsVO );
-		}
-		if ( n.getBody() == null ) {
-			this.changePieceSettings( this.fontProxy.getPieceSettings() );
-		}
+		this.changePieceSettings( n.getBody() as PieceSettingsVO );
 	}
 
 	// End SimpleCommand overrides
@@ -39,19 +36,17 @@ public class ChangePieceSettingsCommand extends BaseCommand
 
 	// Start Innerclass Methods
 
-	private function changePieceSettings( settings : PieceSettingsVO ) : void {
-		FontManager.getInstance().setFont( settings.font );
+	private function changePieceSettings( sets : PieceSettingsVO ) : void {
+		FontManager.getInstance().setFont( sets.font );
 
-		fontProxy.currentFont = settings.font;
-		fontProxy.currentFontSize = settings.fontSize;
+		fontProxy.currentFont = sets.font;
+		fontProxy.currentFontSize = sets.fontSize;
+		sets.font = fontProxy.currentFont;
 
-		settings.fontSizeCssValue = fontProxy.currentFontSizeCssValue;
-		settings.font = fontProxy.currentFont;
+		CssUtil.overrideCssProperty( CssProperties.PIECE_HOLDER, CssProperties.FONT_FAMILY, sets.font.id );
+		CssUtil.overrideCssProperty( CssProperties.PIECE_HOLDER, CssProperties.FONT_SIZE, sets.fontSize );
 
-		CssUtil.overrideCssProperty( CssProperties.PIECE_HOLDER, CssProperties.FONT_FAMILY, settings.font.id );
-		CssUtil.overrideCssProperty( CssProperties.PIECE_HOLDER, CssProperties.FONT_SIZE, settings.fontSizeCssValue );
-
-		sendNotification( ApplicationFacade.PIECE_SETTINGS_CHANGED, settings );
+		sendNotification( ApplicationFacade.PIECE_SETTINGS_CHANGED, sets );
 	}
 
 	// End Innerclass Methods

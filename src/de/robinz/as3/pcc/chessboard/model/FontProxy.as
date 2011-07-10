@@ -2,6 +2,7 @@ package de.robinz.as3.pcc.chessboard.model
 {
 import de.robinz.as3.pcc.chessboard.library.FontManager;
 import de.robinz.as3.pcc.chessboard.library.vo.FontVO;
+import de.robinz.as3.pcc.chessboard.library.vo.FontVO;
 import de.robinz.as3.pcc.chessboard.library.vo.FontVOCollection;
 import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 
@@ -15,7 +16,6 @@ import flash.text.Font;
 public class FontProxy extends BaseProxy
 {
 	public static const NAME : String = "FontProxy";
-	public static const FONT_SIZE_BASE : int = 25;
 
 	private var _fonts : FontVOCollection;
 	private var _fm : FontManager;
@@ -34,7 +34,7 @@ public class FontProxy extends BaseProxy
 
 		var font : FontVO = this._fonts.getById( FontManager.FONT_ID_1 );
 		this.currentFont = font;
-		this.currentFontSize = 0.2;
+		this.currentFontSize = 35;
 	}
 
 
@@ -55,7 +55,6 @@ public class FontProxy extends BaseProxy
 		ps.font = this.currentFont;
 		ps.fonts = this.getFonts();
 		ps.fontSize = this.currentFontSize;
-		ps.fontSizeCssValue = this.currentFontSizeCssValue;
 
 		return ps;
 	}
@@ -75,15 +74,14 @@ public class FontProxy extends BaseProxy
 
 	private function addFonts() : void {
 		this._fonts.add( FontVO.create( FontManager.FONT_ID_1, "Alpha", this._fm.getFontClass( FontManager.FONT_ID_1 ), [ "p", "o", "r", "t", "b", "n", "k", "l", "q", "w", "h", "j" ] ) );
-		this._fonts.add( FontVO.create( FontManager.FONT_ID_2, "Chessole", this._fm.getFontClass( FontManager.FONT_ID_1 ), [ "b", "B", "t", "T", "l", "L", "k", "K", "d", "D", "s", "S" ] ) );
-		this._fonts.add( FontVO.create( FontManager.FONT_ID_3, "Merida", this._fm.getFontClass( FontManager.FONT_ID_1 ), [ "p", "o", "r", "t", "b", "v", "k", "l", "q", "w", "n", "m" ] ) );
-		this._fonts.add( FontVO.create( FontManager.FONT_ID_4, "Traveller", this._fm.getFontClass( FontManager.FONT_ID_1 ), [ "P", "p", "R", "r", "B", "b", "K", "k", "Q", "q", "N", "n" ] ) );
-		this._fonts.add( FontVO.create( FontManager.FONT_ID_5, "Aventfont", this._fm.getFontClass( FontManager.FONT_ID_1 ), [ "p", "o", "r", "t", "b", "v", "k", "l", "q", "w", "n", "m" ] ) );
+		this._fonts.add( FontVO.create( FontManager.FONT_ID_2, "Chessole", this._fm.getFontClass( FontManager.FONT_ID_2 ), [ "b", "B", "t", "T", "l", "L", "k", "K", "d", "D", "s", "S" ] ) );
+		this._fonts.add( FontVO.create( FontManager.FONT_ID_3, "Merida", this._fm.getFontClass( FontManager.FONT_ID_3 ), [ "p", "o", "r", "t", "b", "v", "k", "l", "q", "w", "n", "m" ] ) );
+		this._fonts.add( FontVO.create( FontManager.FONT_ID_4, "Traveller", this._fm.getFontClass( FontManager.FONT_ID_4 ), [ "P", "p", "R", "r", "B", "b", "K", "k", "Q", "q", "N", "n" ] ) );
+		this._fonts.add( FontVO.create( FontManager.FONT_ID_5, "Aventfont", this._fm.getFontClass( FontManager.FONT_ID_5 ), [ "p", "o", "r", "t", "b", "v", "k", "l", "q", "w", "n", "m" ] ) );
 	}
 
 	private function registerFonts() : void {
-		var font : FontVO; // Font Instance Name
-		for each( font in this._fonts.list ) {
+		for each( var font : FontVO in this._fonts.list ) {
 			Font.registerFont( font.instance );
 		}
 	}
@@ -93,9 +91,6 @@ public class FontProxy extends BaseProxy
 
 	// Start Getter / Setters
 
-	public function get currentFontSizeCssValue() : int {
-		return FONT_SIZE_BASE + this._currentFontSize * 12;
-	}
 	public function get currentFontSize() : int {
 		return this._currentFontSize;
 	}
