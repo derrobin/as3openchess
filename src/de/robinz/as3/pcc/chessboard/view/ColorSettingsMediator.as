@@ -36,7 +36,6 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 
 		view.addEventListener( MouseEvent.CLICK, onMouseClick );
 		view.addEventListener( ColorSettingsDialog.EVENT_CLOSE, onClose );
-		view.addEventListener( ColorPickerEvent.CHANGE, onColorChange, true );
 
 		this._dialog = view as ColorSettingsDialog;
 		this._dialog.addEventListener( MouseEvent.CLICK, onMouseClick );
@@ -148,25 +147,6 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 				this.applyChanges();
 			}
 		}
-	}
-
-	private function onColorChange( e : ColorPickerEvent ) : void {
-		/*
-		if ( e.target is ColorPicker ) {
-			var cp : ColorPicker = e.target as ColorPicker;
-			log.info( "new color: {0} for {1}", e.color, cp.id );
-
-			var changeSet : ColorSettingsVO = new ColorSettingsVO();
-
-			if ( changeSet.hasOwnProperty( cp.id ) ) {
-				changeSet[ cp.id ] = e.color;
-				sendNotification( ApplicationFacade.SET_COLOR_SETTINGS, changeSet );
-				return;
-			}
-		}
-		*/
-
-
 	}
 
 	// End Event Handlers
