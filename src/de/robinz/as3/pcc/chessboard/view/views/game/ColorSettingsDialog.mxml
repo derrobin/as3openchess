@@ -8,11 +8,19 @@ ColorSettingsDialog
 >
 	<mx:Script>
 		<![CDATA[
+		import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
+
 		import mx.controls.Alert;
 		import mx.core.UIComponent;
-		import mx.core.UIComponent;
 
-		private static const LABEL_WIDTH : int = 112;
+		private static const LABEL_WIDTH : int = 130;
+
+		private static const COLOR_THEME_1 : String = "blue water";
+		private static const COLOR_THEME_2 : String = "green men";
+		private static const COLOR_THEME_3 : String = "pink lady";
+		private static const COLOR_THEME_4 : String = "white pure";
+		private static const COLOR_THEME_5 : String = "black on white";
+		private static const COLOR_THEME_6 : String = "white on black";
 
 		public static const EVENT_CLOSE : String = "close";
 
@@ -88,14 +96,165 @@ ColorSettingsDialog
 			Alert.show( out, "Color Values" );
 		}
 
+		private function onThemeChange() : void {
+			var theme : String = theme.selectedLabel;
+			var vo : ColorSettingsVO = new ColorSettingsVO();
+
+			switch( theme ) {
+				case COLOR_THEME_1:
+					vo.mainBackground = 3355596;
+					vo.menuBarBackground = 3368601;
+					vo.fieldBlack = 3368601;
+					vo.fieldWhite = 16777215;
+					vo.fieldValidDrop = 0x00CCFF;
+					vo.fieldMoveHint = 0x0099FF;
+					vo.boardGapColor = 3355443;
+					vo.boardBorderBackground = 13158;
+					vo.boardBorderFont = 16777215;
+					vo.pieceWhite = 16777215;
+					vo.pieceWhiteBorder = 0;
+					vo.pieceBlack = 0;
+					vo.pieceBlackBorder = 16777215;
+				break;
+				case COLOR_THEME_2:
+					vo.mainBackground = 26112;
+					vo.menuBarBackground = 26112;
+					vo.fieldBlack = 10066329;
+					vo.fieldWhite = 16777215;
+					vo.fieldValidDrop = 16777113;
+					vo.fieldMoveHint = 16777164;
+					vo.boardGapColor = 3355443;
+					vo.boardBorderBackground = 39168;
+					vo.boardBorderFont = 16777215;
+					vo.pieceWhite = 16777215;
+					vo.pieceWhiteBorder = 0;
+					vo.pieceBlack = 0;
+					vo.pieceBlackBorder = 16777215;
+				break;
+				case COLOR_THEME_3:
+					vo.mainBackground = 16737945;
+					vo.menuBarBackground = 10027059;
+					vo.fieldBlack = 16751052;
+					vo.fieldWhite = 16777215;
+					vo.fieldValidDrop = 0xFFFF99;
+					vo.fieldMoveHint = 0xFFFFCC;
+					vo.boardGapColor = 3355443;
+					vo.boardBorderBackground = 10027059;
+					vo.boardBorderFont = 16777215;
+					vo.pieceWhite = 16764159;
+					vo.pieceWhiteBorder = 0;
+					vo.pieceBlack = 0;
+					vo.pieceBlackBorder = 13421772;
+				break;
+				case COLOR_THEME_4:
+					vo.mainBackground = 16777215;
+					vo.menuBarBackground = 16777215;
+					vo.fieldBlack = 13421772;
+					vo.fieldWhite = 16777215;
+					vo.fieldValidDrop = 0x666666;
+					vo.fieldMoveHint = 10066329;
+					vo.boardGapColor = 3355443;
+					vo.boardBorderBackground = 16777215;
+					vo.boardBorderFont = 0;
+					vo.pieceWhite = 16777215;
+					vo.pieceWhiteBorder = 0;
+					vo.pieceBlack = 0;
+					vo.pieceBlackBorder = 13421772;
+				break;
+				case COLOR_THEME_5:
+					vo.mainBackground = 16777215;
+					vo.menuBarBackground = 16777215;
+					vo.fieldBlack = 0;
+					vo.fieldWhite = 13421772;
+					vo.fieldValidDrop = 0xFFFFFF;
+					vo.fieldMoveHint = 10066329;
+					vo.boardGapColor = 3355443;
+					vo.boardBorderBackground = 0;
+					vo.boardBorderFont = 16777215;
+					vo.pieceWhite = 16777215;
+					vo.pieceWhiteBorder = 0;
+					vo.pieceBlack = 0;
+					vo.pieceBlackBorder = 16777215;
+				break;
+				case COLOR_THEME_6:
+					vo.mainBackground = 0;
+					vo.menuBarBackground = 16777215;
+					vo.fieldBlack = 13421772;
+					vo.fieldWhite = 16777215;
+					vo.fieldValidDrop = 6710886;
+					vo.fieldMoveHint = 10066329;
+					vo.boardGapColor = 3355443;
+					vo.boardBorderBackground = 16777215;
+					vo.boardBorderFont = 0;
+					vo.pieceWhite = 16777215;
+					vo.pieceWhiteBorder = 0;
+					vo.pieceBlack = 0;
+					vo.pieceBlackBorder = 13421772;
+				break;
+			}
+
+			this.bindControls( vo );
+		}
+
+		public function bindControls( colors : ColorSettingsVO ) : void {
+			this.mainBackground.selectedColor = colors.mainBackground;
+			this.fieldWhite.selectedColor = colors.fieldWhite;
+			this.fieldBlack.selectedColor = colors.fieldBlack;
+			this.fieldValidDrop.selectedColor = colors.fieldValidDrop;
+			this.fieldMoveHint.selectedColor = colors.fieldMoveHint;
+			this.boardGapColor.selectedColor = colors.boardGapColor;
+			this.boardBorderBackground.selectedColor = colors.boardBorderBackground;
+			this.boardBorderFont.selectedColor = colors.boardBorderFont;
+			this.pieceBlack.selectedColor = colors.pieceBlack;
+			this.pieceBlackBorder.selectedColor = colors.pieceBlackBorder;
+			this.pieceWhite.selectedColor = colors.pieceWhite;
+			this.pieceWhiteBorder.selectedColor = colors.pieceWhiteBorder;
+			this.menuBarBackground.selectedColor = colors.menuBarBackground;
+		}
+
+		public function readControls() : ColorSettingsVO {
+			var colors : ColorSettingsVO = new ColorSettingsVO();
+
+			colors.mainBackground = this.mainBackground.selectedColor;
+			colors.menuBarBackground = this.menuBarBackground.selectedColor;
+			colors.fieldWhite = this.fieldWhite.selectedColor;
+			colors.fieldBlack = this.fieldBlack.selectedColor;
+			colors.fieldValidDrop = this.fieldValidDrop.selectedColor;
+			colors.fieldMoveHint = this.fieldMoveHint.selectedColor;
+			colors.boardGapColor = this.boardGapColor.selectedColor;
+			colors.boardBorderBackground = this.boardBorderBackground.selectedColor;
+			colors.boardBorderFont = this.boardBorderFont.selectedColor;
+			colors.pieceBlack = this.pieceBlack.selectedColor;
+			colors.pieceBlackBorder = this.pieceBlackBorder.selectedColor;
+			colors.pieceWhite = this.pieceWhite.selectedColor;
+			colors.pieceWhiteBorder = this.pieceWhiteBorder.selectedColor;
+
+			return colors;
+		}
+
 
 		]]>
 	</mx:Script>
 
 	<mx:VBox width="100%" height="100%">
 
+		<mx:Form id="colorTheme" width="100%" height="40" styleName="colorCategory" verticalScrollPolicy="off">
+			<mx:FormItem label="color theme" fontWeight="bold" labelWidth="80">
+				<mx:ComboBox id="theme" change="onThemeChange()" selectedIndex="1">
+					<mx:Array>
+						<mx:String>{ COLOR_THEME_1 }</mx:String>
+						<mx:String>{ COLOR_THEME_2 }</mx:String>
+						<mx:String>{ COLOR_THEME_3 }</mx:String>
+						<mx:String>{ COLOR_THEME_4 }</mx:String>
+						<mx:String>{ COLOR_THEME_5 }</mx:String>
+						<mx:String>{ COLOR_THEME_6 }</mx:String>
+					</mx:Array>
+				</mx:ComboBox>
+			</mx:FormItem>
+		</mx:Form>
+
 		<mx:Form id="colorCategory" width="100%" height="40" styleName="colorCategory" verticalScrollPolicy="off">
-			<mx:FormItem label="category" fontWeight="bold" labelWidth="65">
+			<mx:FormItem label="category" fontWeight="bold" labelWidth="80">
 				<mx:ComboBox id="category" change="onCategoryChange()" selectedIndex="0">
 					<mx:Array>
 						<mx:String>Common</mx:String>
@@ -141,7 +300,7 @@ ColorSettingsDialog
 					</mx:FormItem>
 				</mx:Form>
 
-				<mx:Form label="Test" includeInLayout="false" visible="false" width="50%" height="100%">
+				<mx:Form label="Test" width="50%" height="100%">
 					<mx:FormItem label="border background:" width="100%" labelWidth="{ LABEL_WIDTH }">
 						<mx:ColorPicker id="boardBorderBackground" showTextField="true" selectedColor="0x009900"/>
 					</mx:FormItem>
@@ -173,15 +332,10 @@ ColorSettingsDialog
 
 		</mx:VBox>
 
-
-
 	</mx:VBox>
 
 
-	<mx:HBox width="100%"
-		horizontalAlign="center"
-		horizontalGap="5"
-	>
+	<mx:HBox width="100%" horizontalAlign="center" horizontalGap="5">
 		<mx:Button label="Show Values" click="onShowValues()" />
 		<mx:Button id="applyChanges" label="Apply Changes"/>
 		<mx:Button id="cancel" label="Cancel" click="close();" />

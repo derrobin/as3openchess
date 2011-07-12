@@ -7,7 +7,7 @@ package de.robinz.as3.pcc.chessboard.library.vo {
  */
 public class ColorSettingsVO {
 	public var mainBackground : int = 0x006600;
-	public var menuBarBackground : int = 0x002200;
+	public var menuBarBackground : int = 0x006600;
 	public var fieldWhite : int = 0xffffff;
 	public var fieldBlack : int = 0x999999;
 	public var fieldValidDrop : int = 0xFFFF99;

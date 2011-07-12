@@ -8,6 +8,8 @@ import mx.logging.LogEventLevel;
 import mx.logging.targets.LineFormattedTarget;
 import mx.logging.targets.TraceTarget;
 
+import mx.resources.ResourceManager;
+
 import org.puremvc.as3.interfaces.INotification;
 import org.puremvc.as3.patterns.command.SimpleCommand;
 
@@ -20,6 +22,10 @@ public class InitCommand extends BaseCommand {
 	// Start SimpleCommand overrides
 
 	public override function execute( n : INotification ):void {
+		var locales : Array = ResourceManager.getInstance().getLocales();
+
+		var chain : Array = ResourceManager.getInstance().localeChain;
+
 		sendNotification( ApplicationFacade.CHANGE_PIECE_SETTINGS, this.fontProxy.getPieceSettings() );
 		sendNotification( ApplicationFacade.NEW_GAME );
 		sendNotification( ApplicationFacade.APPEAR_MOVE_HISTORY_PANEL );

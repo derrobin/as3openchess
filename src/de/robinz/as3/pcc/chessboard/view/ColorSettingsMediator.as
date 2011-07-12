@@ -47,43 +47,7 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 	}
 
 	private function applyChanges() : void {
-		sendNotification( ApplicationFacade.CHANGE_COLOR_SETTINGS, this.readControls() );
-	}
-
-	private function bindControls( colors : ColorSettingsVO ) : void {
-		popup.mainBackground.selectedColor = colors.mainBackground;
-		popup.fieldWhite.selectedColor = colors.fieldWhite;
-		popup.fieldBlack.selectedColor = colors.fieldBlack;
-		popup.fieldValidDrop.selectedColor = colors.fieldValidDrop;
-		popup.fieldMoveHint.selectedColor = colors.fieldMoveHint;
-		popup.boardGapColor.selectedColor = colors.boardGapColor;
-		popup.boardBorderBackground.selectedColor = colors.boardBorderBackground;
-		popup.boardBorderFont.selectedColor = colors.boardBorderFont;
-		popup.pieceBlack.selectedColor = colors.pieceBlack;
-		popup.pieceBlackBorder.selectedColor = colors.pieceBlackBorder;
-		popup.pieceWhite.selectedColor = colors.pieceWhite;
-		popup.pieceWhiteBorder.selectedColor = colors.pieceWhiteBorder;
-		popup.menuBarBackground.selectedColor = colors.menuBarBackground;
-	}
-
-	private function readControls() : ColorSettingsVO {
-		var colors : ColorSettingsVO = new ColorSettingsVO();
-
-		colors.mainBackground = popup.mainBackground.selectedColor;
-		colors.menuBarBackground = popup.menuBarBackground.selectedColor;
-		colors.fieldWhite = popup.fieldWhite.selectedColor;
-		colors.fieldBlack = popup.fieldBlack.selectedColor;
-		colors.fieldValidDrop = popup.fieldValidDrop.selectedColor;
-		colors.fieldMoveHint = popup.fieldMoveHint.selectedColor;
-		colors.boardGapColor = popup.boardGapColor.selectedColor;
-		colors.boardBorderBackground = popup.boardBorderBackground.selectedColor;
-		colors.boardBorderFont = popup.boardBorderFont.selectedColor;
-		colors.pieceBlack = popup.pieceBlack.selectedColor;
-		colors.pieceBlackBorder = popup.pieceBlackBorder.selectedColor;
-		colors.pieceWhite = popup.pieceWhite.selectedColor;
-		colors.pieceWhiteBorder = popup.pieceWhiteBorder.selectedColor;
-
-		return colors;
+		sendNotification( ApplicationFacade.CHANGE_COLOR_SETTINGS, this.popup.readControls() );
 	}
 
 	// End Innerclass Methods
@@ -126,7 +90,7 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 		}
 
 		this.appear();
-		this.bindControls( colors );
+		this.popup.bindControls( colors );
 	}
 
 	private function handleDisappearColorSettings() : void {
