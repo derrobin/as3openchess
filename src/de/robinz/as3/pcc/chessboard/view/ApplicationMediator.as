@@ -139,9 +139,9 @@ public class ApplicationMediator extends BaseMediator
 	}
 
 	private function handleColorChanged( sets : ColorSettingsVO ) : void {
-		view.setStyle( CssProperties.BACKGROUND_COLOR, sets.backgroundMain );
-		this.view.chessboard.board.setStyle( CssProperties.BACKGROUND_COLOR, sets.backgroundMain );
-		this.view.chessboardMenubar.setStyle( CssProperties.BACKGROUND_COLOR, sets.backgroundMain );
+		view.setStyle( CssProperties.BACKGROUND_COLOR, sets.mainBackground );
+		this.view.chessboard.board.setStyle( CssProperties.BACKGROUND_COLOR, sets.mainBackground );
+		this.view.chessboardMenubar.setStyle( CssProperties.BACKGROUND_COLOR, sets.menuBarBackground );
 	}
 
 	private function handleAppearGameActionsPanel() : void {

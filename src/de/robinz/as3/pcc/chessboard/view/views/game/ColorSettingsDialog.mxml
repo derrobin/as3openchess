@@ -8,6 +8,7 @@ ColorSettingsDialog
 >
 	<mx:Script>
 		<![CDATA[
+		import mx.controls.Alert;
 		import mx.core.UIComponent;
 		import mx.core.UIComponent;
 
@@ -66,6 +67,27 @@ ColorSettingsDialog
 			onCategoryChange();
 		}
 
+		private function onShowValues() : void {
+			var out : String = "" +
+				"background: " + mainBackground.selectedColor + "\n" +
+				"menuBar: " + menuBarBackground.selectedColor + "\n" +
+				"fieldBlack: " + fieldBlack.selectedColor + "\n" +
+				"fieldWhite: " + fieldWhite.selectedColor + "\n" +
+				"fieldValidDrop: " + fieldValidDrop.selectedColor + "\n" +
+				"fieldMoveHint: " + fieldMoveHint.selectedColor + "\n" +
+				"boardGapColor: " + boardGapColor.selectedColor + "\n" +
+				"boardBorderBackground: " + boardBorderBackground.selectedColor + "\n" +
+				"boardBorderFont: " + boardBorderFont.selectedColor + "\n" +
+				"pieceWhite: " + pieceWhite.selectedColor + "\n" +
+				"pieceWhiteBorder: " + pieceWhiteBorder.selectedColor + "\n" +
+				"pieceBlack: " + pieceBlack.selectedColor + "\n" +
+				"pieceBlackBorder: " + pieceBlackBorder.selectedColor + "\n" +
+				"";
+
+			trace( "ok? = " + Alert.okLabel );
+			Alert.show( out, "Color Values" );
+		}
+
 
 		]]>
 	</mx:Script>
@@ -90,7 +112,10 @@ ColorSettingsDialog
 
 				<mx:Form label="Test" width="50%" height="100%">
 					<mx:FormItem label="background:" width="100%" labelWidth="{ LABEL_WIDTH }">
-						<mx:ColorPicker id="backgroundMain" showTextField="true" selectedColor="0x006600"/>
+						<mx:ColorPicker id="mainBackground" showTextField="true" selectedColor="0x006600"/>
+					</mx:FormItem>
+					<mx:FormItem label="menu bar:" width="100%" labelWidth="{ LABEL_WIDTH }">
+						<mx:ColorPicker id="menuBarBackground" showTextField="true" selectedColor="0x006600"/>
 					</mx:FormItem>
 				</mx:Form>
 
@@ -157,6 +182,7 @@ ColorSettingsDialog
 		horizontalAlign="center"
 		horizontalGap="5"
 	>
+		<mx:Button label="Show Values" click="onShowValues()" />
 		<mx:Button id="applyChanges" label="Apply Changes"/>
 		<mx:Button id="cancel" label="Cancel" click="close();" />
 	</mx:HBox>

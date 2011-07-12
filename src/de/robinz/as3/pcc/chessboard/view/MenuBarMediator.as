@@ -92,7 +92,7 @@ public class MenuBarMediator extends BaseMediator
 	// Start Notification Handlers
 
 	private function handleSetColors( colors : ColorSettingsVO ) : void {
-		this.view.setStyle( "backgroundColor", colors.backgroundMain );
+		this.view.setStyle( "backgroundColor", colors.mainBackground );
 	}
 
 	// End Notification Handlers

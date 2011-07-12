@@ -51,7 +51,7 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 	}
 
 	private function bindControls( colors : ColorSettingsVO ) : void {
-		popup.backgroundMain.selectedColor = colors.backgroundMain;
+		popup.mainBackground.selectedColor = colors.mainBackground;
 		popup.fieldWhite.selectedColor = colors.fieldWhite;
 		popup.fieldBlack.selectedColor = colors.fieldBlack;
 		popup.fieldValidDrop.selectedColor = colors.fieldValidDrop;
@@ -63,12 +63,14 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 		popup.pieceBlackBorder.selectedColor = colors.pieceBlackBorder;
 		popup.pieceWhite.selectedColor = colors.pieceWhite;
 		popup.pieceWhiteBorder.selectedColor = colors.pieceWhiteBorder;
+		popup.menuBarBackground.selectedColor = colors.menuBarBackground;
 	}
 
 	private function readControls() : ColorSettingsVO {
 		var colors : ColorSettingsVO = new ColorSettingsVO();
 
-		colors.backgroundMain = popup.backgroundMain.selectedColor;
+		colors.mainBackground = popup.mainBackground.selectedColor;
+		colors.menuBarBackground = popup.menuBarBackground.selectedColor;
 		colors.fieldWhite = popup.fieldWhite.selectedColor;
 		colors.fieldBlack = popup.fieldBlack.selectedColor;
 		colors.fieldValidDrop = popup.fieldValidDrop.selectedColor;
