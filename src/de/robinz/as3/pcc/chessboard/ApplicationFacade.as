@@ -38,16 +38,12 @@ public class ApplicationFacade extends Facade
 	public static const ERROR : String = "error";
 	public static const INFO : String = "info";
 
-	public static const SET_PIECE_SETTINGS : String = "setPieceSettings";
 	public static const CHANGE_PIECE_SETTINGS : String = "changePieceSettings";
 	public static const PIECE_SETTINGS_CHANGED : String = "pieceSettingsChanged";
 
-
-	public static const SET_BOARD_SETTINGS : String = "setBoardSettings";
 	public static const CHANGE_BOARD_SETTINGS : String = "changeBoardSettings";
 	public static const BOARD_SETTINGS_CHANGED : String = "boardSettingsChanged";
 
-	public static const SET_COLOR_SETTINGS : String = "setColorSettings";
 	public static const CHANGE_COLOR_SETTINGS : String = "changeColorSettings";
 	public static const COLOR_SETTINGS_CHANGED : String = "colorSettingsChanged";
 
@@ -177,8 +173,6 @@ public class ApplicationFacade extends Facade
 		registerCommand( DISAPPEAR_BOARD_SETTINGS, DialogActionCommand );
 
 		registerCommand( PAWN_PROMOTION, DialogActionCommand );
-
-		registerCommand( SET_COLOR_SETTINGS, ChangeColorSettingsCommand );
 
 		registerCommand( CHANGE_BOARD_SETTINGS, ChangeBoardSettingsCommand );
 		registerCommand( CHANGE_COLOR_SETTINGS, ChangeColorSettingsCommand );

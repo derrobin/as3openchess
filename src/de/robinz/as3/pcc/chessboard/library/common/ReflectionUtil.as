@@ -2,7 +2,7 @@ package de.robinz.as3.pcc.chessboard.library.common {
 import flash.utils.getQualifiedClassName;
 
 /**
- * de.robinz.as3.pcc.chessboard.library.common
+ * ReflectionUtil
  *
  * @author robin heinel
  */

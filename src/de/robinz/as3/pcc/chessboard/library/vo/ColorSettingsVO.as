@@ -1,4 +1,5 @@
 package de.robinz.as3.pcc.chessboard.library.vo {
+import flash.utils.describeType;
 
 /**
  * ColorSettingsVO
@@ -6,18 +7,56 @@ package de.robinz.as3.pcc.chessboard.library.vo {
  * @author robin heinel
  */
 public class ColorSettingsVO {
-	public var mainBackground : int = 0x006600;
-	public var menuBarBackground : int = 0x006600;
-	public var fieldWhite : int = 0xffffff;
-	public var fieldBlack : int = 0x999999;
-	public var fieldValidDrop : int = 0xFFFF99;
-	public var fieldMoveHint : int = 0xFFFFCC;
-	public var boardGapColor : int = 0x333333;
-	public var boardBorderFont : int = 0xffffff;
-	public var boardBorderBackground : int = 0x009900;
-	public var pieceBlack : int = 0x000000;
-	public var pieceBlackBorder : int = 0xFFFFFF;
-	public var pieceWhite : int = 0xFFFFFF;
-	public var pieceWhiteBorder : int = 0x000000;
+	public var mainBackground : int;
+	public var menuBarBackground : int;
+	public var fieldWhite : int;
+	public var fieldBlack : int;
+	public var fieldValidDrop : int;
+	public var fieldMoveHint : int;
+	public var boardGapColor : int;
+	public var boardBorderFont : int;
+	public var boardBorderBackground : int;
+	public var pieceBlack : int;
+	public var pieceBlackBorder : int;
+	public var pieceWhite : int;
+	public var pieceWhiteBorder : int;
+
+	public static function create(
+		mainBackground : int,
+		menuBarBackground : int,
+		fieldWhite : int,
+		fieldBlack : int,
+		fieldValidDrop : int,
+		fieldMoveHint : int,
+		boardGapColor : int,
+		boardBorderFont : int,
+		boardBorderBackground : int,
+		pieceWhite : int,
+		pieceWhiteBorder : int,
+		pieceBlack : int,
+		pieceBlackBorder : int
+
+	) : ColorSettingsVO {
+
+		var o : ColorSettingsVO = new ColorSettingsVO();
+
+		o.mainBackground = mainBackground;
+		o.menuBarBackground = menuBarBackground;
+		o.fieldBlack = fieldBlack;
+		o.fieldWhite = fieldWhite;
+		o.fieldValidDrop = fieldValidDrop;
+		o.fieldMoveHint = fieldMoveHint;
+		o.boardGapColor = boardGapColor;
+		o.boardBorderBackground = boardBorderBackground;
+		o.boardBorderFont = boardBorderFont;
+		o.pieceWhite = pieceWhite;
+		o.pieceWhiteBorder = pieceWhiteBorder;
+		o.pieceBlack = pieceBlack;
+		o.pieceBlackBorder = pieceBlackBorder;
+
+		return o;
+	}
+
+
 }
 }

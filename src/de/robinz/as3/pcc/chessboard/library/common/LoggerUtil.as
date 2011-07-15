@@ -2,7 +2,7 @@ package de.robinz.as3.pcc.chessboard.library.common {
 import flash.utils.Dictionary;
 
 /**
- * de.robinz.as3.pcc.chessboard.library.common
+ * LoggerUtil
  *
  * @author robin heinel
  */

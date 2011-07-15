@@ -5,7 +5,7 @@ import mx.logging.ILogger;
 import mx.logging.Log;
 
 /**
- * de.robinz.as3.pcc.chessboard.library
+ * LoggerFactory
  *
  * @author robin heinel
  */

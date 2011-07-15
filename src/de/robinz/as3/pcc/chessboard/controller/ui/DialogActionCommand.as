@@ -3,6 +3,7 @@ import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
 import de.robinz.as3.pcc.chessboard.library.common.LoggerUtil;
 import de.robinz.as3.pcc.chessboard.library.vo.BoardSettingsVO;
+import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsAppearVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 import de.robinz.as3.pcc.chessboard.model.FontProxy;
@@ -97,7 +98,10 @@ public class DialogActionCommand extends BaseCommand {
 	}
 
 	public function appearColorSettings( mediator : IMediator, n : INotification ) : void {
-		n.setBody( appProxy.colors );
+		var appear : ColorSettingsAppearVO = new ColorSettingsAppearVO();
+		appear.colorThemes = appProxy.colorThemes;
+		appear.currentColors = appProxy.colors;
+		n.setBody( appear );
 		this.appearDialog( mediator, n );
 	}
 

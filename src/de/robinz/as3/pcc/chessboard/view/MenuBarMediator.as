@@ -74,15 +74,11 @@ public class MenuBarMediator extends BaseMediator
 
 	public override function listNotificationInterests() : Array {
 		return [
-			ApplicationFacade.SET_COLOR_SETTINGS
 		];
 	}
 
 	public override function handleNotification( n : INotification ) : void {
 		switch( n.getName() ) {
-			case ApplicationFacade.SET_COLOR_SETTINGS:
-				this.handleSetColors( n.getBody() as ColorSettingsVO );
-			break;
 		}
 	}
 
@@ -90,10 +86,6 @@ public class MenuBarMediator extends BaseMediator
 
 
 	// Start Notification Handlers
-
-	private function handleSetColors( colors : ColorSettingsVO ) : void {
-		this.view.setStyle( "backgroundColor", colors.mainBackground );
-	}
 
 	// End Notification Handlers
 

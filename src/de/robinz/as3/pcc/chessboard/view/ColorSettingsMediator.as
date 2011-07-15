@@ -1,5 +1,8 @@
 package de.robinz.as3.pcc.chessboard.view {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
+import de.robinz.as3.pcc.chessboard.library.ColorTheme;
+import de.robinz.as3.pcc.chessboard.library.common.ListItem;
+import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsAppearVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
@@ -9,9 +12,12 @@ import de.robinz.as3.pcc.chessboard.view.views.game.ColorSettingsDialog;
 import flash.events.Event;
 import flash.events.MouseEvent;
 
+import flash.utils.Dictionary;
+
 import mx.containers.TitleWindow;
 import mx.controls.Button;
 import mx.controls.ColorPicker;
+import mx.controls.listClasses.ListItemRenderer;
 import mx.events.ColorPickerEvent;
 
 import org.puremvc.as3.interfaces.INotification;
@@ -50,6 +56,15 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 		sendNotification( ApplicationFacade.CHANGE_COLOR_SETTINGS, this.popup.readControls() );
 	}
 
+	private function setThemes( themes : Dictionary ) : void {
+		var dataProvider : Array = new Array();
+		dataProvider.push( new ListItem( "- select theme -", null ) );
+		for each( var theme : ColorTheme in themes ) {
+			dataProvider.push( new ListItem( theme.name, theme ) );
+		}
+		this.popup.theme.dataProvider = dataProvider;
+	}
+
 	// End Innerclass Methods
 
 
@@ -70,7 +85,7 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 	public override function handleNotification( n : INotification ) : void {
 		switch ( n.getName() ) {
 			case ApplicationFacade.APPEAR_COLOR_SETTINGS:
-				this.handleAppearColorSettings( n.getBody() as ColorSettingsVO, n.getType() is String ? n.getType() as String : null );
+				this.handleAppearColorSettings( n.getBody() as ColorSettingsAppearVO, n.getType() is String ? n.getType() as String : null );
 			break;
 			case ApplicationFacade.DISAPPEAR_COLOR_SETTINGS:
 				this.handleDisappearColorSettings();
@@ -84,13 +99,15 @@ public class ColorSettingsMediator extends DialogBaseMediator {
 
 	// Start Notification Handlers
 
-	private function handleAppearColorSettings( colors : ColorSettingsVO, type : String ) : void {
+	private function handleAppearColorSettings( appear : ColorSettingsAppearVO, type : String ) : void {
 		if ( type == ApplicationFacade.NOTIFICATION_TYPE_INTERRUPT_APPEAR ) {
 			return;
 		}
 
 		this.appear();
-		this.popup.bindControls( colors );
+
+		this.popup.bindControls( appear.currentColors );
+		this.setThemes( appear.colorThemes );
 	}
 
 	private function handleDisappearColorSettings() : void {

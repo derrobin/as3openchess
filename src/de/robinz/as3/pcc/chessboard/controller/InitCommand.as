@@ -22,18 +22,15 @@ public class InitCommand extends BaseCommand {
 	// Start SimpleCommand overrides
 
 	public override function execute( n : INotification ):void {
-		var locales : Array = ResourceManager.getInstance().getLocales();
-
-		var chain : Array = ResourceManager.getInstance().localeChain;
-
 		sendNotification( ApplicationFacade.CHANGE_PIECE_SETTINGS, this.fontProxy.getPieceSettings() );
+		sendNotification( ApplicationFacade.CHANGE_COLOR_SETTINGS, appProxy.colors );
+		sendNotification( ApplicationFacade.BOARD_SETTINGS_CHANGED, appProxy.board );
+
 		sendNotification( ApplicationFacade.NEW_GAME );
 		sendNotification( ApplicationFacade.APPEAR_MOVE_HISTORY_PANEL );
 		sendNotification( ApplicationFacade.APPEAR_GAME_ACTIONS_PANEL );
 		sendNotification( ApplicationFacade.APPEAR_TAKEN_PIECES_PANEL );
-		sendNotification( ApplicationFacade.SET_COLOR_SETTINGS, new ColorSettingsVO() );
 
-		sendNotification( ApplicationFacade.BOARD_SETTINGS_CHANGED, appProxy.board );
 
 		this.prepareLogging();
 	}
@@ -45,7 +42,6 @@ public class InitCommand extends BaseCommand {
 
 	private function prepareLogging():void {
 		this.prepareLoggingTarget( new TraceTarget() );
-		// this.prepareLoggingTarget( new MiniDebugTarget() );
 	}
 
 	private function prepareLoggingTarget( target : LineFormattedTarget ) : void {
