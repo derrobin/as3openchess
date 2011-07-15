@@ -4,8 +4,6 @@ import de.robinz.as3.pcc.chessboard.library.ColorTheme;
 import de.robinz.as3.pcc.chessboard.library.vo.BoardSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
 
-import de.robinz.as3.pcc.chessboard.library.ColorTheme;
-
 import flash.utils.Dictionary;
 
 /**

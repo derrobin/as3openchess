@@ -11,7 +11,6 @@ import de.robinz.as3.pcc.chessboard.view.views.Chessboard;
 
 import flash.events.Event;
 
-import mx.containers.Panel;
 import mx.core.Container;
 
 import org.puremvc.as3.interfaces.INotification;

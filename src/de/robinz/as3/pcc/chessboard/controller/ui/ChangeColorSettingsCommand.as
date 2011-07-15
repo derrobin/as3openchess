@@ -2,16 +2,7 @@ package de.robinz.as3.pcc.chessboard.controller.ui
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
-import de.robinz.as3.pcc.chessboard.library.CssSelectors;
-import de.robinz.as3.pcc.chessboard.library.FontManager;
 import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
-import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
-import de.robinz.as3.pcc.chessboard.model.FontProxy;
-
-import de.robinz.as3.pcc.chessboard.view.MenuBarMediator;
-
-import mx.styles.CSSStyleDeclaration;
-import mx.styles.StyleManager;
 
 import org.puremvc.as3.interfaces.INotification;
 

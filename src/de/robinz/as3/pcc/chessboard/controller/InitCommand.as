@@ -1,6 +1,5 @@
 package de.robinz.as3.pcc.chessboard.controller {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
-import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
 import de.robinz.as3.pcc.chessboard.model.FontProxy;
 
 import mx.logging.Log;
@@ -8,10 +7,7 @@ import mx.logging.LogEventLevel;
 import mx.logging.targets.LineFormattedTarget;
 import mx.logging.targets.TraceTarget;
 
-import mx.resources.ResourceManager;
-
 import org.puremvc.as3.interfaces.INotification;
-import org.puremvc.as3.patterns.command.SimpleCommand;
 
 /**
  * Application initialization

@@ -1,10 +1,8 @@
 package de.robinz.as3.pcc.chessboard.view
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
-import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.library.vo.FontVO;
 import de.robinz.as3.pcc.chessboard.library.vo.FontVOCollection;
-import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 import de.robinz.as3.pcc.chessboard.view.views.game.PieceSettingsDialog;
 import de.robinz.as3.rzlib.ui.IListEntry;

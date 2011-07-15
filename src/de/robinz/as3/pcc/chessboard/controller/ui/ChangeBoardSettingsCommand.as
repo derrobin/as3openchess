@@ -3,8 +3,6 @@ package de.robinz.as3.pcc.chessboard.controller.ui
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
 import de.robinz.as3.pcc.chessboard.library.vo.BoardSettingsVO;
-import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
-import de.robinz.as3.pcc.chessboard.model.FontProxy;
 
 import org.puremvc.as3.interfaces.INotification;
 

@@ -8,9 +8,9 @@ ShowSaveGamesDialog
 		<![CDATA[
 		import mx.managers.PopUpManager;
 
-		public static const EVENT_LOAD_GAME:String = "loadGame";
+		public static const EVENT_LOAD_GAME : String = "loadGame";
 
-		private function loadGame():void {
+		private function loadGame() : void {
 			this.dispatchEvent( new Event( EVENT_LOAD_GAME ) );
 		}
 		]]>

@@ -1,6 +1,5 @@
 package de.robinz.as3.pcc.chessboard.library.vo
 {
-import mx.containers.Panel;
 import mx.core.Container;
 
 public class PanelVO

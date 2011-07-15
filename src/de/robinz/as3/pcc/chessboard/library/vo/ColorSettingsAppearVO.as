@@ -1,6 +1,4 @@
 package de.robinz.as3.pcc.chessboard.library.vo {
-import de.robinz.as3.pcc.chessboard.library.ColorTheme;
-
 import flash.utils.Dictionary;
 
 /**

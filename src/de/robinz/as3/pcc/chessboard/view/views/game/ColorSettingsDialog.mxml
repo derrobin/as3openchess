@@ -18,7 +18,7 @@ ColorSettingsDialog
 
 		public static const EVENT_CLOSE : String = "close";
 
-		private function close():void {
+		private function close() : void {
 			this.dispatchEvent( new Event( EVENT_CLOSE, true ) );
 		}
 
@@ -45,8 +45,8 @@ ColorSettingsDialog
 				selector = "color" + category.selectedLabel;
 
 				show = element.styleName == selector
-					? showElements.push( element )
-					: hideElements.push( element );
+						? showElements.push( element )
+						: hideElements.push( element );
 			}
 
 			var uic : UIComponent;
@@ -71,20 +71,20 @@ ColorSettingsDialog
 
 		private function onShowValues() : void {
 			var out : String = "" +
-				"background: " + mainBackground.selectedColor + "\n" +
-				"menuBar: " + menuBarBackground.selectedColor + "\n" +
-				"fieldBlack: " + fieldBlack.selectedColor + "\n" +
-				"fieldWhite: " + fieldWhite.selectedColor + "\n" +
-				"fieldValidDrop: " + fieldValidDrop.selectedColor + "\n" +
-				"fieldMoveHint: " + fieldMoveHint.selectedColor + "\n" +
-				"boardGapColor: " + boardGapColor.selectedColor + "\n" +
-				"boardBorderBackground: " + boardBorderBackground.selectedColor + "\n" +
-				"boardBorderFont: " + boardBorderFont.selectedColor + "\n" +
-				"pieceWhite: " + pieceWhite.selectedColor + "\n" +
-				"pieceWhiteBorder: " + pieceWhiteBorder.selectedColor + "\n" +
-				"pieceBlack: " + pieceBlack.selectedColor + "\n" +
-				"pieceBlackBorder: " + pieceBlackBorder.selectedColor + "\n" +
-				"";
+					"background: " + mainBackground.selectedColor + "\n" +
+					"menuBar: " + menuBarBackground.selectedColor + "\n" +
+					"fieldBlack: " + fieldBlack.selectedColor + "\n" +
+					"fieldWhite: " + fieldWhite.selectedColor + "\n" +
+					"fieldValidDrop: " + fieldValidDrop.selectedColor + "\n" +
+					"fieldMoveHint: " + fieldMoveHint.selectedColor + "\n" +
+					"boardGapColor: " + boardGapColor.selectedColor + "\n" +
+					"boardBorderBackground: " + boardBorderBackground.selectedColor + "\n" +
+					"boardBorderFont: " + boardBorderFont.selectedColor + "\n" +
+					"pieceWhite: " + pieceWhite.selectedColor + "\n" +
+					"pieceWhiteBorder: " + pieceWhiteBorder.selectedColor + "\n" +
+					"pieceBlack: " + pieceBlack.selectedColor + "\n" +
+					"pieceBlackBorder: " + pieceBlackBorder.selectedColor + "\n" +
+					"";
 
 			trace( "ok? = " + Alert.okLabel );
 			Alert.show( out, "Color Values" );
@@ -134,8 +134,6 @@ ColorSettingsDialog
 
 			return colors;
 		}
-
-
 		]]>
 	</mx:Script>
 

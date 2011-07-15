@@ -1,7 +1,6 @@
 package de.robinz.as3.pcc.chessboard.view
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
-import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
 import de.robinz.as3.pcc.chessboard.view.views.ChessboardMenubar;
 
 import mx.events.MenuEvent;

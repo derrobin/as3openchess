@@ -14,21 +14,21 @@ ChessboardField
 
 		import mx.controls.Text;
 
-		private var _validMove:ChessboardMove;
+		private var _validMove : ChessboardMove;
 
-		public function set validMove( move:ChessboardMove ):void {
+		public function set validMove( move : ChessboardMove ) : void {
 			this._validMove = move;
 		}
 
-		public function get validMove():ChessboardMove {
+		public function get validMove() : ChessboardMove {
 			return this._validMove;
 		}
 
-		public function getNotation():String {
+		public function getNotation() : String {
 			return this.id;
 		}
 
-		public function hasPiece():Boolean {
+		public function hasPiece() : Boolean {
 			if ( this.numChildren > 0 ) {
 				return true;
 			}
@@ -36,12 +36,12 @@ ChessboardField
 			return false;
 		}
 
-		public function getPiece():IPiece {
+		public function getPiece() : IPiece {
 			try {
-				var t:Text = this.getText();
-				var piece:IPiece = t.data as IPiece;
+				var t : Text = this.getText();
+				var piece : IPiece = t.data as IPiece;
 				return piece;
-			} catch( e:Error ) {
+			} catch( e : Error ) {
 				trace( e.getStackTrace() );
 				return null;
 			}
@@ -60,8 +60,8 @@ ChessboardField
 			t.filters = ChessboardUtil.getPieceFilters( color );
 		}
 
-		public function setPiece( piece:IPiece ):void {
-			var text:Text = new Text();
+		public function setPiece( piece : IPiece ) : void {
+			var text : Text = new Text();
 
 			text.mouseChildren = false;
 			text.text = piece.fontKey;
@@ -72,7 +72,7 @@ ChessboardField
 			this.addChild( text );
 		}
 
-		public function refreshFontKey():void {
+		public function refreshFontKey() : void {
 			if ( ! this.hasPiece() ) {
 				return;
 			}
@@ -80,12 +80,12 @@ ChessboardField
 			this.getText().text = this.getPiece().fontKey;
 		}
 
-		public function getText():Text {
+		public function getText() : Text {
 			if ( this.numChildren == 0 ) {
 				return null;
 			}
 
-			var t:Text = this.getChildAt( 0 ) as Text;
+			var t : Text = this.getChildAt( 0 ) as Text;
 			return t;
 		}
 		]]>

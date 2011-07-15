@@ -9,7 +9,6 @@ import de.robinz.as3.pcc.chessboard.library.CssSelectors;
 import de.robinz.as3.pcc.chessboard.library.CssUtil;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
-import de.robinz.as3.pcc.chessboard.library.vo.BoardSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardFieldVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
@@ -22,9 +21,6 @@ import de.robinz.as3.pcc.chessboard.view.views.chessboard.ChessboardFieldCollect
 
 import flash.events.Event;
 import flash.events.MouseEvent;
-
-import flash.filters.BitmapFilterQuality;
-import flash.filters.GlowFilter;
 
 import mx.containers.Box;
 import mx.controls.Alert;

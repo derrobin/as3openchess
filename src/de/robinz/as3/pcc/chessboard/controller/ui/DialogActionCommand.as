@@ -2,9 +2,7 @@ package de.robinz.as3.pcc.chessboard.controller.ui {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.controller.BaseCommand;
 import de.robinz.as3.pcc.chessboard.library.common.LoggerUtil;
-import de.robinz.as3.pcc.chessboard.library.vo.BoardSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsAppearVO;
-import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 import de.robinz.as3.pcc.chessboard.model.FontProxy;
 import de.robinz.as3.pcc.chessboard.view.BoardSettingsMediator;
@@ -13,16 +11,8 @@ import de.robinz.as3.pcc.chessboard.view.MoveHistoryModifierMediator;
 import de.robinz.as3.pcc.chessboard.view.PawnConvertMediator;
 import de.robinz.as3.pcc.chessboard.view.PieceSettingsMediator;
 
-import de.robinz.as3.pcc.chessboard.view.views.game.BoardSettingsDialog;
-import de.robinz.as3.pcc.chessboard.view.views.game.ColorSettingsDialog;
-
-import flash.net.getClassByAlias;
-
-import org.puremvc.as3.interfaces.IMediator;
-import org.puremvc.as3.interfaces.IMediator;
 import org.puremvc.as3.interfaces.IMediator;
 import org.puremvc.as3.interfaces.INotification;
-import org.puremvc.as3.patterns.observer.Notification;
 
 /**
  * DialogActionCommand

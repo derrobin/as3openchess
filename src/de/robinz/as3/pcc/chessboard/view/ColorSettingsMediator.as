@@ -3,22 +3,14 @@ import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.library.ColorTheme;
 import de.robinz.as3.pcc.chessboard.library.common.ListItem;
 import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsAppearVO;
-import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
-import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
-import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
-import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
 import de.robinz.as3.pcc.chessboard.view.views.game.ColorSettingsDialog;
 
 import flash.events.Event;
 import flash.events.MouseEvent;
-
 import flash.utils.Dictionary;
 
 import mx.containers.TitleWindow;
 import mx.controls.Button;
-import mx.controls.ColorPicker;
-import mx.controls.listClasses.ListItemRenderer;
-import mx.events.ColorPickerEvent;
 
 import org.puremvc.as3.interfaces.INotification;
 

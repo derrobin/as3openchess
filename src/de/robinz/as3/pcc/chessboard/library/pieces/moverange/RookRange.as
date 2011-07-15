@@ -4,7 +4,6 @@
  * Time: 10:39 AM
  */
 package de.robinz.as3.pcc.chessboard.library.pieces.moverange {
-
 import de.robinz.as3.pcc.chessboard.library.ChessPosition;
 import de.robinz.as3.pcc.chessboard.library.FieldNotation;
 import de.robinz.as3.pcc.chessboard.library.FieldNotationCollection;

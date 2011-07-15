@@ -8,9 +8,9 @@ SaveGameDialog
 		<![CDATA[
 		import mx.managers.PopUpManager;
 
-		public static const EVENT_SAVE_GAME:String = "saveGame";
+		public static const EVENT_SAVE_GAME : String = "saveGame";
 
-		private function saveGame():void {
+		private function saveGame() : void {
 			this.dispatchEvent( new Event( EVENT_SAVE_GAME ) );
 		}
 		]]>

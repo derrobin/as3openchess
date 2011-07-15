@@ -3,7 +3,6 @@ import de.robinz.as3.pcc.chessboard.library.common.LoggerFactory;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
 import de.robinz.as3.pcc.chessboard.library.pieces.King;
 import de.robinz.as3.pcc.chessboard.library.pieces.Pawn;
-import de.robinz.as3.pcc.chessboard.library.pieces.Rook;
 import de.robinz.as3.pcc.chessboard.library.vo.ChessboardGameVO;
 import de.robinz.as3.pcc.chessboard.library.vo.PiecePositionVO;
 

@@ -9,18 +9,16 @@ Chessboard
 
 	<mx:Script>
 		<![CDATA[
+		import mx.events.ResizeEvent;
 
-			import mx.events.ResizeEvent;
+		private var boardSpace : int = 1;
+		private var boardLegendSpace : int = 22;
 
-			private var boardSpace : int = 1;
-			private var boardLegendSpace : int = 22;
-
-			private function onBoardResize( e : ResizeEvent ) : void {
-				if ( board.width != board.height ) {
-					board.width = board.height;
-				}
+		private function onBoardResize( e : ResizeEvent ) : void {
+			if ( board.width != board.height ) {
+				board.width = board.height;
 			}
-
+		}
 		]]>
 	</mx:Script>
 

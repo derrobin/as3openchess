@@ -2,7 +2,6 @@ package de.robinz.as3.pcc.chessboard.library.vo
 {
 import de.robinz.as3.rzlib.collections.TypedCollection;
 
-import mx.containers.Panel;
 import mx.core.Container;
 
 /**
