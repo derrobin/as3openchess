@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="libs" type="flex">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/chessgame/libs" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/chessgame/libs" recursive="false" />
+  </library>
+</component>

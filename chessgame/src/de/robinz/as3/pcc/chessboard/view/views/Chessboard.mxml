@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Chessboard
+@author robin heinel
+-->
+<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:chessboard="de.robinz.as3.pcc.chessboard.view.views.chessboard.*"
+>
+
+	<mx:Script>
+		<![CDATA[
+
+			import mx.events.ResizeEvent;
+
+			private var boardSpace : int = 1;
+			private var boardLegendSpace : int = 22;
+
+			private function onBoardResize( e : ResizeEvent ) : void {
+				if ( board.width != board.height ) {
+					board.width = board.height;
+				}
+			}
+
+		]]>
+	</mx:Script>
+
+	<mx:VBox id="board" width="400" height="400" resize="onBoardResize( event )">
+
+		<mx:HBox styleName="boardBorderTop" width="100%" height="{ boardLegendSpace }">
+
+			<mx:Spacer width="50%" />
+
+			<mx:HBox styleName="boardLegendContainer" width="{ row8.width }" height="100%">
+
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="A" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="B" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="C" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="D" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="E" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="F" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="G" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="H" />
+				</mx:HBox>
+
+			</mx:HBox>
+
+			<mx:Spacer width="50%" />
+
+		</mx:HBox>
+
+		<mx:HBox id="boardInner" width="100%" height="100%">
+
+			<mx:VBox styleName="boardLegendContainer" width="{ boardLegendSpace }" height="100%">
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="8" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="7" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="6" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="5" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="4" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="3" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="2" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="1" />
+				</mx:HBox>
+			</mx:VBox>
+
+			<mx:VBox id="boardRows" width="100%" height="100%">
+				<mx:Spacer height="{ boardSpace }" />
+				<mx:HBox id="row8" height="12.5%" width="100%" styleName="boardFieldRow"/>
+				<mx:Spacer height="{ boardSpace }" />
+				<mx:HBox id="row7" height="12.5%" width="100%" styleName="boardFieldRow"/>
+				<mx:Spacer height="{ boardSpace }" />
+				<mx:HBox id="row6" height="12.5%" width="100%" styleName="boardFieldRow"/>
+				<mx:Spacer height="{ boardSpace }" />
+				<mx:HBox id="row5" height="12.5%" width="100%" styleName="boardFieldRow"/>
+				<mx:Spacer height="{ boardSpace }" />
+				<mx:HBox id="row4" height="12.5%" width="100%" styleName="boardFieldRow"/>
+				<mx:Spacer height="{ boardSpace }" />
+				<mx:HBox id="row3" height="12.5%" width="100%" styleName="boardFieldRow"/>
+				<mx:Spacer height="{ boardSpace }" />
+				<mx:HBox id="row2" height="12.5%" width="100%" styleName="boardFieldRow"/>
+				<mx:Spacer height="{ boardSpace }" />
+				<mx:HBox id="row1" height="12.5%" width="100%" styleName="boardFieldRow"/>
+				<mx:Spacer height="{ boardSpace }" />
+			</mx:VBox>
+
+			<mx:VBox styleName="boardLegendContainer" width="{ boardLegendSpace }" height="100%">
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="8" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="7" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="6" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="5" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="4" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="3" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="2" />
+				</mx:HBox>
+				<mx:HBox width="100%" height="12.5%" styleName="legendVertical">
+					<mx:Text text="1" />
+				</mx:HBox>
+			</mx:VBox>
+
+		</mx:HBox>
+
+		<mx:HBox styleName="boardBorderBottom" width="100%" height="{ boardLegendSpace }">
+
+			<mx:Spacer width="50%" />
+
+			<mx:HBox styleName="boardLegendContainer" width="{ row8.width }" height="100%">
+
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="A" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="B" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="C" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="D" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="E" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="F" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="G" />
+				</mx:HBox>
+				<mx:HBox width="12.5%" height="100%" styleName="legendVerticalRow">
+					<mx:Text text="H" />
+				</mx:HBox>
+
+			</mx:HBox>
+
+			<mx:Spacer width="50%" />
+
+		</mx:HBox>
+
+	</mx:VBox>
+
+</mx:Box>

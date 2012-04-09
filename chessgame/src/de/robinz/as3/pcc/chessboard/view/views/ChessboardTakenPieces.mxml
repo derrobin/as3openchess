@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ChessboardTakenPieces
+@author robin heinel
+-->
+<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml">
+
+	<mx:VBox width="100%" height="100%">
+		<mx:Panel width="100%" height="50%" title="White Pieces" backgroundColor="#eeeeee">
+			<mx:Tile id="whitePieces" width="100%" height="100%"
+				direction="horizontal"
+				horizontalGap="0"
+				verticalGap="0"
+				verticalScrollPolicy="off"
+			>
+			</mx:Tile>
+		</mx:Panel>
+		<mx:HRule width="100%" height="1" />
+		<mx:Panel width="100%" height="50%" title="Black Pieces" backgroundColor="#eeeeee">
+			<mx:Tile id="blackPieces" width="100%" height="100%"
+				direction="horizontal"
+				horizontalGap="0"
+				verticalGap="0"
+				verticalScrollPolicy="off"
+			>
+			</mx:Tile>
+		</mx:Panel>
+	</mx:VBox>
+
+</mx:Box>

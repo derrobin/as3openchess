@@ -1,0 +1,99 @@
+/**
+ * default stylesheets
+ *
+ * @author robin heinel
+ *
+ */
+global {
+	horizontalGap: 0px;
+	verticalGap: 0px;
+	paddingLeft: 0px;
+	paddingRight: 0px;
+	paddingBottom: 0;
+	paddingTop: 0px;
+}
+DragManager {
+	moveCursor: Embed(source="/de/robinz/as3/pcc/chessboard/resources/images/drop-valid.png");
+	rejectCursor: Embed(source="/de/robinz/as3/pcc/chessboard/resources/images/drop-unvalid.png");
+}
+.menuBar {
+	fontFamily: Verdana;
+	fontSize: 13;
+	fontWeight: bold;
+	textIndent: 0;
+}
+.chessboardLeftPanelContainer {
+	horizontalGap: 20;
+	verticalGap: 20;
+}
+.chessboardStage {
+	paddingLeft: 0;
+	paddingRight: 0;
+	paddingBottom: 0;
+	paddingTop: 0;
+}
+.boardStage {
+	paddingLeft: 10;
+	paddingRight: 10;
+	paddingBottom: 5;
+	paddingTop: 5;
+}
+.boardContainer {
+	horizontalGap: 20;
+	verticalGap: 20;
+}
+.historyMoveNumber,
+.historyMovePiece,
+.historyMoveDescription {
+	fontSize: 14;
+}
+.historyMoveNumber {
+	background-color: #ff0000;
+	fontSize: 12;
+}
+.takenPiecesContainer {
+	verticalAlign: middle;
+	horizontalAlign: center;
+	background: #ff0000;
+}
+.pieceHolder {
+	fontFamily: font1;
+	fontSize: 25pt;
+}
+
+.legendVertical {
+	verticalAlign: middle;
+	horizontalAlign: center;
+	backgroundColor: #ffffff;
+}
+.boardLegendContainer {
+	color: #ffffff;
+}
+.legendVerticalRow {
+	backgroundColor: #ffffff;
+	horizontalAlign: center;
+	verticalAlign: middle;
+}
+.boardField {
+	horizontalAlign: center;
+	verticalAlign: middle;
+	fontFamily: font1;
+	fontSize: 40;
+}
+.boardBorderBottom {
+	backgroundColor: #ffffff;
+}
+.boardBorderTop {
+	backgroundColor: #ffffff;
+	verticalAlign: middle;
+	horizontalAlign: center;
+}
+.boardFieldRow {
+	backgroundColor: #a0a0a0;
+}
+.panel {
+	borderSides: bottom;
+	borderColor: #aaaaaa;
+	borderThickness: 1;
+	borderStyle: solid;
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/chess-api/master/api.iml" filepath="$PROJECT_DIR$/chess-api/master/api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chessgame/chessgame.iml" filepath="$PROJECT_DIR$/chessgame/chessgame.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chessgame.iml" filepath="$PROJECT_DIR$/chessgame.iml" />
+      <module fileurl="file://$PROJECT_DIR$/untitled1/untitled1.iml" filepath="$PROJECT_DIR$/untitled1/untitled1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/untitled2/untitled2.iml" filepath="$PROJECT_DIR$/untitled2/untitled2.iml" />
+    </modules>
+  </component>
+</project>
+

@@ -1,0 +1,241 @@
+<?xml version="1.0"?>
+<!--
+ColorSettingsDialog
+@author robin heinel
+-->
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"
+	creationComplete="onCreationComplete()"
+>
+	<mx:Script>
+		<![CDATA[
+		import de.robinz.as3.pcc.chessboard.library.ColorTheme;
+		import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
+
+		import mx.controls.Alert;
+		import mx.core.UIComponent;
+
+		private static const LABEL_WIDTH : int = 130;
+
+		public static const EVENT_CLOSE : String = "close";
+
+		private function close():void {
+			this.dispatchEvent( new Event( EVENT_CLOSE, true ) );
+		}
+
+		private function onCategoryChange() : void {
+			var selector : String;
+			var elements : Array = formContainer.getChildren();
+			var element : UIComponent;
+			var show : Boolean;
+
+			var hideElements : Array = new Array();
+			var showElements : Array = new Array();
+
+			for each( var child : Object in elements ) {
+				if ( child is UIComponent ) {
+					element = child as UIComponent;
+				} else {
+					continue;
+				}
+
+				if ( element.styleName == colorCategory.id ) {
+					continue;
+				}
+
+				selector = "color" + category.selectedLabel;
+
+				show = element.styleName == selector
+					? showElements.push( element )
+					: hideElements.push( element );
+			}
+
+			var uic : UIComponent;
+
+			// hiding the elements first is necessary otherwise the transition is visible :(
+			for each( uic in hideElements ) {
+				uic.height = 0;
+				uic.visible = false;
+				uic.includeInLayout = false;
+			}
+
+			for each( uic in showElements ) {
+				uic.percentHeight = 100;
+				uic.visible = true;
+				uic.includeInLayout = true;
+			}
+		}
+
+		private function onCreationComplete() : void {
+			onCategoryChange();
+		}
+
+		private function onShowValues() : void {
+			var out : String = "" +
+				"background: " + mainBackground.selectedColor + "\n" +
+				"menuBar: " + menuBarBackground.selectedColor + "\n" +
+				"fieldBlack: " + fieldBlack.selectedColor + "\n" +
+				"fieldWhite: " + fieldWhite.selectedColor + "\n" +
+				"fieldValidDrop: " + fieldValidDrop.selectedColor + "\n" +
+				"fieldMoveHint: " + fieldMoveHint.selectedColor + "\n" +
+				"boardGapColor: " + boardGapColor.selectedColor + "\n" +
+				"boardBorderBackground: " + boardBorderBackground.selectedColor + "\n" +
+				"boardBorderFont: " + boardBorderFont.selectedColor + "\n" +
+				"pieceWhite: " + pieceWhite.selectedColor + "\n" +
+				"pieceWhiteBorder: " + pieceWhiteBorder.selectedColor + "\n" +
+				"pieceBlack: " + pieceBlack.selectedColor + "\n" +
+				"pieceBlackBorder: " + pieceBlackBorder.selectedColor + "\n" +
+				"";
+
+			trace( "ok? = " + Alert.okLabel );
+			Alert.show( out, "Color Values" );
+		}
+
+		private function onThemeChange() : void {
+			if ( theme.selectedItem.data == null ) {
+				return;
+			}
+
+			var selectedTheme : ColorTheme = theme.selectedItem.data as ColorTheme;
+			this.bindControls( selectedTheme.colors );
+		}
+
+		public function bindControls( colors : ColorSettingsVO ) : void {
+			this.mainBackground.selectedColor = colors.mainBackground;
+			this.fieldWhite.selectedColor = colors.fieldWhite;
+			this.fieldBlack.selectedColor = colors.fieldBlack;
+			this.fieldValidDrop.selectedColor = colors.fieldValidDrop;
+			this.fieldMoveHint.selectedColor = colors.fieldMoveHint;
+			this.boardGapColor.selectedColor = colors.boardGapColor;
+			this.boardBorderBackground.selectedColor = colors.boardBorderBackground;
+			this.boardBorderFont.selectedColor = colors.boardBorderFont;
+			this.pieceBlack.selectedColor = colors.pieceBlack;
+			this.pieceBlackBorder.selectedColor = colors.pieceBlackBorder;
+			this.pieceWhite.selectedColor = colors.pieceWhite;
+			this.pieceWhiteBorder.selectedColor = colors.pieceWhiteBorder;
+			this.menuBarBackground.selectedColor = colors.menuBarBackground;
+		}
+
+		public function readControls() : ColorSettingsVO {
+			var colors : ColorSettingsVO = new ColorSettingsVO();
+
+			colors.mainBackground = this.mainBackground.selectedColor;
+			colors.menuBarBackground = this.menuBarBackground.selectedColor;
+			colors.fieldWhite = this.fieldWhite.selectedColor;
+			colors.fieldBlack = this.fieldBlack.selectedColor;
+			colors.fieldValidDrop = this.fieldValidDrop.selectedColor;
+			colors.fieldMoveHint = this.fieldMoveHint.selectedColor;
+			colors.boardGapColor = this.boardGapColor.selectedColor;
+			colors.boardBorderBackground = this.boardBorderBackground.selectedColor;
+			colors.boardBorderFont = this.boardBorderFont.selectedColor;
+			colors.pieceBlack = this.pieceBlack.selectedColor;
+			colors.pieceBlackBorder = this.pieceBlackBorder.selectedColor;
+			colors.pieceWhite = this.pieceWhite.selectedColor;
+			colors.pieceWhiteBorder = this.pieceWhiteBorder.selectedColor;
+
+			return colors;
+		}
+
+
+		]]>
+	</mx:Script>
+
+	<mx:VBox width="100%" height="100%">
+
+		<mx:Form id="colorTheme" width="100%" height="40" styleName="colorCategory" verticalScrollPolicy="off">
+			<mx:FormItem label="color theme" fontWeight="bold" labelWidth="80">
+				<mx:ComboBox id="theme" change="onThemeChange()" selectedIndex="0">
+				</mx:ComboBox>
+			</mx:FormItem>
+		</mx:Form>
+
+		<mx:Form id="colorCategory" width="100%" height="40" styleName="colorCategory" verticalScrollPolicy="off">
+			<mx:FormItem label="category" fontWeight="bold" labelWidth="80">
+				<mx:ComboBox id="category" change="onCategoryChange()" selectedIndex="0">
+					<mx:Array>
+						<mx:String>Common</mx:String>
+						<mx:String>Board</mx:String>
+						<mx:String>Piece</mx:String>
+					</mx:Array>
+				</mx:ComboBox>
+			</mx:FormItem>
+		</mx:Form>
+
+		<mx:VBox id="formContainer" width="100%" height="100%">
+
+			<mx:HBox width="100%" height="100%" styleName="colorCommon" includeInLayout="false" visible="false">
+
+				<mx:Form label="Test" width="50%" height="100%">
+					<mx:FormItem label="background:" width="100%" labelWidth="{ LABEL_WIDTH }">
+						<mx:ColorPicker id="mainBackground" showTextField="true" selectedColor="0x006600"/>
+					</mx:FormItem>
+					<mx:FormItem label="menu bar:" width="100%" labelWidth="{ LABEL_WIDTH }">
+						<mx:ColorPicker id="menuBarBackground" showTextField="true" selectedColor="0x006600"/>
+					</mx:FormItem>
+				</mx:Form>
+
+			</mx:HBox>
+
+			<mx:HBox width="100%" height="100%" styleName="colorBoard" includeInLayout="false" visible="false">
+
+				<mx:Form label="Test" width="50%" height="100%">
+					<mx:FormItem label="black field:" width="100%" labelWidth="{ LABEL_WIDTH }">
+						<mx:ColorPicker id="fieldBlack" showTextField="true" selectedColor="0x999999" />
+					</mx:FormItem>
+					<mx:FormItem label="white field:" width="100%" labelWidth="{ LABEL_WIDTH }">
+						<mx:ColorPicker id="fieldWhite" showTextField="true" selectedColor="0xFFFFFF"/>
+					</mx:FormItem>
+					<mx:FormItem label="field valid drop:" width="100%" labelWidth="{ LABEL_WIDTH }">
+						<mx:ColorPicker id="fieldValidDrop" showTextField="true" selectedColor="0xFFFF99"/>
+					</mx:FormItem>
+					<mx:FormItem label="field move hint:" width="100%" labelWidth="{ LABEL_WIDTH }">
+						<mx:ColorPicker id="fieldMoveHint" showTextField="true" selectedColor="0xFFFFCC"/>
+					</mx:FormItem>
+					<mx:FormItem label="board gap:" width="100%" labelWidth="{ LABEL_WIDTH }">
+						<mx:ColorPicker id="boardGapColor" showTextField="true" selectedColor="0x333333"/>
+					</mx:FormItem>
+				</mx:Form>
+
+				<mx:Form label="Test" width="50%" height="100%">
+					<mx:FormItem label="border background:" width="100%" labelWidth="{ LABEL_WIDTH }">
+						<mx:ColorPicker id="boardBorderBackground" showTextField="true" selectedColor="0x009900"/>
+					</mx:FormItem>
+					<mx:FormItem label="border font:" width="100%" labelWidth="{ LABEL_WIDTH }">
+						<mx:ColorPicker id="boardBorderFont" showTextField="true" selectedColor="0xFFFFFF"/>
+					</mx:FormItem>
+				</mx:Form>
+
+			</mx:HBox>
+
+			<mx:HBox width="100%" height="100%" styleName="colorPiece" includeInLayout="false" visible="false">
+
+				<mx:Form label="Test" width="50%" height="100%">
+					<mx:FormItem label="white:" width="100%" labelWidth="{ LABEL_WIDTH }">
+						<mx:ColorPicker id="pieceWhite" showTextField="true" selectedColor="0xFFFFFF"/>
+					</mx:FormItem>
+					<mx:FormItem label="white borderline:" width="100%" labelWidth="{ LABEL_WIDTH }">
+						<mx:ColorPicker id="pieceWhiteBorder" showTextField="true" selectedColor="0x000000"/>
+					</mx:FormItem>
+					<mx:FormItem label="black:" width="100%" labelWidth="{ LABEL_WIDTH }">
+						<mx:ColorPicker id="pieceBlack" showTextField="true" selectedColor="0x000000"/>
+					</mx:FormItem>
+					<mx:FormItem label="black borderline:" width="100%" labelWidth="{ LABEL_WIDTH }">
+						<mx:ColorPicker id="pieceBlackBorder" showTextField="true" selectedColor="0xFFFFFF"/>
+					</mx:FormItem>
+				</mx:Form>
+
+			</mx:HBox>
+
+		</mx:VBox>
+
+	</mx:VBox>
+
+
+	<mx:HBox width="100%" horizontalAlign="center" horizontalGap="5">
+		<!--<mx:Button label="Show Values" click="onShowValues()" />-->
+		<mx:Button id="applyChanges" label="Apply Changes"/>
+		<mx:Button id="cancel" label="Cancel" click="close();" />
+	</mx:HBox>
+
+	<mx:Spacer height="5" />
+
+</mx:TitleWindow>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ChessboardMoveHistory
+@author robin heinel
+-->
+<mx:Box xmlns:mx="http://www.adobe.com/2006/mxml">
+	<mx:Canvas id="scrollBox" width="100%" height="100%" horizontalScrollPolicy="off">
+		<mx:VBox y="12" id="moveList" width="100%" height="100%">
+		</mx:VBox>
+	</mx:Canvas>
+</mx:Box>
