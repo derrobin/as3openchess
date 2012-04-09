@@ -19,150 +19,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4987192c-af58-4ea9-912a-3cf377438632" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\as3openchess.iml" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\libs\KapInspect.swc" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\libs\PureMVC_AS3_2_0_4.swc" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\libs\flexunit-core-flex-4.1.0-beta1.64-sdk4.0.0.14159.swc" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\libs\rzlib.swc" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\ApplicationFacade.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\BaseCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\ErrorCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\InfoCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\InitCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\PrepareModelCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\PrepareViewCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\ShowAllFontKeysOnChessboardCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\StartupCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\game\ExportFenCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\game\GetCurrentGameCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\game\LoadGameCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\game\NewGameCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\game\SaveGameCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\game\ShowSaveGamesCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\move\MoveCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\move\TryToMoveCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\move\history\MoveBackwardCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\move\history\MoveEndCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\move\history\MoveForwardCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\move\history\MoveJumpCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\move\history\MoveStartCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\piece\RemovePieceCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\ui\ChangeBoardSettingsCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\ui\ChangeColorSettingsCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\ui\ChangePieceSettingsCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\ui\DialogActionCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\controller\ui\PanelActionCommand.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\ChessPosition.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\ChessRuleEngine.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\ChessboardGameCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\ChessboardMove.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\ChessboardMoveCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\ChessboardUtil.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\ColorTheme.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\CssProperties.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\CssSelectors.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\CssUtil.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\FenPosition.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\FieldNotation.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\FieldNotationCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\FontManager.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\MoveValidator.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\Player.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\common\ListItem.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\common\LoggerFactory.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\common\LoggerUtil.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\common\ReflectionUtil.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\pieces\Bishop.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\pieces\FakedPiece.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\pieces\IPiece.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\pieces\King.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\pieces\Knight.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\pieces\Pawn.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\pieces\Piece.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\pieces\PieceCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\pieces\Queen.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\pieces\Rook.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\pieces\moverange\BishopRange.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\pieces\moverange\IMoveRange.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\pieces\moverange\KingRange.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\pieces\moverange\KnightRange.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\pieces\moverange\MoveRange.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\pieces\moverange\PawnRange.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\pieces\moverange\QueenRange.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\pieces\moverange\RookRange.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\vo\BoardPieceVO.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\vo\BoardSettingsVO.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\vo\ChessCheckVO.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\vo\ChessboardFieldVO.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\vo\ChessboardGameVO.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\vo\ColorSettingsAppearVO.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\vo\ColorSettingsVO.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\vo\FontVO.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\vo\FontVOCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\vo\PanelVO.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\vo\PanelVOCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\vo\PawnConvertDialogVO.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\vo\PiecePositionVO.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\vo\PiecePositionVOCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\vo\PieceSettingsVO.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\library\vo\SaveGameDialogVO.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\model\ApplicationProxy.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\model\BaseProxy.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\model\FontProxy.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\model\GameProxy.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\model\SaveGameProxy.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\resources\fonts\Alpha.ttf" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\resources\fonts\avenfont.ttf" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\resources\fonts\chessole.TTF" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\resources\fonts\diari.ttf" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\resources\fonts\merida.ttf" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\resources\fonts\traveller.ttf" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\resources\images\Gnome-Media-Seek-Backward-32.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\resources\images\Gnome-Media-Seek-Forward-32.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\resources\images\Gnome-Media-Skip-Backward-32.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\resources\images\Gnome-Media-Skip-Forward-32.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\resources\images\blind.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\resources\images\drop-unvalid.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\resources\images\drop-valid.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\resources\images\moveBackward.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\resources\images\moveEnd.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\resources\images\moveForward.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\resources\images\moveStart.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\styles\default.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\ApplicationMediator.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\BaseMediator.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\BoardSettingsMediator.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\ChessboardMediator.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\ColorSettingsMediator.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\DialogBaseMediator.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\GameActionsMediator.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\MenuBarMediator.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\MoveHistoryMediator.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\MoveHistoryModifierMediator.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\PawnConvertMediator.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\PieceSettingsMediator.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\SaveGameDialogMediator.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\ShowSaveGamesDialogMediator.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\TakenPiecesMediator.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\views\ApplicationView.mxml" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\views\Chessboard.mxml" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\views\ChessboardGameActions.mxml" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\views\ChessboardMenubar.mxml" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\views\ChessboardMoveHistory.mxml" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\views\ChessboardTakenPieces.mxml" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\views\chessboard\ChessboardField.mxml" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\views\chessboard\ChessboardFieldCollection.as" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\views\game\BoardSettingsDialog.mxml" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\views\game\ColorSettingsDialog.mxml" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\views\game\PawnConvertDialog.mxml" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\views\game\PieceSettingsDialog.mxml" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\views\game\SaveGameDialog.mxml" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\views\game\ShowSaveGamesDialog.mxml" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\views\moveHistory\ChessboardMoveEntry.mxml" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\views\moveHistory\MoveHistoryModifier.mxml" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\de\robinz\as3\pcc\chessboard\view\views\takenPieces\TakenPiece.mxml" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\src\mainapp.mxml" afterPath="" />
-      <change type="DELETED" beforePath="C:\workspace\as3openchess\test\flex\move\range\MoveRangeTest.as" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chessgame/bin/mainapp.swf" afterPath="$PROJECT_DIR$/chessgame/bin/mainapp.swf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="as3openchess.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -246,7 +104,7 @@
       <file leaf-file-name="ApplicationFacade.as" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/chessgame/src/de/robinz/as3/pcc/chessboard/ApplicationFacade.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="27" selection-start="1910" selection-end="1910" vertical-scroll-proportion="0.30955994">
+            <state line="67" column="26" selection-start="3406" selection-end="3406" vertical-scroll-proportion="0.5461847">
               <folding />
             </state>
           </provider>
@@ -349,7 +207,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="PackagesPane" proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -361,6 +219,22 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Favorites" />
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="as3openchess" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="chessgame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -381,22 +255,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="as3openchess" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="chessgame" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="Favorites" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -682,7 +540,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32853025" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -691,19 +549,19 @@
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32964474" sideWeight="0.66570604" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2612872" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33333334" sideWeight="0.9965967" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32853025" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.19685498" sideWeight="0.7270936" order="1" side_tool="true" content_ui="tabs" x="1176" y="196" width="351" height="968" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32886297" sideWeight="0.6013449" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39953408" sideWeight="0.6013449" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15536572" sideWeight="0.67057675" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15536572" sideWeight="0.6666667" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32942328" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3291866" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="IntelliTail" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32906404" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32944608" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28338137" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33333334" sideWeight="0.9965967" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24868958" sideWeight="0.66570604" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -824,44 +682,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/chessgame/test/flex/move/range/MoveRangeTest.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="54" selection-start="935" selection-end="935" vertical-scroll-proportion="0.43854326">
-          <folding />
-        </state>
+        <state line="24" column="54" selection-start="935" selection-end="935" vertical-scroll-proportion="0.43854326" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chessgame/src/de/robinz/as3/pcc/chessboard/library/FieldNotationCollection.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="10" selection-start="404" selection-end="404" vertical-scroll-proportion="0.3505311">
-          <folding />
-        </state>
+        <state line="17" column="10" selection-start="404" selection-end="404" vertical-scroll-proportion="0.3505311" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chessgame/src/de/robinz/as3/pcc/chessboard/library/FieldNotation.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="5" selection-start="668" selection-end="668" vertical-scroll-proportion="0.025796661">
-          <folding />
-        </state>
+        <state line="24" column="5" selection-start="668" selection-end="668" vertical-scroll-proportion="0.025796661" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chessgame/src/de/robinz/as3/pcc/chessboard/library/FenPosition.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="32" selection-start="1446" selection-end="1446" vertical-scroll-proportion="0.025796661">
-          <folding />
-        </state>
+        <state line="42" column="32" selection-start="1446" selection-end="1446" vertical-scroll-proportion="0.025796661" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chessgame/src/de/robinz/as3/pcc/chessboard/library/CssSelectors.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="60" selection-start="687" selection-end="687" vertical-scroll-proportion="0.38694993">
-          <folding />
-        </state>
+        <state line="15" column="60" selection-start="687" selection-end="687" vertical-scroll-proportion="0.38694993" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chessgame/src/de/robinz/as3/pcc/chessboard/library/ColorTheme.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="0" selection-start="615" selection-end="615" vertical-scroll-proportion="0.32928678">
-          <folding />
-        </state>
+        <state line="21" column="0" selection-start="615" selection-end="615" vertical-scroll-proportion="0.32928678" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chessgame/src/de/robinz/as3/pcc/chessboard/library/ChessRuleEngine.as">
@@ -871,28 +717,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/chessgame/src/de/robinz/as3/pcc/chessboard/library/ChessPosition.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="32" selection-start="733" selection-end="741" vertical-scroll-proportion="0.025796661">
-          <folding />
-        </state>
+        <state line="27" column="32" selection-start="733" selection-end="741" vertical-scroll-proportion="0.025796661" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chessgame/src/de/robinz/as3/pcc/chessboard/library/ChessboardUtil.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="35" selection-start="1099" selection-end="1099" vertical-scroll-proportion="0.025796661">
-          <folding />
-        </state>
+        <state line="40" column="35" selection-start="1099" selection-end="1099" vertical-scroll-proportion="0.025796661" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chessgame/src/de/robinz/as3/pcc/chessboard/library/ChessboardMoveCollection.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="16" selection-start="353" selection-end="353" vertical-scroll-proportion="0.025796661">
-          <folding />
-        </state>
+        <state line="15" column="16" selection-start="353" selection-end="353" vertical-scroll-proportion="0.025796661" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chessgame/src/de/robinz/as3/pcc/chessboard/ApplicationFacade.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="27" selection-start="1910" selection-end="1910" vertical-scroll-proportion="0.30955994">
+        <state line="67" column="26" selection-start="3406" selection-end="3406" vertical-scroll-proportion="0.5461847">
           <folding />
         </state>
       </provider>
