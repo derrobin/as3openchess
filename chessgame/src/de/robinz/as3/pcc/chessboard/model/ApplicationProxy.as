@@ -94,15 +94,7 @@ public class ApplicationProxy extends BaseProxy
 	private function initColors() : void {
 		this._colorThemes = new Dictionary( true );
 
-//		this._colorThemes[ ColorTheme.BLUE_WATER ]      = ColorTheme.create( "blue water",      ColorSettingsVO.create(  3355596,   3368601,    3368601,   16777215,   0x00CCFF,   0x0099FF,   3355443,    13158,  16777215,   16777215,   0,   0,  16777215 ) );
-//		this._colorThemes[ ColorTheme.GREEN_MEN ]       = ColorTheme.create( "green men",       ColorSettingsVO.create(    26112,     26112,   10066329,   16777215,   16777113,   16777164,   3355443,    39168,  16777215,   16777215,   0,   0,  16777215 ) );
-//		this._colorThemes[ ColorTheme.PINK_LADY ]       = ColorTheme.create( "pink lady",       ColorSettingsVO.create( 16737945,  10027059,   16751052,   16777215,   0xFFFF99,   0xFFFFCC,   3355443, 10027059,  16777215,   16764159,   0,   0,  13421772 ) );
-//		this._colorThemes[ ColorTheme.WHITE_PURE ]      = ColorTheme.create( "white pure",      ColorSettingsVO.create( 16777215,  16777215,   13421772,   16777215,   0x666666,   10066329,   3355443, 16777215,         0,   16777215,   0,   0,  13421772 ) );
-//		this._colorThemes[ ColorTheme.BLACK_ON_WHITE]   = ColorTheme.create( "black on white",  ColorSettingsVO.create( 16777215,  16777215,          0,   13421772,   0xFFFFFF,   10066329,   3355443,        0,  16777215,   16777215,   0,   0,  16777215 ) );
-//		this._colorThemes[ ColorTheme.WHITE_ON_BLACK ]  = ColorTheme.create( "white on black",  ColorSettingsVO.create(        0,  16777215,   13421772,   16777215,    6710886,   10066329,   3355443, 16777215,         0,   16777215,   0,   0,  13421772 ) );
-
-
-		this.addColorTheme( ColorTheme.BLUE_WATER,      "blue water",       ColorSettingsVO.create(  3355596,   3368601,    3368601,   16777215,   0x00CCFF,   0x0099FF,   3355443,    13158,  16777215,   16777215,   0,   0,  16777215 ) );
+		this.addColorTheme( ColorTheme.BLUE_WATER,      "blue water",       ColorSettingsVO.create( 0xdddddd,   3368601,    3368601,   16777215,   0x00CCFF,   0x0099FF,   3355443,    13158,  16777215,   16777215,   0,   0,  16777215 ) );
 		this.addColorTheme( ColorTheme.GREEN_MEN,       "green men",        ColorSettingsVO.create(    26112,     26112,   10066329,   16777215,   16777113,   16777164,   3355443,    39168,  16777215,   16777215,   0,   0,  16777215 ) );
 		this.addColorTheme( ColorTheme.PINK_LADY,       "pink lady",        ColorSettingsVO.create( 16737945,  10027059,   16751052,   16777215,   0xFFFF99,   0xFFFFCC,   3355443, 10027059,  16777215,   16764159,   0,   0,  13421772 ) );
 		this.addColorTheme( ColorTheme.WHITE_PURE,      "white pure",       ColorSettingsVO.create( 16777215,  16777215,   13421772,   16777215,   0x666666,   10066329,   3355443, 16777215,         0,   16777215,   0,   0,  13421772 ) );
@@ -115,9 +107,9 @@ public class ApplicationProxy extends BaseProxy
 	private function initBoard() : void {
 		this._board = new BoardSettingsVO();
 		this._board.fixedSize = true;
-		this._board.size = 450;
-		this._board.horizontalAlign = "left";
-		this._board.verticalAlign = "top";
+		this._board.size = 800;
+		this._board.horizontalAlign = "center";
+		this._board.verticalAlign = "middle";
 	}
 
 	// End Innerclass Methods
