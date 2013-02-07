@@ -34,7 +34,7 @@ public class FontProxy extends BaseProxy
 
 		var font : FontVO = this._fonts.getById( FontManager.FONT_ID_1 );
 		this.currentFont = font;
-		this.currentFontSize = 80;
+		this.currentFontSize = 50;
 	}
 
 

@@ -107,7 +107,7 @@ public class ApplicationProxy extends BaseProxy
 	private function initBoard() : void {
 		this._board = new BoardSettingsVO();
 		this._board.fixedSize = true;
-		this._board.size = 800;
+		this._board.size = 570;
 		this._board.horizontalAlign = "center";
 		this._board.verticalAlign = "middle";
 	}
