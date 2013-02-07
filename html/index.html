@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>as3openchess</title>
+	<link rel="stylesheet" type="text/css" href="css/history.css" />
+
+	<script language="JavaScript" type="text/javascript" src="js/swfobject.js"></script>
+	<script language="JavaScript" type="text/javascript" src="js/history.js"></script>
+	<script language="JavaScript" type="text/javascript" src="js/functions.js"></script>
+
+	<script type="text/javascript">
+
+		var params = {
+			scale: "noscale",
+			allowfullscreen: "true",
+			width: "100%",
+			height: "100%",
+			align: "middle",
+			quality: "high",
+			bgcolor: "#FFFFFF",
+			allowScriptAccess: "sameDomain",
+			type: "application/x-shockwave-flash",
+			pluginspage: "http://www.adobe.com/go/getflashplayer"
+		};
+		var attributes = {
+			id: "as3openchess",
+			name: "as3openchess"
+		};
+
+		swfobject.embedSWF( "mainapp.swf", "content", "100%", "100%", "9.0.28", "expressInstall.swf", {}, params, attributes );
+
+	</script>
+</head>
+
+<body scroll="no" marginheight="0" marginwidth="0" leftmargin="0" topmargin="0" onLoad="maxWindow();">
+
+	<noscript>
+		<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+				id="as3openchess" width="100%" height="100%"
+				codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
+				<param name="movie" value="mainapp.swf" />
+				<param name="quality" value="high" />
+				<param name="bgcolor" value="#FFFFFF" />
+				<param name="allowScriptAccess" value="sameDomain" />
+				<embed src="mainapp.swf" quality="high"
+					width="100%" height="100%" name="Main" align="middle"
+					play="true"
+					loop="false"
+					quality="high"
+					allowScriptAccess="sameDomain"
+					type="application/x-shockwave-flash"
+					pluginspage="http://www.adobe.com/go/getflashplayer">
+				</embed>
+		</object>
+	</noscript>
+
+	<table id="content" width="100%" border="0" cellspacing="0" cellpadding="0" />
+	
+</body>
+</html>
