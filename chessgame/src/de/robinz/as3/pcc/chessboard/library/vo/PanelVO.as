@@ -8,8 +8,7 @@ public class PanelVO
 	public var container : Container;
 	public var visible : Boolean = false;
 
-	public function PanelVO()
-	{
+	public function PanelVO() {
 	}
 
 	public static function createByParams( c : Container ) : PanelVO {
