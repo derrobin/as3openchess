@@ -40,7 +40,7 @@ public class ApplicationMediator extends BaseMediator
 		this._panels = new PanelVOCollection();
 		this._panels.add( PanelVO.createByParams( this.view.chessboardMoveHistory ) );
 		this._panels.add( PanelVO.createByParams( this.view.chessboardTakenPieces ) );
-		this._panels.add( PanelVO.createByParams( this.view.chessboardGameActions ) );
+		// this._panels.add( PanelVO.createByParams( this.view.chessboardGameActions ) );
 	}
 
 	private function hidePanel( panel : Container ) : void {
@@ -84,8 +84,6 @@ public class ApplicationMediator extends BaseMediator
 		return [
 			ApplicationFacade.BOARD_SETTINGS_CHANGED,
 			ApplicationFacade.COLOR_SETTINGS_CHANGED,
-			ApplicationFacade.APPEAR_GAME_ACTIONS_PANEL,
-			ApplicationFacade.DISAPPEAR_GAME_ACTIONS_PANEL,
 			ApplicationFacade.APPEAR_MOVE_HISTORY_PANEL,
 			ApplicationFacade.DISAPPEAR_MOVE_HISTORY_PANEL,
 			ApplicationFacade.APPEAR_TAKEN_PIECES_PANEL,
@@ -100,12 +98,6 @@ public class ApplicationMediator extends BaseMediator
 			break;
 			case ApplicationFacade.COLOR_SETTINGS_CHANGED:
 				this.handleColorChanged( n.getBody() as ColorSettingsVO );
-			break;
-			case ApplicationFacade.APPEAR_GAME_ACTIONS_PANEL:
-				this.handleAppearGameActionsPanel();
-			break;
-			case ApplicationFacade.DISAPPEAR_GAME_ACTIONS_PANEL:
-				this.handleDisappearGameActionsPanel();
 			break;
 			case ApplicationFacade.APPEAR_MOVE_HISTORY_PANEL:
 				this.handleAppearMoveHistoryPanel();
@@ -144,12 +136,6 @@ public class ApplicationMediator extends BaseMediator
 		this.view.chessboardMenubar.setStyle( CssProperties.BACKGROUND_COLOR, sets.menuBarBackground );
 	}
 
-	private function handleAppearGameActionsPanel() : void {
-		this.showPanel( this.view.chessboardGameActions );
-	}
-	private function handleDisappearGameActionsPanel() : void {
-		this.hidePanel( this.view.chessboardGameActions );
-	}
 	private function handleAppearMoveHistoryPanel() : void {
 		this.showPanel( this.view.chessboardMoveHistory );
 	}

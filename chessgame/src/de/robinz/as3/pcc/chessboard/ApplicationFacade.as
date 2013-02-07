@@ -87,16 +87,13 @@ public class ApplicationFacade extends Facade
 	public static const APPEAR_MOVE_HISTORY_PANEL : String = "appearMoveHistoryPanel";
 	public static const APPEAR_TAKEN_PIECES_PANEL : String = "appearTakenPiecesPanel";
 	public static const APPEAR_MOVE_HISTORY_MODIFIER : String = "appearMoveHistoryModifier";
-	public static const APPEAR_GAME_ACTIONS_PANEL : String = "appearGameActionsPanel";
 	public static const APPEAR_PANEL_SAVE_GAME : String = "appearPanelSaveGame";
 
 	public static const DISAPPEAR_MOVE_HISTORY_PANEL : String = "disappearMoveHistoryPanel";
 	public static const DISAPPEAR_TAKEN_PIECES_PANEL : String = "disappearTakenPiecesPanel";
 	public static const DISAPPEAR_MOVE_HISTORY_MODIFIER : String = "disappearMoveHistoryModifier";
-	public static const DISAPPEAR_GAME_ACTIONS_PANEL : String = "disappearGameActionsPanel";
 	public static const DISAPPEAR_PANEL_SAVE_GAME : String = "disappearPanelSaveGame";
 
-	public static const TOGGLE_GAME_ACTIONS_PANEL : String = "toggleGameActionsPanel";
 	public static const TOGGLE_TAKEN_PIECES_PANEL : String = "toolgeTakenPiecesPanel";
 	public static const TOGGLE_MOVE_HISTORY_PANEL : String = "toggleMoveHistoryPanel";
 
@@ -152,17 +149,14 @@ public class ApplicationFacade extends Facade
 
 		registerCommand( APPEAR_MOVE_HISTORY_PANEL, PanelActionCommand );
 		registerCommand( APPEAR_TAKEN_PIECES_PANEL, PanelActionCommand );
-		registerCommand( APPEAR_GAME_ACTIONS_PANEL, PanelActionCommand );
 		registerCommand( APPEAR_MOVE_HISTORY_MODIFIER, DialogActionCommand );
 
 		registerCommand( DISAPPEAR_MOVE_HISTORY_PANEL, PanelActionCommand );
 		registerCommand( DISAPPEAR_TAKEN_PIECES_PANEL, PanelActionCommand );
-		registerCommand( DISAPPEAR_GAME_ACTIONS_PANEL, PanelActionCommand );
 		registerCommand( DISAPPEAR_MOVE_HISTORY_MODIFIER, DialogActionCommand );
 
 		registerCommand( TOGGLE_MOVE_HISTORY_PANEL, PanelActionCommand );
 		registerCommand( TOGGLE_TAKEN_PIECES_PANEL, PanelActionCommand );
-		registerCommand( TOGGLE_GAME_ACTIONS_PANEL, PanelActionCommand );
 
 		registerCommand( APPEAR_PIECE_SETTINGS, DialogActionCommand );
 		registerCommand( APPEAR_COLOR_SETTINGS, DialogActionCommand );

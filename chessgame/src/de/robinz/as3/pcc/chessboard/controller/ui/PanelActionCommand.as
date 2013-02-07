@@ -22,9 +22,6 @@ public class PanelActionCommand extends BaseCommand
 		super.execute( n );
 
 		switch ( n.getName() ) {
-			case ApplicationFacade.APPEAR_GAME_ACTIONS_PANEL:
-				this.appearGameActionsPanel();
-			break;
 			case ApplicationFacade.APPEAR_MOVE_HISTORY_PANEL:
 				this.appearMoveHistoryPanel();
 			break;
@@ -32,9 +29,6 @@ public class PanelActionCommand extends BaseCommand
 				this.appearTakenPiecesPanel();
 			break;
 
-			case ApplicationFacade.DISAPPEAR_GAME_ACTIONS_PANEL:
-				this.disappearPanel( GameActionsMediator.NAME );
-			break;
 			case ApplicationFacade.DISAPPEAR_MOVE_HISTORY_PANEL:
 				this.disappearPanel( MoveHistoryMediator.NAME );
 			break;
@@ -42,9 +36,6 @@ public class PanelActionCommand extends BaseCommand
 				this.disappearPanel( TakenPiecesMediator.NAME );
 			break;
 
-			case ApplicationFacade.TOGGLE_GAME_ACTIONS_PANEL:
-				this.togglePanel( GameActionsMediator.NAME, ApplicationFacade.APPEAR_GAME_ACTIONS_PANEL, ApplicationFacade.DISAPPEAR_GAME_ACTIONS_PANEL );
-			break;
 			case ApplicationFacade.TOGGLE_MOVE_HISTORY_PANEL:
 				this.togglePanel( MoveHistoryMediator.NAME, ApplicationFacade.APPEAR_MOVE_HISTORY_PANEL, ApplicationFacade.DISAPPEAR_MOVE_HISTORY_PANEL );
 			break;
@@ -59,13 +50,6 @@ public class PanelActionCommand extends BaseCommand
 
 
 	// Start Innerclass Methods
-
-	private function appearGameActionsPanel() : void {
-		if ( ! this.facade.hasMediator( GameActionsMediator.NAME ) ) {
-			this.facade.registerMediator( new GameActionsMediator( appMediator.app.applicationView.chessboardGameActions ) );
-		}
-		appProxy.openPanel( GameActionsMediator.NAME );
-	}
 
 	private function appearMoveHistoryPanel() : void {
 		if ( ! this.facade.hasMediator( MoveHistoryMediator.NAME ) ) {
