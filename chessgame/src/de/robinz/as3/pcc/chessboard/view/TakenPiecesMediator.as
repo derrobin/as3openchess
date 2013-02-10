@@ -1,11 +1,18 @@
 package de.robinz.as3.pcc.chessboard.view
 {
 import de.robinz.as3.pcc.chessboard.ApplicationFacade;
+import de.robinz.as3.pcc.chessboard.library.CssProperties;
 import de.robinz.as3.pcc.chessboard.library.pieces.IPiece;
-import de.robinz.as3.pcc.chessboard.view.views.ChessboardTakenPieces;
+import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
+import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
+import de.robinz.as3.pcc.chessboard.view.views.game.TakenPiecesDialog;
 import de.robinz.as3.pcc.chessboard.view.views.takenPieces.TakenPiece;
 
+import flash.display.DisplayObject;
+
+import mx.containers.TitleWindow;
 import mx.core.Container;
+import mx.events.CloseEvent;
 
 import org.puremvc.as3.interfaces.INotification;
 
@@ -14,177 +21,213 @@ import org.puremvc.as3.interfaces.INotification;
  *
  * @author robin heinel
  */
-public class TakenPiecesMediator extends BaseMediator
+public class TakenPiecesMediator extends DialogBaseMediator
 {
-	public static const NAME : String = "TakenPiecesMediator";
+    public static const NAME : String = "TakenPiecesMediator";
 
-	public function TakenPiecesMediator( m : ChessboardTakenPieces ) {
-		super( NAME, m );
-	}
+    public function TakenPiecesMediator( stage : DisplayObject ) {
+        super( NAME, stage );
+    }
 
+    // Start Innerclass Methods
 
-	// Start Innerclass Methods
+    private function appear() : TakenPiecesDialog {
+        var view : TitleWindow = this.createDialog( "Taken Pieces", 256, 350, TakenPiecesDialog, this.stage, false );
+        view.x = 14;
+        view.y = 460;
 
-	private function reset() : void {
-		this.view.whitePieces.removeAllChildren();
-		this.view.blackPieces.removeAllChildren();
-	}
+        view.addEventListener( CloseEvent.CLOSE, onPopupClose );
 
-	private function addPiece( p : IPiece, addWrapper : Boolean = true ) : void {
-		var tp : TakenPiece = new TakenPiece();
-		tp.initialize();
-		tp.piece.text = p.fontKey;
-		tp.data = p;
+        this._dialog = view;
+        return view as TakenPiecesDialog;
+    }
 
-		var targetContainer : Container;
+    private function reset() : void {
+        this.popup.whitePieces.removeAllChildren();
+        this.popup.blackPieces.removeAllChildren();
+    }
 
-		if ( p.isWhite ) {
-			targetContainer = this.view.whitePieces;
-		} else {
-			targetContainer = this.view.blackPieces;
-		}
+    private function addPiece( p : IPiece, addWrapper : Boolean = true ) : void {
+        var tp : TakenPiece = new TakenPiece();
+        tp.initialize();
+        tp.piece.text = p.fontKey;
+        tp.data = p;
 
-		targetContainer.addChild( tp );
+        var targetContainer : Container;
 
-		// TODO: optional: sort piece queue ( mb use of out-commented method insertPiece() )
-	}
+        if ( p.isWhite ) {
+            targetContainer = this.popup.whitePieces;
+        } else {
+            targetContainer = this.popup.blackPieces;
+        }
 
-	private function removePiece( p : IPiece ) : void {
-		var wrapper : TakenPiece = this.getPieceWrapperFor( p );
-		if ( wrapper == null ) {
-			return;
-		}
-		wrapper.parent.removeChild( wrapper );
-	}
+        targetContainer.addChild( tp );
 
-	private function getPieceWrapperFor( piece : IPiece ) : TakenPiece {
-		var tp : TakenPiece;
-		var p : IPiece;
-		var wrappers : Array = this.getPieceWrappers();
-		for each( tp in wrappers ) {
-			p = tp.data as IPiece;
-			if ( ! p.equals( piece ) ) {
-				continue;
-			}
+        // TODO: optional: sort piece queue ( mb use of out-commented method insertPiece() )
+    }
 
-			return tp;
-		}
+    private function removePiece( p : IPiece ) : void {
+        var wrapper : TakenPiece = this.getPieceWrapperFor( p );
+        if ( wrapper == null ) {
+            return;
+        }
+        wrapper.parent.removeChild( wrapper );
+    }
 
-		return null;
-	}
+    private function getPieceWrapperFor( piece : IPiece ) : TakenPiece {
+        var tp : TakenPiece;
+        var p : IPiece;
+        var wrappers : Array = this.getPieceWrappers();
+        for each( tp in wrappers ) {
+            p = tp.data as IPiece;
+            if ( ! p.equals( piece ) ) {
+                continue;
+            }
 
-	private function getPieceWrappers() : Array {
-		return new Array().concat(
-			this.view.whitePieces.getChildren(),
-			this.view.blackPieces.getChildren()
-		);
-	}
+            return tp;
+        }
 
-	private function refreshPieces() : void {
-		var piece : IPiece;
-		var tp : TakenPiece;
-		var wrappers : Array = this.getPieceWrappers();
+        return null;
+    }
 
-		var i : int = 0;
-		while ( wrappers.length > i ) {
-			tp = wrappers[ i ] as TakenPiece;
-			piece = tp.data as IPiece;
+    private function getPieceWrappers() : Array {
+        return new Array().concat(
+            this.popup.whitePieces.getChildren(),
+            this.popup.blackPieces.getChildren()
+        );
+    }
 
-			// Remove Piece View from Viewstack
-			tp.parent.removeChild( tp );
+    private function refreshPieces() : void {
+        var piece : IPiece;
+        var tp : TakenPiece;
+        var wrappers : Array = this.getPieceWrappers();
 
-			// Add as new piece to viewstack with the right fontkey
-			this.addPiece( piece );
+        var i : int = 0;
+        while ( wrappers.length > i ) {
+            tp = wrappers[ i ] as TakenPiece;
+            piece = tp.data as IPiece;
 
-			i++;
-		};
-	}
+            // Remove Piece View from Viewstack
+            tp.parent.removeChild( tp );
 
-	/*
-	private function insertPiece( c : Container, p : Piece ) : void {
-		var childs = c.getChildren();
-		var child : TakenPiece;
-		var piece : IPiece;
-		for each( child in childs ) {
-			piece = child.data as IPiece;
-			if ( piece.getSortIndex() == p.getSortIndex() ) {
-				c.addChild();
-			}
-		}
+            // Add as new piece to viewstack with the right fontkey
+            this.addPiece( piece );
 
-		c.addChildAt( c, p.getSortIndex() );
-	}
-	*/
+            i++;
+        };
+    }
 
-	// End Innerclass Methods
+    /*
+    private function insertPiece( c : Container, p : Piece ) : void {
+        var childs = c.getChildren();
+        var child : TakenPiece;
+        var piece : IPiece;
+        for each( child in childs ) {
+            piece = child.data as IPiece;
+            if ( piece.getSortIndex() == p.getSortIndex() ) {
+                c.addChild();
+            }
+        }
 
+        c.addChildAt( c, p.getSortIndex() );
+    }
+    */
 
-	// Start Notification Delegates
-
-	public override function listNotificationInterests() : Array {
-		return [
-			ApplicationFacade.RESTORE_PIECE,
-			ApplicationFacade.CHANGE_PIECE_SETTINGS,
-			ApplicationFacade.NEW_GAME,
-			ApplicationFacade.PIECE_REMOVED
-		];
-	}
-
-	public override function handleNotification( n : INotification ) : void {
-		switch( n.getName() ) {
-			case ApplicationFacade.RESTORE_PIECE:
-				this.handleRestorePiece( n.getBody() as IPiece );
-			break;
-			case ApplicationFacade.CHANGE_PIECE_SETTINGS:
-				this.handleChangePieceSettings();
-			break;
-			case ApplicationFacade.NEW_GAME:
-				this.handleNewGame();
-			break;
-			case ApplicationFacade.PIECE_REMOVED:
-				if ( n.getType() == null ) {
-					this.handlePieceRemoved( n.getBody() as IPiece );
-				}
-			break;
-		}
-	}
-
-	// End Notification Delegates
+    // End Innerclass Methods
 
 
-	// Start Notification Handlers
+    // Start Notification Delegates
 
-	private function handleRestorePiece( piece : IPiece ) : void {
-		this.removePiece( piece );
-	}
+    public override function listNotificationInterests() : Array {
+        return [
+            ApplicationFacade.APPEAR_TAKEN_PIECES_PANEL,
+            ApplicationFacade.DISAPPEAR_TAKEN_PIECES_PANEL,
+            ApplicationFacade.RESTORE_PIECE,
+            ApplicationFacade.CHANGE_PIECE_SETTINGS,
+            ApplicationFacade.CHANGE_COLOR_SETTINGS,
+            ApplicationFacade.NEW_GAME,
+            ApplicationFacade.PIECE_REMOVED
+        ];
+    }
 
-	private function handleChangePieceSettings() : void {
-		// TODO: performance: make condition to internal state
-		this.refreshPieces();
-	}
+    public override function handleNotification( n : INotification ) : void {
+        switch( n.getName() ) {
+            case ApplicationFacade.APPEAR_TAKEN_PIECES_PANEL:
+                this.appear();
+            break;
+            case ApplicationFacade.DISAPPEAR_TAKEN_PIECES_PANEL:
+                this.disappear();
+            break;
+            case ApplicationFacade.RESTORE_PIECE:
+                this.handleRestorePiece( n.getBody() as IPiece );
+            break;
+            case ApplicationFacade.CHANGE_PIECE_SETTINGS:
+                this.handleChangePieceSettings( n.getBody() as PieceSettingsVO );
+            break;
+            case ApplicationFacade.CHANGE_COLOR_SETTINGS:
+                this.handleChangeColorSettings( n.getBody() as ColorSettingsVO );
+            break;
+            case ApplicationFacade.NEW_GAME:
+                this.handleNewGame();
+            break;
+            case ApplicationFacade.PIECE_REMOVED:
+                if ( n.getType() == null ) {
+                    this.handlePieceRemoved( n.getBody() as IPiece );
+                }
+            break;
+        }
+    }
 
-	private function handleNewGame() : void {
-		this.reset();
-	}
-
-	private function handlePieceRemoved( piece : IPiece ) : void {
-		this.addPiece( piece );
-	}
-
-	// End Notification Handlers
+    // End Notification Delegates
 
 
-	// Start Event Handlers
+    // Start Notification Handlers
 
-	// End Event Handlers
+    private function handleRestorePiece( piece : IPiece ) : void {
+        this.removePiece( piece );
+    }
+
+    private function handleChangeColorSettings( settings : ColorSettingsVO ) : void {
+        this.popup.setStyle( CssProperties.BORDER_COLOR, settings.menuBarBackground );
+    }
+
+    private function handleChangePieceSettings( settings : PieceSettingsVO ) : void {
+        // TODO: performance: make condition to internal state
+        this.popup.blackPieces.setStyle( CssProperties.FONT_FAMILY, settings.font.id );
+        this.popup.whitePieces.setStyle( CssProperties.FONT_FAMILY, settings.font.id );
+        this.popup.whitePieces.setStyle( CssProperties.FONT_SIZE, 25 );
+        this.popup.blackPieces.setStyle( CssProperties.FONT_SIZE, 25 );
+
+        this.refreshPieces();
+    }
+
+    private function handleNewGame() : void {
+        this.reset();
+    }
+
+    private function handlePieceRemoved( piece : IPiece ) : void {
+        this.addPiece( piece );
+    }
+
+    // End Notification Handlers
 
 
-	// Start Getter / Setters
+    // Start Event Handlers
 
-	protected function get view() : ChessboardTakenPieces {
-		return this.viewComponent as ChessboardTakenPieces;
-	}
+    protected function onPopupClose( e : CloseEvent ) : void {
+        sendNotification( ApplicationFacade.DISAPPEAR_TAKEN_PIECES_PANEL );
+        this.disappear();
+    }
 
-	// End Getter / Setters
+    // End Event Handlers
+
+
+    // Start Getter / Setters
+
+    protected function get popup() : TakenPiecesDialog {
+        return this._dialog as TakenPiecesDialog;
+    }
+
+    // End Getter / Setters
 }
 }

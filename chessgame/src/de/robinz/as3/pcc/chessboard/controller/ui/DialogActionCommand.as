@@ -9,9 +9,11 @@ import de.robinz.as3.pcc.chessboard.library.vo.PieceSettingsVO;
 import de.robinz.as3.pcc.chessboard.model.FontProxy;
 import de.robinz.as3.pcc.chessboard.view.BoardSettingsMediator;
 import de.robinz.as3.pcc.chessboard.view.ColorSettingsMediator;
+import de.robinz.as3.pcc.chessboard.view.MoveHistoryMediator;
 import de.robinz.as3.pcc.chessboard.view.MoveHistoryModifierMediator;
 import de.robinz.as3.pcc.chessboard.view.PawnConvertMediator;
 import de.robinz.as3.pcc.chessboard.view.PieceSettingsMediator;
+import de.robinz.as3.pcc.chessboard.view.TakenPiecesMediator;
 
 import de.robinz.as3.pcc.chessboard.view.views.game.BoardSettingsDialog;
 import de.robinz.as3.pcc.chessboard.view.views.game.ColorSettingsDialog;
@@ -66,6 +68,20 @@ public class DialogActionCommand extends BaseCommand {
 			case ApplicationFacade.DISAPPEAR_BOARD_SETTINGS:
 				this.closeDialog( BoardSettingsMediator.NAME );
 			break;
+
+            case ApplicationFacade.APPEAR_MOVE_HISTORY_PANEL:
+                this.appearMoveHistoryPanel( new MoveHistoryMediator( stage ), n );
+            break;
+            case ApplicationFacade.APPEAR_TAKEN_PIECES_PANEL:
+                this.appearTakenPiecesPanel( new TakenPiecesMediator( stage ), n );
+            break;
+
+            case ApplicationFacade.DISAPPEAR_MOVE_HISTORY_PANEL:
+                this.closeDialog( MoveHistoryMediator.NAME );
+            break;
+            case ApplicationFacade.DISAPPEAR_TAKEN_PIECES_PANEL:
+                this.closeDialog( TakenPiecesMediator.NAME );
+            break;
 		}
 
 		log.debug( LoggerUtil.outDictionary( appProxy.getOpenDialogs() ) );
@@ -91,6 +107,14 @@ public class DialogActionCommand extends BaseCommand {
 		mediator.handleNotification( n );
 		appProxy.openDialog( mediator.getMediatorName() );
 	}
+
+    private function appearMoveHistoryPanel( mediator : MoveHistoryMediator, n : INotification ) : void {
+        this.appearDialog( mediator, n );
+    }
+
+    private function appearTakenPiecesPanel( mediator: TakenPiecesMediator, n : INotification ) : void {
+        this.appearDialog( mediator, n );
+    }
 
 	public function appearBoardSettings( mediator : IMediator, n : INotification ) : void {
 		n.setBody( appProxy.board );

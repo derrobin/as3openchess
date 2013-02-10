@@ -4,8 +4,6 @@ import de.robinz.as3.pcc.chessboard.ApplicationFacade;
 import de.robinz.as3.pcc.chessboard.library.CssProperties;
 import de.robinz.as3.pcc.chessboard.library.vo.BoardSettingsVO;
 import de.robinz.as3.pcc.chessboard.library.vo.ColorSettingsVO;
-import de.robinz.as3.pcc.chessboard.library.vo.PanelVO;
-import de.robinz.as3.pcc.chessboard.library.vo.PanelVOCollection;
 import de.robinz.as3.pcc.chessboard.view.views.ApplicationView;
 import de.robinz.as3.pcc.chessboard.view.views.Chessboard;
 
@@ -25,68 +23,12 @@ public class ApplicationMediator extends BaseMediator
 {
     public static const NAME : String = "ApplicationMediator";
 
-    private var panels : PanelVOCollection;
-
-
     public function ApplicationMediator( m : mainapp ) {
         super( NAME, m );
-        this.registerPanels();
     }
 
 
     // Start Innerclass Methods
-
-    private function registerPanels() : void {
-        this.panels = new PanelVOCollection();
-        this.panels.add( PanelVO.createByParams( this.view.chessboardMoveHistory ) );
-        this.panels.add( PanelVO.createByParams( this.view.chessboardTakenPieces ) );
-    }
-
-    private function hidePanel( panel : Container ) : void {
-        this.switchPanel( panel, false );
-    }
-    private function showPanel( c : Container ) : void {
-        this.switchPanel( c, true );
-    }
-
-
-    private function switchPanel( panel : Container, visible : Boolean = true ) : void {
-        var vo : PanelVO = this.panels.getByPanel( panel );
-        vo.visible = visible;
-
-        this.switchContainer( panel, visible );
-    }
-
-    private function switchContainer( c : Container, visible : Boolean = true ) : void {
-        c.visible = visible;
-        c.includeInLayout = visible;
-
-        this.switchParent( visible, Container( c.parent ) );
-    }
-
-    private function switchParent( visible, parent : Container ) : void {
-        if( visible ) {
-            parent.includeInLayout = true;
-            parent.visible = true;
-        } else {
-            if( this.view.chessboardMoveHistory.visible == false && this.view.chessboardTakenPieces.visible == false ) {
-                parent.includeInLayout = false;
-                parent.visible = false;
-            }
-        }
-    }
-
-    private function toggleContainer( c : Container ) : Boolean {
-        if ( c.visible ) {
-            c.visible = false;
-            c.includeInLayout = false;
-            return false;
-        }
-
-        c.visible = true;
-        c.includeInLayout = true;
-        return true;
-    }
 
     // End Innerclass Methods
 
@@ -97,10 +39,6 @@ public class ApplicationMediator extends BaseMediator
         return [
             ApplicationFacade.BOARD_SETTINGS_CHANGED,
             ApplicationFacade.COLOR_SETTINGS_CHANGED,
-            ApplicationFacade.APPEAR_MOVE_HISTORY_PANEL,
-            ApplicationFacade.DISAPPEAR_MOVE_HISTORY_PANEL,
-            ApplicationFacade.APPEAR_TAKEN_PIECES_PANEL,
-            ApplicationFacade.DISAPPEAR_TAKEN_PIECES_PANEL
         ];
     }
 
@@ -111,18 +49,6 @@ public class ApplicationMediator extends BaseMediator
             break;
             case ApplicationFacade.COLOR_SETTINGS_CHANGED:
                 this.handleColorChanged( n.getBody() as ColorSettingsVO );
-            break;
-            case ApplicationFacade.APPEAR_MOVE_HISTORY_PANEL:
-                this.handleAppearMoveHistoryPanel();
-            break;
-            case ApplicationFacade.DISAPPEAR_MOVE_HISTORY_PANEL:
-                this.handleDisappearMoveHistoryPanel();
-            break;
-            case ApplicationFacade.APPEAR_TAKEN_PIECES_PANEL:
-                this.handleAppearTakenPiecesPanel();
-            break;
-            case ApplicationFacade.DISAPPEAR_TAKEN_PIECES_PANEL:
-                this.handleDisappearTakenPiecesPanel();
             break;
         }
     }
@@ -149,28 +75,10 @@ public class ApplicationMediator extends BaseMediator
         this.view.chessboardMenubar.setStyle( CssProperties.BACKGROUND_COLOR, sets.menuBarBackground );
     }
 
-    private function handleAppearMoveHistoryPanel() : void {
-        this.showPanel( this.view.chessboardMoveHistory );
-    }
-    private function handleDisappearMoveHistoryPanel() : void {
-        this.hidePanel( this.view.chessboardMoveHistory );
-    }
-    private function handleAppearTakenPiecesPanel() : void {
-        this.showPanel( this.view.chessboardTakenPieces );
-    }
-    private function handleDisappearTakenPiecesPanel() : void {
-        this.hidePanel( this.view.chessboardTakenPieces );
-    }
-
-
     // End Notification Handlers
 
 
     // Start Event Handlers
-
-    private function onCreationComplete( e : Event ) : void {
-
-    }
 
     // End Event Handlers
 

@@ -17,10 +17,6 @@ ChessboardMenubar
 			public static const MENU_ENTRY_LOAD_GAME : String = "loadGame";
 			public static const MENU_ENTRY_SAVE_GAME : String = "saveGame";
 
-			public static const MENU_ENTRY_PANEL_MOVE_HISTORY : String = "panelMoveHistory";
-			public static const MENU_ENTRY_PANEL_TAKEN_PIECES : String = "panelTakenPieces";
-			public static const MENU_ENTRY_PANEL_GAME_ACTIONS : String = "panelGameActions";
-
 			public static const MENU_ENTRY_PIECE_SETTINGS : String = "pieceSettings";
 			public static const MENU_ENTRY_COLOR_SETTINGS : String = "colorSettings";
 			public static const MENU_ENTRY_BOARD_SETTINGS : String = "boardSettings";
@@ -44,11 +40,6 @@ ChessboardMenubar
 				<menuitem label="Test Chessfont" data="setTestPieces" />
 			</menuitem>
 			<menuitem label="Settings">
-				<menuitem label="Panels..">
-					<menuitem label="Move History" data="panelMoveHistory" type="check" toggled="true" />
-					<menuitem label="Taken Pieces" data="panelTakenPieces" type="check" toggled="true" />
-					<menuitem label="Game Actions" data="panelGameActions" type="check" toggled="true" />
-				</menuitem>
 				<menuitem label="Piece Settings.." data="pieceSettings" />
 				<menuitem label="Color Settings.." data="colorSettings" />
 				<menuitem label="Board Settings.." data="boardSettings" />

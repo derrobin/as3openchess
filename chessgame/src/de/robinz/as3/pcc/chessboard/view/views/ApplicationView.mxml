@@ -15,19 +15,8 @@ ApplicationView
 
     <components:ChessboardMenubar id="chessboardMenubar" barColor="#ffffff" backgroundDisabledColor="0xf0e68c" cornerRadius="0" />
 
-    <mx:HDividedBox width="100%" height="100%">
-
-        <mx:VDividedBox width="350" height="100%" visible="true" includeInLayout="true">
-            <components:ChessboardMoveHistory id="chessboardMoveHistory" styleName="panel" width="100%" height="100%" />
-            <components:ChessboardTakenPieces id="chessboardTakenPieces" styleName="panel" width="100%" height="350" />
-        </mx:VDividedBox>
-
-        <mx:VBox id="boardStage" styleName="boardStage" width="100%" height="100%">
-            <components:Chessboard id="chessboard" width="100%" height="100%" />
-        </mx:VBox>
-
-
-    </mx:HDividedBox>
-
+    <mx:VBox id="boardStage" styleName="boardStage" width="100%" height="100%">
+        <components:Chessboard id="chessboard" width="100%" height="100%" />
+    </mx:VBox>
 
 </mx:Box>

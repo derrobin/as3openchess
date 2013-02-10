@@ -22,7 +22,6 @@ import de.robinz.as3.pcc.chessboard.controller.ui.ChangeBoardSettingsCommand;
 import de.robinz.as3.pcc.chessboard.controller.ui.ChangeColorSettingsCommand;
 import de.robinz.as3.pcc.chessboard.controller.ui.ChangePieceSettingsCommand;
 import de.robinz.as3.pcc.chessboard.controller.ui.DialogActionCommand;
-import de.robinz.as3.pcc.chessboard.controller.ui.PanelActionCommand;
 
 import org.puremvc.as3.patterns.facade.Facade;
 
@@ -94,9 +93,6 @@ public class ApplicationFacade extends Facade
 	public static const DISAPPEAR_MOVE_HISTORY_MODIFIER : String = "disappearMoveHistoryModifier";
 	public static const DISAPPEAR_PANEL_SAVE_GAME : String = "disappearPanelSaveGame";
 
-	public static const TOGGLE_TAKEN_PIECES_PANEL : String = "toolgeTakenPiecesPanel";
-	public static const TOGGLE_MOVE_HISTORY_PANEL : String = "toggleMoveHistoryPanel";
-
 	public static const APPEAR_BOARD_SETTINGS : String = "appearBoardSettings";
 	public static const APPEAR_PIECE_SETTINGS : String = "appearPieceSettings";
 	public static const APPEAR_COLOR_SETTINGS : String = "appearColorSettings";
@@ -147,16 +143,13 @@ public class ApplicationFacade extends Facade
 		registerCommand( GET_CURRENT_GAME, GetCurrentGameCommand );
 		registerCommand( EXPORT_FEN, ExportFenCommand );
 
-		registerCommand( APPEAR_MOVE_HISTORY_PANEL, PanelActionCommand );
-		registerCommand( APPEAR_TAKEN_PIECES_PANEL, PanelActionCommand );
+		registerCommand( APPEAR_MOVE_HISTORY_PANEL, DialogActionCommand );
+		registerCommand( APPEAR_TAKEN_PIECES_PANEL, DialogActionCommand );
 		registerCommand( APPEAR_MOVE_HISTORY_MODIFIER, DialogActionCommand );
 
-		registerCommand( DISAPPEAR_MOVE_HISTORY_PANEL, PanelActionCommand );
-		registerCommand( DISAPPEAR_TAKEN_PIECES_PANEL, PanelActionCommand );
+		registerCommand( DISAPPEAR_MOVE_HISTORY_PANEL, DialogActionCommand );
+		registerCommand( DISAPPEAR_TAKEN_PIECES_PANEL, DialogActionCommand );
 		registerCommand( DISAPPEAR_MOVE_HISTORY_MODIFIER, DialogActionCommand );
-
-		registerCommand( TOGGLE_MOVE_HISTORY_PANEL, PanelActionCommand );
-		registerCommand( TOGGLE_TAKEN_PIECES_PANEL, PanelActionCommand );
 
 		registerCommand( APPEAR_PIECE_SETTINGS, DialogActionCommand );
 		registerCommand( APPEAR_COLOR_SETTINGS, DialogActionCommand );

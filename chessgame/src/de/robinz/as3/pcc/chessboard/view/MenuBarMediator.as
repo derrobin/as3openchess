@@ -43,12 +43,6 @@ public class MenuBarMediator extends BaseMediator
 			case ChessboardMenubar.MENU_ENTRY_LOAD_GAME:
 				sendNotification( ApplicationFacade.SHOW_SAVE_GAMES );
 			break;
-			case ChessboardMenubar.MENU_ENTRY_PANEL_MOVE_HISTORY:
-				sendNotification( ApplicationFacade.TOGGLE_MOVE_HISTORY_PANEL );
-			break;
-			case ChessboardMenubar.MENU_ENTRY_PANEL_TAKEN_PIECES:
-				sendNotification( ApplicationFacade.TOGGLE_TAKEN_PIECES_PANEL );
-			break;
 			case ChessboardMenubar.MENU_ENTRY_SET_TEST_PIECES:
 				sendNotification( ApplicationFacade.SHOW_ALL_FONT_KEYS_ON_CHESSBOARD );
 			break;
