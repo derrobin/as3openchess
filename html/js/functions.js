@@ -24,8 +24,8 @@ function maxWindow() {
 	{
 		var msg = "An error occurred. The resolution of your browser window is to low.\n" +
 			"This application needs a minimum size of 1024x768px.\n\n" +
-			"Es ist ein Fehler aufgetreten. Die Gr��e ihres Browserfensters ist zu gering.\n" +
-			"Diese Anwendung ben�tigt eine Mindestgr��e von 1024x768px.";
+			"Es ist ein Fehler aufgetreten. Die Größe ihres Browserfensters ist zu gering.\n" +
+			"Diese Anwendung benötigt eine Mindestgröße von 1024x768px.";
 
 		alert(msg);
 
@@ -54,8 +54,6 @@ function isWindowTooSmall() {
 
 	if (typeof(window.innerWidth) == 'number')
 	{
-		// the more standards compliant browsers (mozilla/netscape/opera/IE7) use window.innerWidth and window.innerHeight
-
 		viewportwidth = window.innerWidth,
 		viewportheight = window.innerHeight
 	}
@@ -66,10 +64,8 @@ function isWindowTooSmall() {
 	}
 	else if (document.body && (document.body.clientWidth || document.body.clientHeight))
 	{
-		// older versions of IE
-
-				viewportwidth = document.body.clientWidth,
-				viewportheight = document.body.clientHeight
+		viewportwidth = document.body.clientWidth,
+		viewportheight = document.body.clientHeight
 	}
 
 	if (viewportwidth < 860 || viewportheight < 560)
