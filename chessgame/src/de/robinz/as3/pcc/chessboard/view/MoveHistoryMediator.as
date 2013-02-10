@@ -228,7 +228,7 @@ public class MoveHistoryMediator extends DialogBaseMediator
     }
 
     protected function onPopupClose( e : CloseEvent ) : void {
-        sendNotification( ApplicationFacade.DISAPPEAR_TAKEN_PIECES_PANEL );
+        sendNotification( ApplicationFacade.DISAPPEAR_MOVE_HISTORY_PANEL );
         this.disappear();
     }
 
