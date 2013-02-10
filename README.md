@@ -1,7 +1,7 @@
 as3openchess
 ============
 
-as3openchess is a game of chess written with actionscript3 ( as3 ) and the adobe flex version 3.3 framework.
+as3openchess is a game of chess written with actionscript3 ( as3 ) and the adobe flex framework ( version 3.3 ).
 
 features
 
