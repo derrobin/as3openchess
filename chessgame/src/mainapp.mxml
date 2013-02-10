@@ -4,44 +4,42 @@ application entry point
 @author robin heinel
 -->
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
-				xmlns:components="de.robinz.as3.pcc.chessboard.view.views.*"
-				xmlns:kapit="fr.kapit.*"
-				pageTitle="PCC Chessboard"
-				creationComplete="onCreationComplete()"
-				layout="vertical"
-				horizontalAlign="center"
-				verticalAlign="middle"
-				backgroundGradientColors="[]"
-				backgroundColor="#ababab"
-				horizontalGap="0"
-				verticalGap="0"
-				paddingLeft="0"
-				paddingRight="0"
-				paddingBottom="0"
-				paddingTop="0">
+    xmlns:components="de.robinz.as3.pcc.chessboard.view.views.*"
+    pageTitle="PCC Chessboard"
+    creationComplete="onCreationComplete()"
+    layout="vertical"
+    horizontalAlign="center"
+    verticalAlign="middle"
+    backgroundGradientColors="[]"
+    backgroundColor="#ababab"
+    horizontalGap="0"
+    verticalGap="0"
+    paddingLeft="0"
+    paddingRight="0"
+    paddingBottom="0"
+    paddingTop="0"
+>
 
-	<mx:Style source="de/robinz/as3/pcc/chessboard/styles/default.css" />
+    <mx:Style source="de/robinz/as3/pcc/chessboard/styles/default.css" />
 
-	<mx:Script>
-		<![CDATA[
-			import de.robinz.as3.pcc.chessboard.ApplicationFacade;
+    <mx:Script>
+        <![CDATA[
+            import de.robinz.as3.pcc.chessboard.ApplicationFacade;
+            private var facade : ApplicationFacade = ApplicationFacade.getInstance();
 
-			private var facade:ApplicationFacade=ApplicationFacade.getInstance();
-
-			private function onCreationComplete() : void {
-				facade.startup( this );
-			}
+            private function onCreationComplete() : void {
+                facade.startup( this );
+            }
 
             public function getApplicationView() : ApplicationView {
                 return this.applicationView;
             }
-		]]>
-	</mx:Script>
+        ]]>
+    </mx:Script>
 
-	<kapit:KapInspect />
-
-	<components:ApplicationView id="applicationView"
-								width="100%"
-								height="100%"/>
+    <components:ApplicationView id="applicationView"
+        width="100%"
+        height="100%"
+    />
 
 </mx:Application>
