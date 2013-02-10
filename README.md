@@ -15,4 +15,4 @@ see demo at http://www.robinz.de/as3openchess/
 
 some todos
 
-  remove piece transparency on board
+- remove piece transparency on board
