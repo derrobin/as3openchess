@@ -68,13 +68,15 @@ public class KnightRange implements IMoveRange {
 				(field.row + row) );
 
 		if( position && position.getPieceAt( f2add.getNotation() ) ) {
-			if(
-				position.getPieceAt( field.getNotation() ).isWhite
-				== position.getPieceAt( f2add.getNotation() ).isWhite
-			) {
-				res.add( f2add );
+            var n1:String = field.getNotation();
+            var n2:String = f2add.getNotation();
+            var a:Boolean = position.getPieceAt( n1 ).isWhite;
+            var b:Boolean = position.getPieceAt( n2 ).isWhite;
+
+			if( a != b ) {
+				return f2add;
 			}
-			return null;
+            return null;
 		}
 
 		return f2add;
